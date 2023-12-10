@@ -1,11 +1,56 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { format } from 'date-fns';
 
 const TrackVisaApplication = () => {
+
+    const [trackData, setTrackData] = useState([]);
+    const [track, setTrack] = useState({
+        appId: ""
+    })
+
+    async function onTextFieldChange(e) {
+
+        setTrack({
+            ...track,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    async function onFormSubmit(e) {
+        e.preventDefault()
+        
+        if(track.appId == ''){
+            document.getElementById("appId").style.border = "1px solid red";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            
+            try {
+                const trackApi = await axios.get(`http://localhost:8081/application/track/${track.appId}`);
+                setTrackData(trackApi.data);
+            } catch (error) {
+                alert("Something is Wrong");
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+             
+    }
+
+    async function onFormReset(e) {
+        e.preventDefault()
+        
+        
+        document.getElementById('appId').value = "";
+        setTrackData("");
+             
+    }
 
     useEffect(() => {
 		// 👇️ scroll to top on page load
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 	}, []);
+
+    const dateFormatString = 'd MMMM, yyyy';
 
     
   return (
@@ -36,16 +81,23 @@ const TrackVisaApplication = () => {
                     <div className="col-md-9">
                         <div className="tack_form">
                             <div className="tack_forms">
-                                <h3>Track Your Application</h3>
-                                <form className="" method="post" action="">
+                                <h3>Track Your Application </h3>
+                                <form>
                                     <div className="form-group">
                                         <label> Reference Number </label>
-                                        <input type="text" placeholder="Enter Reference Number" />
+                                        <input 
+                                            type="text" 
+                                            name='appId'
+                                            id='appId'
+                                            value={track.appId} 
+                                            onChange={e => onTextFieldChange(e)} 
+                                            placeholder="Enter Reference Number" 
+                                        />
                                     </div>
 
                                     <div className="track_btn">
-                                        <button className="btn blue"> Reset</button>
-                                        <button className="btn green"> Submit</button>
+                                        <button onClick={e => onFormReset(e)} className="btn blue"> Reset</button>
+                                        <button onClick={e => onFormSubmit(e)} className="btn green"> Submit</button>
                                     </div>
 
                                 </form>
@@ -53,32 +105,54 @@ const TrackVisaApplication = () => {
                         </div>
                     </div>
 
-                    <div className="col-md-9">
-                        <div className="detail_refrence">
-                            <table id="customers">
-                                <tr>
-                                    <td>Applicant Name :</td>
-                                    <td>Khalid Ansari</td>
-                                    <td>Applied On :</td>
-                                    <td>10-11-2023</td>
-                                </tr>
-                                <tr>
-                                    <td>Service Applied for :</td>
-                                    <td>Transit Visa (Single Entry)</td>
-                                    <td>Travel Date :</td>
-                                    <td>16-11-2024</td>
-                                </tr>
-                                <tr>
-                                    <td>Application Status :</td>
-                                    <td colspan="3">Payment Pending (documents received).</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
+
+                    { 
+                        trackData.id != null ? 
+                            <div className="col-md-9">
+                                <div className="detail_refrence">
+                                    <table id="customers">
+                                        <tbody>
+                                        <tr>
+                                            <td>Applicant Name :</td>
+                                            <td> 
+                                                {trackData.citizenshipCountry.createdBy.firstName} &nbsp;
+                                                {trackData.citizenshipCountry.createdBy.middleName} &nbsp;
+                                                {trackData.citizenshipCountry.createdBy.lastName}
+                                            </td>
+                                            <td>Applied On :</td>
+                                            <td>{format(trackData.createdAt, dateFormatString)}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Service Applied for :</td>
+                                            <td>
+                                                { 
+                                                    trackData.visaVariant ? 
+                                                        trackData.visaVariant.name
+                                                    :
+                                                        'NA'
+                                                
+                                                }
+                                            </td>
+                                            <td>Travel Date :</td>
+                                            <td>{format(trackData.arrivalDate, dateFormatString)}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Application Status :</td>
+                                            <td colSpan="3">{trackData.status}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        :
+                            ''
+                    }
+                    
                 </div>
             </div>
         </section>
 
+        {/* 
         <section className="track_status_cnt">
             <div className="container">
                 <div className="row">
@@ -118,6 +192,7 @@ const TrackVisaApplication = () => {
                 </div>
             </div>
         </section>
+        */}
       
     </>
   )

@@ -1,11 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { format } from 'date-fns';
 
 const EmiratesVisaBlog = () => {
+
+    const [siteBlogs, setSiteBlogs] = useState([]);
+    useEffect(() => {
+        getSiteBlogs();
+    }, []);
+
+    async function getSiteBlogs() {
+        try {
+        const siteBlogApi = await axios.get(`http://localhost:8081/blog/basic/2`)
+            setSiteBlogs(siteBlogApi.data);
+        } catch (error) {
+            console.log("Something is Wrong");
+        }
+    }
 
     useEffect(() => {
 		// 👇️ scroll to top on page load
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 	}, []);
+
+    const dateFormatString = 'd MMMM, yyyy';
     
   return (
     <>
@@ -32,244 +50,43 @@ const EmiratesVisaBlog = () => {
             <div className="container">
                 <div className="row">
 
-                    <div className="col-lg-4 col-md-4 col-sm-6">
-                        <div className="featured-imagebox-post">
-                            <div className="featured-thumbnail">
-                                <img className="img-fluid" src="../img/blog/blog01.jpg" alt="image" />
-                            </div>
-                            <div className="featured-content">
-                                <div className="post-header">
-                                    <div className="featured-title">
-                                        <h3><a href="blog">Why Indian Students Choose To Study
-                                                Abroad?</a></h3>
-                                    </div>
-                                </div>
-                                <div className="post-meta">
-                                    
-                                    <span><i className="fa fa-calendar"></i>12 April 2020</span>
-                                </div>
-                                <div className="post-desc">
-                                    <p>Many young Indian students today wish to pursue their studies in universities abroad.
-                                    </p>
-                                </div>
-                                <div className="post-bottom">
-                                    <a className="cmt-btn-size-sm" href="blog"><i
-                                            className="fa fa-minus"></i>Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {
+                        siteBlogs && siteBlogs.length > 0 ?
+                        siteBlogs.map((item, index) => (
 
-                    <div className="col-lg-4 col-md-4 col-sm-6">
-                        <div className="featured-imagebox-post">
-                            <div className="featured-thumbnail">
-                                <img className="img-fluid" src="../img/blog/02.jpg" alt="image" />
-                            </div>
-                            <div className="featured-content">
-                                <div className="post-header">
-                                    <div className="featured-title">
-                                        <h3><a href="#">Why Indian Students Choose To Study Abroad?</a></h3>
+                            <div className="col-lg-4 col-md-4 col-sm-6" key={index+1}>
+                                <div className="featured-imagebox-post">
+                                    <div className="featured-thumbnail">
+                                        <img className="img-fluid" src={`data:image/png;base64,${item.image}`} alt="image" />
+                                    </div>
+                                    <div className="featured-content">
+                                        <div className="post-header">
+                                            <div className="featured-title">
+                                                <h3><a href="blog">{item.title}</a></h3>
+                                            </div>
+                                        </div>
+                                        <div className="post-meta">
+                                            
+                                            <span><i className="fa fa-calendar"></i>{format(item.createdAt, dateFormatString)} </span>
+                                        </div>
+                                        <div className="post-desc">
+                                            <p>{item.text}</p>
+                                        </div>
+                                        <div className="post-bottom">
+                                            <a className="cmt-btn-size-sm" href={"blog/"+item.id}><i
+                                                    className="fa fa-minus"></i>Read more</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="post-meta">
-                                   
-                                    <span><i className="fa fa-calendar"></i>12 April 2020</span>
-                                </div>
-                                <div className="post-desc">
-                                    <p>Many young Indian students today wish to pursue their studies in universities abroad.
-                                    </p>
-                                </div>
-                                <div className="post-bottom">
-                                    <a className="cmt-btn-size-sm" href="#"><i className="fa fa-minus"></i>Read more</a>
-                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div className="col-lg-4 col-md-4 col-sm-6">
-                        <div className="featured-imagebox-post">
-                            <div className="featured-thumbnail">
-                                <img className="img-fluid" src="../img/blog/03.jpg" alt="image" />
-                            </div>
-                            <div className="featured-content">
-                                <div className="post-header">
-                                    <div className="featured-title">
-                                        <h3><a href="#">Why Indian Students Choose To Study Abroad?</a></h3>
-                                    </div>
-                                </div>
-                                <div className="post-meta">
-                                    
-                                    <span><i className="fa fa-calendar"></i>12 April 2020</span>
-                                </div>
-                                <div className="post-desc">
-                                    <p>Many young Indian students today wish to pursue their studies in universities abroad.
-                                    </p>
-                                </div>
-                                <div className="post-bottom">
-                                    <a className="cmt-btn-size-sm" href="#"><i className="fa fa-minus"></i>Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-4 col-md-4 col-sm-6">
-                        <div className="featured-imagebox-post">
-                            <div className="featured-thumbnail">
-                                <img className="img-fluid" src="../img/blog/blog01.jpg" alt="image" />
-                            </div>
-                            <div className="featured-content">
-                                <div className="post-header">
-                                    <div className="featured-title">
-                                        <h3><a href="#">Why Indian Students Choose To Study Abroad?</a></h3>
-                                    </div>
-                                </div>
-                                <div className="post-meta">
-                                   
-                                    <span><i className="fa fa-calendar"></i>12 April 2020</span>
-                                </div>
-                                <div className="post-desc">
-                                    <p>Many young Indian students today wish to pursue their studies in universities abroad.
-                                    </p>
-                                </div>
-                                <div className="post-bottom">
-                                    <a className="cmt-btn-size-sm" href="#"><i className="fa fa-minus"></i>Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-4 col-md-4 col-sm-6">
-                        <div className="featured-imagebox-post">
-                            <div className="featured-thumbnail">
-                                <img className="img-fluid" src="../img/blog/02.jpg" alt="image" />
-                            </div>
-                            <div className="featured-content">
-                                <div className="post-header">
-                                    <div className="featured-title">
-                                        <h3><a href="#">Why Indian Students Choose To Study Abroad?</a></h3>
-                                    </div>
-                                </div>
-                                <div className="post-meta">
-                                    
-                                    <span><i className="fa fa-calendar"></i>12 April 2020</span>
-                                </div>
-                                <div className="post-desc">
-                                    <p>Many young Indian students today wish to pursue their studies in universities abroad.
-                                    </p>
-                                </div>
-                                <div className="post-bottom">
-                                    <a className="cmt-btn-size-sm" href="#"><i className="fa fa-minus"></i>Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-4 col-md-4 col-sm-6">
-                        <div className="featured-imagebox-post">
-                            <div className="featured-thumbnail">
-                                <img className="img-fluid" src="../img/blog/03.jpg" alt="image" />
-                            </div>
-                            <div className="featured-content">
-                                <div className="post-header">
-                                    <div className="featured-title">
-                                        <h3><a href="#">Why Indian Students Choose To Study Abroad?</a></h3>
-                                    </div>
-                                </div>
-                                <div className="post-meta">
-                                    
-                                    <span><i className="fa fa-calendar"></i>12 April 2020</span>
-                                </div>
-                                <div className="post-desc">
-                                    <p>Many young Indian students today wish to pursue their studies in universities abroad.
-                                    </p>
-                                </div>
-                                <div className="post-bottom">
-                                    <a className="cmt-btn-size-sm" href="#"><i className="fa fa-minus"></i>Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-4 col-md-4 col-sm-6">
-                        <div className="featured-imagebox-post">
-                            <div className="featured-thumbnail">
-                                <img className="img-fluid" src="../img/blog/blog01.jpg" alt="image" />
-                            </div>
-                            <div className="featured-content">
-                                <div className="post-header">
-                                    <div className="featured-title">
-                                        <h3><a href="#">Why Indian Students Choose To Study Abroad?</a></h3>
-                                    </div>
-                                </div>
-                                <div className="post-meta">
-                                    
-                                    <span><i className="fa fa-calendar"></i>12 April 2020</span>
-                                </div>
-                                <div className="post-desc">
-                                    <p>Many young Indian students today wish to pursue their studies in universities abroad.
-                                    </p>
-                                </div>
-                                <div className="post-bottom">
-                                    <a className="cmt-btn-size-sm" href="#"><i className="fa fa-minus"></i>Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-4 col-md-4 col-sm-6">
-                        <div className="featured-imagebox-post">
-                            <div className="featured-thumbnail">
-                                <img className="img-fluid" src="../img/blog/02.jpg" alt="image" />
-                            </div>
-                            <div className="featured-content">
-                                <div className="post-header">
-                                    <div className="featured-title">
-                                        <h3><a href="#">Why Indian Students Choose To Study Abroad?</a></h3>
-                                    </div>
-                                </div>
-                                <div className="post-meta">
-                                    
-                                    <span><i className="fa fa-calendar"></i>12 April 2020</span>
-                                </div>
-                                <div className="post-desc">
-                                    <p>Many young Indian students today wish to pursue their studies in universities abroad.
-                                    </p>
-                                </div>
-                                <div className="post-bottom">
-                                    <a className="cmt-btn-size-sm" href="#"><i className="fa fa-minus"></i>Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-4 col-md-4 col-sm-6">
-                        <div className="featured-imagebox-post">
-                            <div className="featured-thumbnail">
-                                <img className="img-fluid" src="../img/blog/03.jpg" alt="image" />
-                            </div>
-                            <div className="featured-content">
-                                <div className="post-header">
-                                    <div className="featured-title">
-                                        <h3><a href="#">Why Indian Students Choose To Study Abroad?</a></h3>
-                                    </div>
-                                </div>
-                                <div className="post-meta">
-                                   
-                                    <span><i className="fa fa-calendar"></i>12 April 2020</span>
-                                </div>
-                                <div className="post-desc">
-                                    <p>Many young Indian students today wish to pursue their studies in universities abroad.
-                                    </p>
-                                </div>
-                                <div className="post-bottom">
-                                    <a className="cmt-btn-size-sm" href="#"><i className="fa fa-minus"></i>Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                            )) :
+                            'Nothing Found !!!'
+                    }
 
 
                 </div>
+                {/* 
                 <div className="pagination-block mb-15 res-991-mb-0">
                     <a className="page-numbers current" href="#">1</a>
                     <a className="page-numbers" href="#">2</a>
@@ -280,6 +97,7 @@ const EmiratesVisaBlog = () => {
                         </svg>
                     </a>
                 </div>
+                */}
             </div>
         </section>
       

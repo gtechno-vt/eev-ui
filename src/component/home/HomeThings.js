@@ -9,7 +9,7 @@ function HomeThings() {
     async function getThings() {
 
     try {
-        const thingApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/country/48`)
+        const thingApi = await axios.get(`http://localhost:8081/country/48`)
             setHomeThings(thingApi.data);
         } catch (error) {
             console.log("Something is Wrong");

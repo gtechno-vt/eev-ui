@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link , useLocation } from "react-router-dom";
+import axios from 'axios';
 
 
 const Header = () => {
@@ -51,6 +52,20 @@ const Header = () => {
   
     function desktopToMobile(mobileId, desktopId){
         document.getElementById(mobileId).innerHTML = document.getElementById(desktopId).innerHTML
+    }
+
+    const [siteInfo, setSiteInfo] = useState([]);
+    useEffect(() => {
+        getSiteInfo();
+    }, []);
+
+    async function getSiteInfo() {
+        try {
+        const siteInfoApi = await axios.get(`http://localhost:8081/site-info/2`)
+            setSiteInfo(siteInfoApi.data);
+        } catch (error) {
+        console.log("Something is Wrong");
+        }
     }
 
     
@@ -121,8 +136,8 @@ const Header = () => {
                                         <span>Contact Us</span></Link></li>
                             </ul>
                             <div className="head_whatsapp">
-                                <a target='_blank' href="https://api.whatsapp.com/send?phone=9049610267&amp;text=Hello"
-                                    data-toggle="tooltip" data-placement="top" title="9049610267"> <img
+                                <a target='_blank' href={"https://api.whatsapp.com/send?phone="+siteInfo.whatsAppNumber+"&text=Hello"}
+                                    data-toggle="tooltip" data-placement="top" title={siteInfo.whatsAppNumber}> <img
                                         src="/img/vector.png" />
                                     <span>Apply Express Visa </span> </a>
                             </div>

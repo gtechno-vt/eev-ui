@@ -1,6 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const AboutUs = () => {
+
+    const [siteInfo, setSiteInfo] = useState([]);
+
+    useEffect(() => {
+        getSiteInfo();
+    }, []);
+
+    async function getSiteInfo() {
+        try {
+        const siteInfoApi = await axios.get(`http://localhost:8081/site-info/2`)
+            setSiteInfo(siteInfoApi.data);
+        } catch (error) {
+        console.log("Something is Wrong");
+        }
+    }
 
     useEffect(() => {
 		// 👇️ scroll to top on page load
@@ -32,37 +48,18 @@ const AboutUs = () => {
         <section className="pad_fix_50 aboutus">
         <div className="container">
             <div className="row">
+                {/* 
                 <div className="col-md-12">
                     <div className="prt_single_image-wrapper">
                         <img className="img-fluid" src="../img/about_01.png" />
                     </div>
                 </div>
+                */}
 
                 <div className="col-md-12">
                     <div className="content_ab">
-                        <span className="why">Why Choose Us </span>
-                        <h3>Why choose <span>Emirates E-visa Online ?</span></h3>
-                        <p>Emirates evisa online advisory foundation was established with a small idea that was incepted
-                            in the minds of its promoters in the year 1994! We skilfully guide applicants for
-                            immigration process to any country they aspire to settle down.</p>
-                        <p>Emirates evisa online advisory foundation was established with a small idea that was incepted
-                            in the minds of its promoters in the year 1994! We skilfully guide applicants for
-                            immigration process to any country they aspire to settle down.</p>
 
-                        <p>Emirates evisa online advisory foundation was established with a small idea that was incepted
-                            in the minds of its promoters in the year 1994! We skilfully guide applicants for
-                            immigration process to any country they aspire to settle down.</p>
-                        <p>Emirates evisa online advisory foundation was established with a small idea that was incepted
-                            in the minds of its promoters in the year 1994! We skilfully guide applicants for
-                            immigration process to any country they aspire to settle down.</p>
-
-                        <p>Emirates evisa online advisory foundation was established with a small idea that was incepted
-                            in the minds of its promoters in the year 1994! We skilfully guide applicants for
-                            immigration process to any country they aspire to settle down.</p>
-                        <p>Emirates evisa online advisory foundation was established with a small idea that was incepted
-                            in the minds of its promoters in the year 1994! We skilfully guide applicants for
-                            immigration process to any country they aspire to settle down.</p>
-
+                        <div dangerouslySetInnerHTML={{ __html: (siteInfo.aboutUsText) }} />
 
 
 
