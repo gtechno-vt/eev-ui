@@ -12,7 +12,7 @@ const EmiratesVisaTypes = () => {
 
     async function getVisaType() {
         try {
-            const visaTypeApi = await axios.get(`http://localhost:8081/visaVariant/0/48`)
+            const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/0/48`)
             setVisaType(visaTypeApi.data);
         } catch (error) {
             console.log("Something is Wrong Visa Type");

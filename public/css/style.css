@@ -2451,3 +2451,12 @@ color: #fe0000;
     outline: none;
 }
 .error_404 img {width:100%}
+
+#succ_message{
+    background-color: #069;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    color: #fff;
+    display: none;
+}

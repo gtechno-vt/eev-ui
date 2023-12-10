@@ -6,6 +6,7 @@ import StepsToApplyEmiratesVisa from "./component/StepsToApplyEmiratesVisa";
 import EmiratesVisaTypes from "./component/EmiratesVisaTypes";
 import TrackVisaApplication from "./component/TrackVisaApplication";
 import ApplyNow from "./component/ApplyNow";
+import Apply from "./component/Apply";
 import TermsAndConditions from "./component/TermsAndConditions";
 import PrivacyPolicy from "./component/PrivacyPolicy";
 import EmiratesVisaFaqs from "./component/EmiratesVisaFaqs";
@@ -35,7 +36,8 @@ export default function App() {
           <Route path="emirates-visa-blog" element={<EmiratesVisaBlog />} />
           <Route path="about-us" element={<AboutUs />} />
           <Route path="contact-us" element={<Contact />} />
-          <Route path="checkout" element={<Checkout />} />
+          <Route path="apply/:id" element={<Apply />} />
+          <Route path="checkout/:id" element={<Checkout />} />
           <Route path="customer-review" element={<CustomerReview />} />
           <Route path="blog" element={<BlogDetail />} />
           <Route path="*" element={<NoPage />} />

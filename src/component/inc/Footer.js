@@ -12,7 +12,7 @@ const Footer = () => {
         async function getSiteInfo() {
 
 			try {
-				const siteInfoApi = await axios.get(`http://localhost:8081/site-info/2`)
+				const siteInfoApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/site-info/2`)
 				setSiteInfo(siteInfoApi.data);
 			} catch (error) {
 				console.log("Something is Wrong");
@@ -85,14 +85,14 @@ const Footer = () => {
                         </div>
 
                         <div className="ad">
-                            <div className="icon"><img src="img/icons/location.png" /></div>
+                            <div className="icon"><img src="/img/icons/location.png" /></div>
                             <div className="addres">
                                 <p>{siteInfo.address} </p>
                             </div>
                         </div>
 
                         <div className="ad">
-                            <div className="icon"><img src="img/icons/email.png" /></div>
+                            <div className="icon"><img src="/img/icons/email.png" /></div>
                             <div className="addres">
                                 <p>{siteInfo.emailAddress}</p>
                             </div>
@@ -106,7 +106,7 @@ const Footer = () => {
                         </ul>
 
                         <div className="ftr_pay">
-                            <img src="img/payment.webp" />
+                            <img src="/img/payment.webp" />
                         </div>
 
                     </div>

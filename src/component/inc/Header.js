@@ -61,7 +61,7 @@ const Header = () => {
 
     async function getSiteInfo() {
         try {
-        const siteInfoApi = await axios.get(`http://localhost:8081/site-info/2`)
+        const siteInfoApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/site-info/2`)
             setSiteInfo(siteInfoApi.data);
         } catch (error) {
         console.log("Something is Wrong");

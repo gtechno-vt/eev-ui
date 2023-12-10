@@ -26,7 +26,7 @@ const TrackVisaApplication = () => {
         } else {
             
             try {
-                const trackApi = await axios.get(`http://localhost:8081/application/track/${track.appId}`);
+                const trackApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/application/track/${track.appId}`);
                 setTrackData(trackApi.data);
             } catch (error) {
                 alert("Something is Wrong");

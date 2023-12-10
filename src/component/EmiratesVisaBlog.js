@@ -11,7 +11,7 @@ const EmiratesVisaBlog = () => {
 
     async function getSiteBlogs() {
         try {
-        const siteBlogApi = await axios.get(`http://localhost:8081/blog/basic/2`)
+        const siteBlogApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/blog/basic/2`)
             setSiteBlogs(siteBlogApi.data);
         } catch (error) {
             console.log("Something is Wrong");

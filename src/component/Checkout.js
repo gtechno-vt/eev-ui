@@ -1,6 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from "react-router-dom";
 
 const Checkout = () => {
+
+    const { id } = useParams();
+
+    const [applicatDetails, setApplicatDetails] = useState([]);
+
+    useEffect(() => {
+
+        async function getApplicatDetails() {
+            try {
+                const appApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${id}`)
+                setApplicatDetails(appApi.data.application);
+                console.log(appApi.data.application.id);
+            } catch (error) {
+                console.log("Something is Wrong Visa Type");
+            }
+        }
+
+        getApplicatDetails();
+    }, []);
 
     useEffect(() => {
 		// 👇️ scroll to top on page load
@@ -38,11 +59,11 @@ const Checkout = () => {
 
                             <div className="column-three-dflex">
                                 <div className="column-three">
-                                    <div className="data">Reference ID : <span>297444356</span></div>
+                                    <div className="data">Reference ID : <span>{applicatDetails.displayId}</span></div>
                                 </div>
 
                                 <div className="column-three">
-                                    <div className="data">Visa Applied for : <span>Transit Visa Single Entry</span></div>
+                                    <div className="data">Visa Applied for : <span> {applicatDetails.id}</span></div>
                                 </div>
 
                                 <div className="column-three">
@@ -132,7 +153,7 @@ const Checkout = () => {
                                                 <span className="checkmark"></span>
                                             </label>
                                             <a href="#" className="meetInfobtn">
-                                                <img className="lazy" src="img/info1.png" alt="Info" />
+                                                <img className="lazy" src="/img/info1.png" alt="Info" />
                                                 <div className="meetInfoBox">
                                                     <h4>Travel Insurance</h4>
                                                     <p>Travel Insurance, with COVID-19 coverage is mandatory, as per the UAE
@@ -157,7 +178,7 @@ const Checkout = () => {
                                                 <span className="checkmark"></span>
                                             </label>
                                             <a href="#" className="meetInfobtn">
-                                                <img className="lazy" src="img/info1.png" alt="Info" />
+                                                <img className="lazy" src="/img/info1.png" alt="Info" />
                                                 <div className="meetInfoBox">
                                                     <h4>Visa Refusal Coverage</h4>
                                                     <p>With our Visa Refusal Coverage, your application is covered. In the
@@ -186,7 +207,7 @@ const Checkout = () => {
                                                 <span className="checkmark"></span>
                                             </label>
                                             <a href="#" className="meetInfobtn">
-                                                <img className="lazy" src="img/info1.png" alt="Info" />
+                                                <img className="lazy" src="/img/info1.png" alt="Info" />
                                                 <div className="meetInfoBox">
                                                     <h4>Airport Transfer</h4>
                                                     <p>We offers you easy, hassle free and safe airport to hotel transfers

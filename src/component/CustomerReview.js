@@ -10,7 +10,7 @@ const CustomerReview = () => {
 
     async function getSiteInfo() {
         try {
-        const siteReviewsApi = await axios.get(`http://localhost:8081/reviews/site/2`)
+        const siteReviewsApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/reviews/site/2`)
             setSiteReviews(siteReviewsApi.data);
         } catch (error) {
         console.log("Something is Wrong");

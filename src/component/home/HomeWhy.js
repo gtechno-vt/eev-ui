@@ -9,7 +9,7 @@ function HomeWhy() {
     async function getWhyUs() {
 
     try {
-        const whyUsApi = await axios.get(`http://localhost:8081/site-why-choose-us/site/2`)
+        const whyUsApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/site-why-choose-us/site/2`)
             setWhyUs(whyUsApi.data);
         } catch (error) {
             console.log("Something is Wrong");
