@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const Contact = () => {
 
   const [siteInfo, setSiteInfo] = useState([]);
+  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
+  const handleCaptchaChange = (value) => {
+    setIsCaptchaVerified(true);
+  };
 
   const [lead, setLead] = useState({
     userName: "",
@@ -40,6 +45,11 @@ const Contact = () => {
   async function onFormSubmit(e) {
     e.preventDefault()
 
+    document.getElementById("userName").style.borderColor = "#044";
+    document.getElementById("userEmail").style.borderColor = "#044";
+    document.getElementById("userMobile").style.borderColor = "#044";
+    document.getElementById("subject").style.borderColor = "#044";
+    document.getElementById("text").style.borderColor = "#044";
 
     if (lead.userName == '') {
       document.getElementById("userName").style.borderColor = "red";
@@ -57,7 +67,7 @@ const Contact = () => {
       document.getElementById("text").style.borderColor = "red";
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-
+      if (isCaptchaVerified) {
       try {
         await axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/query`, lead)
           .then((res) => {
@@ -72,13 +82,26 @@ const Contact = () => {
               subject: "",
               text: ""
             })
-            //window.location.reload();
+            
+            const timeoutId = setTimeout(() => {
+              document.getElementById("succ_message").style.display = "none";
+            }, 5000);
+            return () => clearTimeout(timeoutId);
           });
       } catch (error) {
         console.log(error);
         alert("Something is Wrong");
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
+     } else {
+        document.getElementById("succ_message").style.display = "block";
+        document.getElementById("alert_message").innerHTML = "Invalid Captcha Try Again";
+
+        const timeoutId = setTimeout(() => {
+          document.getElementById("succ_message").style.display = "none";
+        }, 5000);
+        return () => clearTimeout(timeoutId);
+     }
     }
 
   }
@@ -176,7 +199,7 @@ const Contact = () => {
                 </div>
                 <div className="mb-3">
                   <textarea name='text'
-                    id='txet'
+                    id='text'
                     value={lead.text}
                     onChange={e => onTextFieldChange(e)}
                     className="form-control required"
@@ -184,6 +207,12 @@ const Contact = () => {
                     placeholder="Enter Message *">
 
                   </textarea>
+                </div>
+                <div className='mb-3'>
+                  <ReCAPTCHA
+                    sitekey="6LdmyEApAAAAAKqyBoLkgAXhvdxQ9gf1n-kcv2TT"
+                    onChange={handleCaptchaChange}
+                  />
                 </div>
                 <div className="mb-3">
                   <button
@@ -193,6 +222,7 @@ const Contact = () => {
                     Send message
                   </button>
                 </div>
+
               </form>
             </div>
             <div className="col-xl-5 col-lg-6">

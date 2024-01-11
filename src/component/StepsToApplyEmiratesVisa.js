@@ -35,7 +35,7 @@ const StepsToApplyEmiratesVisa = () => {
                     <span></span>
                 </div>
 
-                <div className="content">
+                {/*<div className="content">
                     <div className="step_cont">
                         <div className="title">
                             <h3>Choose your nationality & the country you are living in</h3>
@@ -142,7 +142,7 @@ const StepsToApplyEmiratesVisa = () => {
                     </div>
 
 
-                </div>
+                </div>*/}
 
 
             </div>

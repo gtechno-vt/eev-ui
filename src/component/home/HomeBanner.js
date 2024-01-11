@@ -1,10 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function HomeBanner() {
 
+    const navigate = useNavigate();
     const [allCountry, setAllCountry] = useState([]);
     const [siteInfo, setSiteInfo] = useState([]);
+    const [leadData, setLeadData] = useState({
+        'citizen' : '',
+        'traveling' : ''
+    });
+
+    async function onTextFieldChange(e) {
+        setLeadData({
+            ...leadData,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    async function onFormSubmit(e) {
+        e.preventDefault();
+        
+        if (leadData.citizen == '') {
+            document.getElementById("citizen").style.border = "1px solid red";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (leadData.traveling == '') {
+            document.getElementById("traveling").style.border = "1px solid red";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            navigate('/emirates-visa/' + leadData.citizen +'/'+ leadData.traveling);
+        }
+
+    }
 
     useEffect(() => {
 
@@ -50,15 +78,22 @@ function HomeBanner() {
                         <div className="searchPanelTitle">
                             <h3>Apply for Visa Now</h3>
                         </div>
-                        <form method="post" action="apply-detail">
-
+                        <form>
                             <div className="form-group">
                                 <label>Citizenship </label>
-                                <select id="countryt" name="countryt" className="form-control js-example-basic-single" >
+                                <select 
+                                    className="form-control" 
+                                    name='citizen'
+                                    id='citizen'
+                                    onChange={e => onTextFieldChange(e)}
+                                    value={leadData.citizen}
+                                    
+                                >
+                                    <option value=''>--Select--</option>
                                     {
 										allCountry && allCountry.length > 0 ?
                                             allCountry.map((item, index) => (
-                                                <option key={index+1} value={item.id}>{item.name}</option>
+                                                <option key={index+1} value={item.countryNameSlug}>{item.name}</option>
                                             )) :
 											    ''
 									}
@@ -66,12 +101,19 @@ function HomeBanner() {
                             </div>
 
                             <div className="form-group">
-                                <label>Travelling from </label>
-                                <select id="country" name="country" className="form-control js-example-basic-single">
+                                <label>Traveling from </label>
+                                <select 
+                                     name='traveling'
+                                     id='traveling'
+                                     onChange={e => onTextFieldChange(e)}
+                                     value={leadData.traveling}
+                                    className="form-control"
+                                >
+                                    <option value=''>--Select--</option>
                                     {
 										allCountry && allCountry.length > 0 ?
                                             allCountry.map((item, index) => (
-                                                <option key={index+1} value={item.id}>{item.name}</option>
+                                                <option key={index+1} value={item.countryNameSlug}>{item.name}</option>
                                             )) :
 											    ''
 									}
@@ -79,7 +121,7 @@ function HomeBanner() {
                             </div>
 
 
-                            <button className="btn" type="submit" disabled> Continue </button>
+                            <button className="btn" type="button" onClick={e => onFormSubmit(e)}> Continue </button>
 
                         </form>
                     </div>

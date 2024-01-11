@@ -15,6 +15,13 @@ import AboutUs from "./component/AboutUs";
 import Checkout from "./component/Checkout";
 import CustomerReview from "./component/CustomerReview";
 import BlogDetail from "./component/BlogDetail";
+import EditApplicantMain from './component/EditApplicantMain';
+import EditApplicant from './component/EditApplicant';
+import EmiratesVisa from './component/EmiratesVisa';
+import ApplyVisa from './component/ApplyVisa';
+import ApplyNowVisa from './component/ApplyNowVisa';
+import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
+
 
 
 import Contact from "./component/Contact";
@@ -22,6 +29,7 @@ import NoPage from "./component/NoPage";
 
 export default function App() {
   return (
+    <>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -39,11 +47,20 @@ export default function App() {
           <Route path="apply/:id" element={<Apply />} />
           <Route path="checkout/:id" element={<Checkout />} />
           <Route path="customer-review" element={<CustomerReview />} />
-          <Route path="blog" element={<BlogDetail />} />
+          <Route path="blog/:id" element={<BlogDetail />} />
+          <Route path="applicant-main/:id" element={<EditApplicantMain />} />
+          <Route path="applicant/:id" element={<EditApplicant />} />
+          <Route path="apply-now-visa/:visa" element={<ApplyNowVisa />} />
+          <Route path="emirates-visa/:citizen/:travelling" element={<EmiratesVisa />} />
+          <Route path="apply-visa/:visa/:citizen/:travelling" element={<ApplyVisa />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
+      <TawkMessengerReact
+          propertyId="6537513bf2439e1631e7c188"
+          widgetId="1hdg1al57" />
+    </>
   );
 }
 

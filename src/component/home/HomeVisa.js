@@ -12,11 +12,12 @@ function HomeVisa() {
 
     async function getVisaType() {
         try {
-            const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/0/48`)
+            const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/0/48?fetchImages=false`)
             setHomeVisa(visaTypeApi.data);
-            var visaData = visaTypeApi.data;
-            const uniqueVisaTypes = [...new Set(visaData.map(visa => visa.visaType.name))];
-            setHomeVisaType(uniqueVisaTypes);
+            //var visaData = visaTypeApi.data;
+            //const uniqueVisaTypes = [...new Set(visaData.map(visa => visa.visaType.name))];
+            const uniqueVisaTypesS = ["Tourist Visa", "Business Visa", "Transit Visa"];
+            setHomeVisaType(uniqueVisaTypesS);
         } catch (error) {
             console.log("Something is Wrong Visa Type");
         }
@@ -32,7 +33,6 @@ function HomeVisa() {
                 <div className="col-md-12">
                     <div className="title">
                         <h3>Visa Details</h3>
-                        
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@ function HomeVisa() {
                     <div className="tab_visa">
 
                         <div role="tabpanel">
-                            <div className="col-md-12">
+                            <div className="col-md-12" key={12}>
                                 <ul className="nav nav-pills brand-pills nav-stacked" role="tablist">
                                     {
                                         homeVisaType && homeVisaType.length > 0 ?
@@ -58,15 +58,14 @@ function HomeVisa() {
 
                                 </ul>
                             </div>
-                            <div className="col-md-12">
+                            <div className="col-md-12" key={13}>
                                 <div className="tab-content">
                                     {
                                         homeVisaType && homeVisaType.length > 0 ?
                                         homeVisaType.map((item, index) => (
 
                                             <>
-
-                                            
+                    
                                                 <div key={index+1} role="tabpanel" className={index == 0 ? 'tab-pane active' : ' tab-pane'} id={"tab"+(index+1)}>
                                                     <div className="row">
                                                         {

@@ -5,6 +5,42 @@ import { format } from 'date-fns';
 const EmiratesVisaBlog = () => {
 
     const [siteBlogs, setSiteBlogs] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [nextPage, setNextPage] = useState(1);
+
+
+    const fetchData = async (page) => {
+        const limit = 15;
+        const offset = (page - 1) * limit;
+    
+        try {
+          const response = await axios.get(
+            `https://dgf0agfzdhu.emiratesevisaonline.com/blog/basic/2?limit=${limit}&offset=${offset}`
+          );
+          setSiteBlogs(response.data); 
+          if(response.data.length == 0){
+            setNextPage(0); 
+            setCurrentPage(page-1)
+          } else {
+            setNextPage(1); 
+          }
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+    
+      useEffect(() => {
+        fetchData(currentPage);
+      }, [currentPage]);
+    
+      const handlePageChange = (newPage) => {
+        setCurrentPage(newPage);
+      };
+
+
+
+
+    /*
     useEffect(() => {
         getSiteBlogs();
     }, []);
@@ -17,6 +53,7 @@ const EmiratesVisaBlog = () => {
             console.log("Something is Wrong");
         }
     }
+    */
 
     useEffect(() => {
 		// 👇️ scroll to top on page load
@@ -70,7 +107,7 @@ const EmiratesVisaBlog = () => {
                                             <span><i className="fa fa-calendar"></i>{format(item.createdAt, dateFormatString)} </span>
                                         </div>
                                         <div className="post-desc">
-                                            <p>{item.text}</p>
+                                            <p></p>
                                         </div>
                                         <div className="post-bottom">
                                             <a className="cmt-btn-size-sm" href={"blog/"+item.id}><i
@@ -81,23 +118,51 @@ const EmiratesVisaBlog = () => {
                             </div>
 
                             )) :
-                            'Nothing Found !!!'
+                            ''
                     }
 
 
                 </div>
-                {/* 
-                <div className="pagination-block mb-15 res-991-mb-0">
-                    <a className="page-numbers current" href="#">1</a>
-                    <a className="page-numbers" href="#">2</a>
-                    <a className="next page-numbers" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="1.5" d="M4 12h16m0 0l-6-6m6 6l-6 6" />
-                        </svg>
-                    </a>
-                </div>
-                */}
+                {/* Pagination controls */}
+                <nav aria-label="Page navigation example">
+                    <ul className="pagination">
+                      <li className="page-item">
+                        {
+                          currentPage === 1 ? 
+                            <a
+                              className="page-link"
+                            >
+                              Previous
+                            </a>
+                          :
+                            <a
+                              className="page-link"
+                              onClick={() => handlePageChange(currentPage - 1)}
+                              disabled={currentPage === 1}
+                            >
+                              Previous
+                            </a>
+                        }
+                      
+                      </li>
+                      <li className="page-item"><a className="page-link">{currentPage}</a></li>
+                      <li className="page-item">
+                      {
+
+                        nextPage == 1 ? 
+                          <a className="page-link" onClick={() => handlePageChange(currentPage + 1)}>
+                            Next
+                          </a>
+                        :
+                          <a className="page-link">
+                            Last
+                          </a>
+                      }
+                      
+                      </li>
+                    </ul>
+                  </nav>
+                {/* Pagination controls */}
             </div>
         </section>
       

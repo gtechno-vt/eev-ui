@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function HomeContinent() {
@@ -17,7 +18,6 @@ function HomeContinent() {
             var countryData = countryApi.data;
             const uniqueContinent = [...new Set(countryData.map(country => country.continentKey))];
             setContinent(uniqueContinent);
-            console.log(uniqueContinent);
         } catch (error) {
             console.log("Something is Wrong Contenent");
         }
@@ -40,7 +40,6 @@ function HomeContinent() {
             var countryData = countryApi.data;
             const uniqueContinent = [...new Set(countryData.map(country => country.continentKey))];
             setContinent(uniqueContinent);
-            console.log(uniqueContinent);
         } catch (error) {
             console.log("Something is Wrong Contenent");
         }
@@ -56,8 +55,8 @@ function HomeContinent() {
                 </div>
             </div>
 
-            <div className="row">
-                <div className="col-md-12">
+            <div className="row" >
+                <div className="col-md-12" >
                     <div className="search_bar">
 
                         <div className="form-group">
@@ -85,7 +84,7 @@ function HomeContinent() {
             </div>
 
 
-            <div className="explanation">
+            <div className="explanation" >
 
 
                 {
@@ -105,7 +104,7 @@ function HomeContinent() {
 
                                             itemV.continentKey == item ?
                                                 <li key={indexs+1}>
-                                                    <a href="#">{itemV.name}<img src="img/svg/arrow.svg" /></a>
+                                                    <Link to={'/emirates-visa/' + itemV.countryNameSlug +'/'+ itemV.countryNameSlug}>{itemV.name}<img src="img/svg/arrow.svg" /></Link>
                                                 </li>
                                             :
                                             ''

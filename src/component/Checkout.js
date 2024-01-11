@@ -1,32 +1,87 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
+import { format } from 'date-fns';
+import { Link } from 'react-router-dom';
+
 
 const Checkout = () => {
 
     const { id } = useParams();
 
     const [applicatDetails, setApplicatDetails] = useState([]);
+    const [serviceType, setServiceType] = useState([]);
+    const [applicationDetails, setApplicationDetails] = useState([]);
+    const [visaTypeFee, setVisaTypeFee] = useState([]);
+    const [siteInfo, setSiteInfo] = useState([]);
 
     useEffect(() => {
 
         async function getApplicatDetails() {
+            
+        }
+
+        async function getApplicationDetails() {
             try {
                 const appApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${id}`)
-                setApplicatDetails(appApi.data.application);
-                console.log(appApi.data.application.id);
+                setApplicationDetails(appApi.data.application);
+
+                if(appApi.data.application.destinationCountry.id){
+                    try {
+                        const serviceApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/service-type/${appApi.data.application.destinationCountry.id}`)
+                        setServiceType(serviceApi.data);
+                    } catch (error) {
+                        console.log("Something is Wrong Visa Type");
+                    }
+                }
+                
+                try {
+                    const applicatntApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant?applicationId=${appApi.data.application.id}`)
+                    setApplicatDetails(applicatntApi.data);
+                } catch (error) {
+                    console.log("Something is Wrong Visa Type");
+                }
+
+                try {
+                    const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/${appApi.data.application.visaVariant.id}/48/fee`)
+                    setVisaTypeFee(visaTypeApi.data);
+                } catch (error) {
+                    console.log("Something is Wrong Visa Type");
+                }
             } catch (error) {
                 console.log("Something is Wrong Visa Type");
             }
         }
 
         getApplicatDetails();
-    }, []);
+        getApplicationDetails();
+
+
+    }, [id]);
+
+
+    useEffect(() => {
+        async function getSiteInfo() {
+
+			try {
+				const siteInfoApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/site-info/2`)
+				setSiteInfo(siteInfoApi.data);
+                console.log(siteInfoApi.data);
+			} catch (error) {
+				console.log("Something is Wrong");
+			}
+		}
+        getSiteInfo();
+	}, []);
+
 
     useEffect(() => {
 		// 👇️ scroll to top on page load
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 	}, []);
+
+    const dateFormatString = 'd MMMM, yyyy';
+
     
   return (
     <>
@@ -59,21 +114,27 @@ const Checkout = () => {
 
                             <div className="column-three-dflex">
                                 <div className="column-three">
-                                    <div className="data">Reference ID : <span>{applicatDetails.displayId}</span></div>
+                                    <div className="data">Reference ID : <span>{applicationDetails.displayId}</span></div>
                                 </div>
 
                                 <div className="column-three">
-                                    <div className="data">Visa Applied for : <span> {applicatDetails.id}</span></div>
+                                    <div className="data">Visa Applied for : 
+                                        <span> 
+                                        {
+                                            applicationDetails.id ? applicationDetails.visaVariant.name : ''
+                                        }
+                                        </span>
+                                    </div>
                                 </div>
 
                                 <div className="column-three">
-                                    <div className="data bg_set">100% Refund if your Visa is not approved</div>
+                                    <div className="data bg_set">
+                                        {
+                                            applicationDetails.id ? applicationDetails.visaVariant.description : ''
+                                        }
+                                    </div>
                                 </div>
                             </div>
-
-
-
-
 
                         </div>
 
@@ -94,26 +155,37 @@ const Checkout = () => {
                                             <th>Action</th>
                                         </tr>
 
-                                        <tr>
-                                            <td>Khalid</td>
-                                            <td>Ansari</td>
-                                            <td>09 Nov, 2023</td>
-                                            <td>4448948949498494</td>
-                                            <td>14 Aug, 2040</td>
-                                            <td><a href="#"> Edit </a>
-                                            </td>
-                                        </tr>
+                                        {
+                                            applicatDetails && applicatDetails.length > 0 ?
+                                            applicatDetails.map((item, index) => (
 
+                                                <tr key={index+1}>
+                                                    <td>{item.firstName}</td>
+                                                    <td>{item.lastName}</td>
+                                                    <td>
+                                                        { 
+                                                            item.arrivalDate ? 
+                                                            format(item.arrivalDate, dateFormatString)
+                                                            :
+                                                            '-'
+                                                        }
+                                                    </td>
+                                                    <td>{item.passportNumber}</td>
+                                                    <td>{format(item.passportExpiryDate, dateFormatString)}</td>
+                                                    <td>
+                                                        {
+                                                            item.isPrimary == true ? 
+                                                                <Link to={`/applicant-main/${item.id}`}> Edit </Link>
+                                                                :
+                                                                <Link to={`/applicant/${item.id}`}> Edit  </Link>
+                                                        }
+                                                        
+                                                    </td>
+                                                </tr>
 
-                                        <tr>
-                                            <td>Cssfounde</td>
-                                            <td>Testpankaj</td>
-                                            <td>09 Nov, 2023</td>
-                                            <td>4448948949498494</td>
-                                            <td>16 Jan, 2036</td>
-                                            <td><a href="#"> Edit </a>
-                                            </td>
-                                        </tr>
+                                                )) :
+                                                'Nothing Found !!!'
+                                        }
 
                                     </table>
                                 </div>
@@ -133,101 +205,50 @@ const Checkout = () => {
 
                             <table className="tableStyle1" id="payment_box">
                                 <tr>
-                                    <th colspan="2">PAYMENT DETAILS</th>
+                                    <th colSpan="2">PAYMENT DETAILS</th>
                                 </tr>
 
                                 <tr>
-                                    <td>Visa Fee</td>
-                                    <td>$ 119</td>
-                                </tr>
-
-                                <tr className="add_Sr">
-                                    <td colspan="2">Addtional Services</td>
+                                    <td>No. Of Applicant</td>
+                                    <td>{applicatDetails.length}</td>
                                 </tr>
 
                                 <tr>
+                                    <td>Total Visa Fees</td>
+                                    <td>${visaTypeFee*applicatDetails.length}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Service Type</td>
                                     <td>
-                                        <div className="d_flk">
-                                            <label className="check_custom"> Travel Insurance
-                                                <input type="checkbox" />
-                                                <span className="checkmark"></span>
-                                            </label>
-                                            <a href="#" className="meetInfobtn">
-                                                <img className="lazy" src="/img/info1.png" alt="Info" />
-                                                <div className="meetInfoBox">
-                                                    <h4>Travel Insurance</h4>
-                                                    <p>Travel Insurance, with COVID-19 coverage is mandatory, as per the UAE
-                                                        Government directive. Book the Government approved travel insurance
-                                                        along with your visa to avail a flat discount of $100 on the
-                                                        insurance fee.</p>
-                                                </div>
-                                            </a>
-                                        </div>
-
-
-
+                                        <select className='form-control'>
+                                            <option value="">Select</option>
+                                            {
+                                                serviceType && serviceType.length > 0 ?
+                                                serviceType.map((item, index) => (
+                                                    <option key={index} value={item.id}>{item.name}</option>
+                                                    )) :
+                                                    ''
+                                            }
+                                            <option value="Normal">Normal</option>
+                                        </select>
                                     </td>
-                                    <td>$ 99</td>
-                                </tr>
-                                <tr>
-
-                                    <td>
-                                        <div className="d_flk">
-                                            <label className="check_custom"> Visa Refusal Coverage
-                                                <input type="checkbox" />
-                                                <span className="checkmark"></span>
-                                            </label>
-                                            <a href="#" className="meetInfobtn">
-                                                <img className="lazy" src="/img/info1.png" alt="Info" />
-                                                <div className="meetInfoBox">
-                                                    <h4>Visa Refusal Coverage</h4>
-                                                    <p>With our Visa Refusal Coverage, your application is covered. In the
-                                                        event of government denial, you're entitled to a full refund.</p>
-                                                    <p><b>Note:</b>
-                                                        Remember, government fees and service Fees are non-refundable after
-                                                        your application is submitted to the Government unless Denial
-                                                        Protection is opted for."
-                                                        Before availing of this service, please ensure that no existing
-                                                        application is currently in the immigration system.</p>
-                                                    <p>Kindly note that applications refused for security reasons by
-                                                        immigration authorities are not eligible for refunds.</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </td>
-
-                                    <td>$ 25</td>
                                 </tr>
 
                                 <tr>
-                                    <td>
-                                        <div className="d_flk">
-                                            <label className="check_custom"> Airport Transfer
-                                                <input type="checkbox" />
-                                                <span className="checkmark"></span>
-                                            </label>
-                                            <a href="#" className="meetInfobtn">
-                                                <img className="lazy" src="/img/info1.png" alt="Info" />
-                                                <div className="meetInfoBox">
-                                                    <h4>Airport Transfer</h4>
-                                                    <p>We offers you easy, hassle free and safe airport to hotel transfers
-                                                        at the lowest guaranteed price.</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>$ 50</td>
+                                    <td>Service Fees</td>
+                                    <td>${siteInfo.transactionFeePc}</td>
                                 </tr>
-
-
-
 
                                 <tr>
-                                    <td className="ftr_l">Total Fees</td>
-                                    <td className="ftr_r">$ 119</td>
+                                    <td>Tax(%)</td>
+                                    <td>{siteInfo.vatPc}</td>
                                 </tr>
 
-
+                                <tr>
+                                    <td className="ftr_l">Net Pay</td>
+                                    <td className="ftr_r">${((visaTypeFee*applicatDetails.length) + (siteInfo.transactionFeePc))+((visaTypeFee*applicatDetails.length) + (siteInfo.transactionFeePc))*(siteInfo.vatPc/100)}</td>
+                                </tr>
 
                             </table>
 

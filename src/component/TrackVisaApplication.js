@@ -26,7 +26,7 @@ const TrackVisaApplication = () => {
         } else {
             
             try {
-                const trackApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/application/track/${track.appId}`);
+                const trackApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant?applicationDisplayId=${track.appId}`);
                 setTrackData(trackApi.data);
             } catch (error) {
                 alert("Something is Wrong");
@@ -38,7 +38,6 @@ const TrackVisaApplication = () => {
 
     async function onFormReset(e) {
         e.preventDefault()
-        
         
         document.getElementById('appId').value = "";
         setTrackData("");
@@ -106,47 +105,45 @@ const TrackVisaApplication = () => {
                     </div>
 
 
-                    { 
-                        trackData.id != null ? 
-                            <div className="col-md-9">
-                                <div className="detail_refrence">
-                                    <table id="customers">
-                                        <tbody>
-                                        <tr>
-                                            <td>Applicant Name :</td>
-                                            <td> 
-                                                {trackData.citizenshipCountry.createdBy.firstName} &nbsp;
-                                                {trackData.citizenshipCountry.createdBy.middleName} &nbsp;
-                                                {trackData.citizenshipCountry.createdBy.lastName}
-                                            </td>
-                                            <td>Applied On :</td>
-                                            <td>{format(trackData.createdAt, dateFormatString)}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Service Applied for :</td>
-                                            <td>
-                                                { 
-                                                    trackData.visaVariant ? 
-                                                        trackData.visaVariant.name
-                                                    :
-                                                        'NA'
-                                                
-                                                }
-                                            </td>
-                                            <td>Travel Date :</td>
-                                            <td>{format(trackData.arrivalDate, dateFormatString)}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Application Status :</td>
-                                            <td colSpan="3">{trackData.status}</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                    {
+                        trackData && trackData.length > 0 ?
+                            trackData.map((item, index) => (
+                                <div className="col-md-9">
+                                    <div className="detail_refrence">
+                                        <table id="customers">
+                                            <tbody>
+                                            <tr>
+                                                <td>Applicant Name :</td>
+                                                <td> 
+                                                    {item.firstName} &nbsp;
+                                                    {item.middleName} &nbsp;
+                                                    {item.lastName}
+                                                </td>
+                                                <td>Applied On :</td>
+                                                <td>{format(item.application.createdAt, dateFormatString)}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Service Applied for :</td>
+                                                <td>
+                                                    { item.application.visaVariant.name }
+                                                </td>
+                                                <td>Travel Date :</td>
+                                                <td>{format(item.application.arrivalDate, dateFormatString)}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Application Status :</td>
+                                                <td colSpan="3">{item.application.status}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                        :
-                            ''
+                            )) :
+                                ''
                     }
+
+
+                    
                     
                 </div>
             </div>

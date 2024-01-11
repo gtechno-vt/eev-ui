@@ -3,107 +3,105 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import axios from 'axios';
+import $ from 'jquery';
 
 const HomeHCustomer = () => {
-
-  const [siteReviews, setSiteReviews] = useState([]);
-    
+  const [happyHomeCustomer, setHappyHomeCustomer] = useState([]);
 
   useEffect(() => {
-      getSiteInfo();
+    getHappyCustomerInfo();
   }, []);
 
-  async function getSiteInfo() {
+  async function getHappyCustomerInfo() {
     try {
-      const siteReviewsApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/reviews/site/2`)
-      setSiteReviews(siteReviewsApi.data);
-      console.log(siteReviewsApi.data);
+      const happyCustomerApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/reviews/site/2`);
+      setHappyHomeCustomer(happyCustomerApi.data);
     } catch (error) {
-      console.log("Something is Wrong");
+      console.log("Something went wrong:", error);
     }
   }
-    
-    const options = {
-        margin: 0,
-        responsiveClass: true,
-        autoplayHoverPause:true,
-        nav: true,
-        dots: false,
-        autoplay: true,
-        smartSpeed: 1000,
-        responsive: {
-            0: {
-                items: 1,
-            },
-            400: {
-                items: 1,
-            },
-            600: {
-                items: 2,
-            },
-            700: {
-                items: 3,
-            },
-            1000: {
-                items: 3,
 
-            }
-        },
-    };
-    
+  const options = {
+    items: 3,
+    // Add other options as needed
+  };
+
+  useEffect(() => {
+    if ($.fn.owlCarousel) {
+      $('.owl-carousel').owlCarousel(options);
+    }
+  }, [happyHomeCustomer]);
 
   return (
     <>
-    <section className="our_happy_customer">
+      <section className="our_happy_customer">
         <div className="container">
-            <div className="row">
-                <div className="title">
-                    <h3>Our Happy customer</h3>
-                </div>
+          <div className="row">
+            <div className="title">
+              <h3>Our Happy customer</h3>
             </div>
+          </div>
 
-            <div id="pinBoot">
-              <OwlCarousel className='owl-theme test_monial_slider' loop margin={10} nav {...options}>
+          <div id="pinBoot">
 
-
-                {
-                  siteReviews && siteReviews.length > 0 ?
-                  siteReviews.map((item, index) => (
-
-                    <div className='item' key={index+1}>
-                      <article className="white-panel">
-
-                      <div class="fg_review">
-                      <h3>{item.userName}</h3>
+            <div className='row'>
+              {happyHomeCustomer && happyHomeCustomer.length > 0 ? (
+                happyHomeCustomer.map((item, index) => (
+                  <div key={index} className={'col-md-4 col-xs-12 displayContent'+(index+1)} style={
+                    {display: 'none'}
+                  } >
+                    <article className="white-panel">
+                      <div className="fg_review">
+                        <h3>{item.userName}</h3>
                         <ul>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          </ul>
-                          </div>
-                        <h4>{item.subject}</h4>  
-                        <p>{item.text}</p>
-                       
-                      </article>
-                    </div>
-
-                    )) :
-                    'Nothing Found !!!'
-                }
-
-
-
-              </OwlCarousel>
+                          <li><i className="fa fa-star"></i></li>
+                          <li><i className="fa fa-star"></i></li>
+                          <li><i className="fa fa-star"></i></li>
+                          <li><i className="fa fa-star"></i></li>
+                          <li><i className="fa fa-star"></i></li>
+                        </ul>
+                      </div>
+                      <h4>{item.subject}</h4>
+                      <p>{item.text}</p>
+                    </article>
+                  </div>
+                ))
+              ) : (
+                <div></div>
+              )}
             </div>
-
+              
+            {/* 
+            <OwlCarousel className="owl-theme" {...options} >
+              {happyHomeCustomer && happyHomeCustomer.length > 0 ? (
+                happyHomeCustomer.map((item, index) => (
+                  <div key={index}>
+                    <article className="white-panel">
+                      <div className="fg_review">
+                        <h3>{item.userName}</h3>
+                        <ul>
+                          <li><i className="fa fa-star"></i></li>
+                          <li><i className="fa fa-star"></i></li>
+                          <li><i className="fa fa-star"></i></li>
+                          <li><i className="fa fa-star"></i></li>
+                          <li><i className="fa fa-star"></i></li>
+                        </ul>
+                      </div>
+                      <h4>{item.subject}</h4>
+                      <p>{item.text}</p>
+                    </article>
+                  </div>
+                ))
+              ) : (
+                <div>Nothing Found !!!</div>
+              )}
+            </OwlCarousel>
+            */}
+          </div>
         </div>
-    </section>
-    
+      </section>
     </>
   );
 };
-
 
 export default HomeHCustomer;

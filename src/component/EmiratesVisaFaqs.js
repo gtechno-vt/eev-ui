@@ -5,7 +5,39 @@ import axios from 'axios';
 const EmiratesVisaFaqs = () => {
 
   const [siteFaq, setSiteFaq] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [nextPage, setNextPage] = useState(1);
 
+  const fetchData = async (page) => {
+    const limit = 15;
+    const offset = (page - 1) * limit;
+
+    try {
+      const response = await axios.get(
+        `https://dgf0agfzdhu.emiratesevisaonline.com/site-faq/site/2?limit=${limit}&offset=${offset}`
+      );
+      setSiteFaq(response.data); 
+      if(response.data.length == 0){
+        setNextPage(0); 
+        setCurrentPage(page-1)
+      } else {
+        setNextPage(1); 
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData(currentPage);
+  }, [currentPage]);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+
+  /*
   useEffect(() => {
     async function getSiteInfo() {
 
@@ -18,6 +50,7 @@ const EmiratesVisaFaqs = () => {
     }
     getSiteInfo();
   }, []);
+  */
 
   useEffect(() => {
 		// 👇️ scroll to top on page load
@@ -47,9 +80,6 @@ const EmiratesVisaFaqs = () => {
 
         <section className="pad_fix_50 faq_css">
             <div className="container">
-                
-
-
 
                 <div className="row justify-content-center">
                     <div className="col-md-12">
@@ -81,6 +111,52 @@ const EmiratesVisaFaqs = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Pagination controls */}
+                  <nav aria-label="Page navigation example">
+                    <ul className="pagination">
+                      <li className="page-item">
+                        {
+                          currentPage === 1 ? 
+                            <a
+                              className="page-link"
+                            >
+                              Previous
+                            </a>
+                          :
+                            <a
+                              className="page-link"
+                              onClick={() => handlePageChange(currentPage - 1)}
+                              disabled={currentPage === 1}
+                            >
+                              Previous
+                            </a>
+                        }
+                      
+                      </li>
+                      <li className="page-item"><a className="page-link">{currentPage}</a></li>
+                      <li className="page-item">
+                      {
+
+                        nextPage == 1 ? 
+                          <a className="page-link" onClick={() => handlePageChange(currentPage + 1)}>
+                            Next
+                          </a>
+                        :
+                          <a className="page-link">
+                            Last
+                          </a>
+                      }
+                      
+                      </li>
+                    </ul>
+                  </nav>
+                {/* Pagination controls */}
+
+                
+
+
+
             </div>
         </section>
       

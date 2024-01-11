@@ -85,7 +85,7 @@ a {text-decoration:none}
     gap: 0;
 }
 .main_menu .head_menus nav ul li.active{
-    font-weight: 700;
+    /*font-weight: 700;*/
 }
 .main_menu .head_menus nav ul li.active a {color: #fe0000;}
 .main_menu .head_menus nav ul li:hover .drop-drown {display:block}
@@ -2459,4 +2459,8 @@ color: #fe0000;
     border-radius: 20px;
     color: #fff;
     display: none;
+}
+
+.displayContent1, .displayContent2, .displayContent3{
+    display: block !important;
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 import HomeBanner from "./home/HomeBanner";
 import HomeVisaStep from "./home/HomeVisaStep";
@@ -12,6 +13,21 @@ import HomeFaq from "./home/HomeFaq";
 
 
 const Home = () => {
+
+  useEffect(() => {
+		updateVisitorCount();
+	}, []);
+
+  async function updateVisitorCount(){
+    try {
+      await axios.put(`https://dgf0agfzdhu.emiratesevisaonline.com/site-info/visitor-count/2`)
+        .then((res) => {
+          console.log(res);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
     
     useEffect(() => {
 		// 👇️ scroll to top on page load

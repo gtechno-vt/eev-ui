@@ -7,12 +7,8 @@ const Header = () => {
 
     const location = useLocation();
 
-    const { hash, pathname, search } = location;
-
-
     //const ScrollListenerComponent = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
-    const [headerPosition, setHeaderPosition] = useState(false);
     const toggleClass = 'main_menu page-header is-sticky'; // replace 'yourToggleClass' with the actual class you want to toggle
     
     useEffect(() => {
@@ -26,9 +22,6 @@ const Header = () => {
     }, []);
 
     useEffect(() => {
-        if(pathname == '/'){
-            setHeaderPosition(true);
-        }
         desktopToMobile('mob_notify', 'desktop_menu');
     }, []);
 
@@ -107,31 +100,31 @@ const Header = () => {
                     <div className="head_menus">
                         <nav className="" id="desktop_menu">
                             <ul>
-                                <li className="active">
+                                <li className={location.pathname === '/' ? 'active' : ''}>
                                     <Link to="/">
                                         <img src="/img/icons/10.png" />
-                                        <span>Home</span></Link></li>
+                                        <span>Home </span></Link></li>
 
-                                <li><Link to="/steps-to-apply-emirates-visa">
+                                <li className={location.pathname === '/steps-to-apply-emirates-visa' ? 'active' : ''}><Link to="/steps-to-apply-emirates-visa">
                                         <img src="/img/icons/11.png" />
                                         <span>How To Apply</span></Link></li>
 
-                                <li><Link to="/emirates-visa-types">
+                                <li className={location.pathname === '/emirates-visa-types' ? 'active' : ''}><Link to="/emirates-visa-types">
                                         <img src="/img/icons/12.png" />
                                         <span>Emirates Visa Type</span></Link>
                                 
 
                                 </li>
 
-                                <li><Link to="/track-visa-application">
+                                <li className={location.pathname === '/track-visa-application' ? 'active' : ''}><Link to="/track-visa-application">
                                         <img src="/img/icons/13.png" />
                                         <span>Track Visa Status</span></Link></li>
 
-                                <li><Link to="/apply-now">
+                                <li className={location.pathname === '/apply-now' ? 'active' : ''}><Link to="/apply-now">
                                         <img src="/img/icons/14.png" />
                                         <span>Urgent Visa</span></Link></li>
 
-                                <li><Link to="/contact-us">
+                                <li className={location.pathname === '/contact-us' ? 'active' : ''}><Link to="/contact-us">
                                         <img src="/img/icons/15.png" />
                                         <span>Contact Us</span></Link></li>
                             </ul>
