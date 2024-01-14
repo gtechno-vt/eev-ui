@@ -454,7 +454,7 @@ const ApplyNow = () => {
 
                                                 <div className="col-md-3">
                                                     <div className="form-group">
-                                                        <label>Living country/Traveling from</label>
+                                                        <label>Traveling from</label>
                                                         <select
                                                             name="destinationCountry"
                                                             id='destinationCountry'
