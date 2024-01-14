@@ -9,12 +9,13 @@ const Apply = () => {
     const { id } = useParams();
     const navigate = useNavigate();
   
+    const [allCountry, setAllCountry] = useState([]);
     const [leadData, setLeadData] = useState([]);
     const [applicationData, setApplicationData] = useState([]);
 
-    const [selectedFile, setSelectedFile] = useState({ file : null });
-    const [selectedFilePhoto, setSelectedFilePhoto] = useState({ file : null });
-    const [selectedFileDoc, setSelectedFileDoc] = useState({ file : null });
+    const [selectedFile, setSelectedFile] = useState("");
+    const [selectedFilePhoto, setSelectedFilePhoto] = useState("");
+    const [selectedFileDoc, setSelectedFileDoc] = useState("");
 
     //== = 
     useEffect(() => {
@@ -24,6 +25,7 @@ const Apply = () => {
             try {
                 const applicationApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${id}`)
                 setApplicationData(applicationApi.data);
+                console.log(applicationApi.data);
             } catch (error) {
                 console.log("Something is Wrong");
             }
@@ -31,10 +33,31 @@ const Apply = () => {
 
         getApplicationData();
     }, [id]);
+
+    useEffect(() => {
+        async function getCountry() {
+
+            try {
+                const countryApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/country/basic`)
+                setAllCountry(countryApi.data);
+            } catch (error) {
+                console.log("Something is Wrong");
+            }
+        }
+
+        getCountry();
+    },[])
     //====
 
     // === Form Submit Start Here -=====
     async function onTextFieldChange(e) {
+        if (e.target.name === "uaeVisit" || e.target.name === "KnowUae") {
+            setLeadData({
+                ...leadData,
+                [e.target.name]: e.target.checked
+            })
+            return
+        }
         setLeadData({
             ...leadData,
             [e.target.name]: e.target.value
@@ -53,85 +76,116 @@ const Apply = () => {
                 "residenceCountry": {
                     "id": applicationData.residenceCountry.id
                 },
-                "emailId": leadData.emailId,
+                "emailId": leadData.emailId || null,
                 "firstName": leadData.firstName,
-                "lastName": leadData.lastName,
-                "dob": leadData.dob,
+                "lastName": leadData.lastName || null,
+                "dob": leadData.dob || null,
                 "state": applicationData.state,
                 "city": applicationData.city,
                 "address": applicationData.address,
                 "postalCode": applicationData.postalCode,
-                "mobileNumber": leadData.mobileNumber,
-                "whatsappNumber": leadData.whatsappNumber,
+                "mobileNumber": leadData.countryCode && leadData.mobileNumber ? leadData.countryCode + "-" + leadData.mobileNumber: leadData.mobileNumber ? leadData.mobileNumber : null,
+                // "whatsappNumber": leadData.whatsappNumber,
                 "passportNumber": leadData.passportNumber,
-                "profession": {
+                "profession": applicationData?.profession?.id ? {
                     "id": applicationData.profession.id
-                },
-                "education": {
+                }:null,
+                "education": applicationData?.education?.id ?{
                     "id": applicationData.education.id
-                },
-                "passportExpiryDate": leadData.passportExpiryDateYear + "-" + leadData.passportExpiryDateMonth + "-" + leadData.passportExpiryDateDay,
+                }:null,
+                "passportExpiryDate": leadData.passportExpiryDate,
                 "isPrimary": false,
-                "isContactInForeignCountry": true,
-                "isFirstForeignVisit": true
+                "isContactInForeignCountry": leadData.KnowUae || leadData.KnowUae === false ? leadData.KnowUae : null,
+                "isFirstForeignVisit": leadData.uaeVisit || leadData.uaeVisit === false  ? leadData.uaeVisit : null,
             }
         );
 
+        console.log(payloadData,"payloadData");
 
         document.getElementById("firstName").style.border = "none";
         document.getElementById("lastName").style.border = "none";
         document.getElementById("emailId").style.border = "none";
         document.getElementById("dob").style.border = "none";
         document.getElementById("mobileNumber").style.border = "none";
-        document.getElementById("whatsappNumber").style.border = "none";
+        // document.getElementById("whatsappNumber").style.border = "none";
         document.getElementById("passportNumber").style.border = "none";
-        document.getElementById("passportExpiryDateDay").style.border = "none";
-        document.getElementById("passportExpiryDateMonth").style.border = "none";
-        document.getElementById("passportExpiryDateYear").style.border = "none";
-        document.getElementById("arrivalDateDay").style.border = "none";
-        document.getElementById("arrivalDateMonth").style.border = "none";
-        document.getElementById("arrivalDateYear").style.border = "none";
+        document.getElementById("passportExpiryDate").style.border = "none";
+        document.getElementById("countryCode").style.border = "none";
+        
+        // document.getElementById("arrivalDate").style.border = "none";
+        // document.getElementById("passportExpiryDateDay").style.border = "none";
+        // document.getElementById("passportExpiryDateMonth").style.border = "none";
+        // document.getElementById("passportExpiryDateYear").style.border = "none";
+        // document.getElementById("arrivalDateDay").style.border = "none";
+        // document.getElementById("arrivalDateMonth").style.border = "none";
+        // document.getElementById("arrivalDateYear").style.border = "none";
 
-        if (leadData.firstName == undefined) {
+        if (!leadData.firstName) {
             document.getElementById("firstName").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (leadData.lastName == undefined) {
-            document.getElementById("lastName").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (leadData.emailId == undefined) {
-            document.getElementById("emailId").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (leadData.dob == undefined) {
-            document.getElementById("dob").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (leadData.mobileNumber == undefined) {
-            document.getElementById("mobileNumber").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (leadData.whatsappNumber == undefined) {
-            document.getElementById("whatsappNumber").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (leadData.passportNumber == undefined) {
+        } 
+        // else if (!leadData.countryCode) {
+        //     document.getElementById("countryCode").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // }
+        // else if (leadData.lastName == undefined) {
+        //     document.getElementById("lastName").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // } else if (leadData.emailId == undefined) {
+        //     document.getElementById("emailId").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // } else if (leadData.dob == undefined) {
+        //     document.getElementById("dob").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // } 
+        // else if (!leadData.mobileNumber) {
+        //     document.getElementById("mobileNumber").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // } 
+        // else if (leadData.whatsappNumber == undefined) {
+        //     document.getElementById("whatsappNumber").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // } 
+        else if (!leadData.passportNumber) {
             document.getElementById("passportNumber").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (leadData.passportExpiryDateDay == undefined) {
-            document.getElementById("passportExpiryDateDay").style.border = "1px solid red";
+        } 
+        else if (!leadData.passportExpiryDate) {
+            document.getElementById("passportExpiryDate").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (leadData.passportExpiryDateMonth == undefined) {
-            document.getElementById("passportExpiryDateMonth").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (leadData.passportExpiryDateYear == undefined) {
-            document.getElementById("passportExpiryDateYear").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (leadData.arrivalDateDay == undefined) {
-            document.getElementById("arrivalDateDay").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (leadData.arrivalDateMonth == undefined) {
-            document.getElementById("arrivalDateMonth").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (leadData.arrivalDateYear == undefined) {
-            document.getElementById("arrivalDateYear").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
+        } 
+        // else if (!leadData.arrivalDate) {
+        //     document.getElementById("arrivalDate").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // } 
+        // else if (leadData.passportExpiryDateDay == undefined) {
+        //     document.getElementById("passportExpiryDateDay").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // } else if (leadData.passportExpiryDateMonth == undefined) {
+        //     document.getElementById("passportExpiryDateMonth").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // } else if (leadData.passportExpiryDateYear == undefined) {
+        //     document.getElementById("passportExpiryDateYear").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // } else if (leadData.arrivalDateDay == undefined) {
+        //     document.getElementById("arrivalDateDay").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // } else if (leadData.arrivalDateMonth == undefined) {
+        //     document.getElementById("arrivalDateMonth").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // } else if (leadData.arrivalDateYear == undefined) {
+        //     document.getElementById("arrivalDateYear").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // } 
+        // else if (leadData.KnowUae == undefined) {
+        //     // document.getElementById("arrivalDate").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // } 
+        // else if (!leadData.uaeVisit == undefined) {
+        //     // document.getElementById("arrivalDate").style.border = "1px solid red";
+        //     window.scrollTo({ top: 0, behavior: 'smooth' });
+        // } 
+        else {
 
             try {
                 await axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant`, payloadData)
@@ -141,47 +195,51 @@ const Apply = () => {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                         console.log(res);
 
-                        try {
-
+                        
+                        if (selectedFile) {
                             const formData = new FormData();
                             formData.append("file", selectedFile);
-                
+
                             axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${res.data.id}/PASSPORT/upload`, formData)
                                 .then((res) => {
                                     console.log(res);
-                                });
-                        } catch (error) {
-                            console.log("My Error Passport-"+error);
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }
+                                }).catch(error => {
+                                    console.log("My Error Passport-" + error);
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });        
+                                })
+                            }
 
-                        try {
+
+                        if(selectedFilePhoto){
 
                             const formDataPhoto = new FormData();
                             formDataPhoto.append("file", selectedFilePhoto);
-                
+
                             axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${res.data.id}/PHOTOGRAPH/upload`, formDataPhoto)
                                 .then((res) => {
                                     console.log(res);
+                                }).catch(error => {
+                                    console.log("My Error Photo-" + error);
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
                                 });
-                        } catch (error) {
-                            console.log("My Error Photo-"+error);
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        
                         }
 
-                        try {
+                        if(selectedFileDoc){
 
                             const formDataDoc = new FormData();
                             formDataDoc.append("file", selectedFileDoc);
-                
+
                             axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${res.data.id}/OTHER/upload`, formDataDoc)
                                 .then((res) => {
                                     console.log(res);
+                                }).catch(error => {
+                                    console.log("My Error Doc-" + error);
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
                                 });
-                        } catch (error) {
-                            console.log("My Error Doc-"+error);
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                       
                         }
+
 
                         if (scndVal == 'add') {
                             navigate('/apply/' + res.data.id);
@@ -274,7 +332,7 @@ const Apply = () => {
 
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label>Last name <sup>*</sup></label>
+                                                        <label>Last name</label>
                                                         <input 
                                                             type="text" 
                                                             placeholder="Enter Last Name" 
@@ -288,7 +346,7 @@ const Apply = () => {
 
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label>Date Of Birth <sup>*</sup></label>
+                                                        <label>Date Of Birth </label>
                                                         <input 
                                                             type="date" 
                                                             name='dob'
@@ -301,42 +359,50 @@ const Apply = () => {
 
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label>Email Id</label>
+                                                        <label>Email</label>
                                                         <input 
                                                             type="email" 
                                                             name='emailId'
                                                             id='emailId'
                                                             onChange={e => onTextFieldChange(e)}
                                                             value={leadData.emailId}
-                                                            placeholder="Enter Email id" 
+                                                            placeholder="example@example.com" 
                                                         />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                <div className="form-group">
+                                                        <label>Country Code </label>
+                                                        <select
+                                                             name="countryCode"
+                                                             id='countryCode'
+                                                            onChange={e => onTextFieldChange(e)}
+                                                            value={leadData.countryCode}
+                                                        >
+                                                            <option value="">Select Country Code</option>
+                                                            {
+                                                                allCountry && allCountry.length > 0 ?
+                                                                    allCountry.map((item, index) => (
+                                                                        <option key={index + 1} value={item.id}>{item.name} ({item.countryCode})</option>
+                                                                    )) :
+                                                                    ''
+                                                            }
+                                                        </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Mobile Number</label>
-                                                        <input 
-                                                            type="number" 
+                                                        <input
                                                             name='mobileNumber'
                                                             id='mobileNumber'
                                                             onChange={e => onTextFieldChange(e)}
                                                             value={leadData.mobileNumber}
-                                                            placeholder="Phone Number" 
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label>Mobile Number</label>
-                                                        <input 
-                                                            type="number" 
-                                                            name='whatsappNumber'
-                                                            id='whatsappNumber'
-                                                            onChange={e => onTextFieldChange(e)}
-                                                            value={leadData.whatsappNumber}
-                                                            placeholder="Whatsapp Number" 
+                                                            type="number"
+                                                            placeholder="Enter Mobile Number"
+                                                            maxLength="10"
                                                         />
                                                     </div>
                                                 </div>
@@ -359,7 +425,7 @@ const Apply = () => {
                                                     <div className="form-group">
                                                         <label>Passport Expiry Date <sup>*</sup></label>
 
-                                                        <div className="date_gap">
+                                                        {/* <div className="date_gap">
                                                             <select
                                                                 name="passportExpiryDateDay"
                                                                 id='passportExpiryDateDay'
@@ -419,11 +485,7 @@ const Apply = () => {
                                                                 <option value="10">October</option>
                                                                 <option value="21">November</option>
                                                                 <option value="12">December</option>
-                                                                {/* 
-                                                                {months.map((month, index) => (
-                                                                    <option key={index} value={month}>{month}</option>
-                                                                ))}
-                                                                */}
+                                                               
 
                                                             </select>
 
@@ -439,12 +501,20 @@ const Apply = () => {
                                                                 ))}
                                                             </select>
 
-                                                        </div>
+                                                        </div> */}
+                                                         <input
+                                                            name='passportExpiryDate'
+                                                            id='passportExpiryDate'
+                                                            onChange={e => onTextFieldChange(e)}
+                                                            value={leadData.passportExpiryDate}
+                                                            type="date"
+                                                            placeholder="YYYY-MM-DD"
+                                                        />
 
                                                     </div>
                                                 </div>
 
-                                                <div className="col-md-3">
+                                                {/* <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>Arrival Date <sup>*</sup></label>
 
@@ -509,12 +579,7 @@ const Apply = () => {
                                                                 <option value="21">November</option>
                                                                 <option value="12">December</option>
 
-                                                                {/* 
-                                                                {months.map((month, index) => (
-                                                                    <option key={index} value={month}>{month}</option>
-                                                                ))}
-                                                                */}
-
+                                                               
                                                             </select>
 
                                                             <select
@@ -528,6 +593,69 @@ const Apply = () => {
                                                                     <option key={index} value={year}>{year}</option>
                                                                 ))}
                                                             </select>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div> */}
+                                                <div className="col-md-3">
+                                                    <div className="form-group">
+                                                        <label>First UAE Visit? </label>
+
+                                                        <div className="radio_btn">
+                                                            <label>
+                                                                <input
+                                                                    type="radio"
+                                                                    name='uaeVisit'
+                                                                    id='uaeVisitF'
+                                                                    onChange={e => onTextFieldChange(e)}
+                                                                    value={leadData.uaeVisit}
+                                                                />
+                                                                Yes
+                                                            </label>
+
+                                                            <label >
+                                                                <input
+                                                                    type="radio"
+                                                                    name='uaeVisit'
+                                                                    id='uaeVisitS'
+                                                                    onChange={e => onTextFieldChange(e)}
+                                                                    value={leadData.uaeVisit}
+                                                                />
+                                                                No
+                                                            </label>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-8">
+                                                    <div className="form-group">
+                                                        <label>Is There Any family/friends/Known Person of yours in UAE?</label>
+
+                                                        <div className="radio_btn">
+                                                            <label >
+                                                                <input
+                                                                    type="radio"
+                                                                    name='KnowUae'
+                                                                    id='KnowUae'
+                                                                    onChange={e => onTextFieldChange(e)}
+                                                                    value={leadData.KnowUae}
+                                                                />
+                                                                Yes
+                                                            </label>
+
+                                                            <label >
+                                                                <input
+                                                                    type="radio"
+                                                                    name='KnowUae'
+                                                                    id='KnowUaeS'
+                                                                    onChange={e => onTextFieldChange(e)}
+                                                                    value={leadData.KnowUae}
+                                                                />
+                                                                No
+                                                            </label>
 
                                                         </div>
 
@@ -559,12 +687,12 @@ const Apply = () => {
                                                             onChange={e => setSelectedFile(e.target.files[0])} 
                                                         />
                                                     </div>
-                                                    <div className="form-group pic">
+                                                    {/* <div className="form-group pic">
                                                         <div className="set">
                                                             <img id="blah" src="../img/passport.jpg" alt="your image" />
                                                         </div>
                                                         <label>Colored Passport copy</label>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
 
                                                 <div className="col-md-4">
@@ -577,12 +705,12 @@ const Apply = () => {
                                                             onChange={e => setSelectedFilePhoto(e.target.files[0])} 
                                                         />
                                                     </div>
-                                                    <div className="form-group pic">
+                                                    {/* <div className="form-group pic">
                                                         <div className="set">
                                                             <img id="blah1" src="../img/dummy-avatar.jpg" alt="your image" />
                                                         </div>
                                                         <label>Colored photograph</label>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
 
                                                 <div className="col-md-4">
@@ -595,12 +723,12 @@ const Apply = () => {
                                                             onChange={e => setSelectedFileDoc(e.target.files[0])} 
                                                         />
                                                     </div>
-                                                    <div className="form-group pic">
+                                                    {/* <div className="form-group pic">
                                                         <div className="set">
                                                             <img id="blah1" src="../img/dummy-avatar.jpg" alt="your image" />
                                                         </div>
                                                         <label>Colored photograph</label>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
 
                                                 <div className="col-md-12">

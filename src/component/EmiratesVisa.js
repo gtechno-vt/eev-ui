@@ -295,7 +295,7 @@ const EmiratesVisa = () => {
 
                                                                                     <tr>
                                                                                         <td className="tb_btn" colspan="2">
-                                                                                            <button type="button" onClick={e => onFormSubmitApply(e, item.id)} className="btn">Apply Now </button></td>
+                                                                                            <button type="button" onClick={e => onFormSubmitApply(e, item.slugVisaVariantName)} className="btn">Apply Now </button></td>
                                                                                     </tr>
 
                                                                                 </tbody>

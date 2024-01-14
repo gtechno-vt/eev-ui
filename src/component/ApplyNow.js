@@ -130,7 +130,7 @@ const ApplyNow = () => {
 
     async function onFormSubmit(e, scndVal) {
         e.preventDefault()
-
+        
         
         var uaeVisitData =false;
         var KnowUaeData = false;
