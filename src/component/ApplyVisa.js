@@ -3,6 +3,7 @@ import axios from 'axios';
 import { format, addMonths } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
+import { isValidEmail } from '../utils/staticFunctions';
 
 const ApplyVisa = () => {
 
@@ -51,10 +52,12 @@ const ApplyVisa = () => {
             try {
                 const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/0/48?fetchImages=false`)
                 setVisaType(visaTypeApi.data);
-                const singlevisaVar = visaTypeApi.data.find(ele => ele.slugVisaVariantName === visa);
-                console.log(singlevisaVar);
-                if (singlevisaVar) {
-                    setVisaVariant(singlevisaVar.id)
+                if(visa){
+                    const singlevisaVar = visaTypeApi.data.find(ele => ele.slugVisaVariantName === visa);
+                    console.log(singlevisaVar);
+                    if (singlevisaVar) {
+                        setVisaVariant(singlevisaVar.id)
+                    }
                 }
                 console.log(visaTypeApi.data);
             } catch (error) {
@@ -125,19 +128,20 @@ const ApplyVisa = () => {
 
     // === Form Submit Start Here -=====
     async function onTextFieldChange(e) {
-
-        if (e.target.name === "uaeVisit" || e.target.name === "KnowUae") {
-            setLeadData({
-                ...leadData,
-                [e.target.name]: e.target.checked
-            })
-            return
-        }
-
         setLeadData({
             ...leadData,
             [e.target.name]: e.target.value
         })
+    }
+
+    const handleRadioChange = (e,val) => {
+        console.log(val,typeof val);
+            console.log(e.target.checked);
+            setLeadData({
+                ...leadData,
+                [e.target.name]: val
+            })
+    
     }
 
     // const [citizenshipCountry, setCitizenshipCountry] = useState("");
@@ -282,16 +286,16 @@ const ApplyVisa = () => {
         document.getElementById("passportExpiryDate").style.border = "1px solid #ccc";
         document.getElementById("arrivalDate").style.border = "1px solid #ccc";
 
-        if (citizenData == '0') {
+        if (!citizenData) {
             document.getElementById("citizenshipCountry").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (travellingData == '0') {
+        } else if (!travellingData) {
             document.getElementById("destinationCountry").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (visa == '0') {
+        } else if (!visaVariant) {
             document.getElementById("visaVariant").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (leadData.firstName == undefined) {
+        } else if (!leadData.firstName) {
             document.getElementById("firstName").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -303,7 +307,7 @@ const ApplyVisa = () => {
         //     document.getElementById("dob").style.border = "1px solid red";
         //     window.scrollTo({ top: 0, behavior: 'smooth' });
         // } 
-        else if (leadData.emailId == undefined) {
+        else if (!leadData.emailId || !isValidEmail(leadData.emailId)) {
             document.getElementById("emailId").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -329,7 +333,16 @@ const ApplyVisa = () => {
         } else if (!leadData.whatsappNumber) {
             document.getElementById("whatsappNumber").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (!leadData.address) {
+        } 
+        else if (leadData.uaeVisit == undefined) {
+            // document.getElementById("arrivalDate").style.border = "1px solid red";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }  
+        else if (leadData.KnowUae == undefined) {
+            // document.getElementById("arrivalDate").style.border = "1px solid red";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } 
+        else if (!leadData.address) {
             document.getElementById("address").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -373,15 +386,7 @@ const ApplyVisa = () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } 
         
-        else if (leadData.KnowUae == undefined) {
-            // document.getElementById("arrivalDate").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } 
-        else if (!leadData.uaeVisit == undefined) {
-            // document.getElementById("arrivalDate").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } 
-
+       
 
 
         // else if (!leadData.arrivalDateDay) {
@@ -467,7 +472,6 @@ const ApplyVisa = () => {
 
     }
 
-    // = Form Submit #END Here...
 
     useEffect(() => {
         // 👇️ scroll to top on page load
@@ -475,7 +479,6 @@ const ApplyVisa = () => {
     }, []);
 
     const currentDate = new Date();
-
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
 
     const months = Array.from({ length: 12 }, (_, index) =>
@@ -485,7 +488,7 @@ const ApplyVisa = () => {
     const currentYear = new Date().getFullYear();
     const years = Array.from({ length: 20 }, (_, index) => currentYear + index);
 
-    console.log(visaVariant, "leadData");
+    console.log(leadData.KnowUae,leadData.uaeVisit, "leadData");
     return (
         <>
             <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
@@ -859,7 +862,7 @@ const ApplyVisa = () => {
                                                                     type="radio"
                                                                     name='uaeVisit'
                                                                     id='uaeVisitF'
-                                                                    onChange={e => onTextFieldChange(e)}
+                                                                    onChange={e => handleRadioChange(e,true)}
                                                                     value={leadData.uaeVisit}
                                                                 />
                                                                 Yes
@@ -870,7 +873,7 @@ const ApplyVisa = () => {
                                                                     type="radio"
                                                                     name='uaeVisit'
                                                                     id='uaeVisitS'
-                                                                    onChange={e => onTextFieldChange(e)}
+                                                                    onChange={e => handleRadioChange(e,false)}
                                                                     value={leadData.uaeVisit}
                                                                 />
                                                                 No
@@ -891,7 +894,7 @@ const ApplyVisa = () => {
                                                                     type="radio"
                                                                     name='KnowUae'
                                                                     id='KnowUae'
-                                                                    onChange={e => onTextFieldChange(e)}
+                                                                    onChange={e => handleRadioChange(e,true)}
                                                                     value={leadData.KnowUae}
                                                                 />
                                                                 Yes
@@ -902,7 +905,7 @@ const ApplyVisa = () => {
                                                                     type="radio"
                                                                     name='KnowUae'
                                                                     id='KnowUaeS'
-                                                                    onChange={e => onTextFieldChange(e)}
+                                                                    onChange={e => handleRadioChange(e,false)}
                                                                     value={leadData.KnowUae}
                                                                 />
                                                                 No

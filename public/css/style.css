@@ -2329,6 +2329,17 @@ color: #fe0000;
     color: #fff;
     width: 100%;
     border: none;
+    /* margin: 10px 0 10px; */
+    margin-top: 10px;
+    outline: none;
+    padding: 10px;
+}
+
+.tab_set button.btn{
+    background: #171819;
+    color: #fff;
+    width: 50%;
+    border: none;
     margin: 10px 0 10px;
     outline: none;
     padding: 10px;

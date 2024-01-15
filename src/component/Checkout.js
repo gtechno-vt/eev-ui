@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
@@ -8,18 +8,32 @@ import { Link } from 'react-router-dom';
 const Checkout = () => {
 
     const { id } = useParams();
-
     const [applicatDetails, setApplicatDetails] = useState([]);
     const [serviceType, setServiceType] = useState([]);
     const [applicationDetails, setApplicationDetails] = useState([]);
     const [visaTypeFee, setVisaTypeFee] = useState([]);
     const [siteInfo, setSiteInfo] = useState([]);
+    const [serviceTypeValue,setServiceTypeValue] = useState("Normal")
+    const [paymentDetails,setPaymentDetails] = useState({});
+    
+    const navigate = useNavigate();
+
+    const serviceTypeValueChange = (e) => {
+        setServiceTypeValue(e.target.value);
+        const item = serviceType.find(ele => ele.id == e.target.value);
+        console.log(item);
+        setPaymentDetails( prevState => {
+            return {...prevState,
+                serviceFees:item.serviceFee
+            };
+          })
+    }
 
     useEffect(() => {
 
-        async function getApplicatDetails() {
+        // async function getApplicatDetails() {
             
-        }
+        // }
 
         async function getApplicationDetails() {
             try {
@@ -38,6 +52,11 @@ const Checkout = () => {
                 try {
                     const applicatntApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant?applicationId=${appApi.data.application.id}`)
                     setApplicatDetails(applicatntApi.data);
+                    setPaymentDetails( prevState => {
+                        return {...prevState,
+                            noOfApplicant:applicatntApi.data.length
+                        };
+                      })
                 } catch (error) {
                     console.log("Something is Wrong Visa Type");
                 }
@@ -45,6 +64,12 @@ const Checkout = () => {
                 try {
                     const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/${appApi.data.application.visaVariant.id}/48/fee`)
                     setVisaTypeFee(visaTypeApi.data);
+                    setPaymentDetails( prevState => {
+                        return {...prevState,
+                            visaFees:visaTypeApi.data
+                        };
+                      })
+                    console.log(visaTypeApi.data);
                 } catch (error) {
                     console.log("Something is Wrong Visa Type");
                 }
@@ -53,7 +78,7 @@ const Checkout = () => {
             }
         }
 
-        getApplicatDetails();
+        // getApplicatDetails();
         getApplicationDetails();
 
 
@@ -66,6 +91,13 @@ const Checkout = () => {
 			try {
 				const siteInfoApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/site-info/2`)
 				setSiteInfo(siteInfoApi.data);
+                setPaymentDetails( prevState => {
+                    return {...prevState,
+                        serviceType:"Normal",
+                        serviceFees:siteInfoApi.data.regularServiceFee,
+                        taxPercent:siteInfoApi.data.vatPc
+                    };
+                  })
                 console.log(siteInfoApi.data);
 			} catch (error) {
 				console.log("Something is Wrong");
@@ -80,9 +112,33 @@ const Checkout = () => {
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 	}, []);
 
+    // useEffect(() => {
+    //  const {visaFees,serviceFees,noOfApplicant,taxPercent} = paymentDetails;
+    //  console.log("useEffect call");
+    //     if(visaFees && serviceFees && noOfApplicant && taxPercent){
+    //         const taxAmt = (((noOfApplicant*visaFees)+serviceFees)/100) * taxPercent;
+    //         const totalPayable = taxAmt+(noOfApplicant*visaFees)+serviceFees;
+            
+    //         // setPaymentDetails( prevState => {
+    //         //     return {...prevState,
+    //         //         totalTax:taxAmt,
+    //         //         netPay:totalPayable
+    //         //     };
+    //         //   })
+    //     }
+
+	// },[paymentDetails]);
+
+    const totalTax = ((paymentDetails.noOfApplicant*paymentDetails.visaFees+paymentDetails.serviceFees)/100)*paymentDetails.taxPercent;
+    const netPay = (paymentDetails.noOfApplicant*paymentDetails.visaFees) + paymentDetails.serviceFees + ((paymentDetails.noOfApplicant*paymentDetails.visaFees+paymentDetails.serviceFees)/100)*paymentDetails.taxPercent
+
     const dateFormatString = 'd MMMM, yyyy';
 
-    
+    const redirectAddMoreAppl = () => {
+        navigate(`/apply/${applicatDetails[0].id}`)
+    }
+
+    console.log(paymentDetails,"paymentDetails");
   return (
     <>
         <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
@@ -164,8 +220,8 @@ const Checkout = () => {
                                                     <td>{item.lastName}</td>
                                                     <td>
                                                         { 
-                                                            item.arrivalDate ? 
-                                                            format(item.arrivalDate, dateFormatString)
+                                                            item.application.createdAt ? 
+                                                            format(item.application.createdAt, dateFormatString)
                                                             :
                                                             '-'
                                                         }
@@ -189,6 +245,9 @@ const Checkout = () => {
 
                                     </table>
                                 </div>
+                                <div className='d-flex justify-content-center'>
+                                <button  className="btn button" id="checkout-button" name="proceedFinal" onClick={redirectAddMoreAppl}> Add More Applicants</button>
+                                </div>
                             </div>
 
                         </div>
@@ -210,18 +269,22 @@ const Checkout = () => {
 
                                 <tr>
                                     <td>No. Of Applicant</td>
-                                    <td>{applicatDetails.length}</td>
+                                    <td>{paymentDetails.noOfApplicant ? paymentDetails.noOfApplicant : "-" }</td>
                                 </tr>
 
                                 <tr>
                                     <td>Total Visa Fees</td>
-                                    <td>${visaTypeFee*applicatDetails.length}</td>
+                                    <td>${paymentDetails.noOfApplicant*paymentDetails.visaFees ? paymentDetails.noOfApplicant*paymentDetails.visaFees : "-"}</td>
                                 </tr>
 
                                 <tr>
                                     <td>Service Type</td>
                                     <td>
-                                        <select className='form-control'>
+                                        <select 
+                                        className='form-control'
+                                        value={serviceTypeValue}
+                                        onChange={serviceTypeValueChange}
+                                        >
                                             <option value="">Select</option>
                                             {
                                                 serviceType && serviceType.length > 0 ?
@@ -237,17 +300,17 @@ const Checkout = () => {
 
                                 <tr>
                                     <td>Service Fees</td>
-                                    <td>${siteInfo.transactionFeePc}</td>
+                                    <td>${paymentDetails.serviceFees ? paymentDetails.serviceFees :"-"}</td>
                                 </tr>
 
                                 <tr>
-                                    <td>Tax(%)</td>
-                                    <td>{siteInfo.vatPc}</td>
+                                    <td>Tax({paymentDetails.taxPercent}%)</td>
+                                    <td>{ totalTax ?totalTax.toFixed(2):"-"}</td>
                                 </tr>
 
                                 <tr>
                                     <td className="ftr_l">Net Pay</td>
-                                    <td className="ftr_r">${((visaTypeFee*applicatDetails.length) + (siteInfo.transactionFeePc))+((visaTypeFee*applicatDetails.length) + (siteInfo.transactionFeePc))*(siteInfo.vatPc/100)}</td>
+                                    <td className="ftr_r">${netPay ?netPay.toFixed(2) :"-"}</td>
                                 </tr>
 
                             </table>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { format, addMonths } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
+import { isValidEmail } from '../utils/staticFunctions';
 
 const Apply = () => {
 
@@ -51,13 +52,6 @@ const Apply = () => {
 
     // === Form Submit Start Here -=====
     async function onTextFieldChange(e) {
-        if (e.target.name === "uaeVisit" || e.target.name === "KnowUae") {
-            setLeadData({
-                ...leadData,
-                [e.target.name]: e.target.checked
-            })
-            return
-        }
         setLeadData({
             ...leadData,
             [e.target.name]: e.target.value
@@ -124,6 +118,10 @@ const Apply = () => {
             document.getElementById("firstName").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } 
+        else if (leadData.emailId && isValidEmail(leadData.emailId) === false) {
+            document.getElementById("emailId").style.border = "1px solid red";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
         // else if (!leadData.countryCode) {
         //     document.getElementById("countryCode").style.border = "1px solid red";
         //     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -255,6 +253,14 @@ const Apply = () => {
         }
     }
 
+    const handleRadioChange = (e,val) => {
+        console.log(val,typeof val);
+            console.log(e.target.checked);
+            setLeadData({
+                ...leadData,
+                [e.target.name]: val
+            })
+    }
     // = Form Submit #END Here...
 
     useEffect(() => {
@@ -271,7 +277,8 @@ const Apply = () => {
 
     const currentYear = new Date().getFullYear();
     const years = Array.from({ length: 20 }, (_, index) => currentYear + index);
-
+    console.log(leadData.KnowUae,leadData.uaeVisit, "leadData");
+    
     return (
         <>
             <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
@@ -608,7 +615,7 @@ const Apply = () => {
                                                                     type="radio"
                                                                     name='uaeVisit'
                                                                     id='uaeVisitF'
-                                                                    onChange={e => onTextFieldChange(e)}
+                                                                    onChange={e => handleRadioChange(e,true)}
                                                                     value={leadData.uaeVisit}
                                                                 />
                                                                 Yes
@@ -619,7 +626,7 @@ const Apply = () => {
                                                                     type="radio"
                                                                     name='uaeVisit'
                                                                     id='uaeVisitS'
-                                                                    onChange={e => onTextFieldChange(e)}
+                                                                    onChange={e => handleRadioChange(e,false)}
                                                                     value={leadData.uaeVisit}
                                                                 />
                                                                 No
@@ -640,7 +647,7 @@ const Apply = () => {
                                                                     type="radio"
                                                                     name='KnowUae'
                                                                     id='KnowUae'
-                                                                    onChange={e => onTextFieldChange(e)}
+                                                                    onChange={e => handleRadioChange(e,true)}
                                                                     value={leadData.KnowUae}
                                                                 />
                                                                 Yes
@@ -651,7 +658,7 @@ const Apply = () => {
                                                                     type="radio"
                                                                     name='KnowUae'
                                                                     id='KnowUaeS'
-                                                                    onChange={e => onTextFieldChange(e)}
+                                                                    onChange={e => handleRadioChange(e,false)}
                                                                     value={leadData.KnowUae}
                                                                 />
                                                                 No
