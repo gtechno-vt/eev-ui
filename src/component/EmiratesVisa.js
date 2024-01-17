@@ -306,10 +306,6 @@ const EmiratesVisa = () => {
 
                                                                         {/* --------------- */}
 
-                                                                        
-
-                                                                        <p><sup>*</sup> Travel Insurance, with COVID-19 coverage is mandatory, as per the UAE Government directive. Book the Government approved travel insurance along with your visa to avail a flat discount of $100 on the insurance fee.</p>
-
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -253,8 +253,7 @@ const Checkout = () => {
                         </div>
 
                         <div className="note_check">
-                            <p className="">For a limited time only, we are offering a 100% refund guarantee*, in the slim case
-                                your visa application is not approved by the UAE immigration department</p>
+                            <p className="">The amounts shown in USD on this page will be shown in your local currency on the gateway page.</p>
                         </div>
 
                     </div>
