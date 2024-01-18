@@ -362,8 +362,8 @@ const ApplyVisa = ({update,appId}) => {
         
 
         if(update){
-            payloadData.application.id = leadData.applicationId,
-            payloadData.application.status = leadData.status || "DRAFT"
+            payloadData.application.id = leadData.applicationId;
+            payloadData.application.status = leadData.status || "DRAFT";
         }
 
         document.getElementById("citizenshipCountry").style.border = "1px solid #ccc";
