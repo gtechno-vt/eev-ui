@@ -3,7 +3,8 @@ import axios from 'axios';
 import { format, addMonths } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
-import { isValidEmail } from '../utils/staticFunctions';
+import { isValidEmail } from '../utils/StaticFunctions';
+import { isValidMobile } from '../utils/StaticFunctions';
 
 const Apply = ({update}) => {
 
@@ -179,8 +180,12 @@ const Apply = ({update}) => {
             document.getElementById("firstName").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } 
-        else if (leadData.emailId && isValidEmail(leadData.emailId) === false) {
+        else if (leadData.emailId && !isValidEmail(leadData.emailId)) {
             document.getElementById("emailId").style.border = "1px solid red";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        else if (leadData.mobileNumber && !isValidMobile(leadData.mobileNumber)) {
+            document.getElementById("mobileNumber").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         // else if (!leadData.countryCode) {

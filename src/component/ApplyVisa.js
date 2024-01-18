@@ -3,7 +3,8 @@ import axios from 'axios';
 import { format, addMonths } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
-import { isValidEmail } from '../utils/staticFunctions';
+import { isValidEmail } from '../utils/StaticFunctions';
+import { isValidMobile } from '../utils/StaticFunctions';
 
 const ApplyVisa = ({update,appId}) => {
 
@@ -433,13 +434,13 @@ const ApplyVisa = ({update,appId}) => {
         } else if (!leadData.countryCode) {
             document.getElementById("countryCode").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (!leadData.mobileNumber) {
+        } else if (!leadData.mobileNumber || !isValidMobile(leadData.mobileNumber)) {
             document.getElementById("mobileNumber").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } else if (!leadData.countryCodeWhatsapp) {
             document.getElementById("countryCodeWhatsapp").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (!leadData.whatsappNumber) {
+        } else if (!leadData.whatsappNumber || !isValidMobile(leadData.whatsappNumber)) {
             document.getElementById("whatsappNumber").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } 
@@ -638,7 +639,7 @@ const ApplyVisa = ({update,appId}) => {
 
                                                 <div className="col-md-4">
                                                     <div className="form-group">
-                                                        <label>Living country/Traveling from</label>
+                                                        <label>Traveling from</label>
                                                         <select
                                                             name="destinationCountry"
                                                             id='destinationCountry'
