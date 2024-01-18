@@ -305,7 +305,7 @@ const Checkout = () => {
 
                                 <tr>
                                     <td>Tax({paymentDetails.taxPercent}%)</td>
-                                    <td>{ totalTax ?totalTax.toFixed(2):"-"}</td>
+                                    <td>${ totalTax ?totalTax.toFixed(2):"-"}</td>
                                 </tr>
 
                                 <tr>

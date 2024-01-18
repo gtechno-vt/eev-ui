@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { isValidEmail } from '../utils/staticFunctions';
 
-const ApplyVisa = () => {
+const ApplyVisa = ({update,appId}) => {
 
     const navigate = useNavigate();
     const { visa } = useParams();
@@ -17,13 +17,18 @@ const ApplyVisa = () => {
     const [education, setEducation] = useState([]);
     const [profession, setProfession] = useState([]);
     const [purposeOfVisit, setPurposeOfVisit] = useState([]);
-    const [leadData, setLeadData] = useState({});
+    const [leadData, setLeadData] = useState({KnowUae:false,uaeVisit:false});
     const [citizenData, setCitizenData] = useState("");
     const [travellingData, setTravellingData] = useState("");
 
     const [selectedFile, setSelectedFile] = useState("");
     const [selectedFilePhoto, setSelectedFilePhoto] = useState("");
     const [selectedFileDoc, setSelectedFileDoc] = useState("");
+
+    // for update purpose 
+    
+// application status
+// application id
 
 
 
@@ -92,39 +97,91 @@ const ApplyVisa = () => {
             }
         }
 
+        // for update purpose fetch the application details  -> only for update case
+        async function getApplicationData() {
+
+            try {
+                const applicationApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${appId}`)
+                // setApplicationData(applicationApi.data);
+                const data = applicationApi.data;
+                setLeadData({
+                    firstName:data.firstName || "",
+                    lastName:data.lastName || "",
+                    dob:data.dob ? format(data.dob, 'yyyy-MM-dd') :"",
+                    emailId:data.emailId || "",
+                    state:data.state || "",
+                    city:data.city || "",
+                    address:data.address || "",
+                    postalCode:data.postalCode || "",
+                    residenceCountry:data.residenceCountry || "",
+                    countryCode:data.mobileNumber?.split("-")[0] ? data.mobileNumber?.split("-")[0]: "",
+                    mobileNumber:data.mobileNumber?.split("-")[1] ? Number(data.mobileNumber?.split("-")[1]): "",
+                    countryCodeWhatsapp:data.whatsappNumber?.split("-")[0] ? data.whatsappNumber?.split("-")[0]: "",
+                    whatsappNumber:data.whatsappNumber?.split("-")[1] ? Number(data.whatsappNumber?.split("-")[1]): "",
+                    customEducation:data.customEducation || "",
+                    customProfession : data.customProfession || "",
+                    purposeOfVisitText : data.application?.purposeOfVisitText || "",
+                    passportNumber:data.passportNumber || "",
+                    passportExpiryDate:data.passportExpiryDate ? format(data.passportExpiryDate, 'yyyy-MM-dd') : "",
+                    arrivalDate:data?.application?.arrivalDate ? format(data.application.arrivalDate, 'yyyy-MM-dd') : "",
+                    KnowUae:data.isContactInForeignCountry,
+                    uaeVisit:data.isFirstForeignVisit,
+                    purposeOfVisit:data.application?.purposeOfVisit?.id ? data.application.purposeOfVisit.id : data.application.purposeOfVisitText ? "other" : "",
+                    applicationId:data.application?.id || "",
+                    status:data.application.status || "DRAFT",
+                })
+
+                setVisaVariant(data?.application?.visaVariant?.id || "")
+                setCitizenData(data?.application?.citizenshipCountry?.id || "")
+                setTravellingData(data?.residenceCountry?.id || "")
+                 const prof = data.profession?.id ? data.profession.id : data.customProfession ? 'other': "";
+                 const edu = data.education?.id ? data.education.id : data.customEducation ? 'other': "";
+                setProfessionF(prof);
+                setEducationF(edu);
+              
+               
+                // console.log(applicationApi.data);
+            } catch (error) {
+                console.log("Something is Wrong",error);
+            }
+        }
+
         getCountry();
         getVisaType();
         getEducation();
         getProfession();
         getPurposeVisit();
+        if(appId){
+            getApplicationData();
+        }
     }, []);
 
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        // async function getCityCounrtyId(){
-        //     try {
-        //         const cityCountryApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/country/slug-name/${citizen}`)
-        //         setCitizenData(cityCountryApi.data.id);
-        //     } catch (error) {
-        //         console.log("Something is Wrong Visa Type");
-        //     }
-        // }
+    //     // async function getCityCounrtyId(){
+    //     //     try {
+    //     //         const cityCountryApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/country/slug-name/${citizen}`)
+    //     //         setCitizenData(cityCountryApi.data.id);
+    //     //     } catch (error) {
+    //     //         console.log("Something is Wrong Visa Type");
+    //     //     }
+    //     // }
 
-        // async function getTravelCounrtyId(){
-        //     try {
-        //         const travellingCountryApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/country/slug-name/${travelling}`)
-        //         setTravellingData(travellingCountryApi.data.id);
-        //     } catch (error) {
-        //         console.log("Something is Wrong Visa Type");
-        //     }
-        // }
+    //     // async function getTravelCounrtyId(){
+    //     //     try {
+    //     //         const travellingCountryApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/country/slug-name/${travelling}`)
+    //     //         setTravellingData(travellingCountryApi.data.id);
+    //     //     } catch (error) {
+    //     //         console.log("Something is Wrong Visa Type");
+    //     //     }
+    //     // }
 
 
-        // getCityCounrtyId();
-        // getTravelCounrtyId();
-    }, [citizen, travelling]);
+    //     // getCityCounrtyId();
+    //     // getTravelCounrtyId();
+    // }, [citizen, travelling]);
 
     // === Form Submit Start Here -=====
     async function onTextFieldChange(e) {
@@ -163,11 +220,11 @@ const ApplyVisa = () => {
     const [professionF, setProfessionF] = useState("");
     function OnProfessionF(e) {
         if (e.target.value == 'other') {
-            setProfessionF(null)
-            document.getElementById('customProfessionLabel').style.display = "block";
+            setProfessionF('other')
+            // document.getElementById('customProfessionLabel').style.display = "block";
         } else {
             setProfessionF(Number(e.target.value))
-            document.getElementById('customProfessionLabel').style.display = "none";
+            // document.getElementById('customProfessionLabel').style.display = "none";
         }
     }
 
@@ -175,11 +232,11 @@ const ApplyVisa = () => {
     function onEducation(e) {
         
         if (e.target.value == 'other') {
-            setEducationF(null)
-            document.getElementById('customEducationLabel').style.display = "block";
+            setEducationF("other")
+            // document.getElementById('customEducationLabel').style.display = "block";
         } else {
             setEducationF(Number(e.target.value))
-            document.getElementById('customEducationLabel').style.display = "none";
+            // document.getElementById('customEducationLabel').style.display = "none";
         }
     }
 
@@ -188,23 +245,71 @@ const ApplyVisa = () => {
             if (e.target.value == 'other') {
                 setLeadData({
                     ...leadData,
-                    [e.target.name]:null,
+                    [e.target.name]:"other",
                 })
-                document.getElementById('purposeOfVisitTextLabel').style.display = "block";
+                // document.getElementById('purposeOfVisitTextLabel').style.display = "block";
             } else {
                 setLeadData({
                     ...leadData,
                     [e.target.name]: Number(e.target.value)
                 })
-                document.getElementById('purposeOfVisitTextLabel').style.display = "none";
+                // document.getElementById('purposeOfVisitTextLabel').style.display = "none";
             }
         }
        
     }
+
+    const handleFileUpload = (id) => { 
+        if (selectedFile) {
+            const formData = new FormData();
+            formData.append("file", selectedFile);
+
+            axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${id}/PASSPORT/upload`, formData)
+                .then((res) => {
+                    console.log(res);
+                }).catch(error => {
+                    console.log("My Error Passport-" + error);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });        
+                })
+            }
+
+
+        if(selectedFilePhoto){
+
+            const formDataPhoto = new FormData();
+            formDataPhoto.append("file", selectedFilePhoto);
+
+            axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${id}/PHOTOGRAPH/upload`, formDataPhoto)
+                .then((res) => {
+                    console.log(res);
+                }).catch(error => {
+                    console.log("My Error Photo-" + error);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+        
+        }
+
+        if(selectedFileDoc){
+
+            const formDataDoc = new FormData();
+            formDataDoc.append("file", selectedFileDoc);
+
+            axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${id}/OTHER/upload`, formDataDoc)
+                .then((res) => {
+                    console.log(res);
+                }).catch(error => {
+                    console.log("My Error Doc-" + error);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+       
+        }
+
+    }
+
     async function onFormSubmit(e, scndVal) {
         e.preventDefault()
         
-        var payloadData = (
+        let payloadData = 
             {
                 "application": {
                     "citizenshipCountry": {
@@ -216,7 +321,7 @@ const ApplyVisa = () => {
                     "visaVariant": {
                         "id": visaVariant
                     },
-                    "purposeOfVisit": leadData.purposeOfVisit ?{
+                    "purposeOfVisit": leadData.purposeOfVisit && leadData.purposeOfVisit !== "other" ?{
                         "id": leadData.purposeOfVisit
                     }:null,
                     purposeOfVisitText:leadData.purposeOfVisitText || null,
@@ -240,10 +345,10 @@ const ApplyVisa = () => {
                 "mobileNumber": leadData.countryCode + "-" + leadData.mobileNumber,
                 "whatsappNumber": leadData.countryCodeWhatsapp + "-" + leadData.whatsappNumber,
                 "passportNumber": leadData.passportNumber,
-                "profession": professionF ?{
+                "profession": professionF && professionF !== "other" ?{
                     "id": professionF
                 }:null,
-                "education": educationF ? {
+                "education": educationF && educationF !== "other" ? {
                     "id": educationF
                 }:null,
                 customEducation:leadData.customEducation || null, 
@@ -254,8 +359,12 @@ const ApplyVisa = () => {
                 "isFirstForeignVisit": leadData.uaeVisit || leadData.uaeVisit === false  ? leadData.uaeVisit : null,
         
             }
+        
 
-        );
+        if(update){
+            payloadData.application.id = leadData.applicationId,
+            payloadData.application.status = leadData.status || "DRAFT"
+        }
 
         document.getElementById("citizenshipCountry").style.border = "1px solid #ccc";
         document.getElementById("destinationCountry").style.border = "1px solid #ccc";
@@ -274,7 +383,7 @@ const ApplyVisa = () => {
         document.getElementById("address").style.border = "1px solid #ccc";
         document.getElementById("city").style.border = "1px solid #ccc";
         document.getElementById("state").style.border = "1px solid #ccc";
-        document.getElementById("residenceCountry").style.border = "1px solid #ccc";
+        // document.getElementById("residenceCountry").style.border = "1px solid #ccc";
         document.getElementById("postalCode").style.border = "1px solid #ccc";
         document.getElementById("passportNumber").style.border = "1px solid #ccc";
         // document.getElementById("passportExpiryDateDay").style.border = "1px solid #ccc";
@@ -402,65 +511,39 @@ const ApplyVisa = () => {
         // } 
         else {
             try {
+              if(update){
+                //   to update existing
+                await axios.put(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${appId}`, payloadData)
+                .then((res) => {
+                    document.getElementById("succ_message").style.display = "block";
+                    document.getElementById("alert_message").innerHTML = "Your Query has been Submitted Succesfully!!! We will get back to you.";
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    handleFileUpload(res.data.id)
+                    if (scndVal == 'add') {
+                        navigate('/apply/' + res.data.id);
+                    } else {
+                        navigate('/checkout/' + res.data.id);
+                    }
+
+                });
+              }else{
+                //  to add new
                 await axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant`, payloadData)
-                    .then((res) => {
-                        document.getElementById("succ_message").style.display = "block";
-                        document.getElementById("alert_message").innerHTML = "Your Query has been Submitted Succesfully!!! We will get back to you.";
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                .then((res) => {
+                    document.getElementById("succ_message").style.display = "block";
+                    document.getElementById("alert_message").innerHTML = "Your Query has been Submitted Succesfully!!! We will get back to you.";
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
 
+                    handleFileUpload(res.data.id)
+                    if (scndVal == 'add') {
+                        navigate('/apply/' + res.data.id);
+                    } else {
+                        navigate('/checkout/' + res.data.id);
+                    }
 
-
-                        if (selectedFile) {
-                            const formData = new FormData();
-                            formData.append("file", selectedFile);
-
-                            axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${res.data.id}/PASSPORT/upload`, formData)
-                                .then((res) => {
-                                    console.log(res);
-                                }).catch(error => {
-                                    console.log("My Error Passport-" + error);
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });        
-                                })
-                            }
-
-
-                        if(selectedFilePhoto){
-
-                            const formDataPhoto = new FormData();
-                            formDataPhoto.append("file", selectedFilePhoto);
-
-                            axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${res.data.id}/PHOTOGRAPH/upload`, formDataPhoto)
-                                .then((res) => {
-                                    console.log(res);
-                                }).catch(error => {
-                                    console.log("My Error Photo-" + error);
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                });
-                        
-                        }
-
-                        if(selectedFileDoc){
-
-                            const formDataDoc = new FormData();
-                            formDataDoc.append("file", selectedFileDoc);
-
-                            axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${res.data.id}/OTHER/upload`, formDataDoc)
-                                .then((res) => {
-                                    console.log(res);
-                                }).catch(error => {
-                                    console.log("My Error Doc-" + error);
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                });
-                       
-                        }
-
-                        if (scndVal == 'add') {
-                            navigate('/apply/' + res.data.id);
-                        } else {
-                            navigate('/checkout/' + res.data.id);
-                        }
-
-                    });
+                });
+              }
             } catch (error) {
                 document.getElementById("succ_message").style.display = "block";
                 document.getElementById("alert_message").innerHTML = error;
@@ -488,7 +571,7 @@ const ApplyVisa = () => {
     const currentYear = new Date().getFullYear();
     const years = Array.from({ length: 20 }, (_, index) => currentYear + index);
 
-    console.log(leadData.KnowUae,leadData.uaeVisit, "leadData");
+    console.log(leadData, "leadData");
     return (
         <>
             <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
@@ -529,7 +612,7 @@ const ApplyVisa = () => {
                                     <div className="box_shadow">
                                         <div className="box_shadow_pd">
                                             <div className="row">
-                                                <div className="col-md-3">
+                                                <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Citizenship country </label>
                                                         <select
@@ -553,7 +636,7 @@ const ApplyVisa = () => {
                                                     </div>
                                                 </div>
 
-                                                <div className="col-md-3">
+                                                <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Living country/Traveling from</label>
                                                         <select
@@ -578,7 +661,7 @@ const ApplyVisa = () => {
                                                     </div>
                                                 </div>
 
-                                                <div className="col-md-3">
+                                                <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Select Type of Visa</label>
                                                         <select
@@ -617,7 +700,7 @@ const ApplyVisa = () => {
                                         </div>
                                         <div className="box_shadow_pd">
                                             <div className="row">
-                                                <div className="col-md-4">
+                                                <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>First Name <sup>*</sup></label>
                                                         <input
@@ -631,7 +714,7 @@ const ApplyVisa = () => {
                                                     </div>
                                                 </div>
 
-                                                <div className="col-md-4">
+                                                <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>Last Name </label>
                                                         <input
@@ -645,7 +728,7 @@ const ApplyVisa = () => {
                                                     </div>
                                                 </div>
 
-                                                <div className="col-md-4">
+                                                <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>Date of birth </label>
                                                         <input
@@ -669,114 +752,6 @@ const ApplyVisa = () => {
                                                             value={leadData.emailId}
                                                             type="email"
                                                             placeholder="example@example.com"
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-3">
-                                                    <div className="form-group">
-                                                        <label>Education </label>
-                                                        <select
-                                                            name="educationF"
-                                                            id='educationF'
-                                                            onChange={e => onEducation(e)}
-                                                            value={educationF}
-                                                        >
-                                                            <option value="">Select Education </option>
-                                                            {
-                                                                education && education.length > 0 ?
-                                                                    education.map((item, index) => (
-                                                                        <option key={index + 1} value={item.id}>{item.name}</option>
-                                                                    )) :
-                                                                    ''
-                                                            }
-                                                            <option value="other">Others</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-3" id='customEducationLabel' style={{ display: 'none' }}>
-                                                    <div className="form-group">
-                                                        <label>Education </label>
-                                                        <input
-                                                            name='customEducation'
-                                                            id='customEducation'
-                                                            onChange={e => onTextFieldChange(e)}
-                                                            value={leadData.customEducation}
-                                                            type="text"
-                                                            placeholder=""
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-3">
-                                                    <div className="form-group">
-                                                        <label>Profession <sup>*</sup></label>
-                                                        <select
-                                                            name="professionF"
-                                                            id='professionF'
-                                                            onChange={e => OnProfessionF(e)}
-                                                            value={professionF}
-                                                        >
-                                                            <option value="">Select Profession </option>
-                                                            {
-                                                                profession && profession.length > 0 ?
-                                                                    profession.map((item, index) => (
-                                                                        <option key={index + 1} value={item.id}>{item.name}</option>
-                                                                    )) :
-                                                                    ''
-                                                            }
-                                                            <option value="other">Others</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-3" id='customProfessionLabel' style={{ display: 'none' }}>
-                                                    <div className="form-group">
-                                                        <label>Profession </label>
-                                                        <input
-                                                            name='customProfession'
-                                                            id='customProfession'
-                                                            onChange={e => onTextFieldChange(e)}
-                                                            value={leadData.customProfession}
-                                                            type="text"
-                                                            placeholder=""
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-3">
-                                                    <div className="form-group">
-                                                        <label>Purpose of Visit <sup>*</sup></label>
-                                                        <select
-                                                            name="purposeOfVisit"
-                                                            id='purposeOfVisit'
-                                                            onChange={handlePurposeOfVisit}
-                                                            value={leadData.purposeOfVisit}
-                                                        >
-                                                            <option value="">Select Visit </option>
-                                                            {
-                                                                purposeOfVisit && purposeOfVisit.length > 0 ?
-                                                                    purposeOfVisit.map((item, index) => (
-                                                                        <option key={index + 1} value={item.id}>{item.name}</option>
-                                                                    )) :
-                                                                    ''
-                                                            }
-                                                            <option value="other">Others</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-md-3" id='purposeOfVisitTextLabel' style={{ display: 'none' }}>
-                                                    <div className="form-group">
-                                                        <label>Purpose of Visit </label>
-                                                        <input
-                                                            name='purposeOfVisitText'
-                                                            id='purposeOfVisitText'
-                                                            onChange={e => onTextFieldChange(e)}
-                                                            value={leadData.purposeOfVisitText}
-                                                            type="text"
-                                                            placeholder=""
                                                         />
                                                     </div>
                                                 </div>
@@ -852,7 +827,126 @@ const ApplyVisa = () => {
                                                     </div>
                                                 </div>
 
-                                                <div className="col-md-3">
+                                                <div className="col-md-4">
+                                                    <div className="form-group">
+                                                        <label>Education </label>
+                                                        <select
+                                                            name="educationF"
+                                                            id='educationF'
+                                                            onChange={e => onEducation(e)}
+                                                            value={educationF}
+                                                        >
+                                                            <option value="">Select Education </option>
+                                                            {
+                                                                education && education.length > 0 ?
+                                                                    education.map((item, index) => (
+                                                                        <option key={index + 1} value={item.id}>{item.name}</option>
+                                                                    )) :
+                                                                    ''
+                                                            }
+                                                            <option value="other">Others</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-4">
+                                                    <div className="form-group">
+                                                        <label>Profession <sup>*</sup></label>
+                                                        <select
+                                                            name="professionF"
+                                                            id='professionF'
+                                                            onChange={e => OnProfessionF(e)}
+                                                            value={professionF}
+                                                        >
+                                                            <option value="">Select Profession </option>
+                                                            {
+                                                                profession && profession.length > 0 ?
+                                                                    profession.map((item, index) => (
+                                                                        <option key={index + 1} value={item.id}>{item.name}</option>
+                                                                    )) :
+                                                                    ''
+                                                            }
+                                                            <option value="other">Others</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-md-4">
+                                                    <div className="form-group">
+                                                        <label>Purpose of Visit <sup>*</sup></label>
+                                                        <select
+                                                            name="purposeOfVisit"
+                                                            id='purposeOfVisit'
+                                                            onChange={handlePurposeOfVisit}
+                                                            value={leadData.purposeOfVisit}
+                                                        >
+                                                            <option value="">Select Visit </option>
+                                                            {
+                                                                purposeOfVisit && purposeOfVisit.length > 0 ?
+                                                                    purposeOfVisit.map((item, index) => (
+                                                                        <option key={index + 1} value={item.id}>{item.name}</option>
+                                                                    )) :
+                                                                    ''
+                                                            }
+                                                            <option value="other">Others</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                
+                                                <div className="col-md-4" id='customEducationLabel'>
+                                                    <div className="form-group">
+                                                        <label  className={educationF !== "other" ? "lightGray" : ""}>Education (Others) </label>
+                                                        <input
+                                                            name='customEducation'
+                                                            id='customEducation'
+                                                            onChange={e => onTextFieldChange(e)}
+                                                            value={leadData.customEducation}
+                                                            type="text"
+                                                            placeholder=""
+                                                            disabled = {educationF !== "other" ? true : false}
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                              
+
+
+
+                                                <div className="col-md-4" id='customProfessionLabel' >
+                                                    <div className="form-group">
+                                                        <label className={professionF !== "other" ? "lightGray" : ""}>Profession (Others) </label>
+                                                        <input
+                                                            name='customProfession'
+                                                            id='customProfession'
+                                                            onChange={e => onTextFieldChange(e)}
+                                                            value={leadData.customProfession}
+                                                            type="text"
+                                                            placeholder=""
+                                                            disabled = {professionF !== "other" ? true : false}
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                              
+                                                <div className="col-md-4" id='purposeOfVisitTextLabel'>
+                                                    <div className="form-group">
+                                                        <label className={leadData.purposeOfVisit !== "other" ? "lightGray" : ""}>Purpose of Visit (Others) </label>
+                                                        <input
+                                                            name='purposeOfVisitText'
+                                                            id='purposeOfVisitText'
+                                                            onChange={e => onTextFieldChange(e)}
+                                                            value={leadData.purposeOfVisitText }
+                                                            type="text"
+                                                            placeholder=""
+                                                            disabled = {leadData.purposeOfVisit !== "other" ? true : false}
+
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                               
+
+                                                <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>First UAE Visit? <sup>*</sup></label>
 
@@ -863,7 +957,8 @@ const ApplyVisa = () => {
                                                                     name='uaeVisit'
                                                                     id='uaeVisitF'
                                                                     onChange={e => handleRadioChange(e,true)}
-                                                                    value={leadData.uaeVisit}
+                                                                    // value={leadData.uaeVisit}
+                                                                    checked={leadData.uaeVisit ? true : false}
                                                                 />
                                                                 Yes
                                                             </label>
@@ -874,7 +969,8 @@ const ApplyVisa = () => {
                                                                     name='uaeVisit'
                                                                     id='uaeVisitS'
                                                                     onChange={e => handleRadioChange(e,false)}
-                                                                    value={leadData.uaeVisit}
+                                                                    // value={leadData.uaeVisit}
+                                                                    checked={leadData.uaeVisit === false ? true:false}
                                                                 />
                                                                 No
                                                             </label>
@@ -895,7 +991,8 @@ const ApplyVisa = () => {
                                                                     name='KnowUae'
                                                                     id='KnowUae'
                                                                     onChange={e => handleRadioChange(e,true)}
-                                                                    value={leadData.KnowUae}
+                                                                    // value={leadData.KnowUae}
+                                                                    checked={leadData.KnowUae ? true :false}
                                                                 />
                                                                 Yes
                                                             </label>
@@ -906,7 +1003,8 @@ const ApplyVisa = () => {
                                                                     name='KnowUae'
                                                                     id='KnowUaeS'
                                                                     onChange={e => handleRadioChange(e,false)}
-                                                                    value={leadData.KnowUae}
+                                                                    // value={leadData.KnowUae}
+                                                                    checked={leadData.KnowUae === false ? true : false}
                                                                 />
                                                                 No
                                                             </label>
@@ -972,7 +1070,7 @@ const ApplyVisa = () => {
                                                     </div>
                                                 </div>
 
-                                                <div className="col-md-3">
+                                                {/* <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>Country </label>
                                                         <select
@@ -991,7 +1089,7 @@ const ApplyVisa = () => {
                                                             }
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div> */}
 
                                                 <div className="col-md-4">
                                                     <div className="form-group">
@@ -1222,7 +1320,7 @@ const ApplyVisa = () => {
                                                             name='arrivalDate'
                                                             id='arrivalDate'
                                                             onChange={e => onTextFieldChange(e)}
-                                                            value={leadData.dob}
+                                                            value={leadData.arrivalDate}
                                                             type="date"
                                                             placeholder="YYYY-MM-DD"
                                                         />
@@ -1305,7 +1403,19 @@ const ApplyVisa = () => {
 
                                             <div className="row">
                                                 <div className="btn_d_flex">
+                                                  {
+                                                    update ? 
                                                     <button
+                                                    type="button"
+                                                    className="red"
+                                                    onClick={e => onFormSubmit(e, 'submit')}
+                                                >
+                                                    Update Application
+                                                </button>
+                                                    
+                                                    :
+                                                    <>
+                                                      <button
                                                         type="button"
                                                         onClick={e => onFormSubmit(e, 'add')}
                                                         className="green"
@@ -1320,6 +1430,8 @@ const ApplyVisa = () => {
                                                     >
                                                         Submit Application
                                                     </button>
+                                                    </>
+                                                  }
 
 
                                                 </div>

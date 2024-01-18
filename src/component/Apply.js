@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { isValidEmail } from '../utils/staticFunctions';
 
-const Apply = () => {
+const Apply = ({update}) => {
 
     const { id } = useParams();
     const navigate = useNavigate();
   
     const [allCountry, setAllCountry] = useState([]);
-    const [leadData, setLeadData] = useState([]);
+    const [leadData, setLeadData] = useState({});
     const [applicationData, setApplicationData] = useState([]);
 
     const [selectedFile, setSelectedFile] = useState("");
@@ -26,16 +26,27 @@ const Apply = () => {
             try {
                 const applicationApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${id}`)
                 setApplicationData(applicationApi.data);
+                const data = applicationApi.data;
+               if(update){
+                setLeadData({
+                    firstName:data.firstName || "",
+                    lastName:data.lastName || "",
+                    dob:data.dob ? format(data.dob, 'yyyy-MM-dd') :"",
+                    emailId:data.emailId || "",
+                    countryCode:data.mobileNumber?.split("-")[0] ? data.mobileNumber?.split("-")[0]: "",
+                    mobileNumber:data.mobileNumber?.split("-")[1] ? Number(data.mobileNumber?.split("-")[1]): "",
+                    passportNumber:data.passportNumber || "",
+                    passportExpiryDate:data.passportExpiryDate ? format(data.passportExpiryDate, 'yyyy-MM-dd') : "",
+                    KnowUae:data.isContactInForeignCountry,
+                    uaeVisit:data.isFirstForeignVisit,
+                })
+               }
                 console.log(applicationApi.data);
             } catch (error) {
                 console.log("Something is Wrong");
             }
         }
 
-        getApplicationData();
-    }, [id]);
-
-    useEffect(() => {
         async function getCountry() {
 
             try {
@@ -46,16 +57,66 @@ const Apply = () => {
             }
         }
 
+        getApplicationData();
         getCountry();
-    },[])
+        
+    }, [id]);
+
     //====
 
     // === Form Submit Start Here -=====
     async function onTextFieldChange(e) {
+        console.log(e.target.value);
         setLeadData({
             ...leadData,
             [e.target.name]: e.target.value
         })
+    }
+
+   const handleFileUpload = (id) => {
+        if (selectedFile) {
+            const formData = new FormData();
+            formData.append("file", selectedFile);
+
+            axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${id}/PASSPORT/upload`, formData)
+                .then((res) => {
+                    console.log(res);
+                }).catch(error => {
+                    console.log("My Error Passport-" + error);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });        
+                })
+            }
+
+
+        if(selectedFilePhoto){
+
+            const formDataPhoto = new FormData();
+            formDataPhoto.append("file", selectedFilePhoto);
+
+            axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${id}/PHOTOGRAPH/upload`, formDataPhoto)
+                .then((res) => {
+                    console.log(res);
+                }).catch(error => {
+                    console.log("My Error Photo-" + error);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+        
+        }
+
+        if(selectedFileDoc){
+
+            const formDataDoc = new FormData();
+            formDataDoc.append("file", selectedFileDoc);
+
+            axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${id}/OTHER/upload`, formDataDoc)
+                .then((res) => {
+                    console.log(res);
+                }).catch(error => {
+                    console.log("My Error Doc-" + error);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+       
+        }
     }
 
 
@@ -186,65 +247,50 @@ const Apply = () => {
         else {
 
             try {
+              if(update){
+                // for update flow
+                await axios.put(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${id}`, payloadData)
+                .then((res) => {
+                    document.getElementById("succ_message").style.display = "block";
+                    document.getElementById("alert_message").innerHTML = "Applicant Submitted Succesfully!!!";
+                    setLeadData({});
+                    setSelectedFile("")
+                    setSelectedFileDoc("")
+                    setSelectedFilePhoto("")
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    console.log(res);
+
+                    handleFileUpload(res.data.id)
+                    
+                    if (scndVal == 'add') {
+                        navigate('/apply/' + res.data.id);
+                    } else {
+                        navigate('/checkout/' + res.data.id);
+                    }
+                });
+              } else{
+                //  for normal add flow
                 await axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant`, payloadData)
-                    .then((res) => {
-                        document.getElementById("succ_message").style.display = "block";
-                        document.getElementById("alert_message").innerHTML = "Your Query has been Submitted Succesfully!!! We will get back to you.";
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                        console.log(res);
+                .then((res) => {
+                    document.getElementById("succ_message").style.display = "block";
+                    document.getElementById("alert_message").innerHTML = "Applicant Submitted Succesfully!!!";
+                    setLeadData({});
+                    setSelectedFile("")
+                    setSelectedFileDoc("")
+                    setSelectedFilePhoto("")
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    console.log(res);
 
-                        
-                        if (selectedFile) {
-                            const formData = new FormData();
-                            formData.append("file", selectedFile);
-
-                            axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${res.data.id}/PASSPORT/upload`, formData)
-                                .then((res) => {
-                                    console.log(res);
-                                }).catch(error => {
-                                    console.log("My Error Passport-" + error);
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });        
-                                })
-                            }
-
-
-                        if(selectedFilePhoto){
-
-                            const formDataPhoto = new FormData();
-                            formDataPhoto.append("file", selectedFilePhoto);
-
-                            axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${res.data.id}/PHOTOGRAPH/upload`, formDataPhoto)
-                                .then((res) => {
-                                    console.log(res);
-                                }).catch(error => {
-                                    console.log("My Error Photo-" + error);
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                });
-                        
-                        }
-
-                        if(selectedFileDoc){
-
-                            const formDataDoc = new FormData();
-                            formDataDoc.append("file", selectedFileDoc);
-
-                            axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${res.data.id}/OTHER/upload`, formDataDoc)
-                                .then((res) => {
-                                    console.log(res);
-                                }).catch(error => {
-                                    console.log("My Error Doc-" + error);
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                                });
-                       
-                        }
-
-
-                        if (scndVal == 'add') {
-                            navigate('/apply/' + res.data.id);
-                        } else {
-                            navigate('/checkout/' + res.data.id);
-                        }
-                    });
+                    handleFileUpload(res.data.id)
+                    
+                    if (scndVal == 'add') {
+                        navigate('/apply/' + res.data.id);
+                    } else {
+                        navigate('/checkout/' + res.data.id);
+                    }
+                });
+              } 
+             
             } catch (error) {
                 console.log(error);
                 alert("Something is Wrong");
@@ -277,7 +323,7 @@ const Apply = () => {
 
     const currentYear = new Date().getFullYear();
     const years = Array.from({ length: 20 }, (_, index) => currentYear + index);
-    console.log(leadData.KnowUae,leadData.uaeVisit, "leadData");
+    console.log(leadData, "leadData");
     
     return (
         <>
@@ -332,7 +378,7 @@ const Apply = () => {
                                                             name='firstName'
                                                             id='firstName'
                                                             onChange={e => onTextFieldChange(e)}
-                                                            value={leadData.firstName}
+                                                            value={leadData.firstName || ""}
                                                         />
                                                     </div>
                                                 </div>
@@ -346,7 +392,7 @@ const Apply = () => {
                                                             name='lastName'
                                                             id='lastName'
                                                             onChange={e => onTextFieldChange(e)}
-                                                            value={leadData.lastName}
+                                                            value={leadData.lastName || ""}
                                                         />
                                                     </div>
                                                 </div>
@@ -359,7 +405,7 @@ const Apply = () => {
                                                             name='dob'
                                                             id='dob'
                                                             onChange={e => onTextFieldChange(e)}
-                                                            value={leadData.dob}
+                                                            value={leadData.dob || ""}
                                                         />
                                                     </div>
                                                 </div>
@@ -372,7 +418,7 @@ const Apply = () => {
                                                             name='emailId'
                                                             id='emailId'
                                                             onChange={e => onTextFieldChange(e)}
-                                                            value={leadData.emailId}
+                                                            value={leadData.emailId || ""}
                                                             placeholder="example@example.com" 
                                                         />
                                                     </div>
@@ -385,13 +431,13 @@ const Apply = () => {
                                                              name="countryCode"
                                                              id='countryCode'
                                                             onChange={e => onTextFieldChange(e)}
-                                                            value={leadData.countryCode}
+                                                            value={leadData.countryCode || ""}
                                                         >
                                                             <option value="">Select Country Code</option>
                                                             {
                                                                 allCountry && allCountry.length > 0 ?
                                                                     allCountry.map((item, index) => (
-                                                                        <option key={index + 1} value={item.id}>{item.name} ({item.countryCode})</option>
+                                                                        <option selected={item.countryCode === leadData.countryCode} key={index + 1} value={item.countryCode}>{item.name} ({item.countryCode})</option>
                                                                     )) :
                                                                     ''
                                                             }
@@ -406,7 +452,7 @@ const Apply = () => {
                                                             name='mobileNumber'
                                                             id='mobileNumber'
                                                             onChange={e => onTextFieldChange(e)}
-                                                            value={leadData.mobileNumber}
+                                                            value={leadData.mobileNumber || ""}
                                                             type="number"
                                                             placeholder="Enter Mobile Number"
                                                             maxLength="10"
@@ -422,7 +468,7 @@ const Apply = () => {
                                                             name='passportNumber'
                                                             id='passportNumber'
                                                             onChange={e => onTextFieldChange(e)}
-                                                            value={leadData.passportNumber}
+                                                            value={leadData.passportNumber || ""}
                                                             placeholder="Enter Passport Number"
                                                         />
                                                     </div>
@@ -513,7 +559,7 @@ const Apply = () => {
                                                             name='passportExpiryDate'
                                                             id='passportExpiryDate'
                                                             onChange={e => onTextFieldChange(e)}
-                                                            value={leadData.passportExpiryDate}
+                                                            value={leadData.passportExpiryDate || ""}
                                                             type="date"
                                                             placeholder="YYYY-MM-DD"
                                                         />
@@ -616,7 +662,8 @@ const Apply = () => {
                                                                     name='uaeVisit'
                                                                     id='uaeVisitF'
                                                                     onChange={e => handleRadioChange(e,true)}
-                                                                    value={leadData.uaeVisit}
+                                                                    // value={}
+                                                                    checked={leadData.uaeVisit ? true : false}
                                                                 />
                                                                 Yes
                                                             </label>
@@ -627,7 +674,8 @@ const Apply = () => {
                                                                     name='uaeVisit'
                                                                     id='uaeVisitS'
                                                                     onChange={e => handleRadioChange(e,false)}
-                                                                    value={leadData.uaeVisit}
+                                                                    // value={leadData.uaeVisit === false ? true:false}
+                                                                    checked={leadData.uaeVisit === false ? true:false}
                                                                 />
                                                                 No
                                                             </label>
@@ -648,7 +696,8 @@ const Apply = () => {
                                                                     name='KnowUae'
                                                                     id='KnowUae'
                                                                     onChange={e => handleRadioChange(e,true)}
-                                                                    value={leadData.KnowUae}
+                                                                    // value={leadData.KnowUae}
+                                                                    checked={leadData.KnowUae ? true :false}
                                                                 />
                                                                 Yes
                                                             </label>
@@ -659,7 +708,8 @@ const Apply = () => {
                                                                     name='KnowUae'
                                                                     id='KnowUaeS'
                                                                     onChange={e => handleRadioChange(e,false)}
-                                                                    value={leadData.KnowUae}
+                                                                    // value={leadData.KnowUae}
+                                                                    checked={leadData.KnowUae === false ? true : false}
                                                                 />
                                                                 No
                                                             </label>
@@ -750,7 +800,9 @@ const Apply = () => {
 
                                             <div className="row">
                                                 <div className="btn_d_flex">
-                                                    <button
+                                                  { !update  ?
+                                                  <>
+                                                  <button
                                                         type="button"
                                                         onClick={e => onFormSubmit(e, 'add')}
                                                         className="green"
@@ -765,8 +817,15 @@ const Apply = () => {
                                                     >
                                                         Submit Application
                                                     </button>
-
-
+                                                    </> :
+                                                   <button
+                                                   type="button"
+                                                   className="red"
+                                                   onClick={e => onFormSubmit(e, 'submit')}
+                                               >
+                                                   Update Application
+                                               </button>                                                   
+}
                                                 </div>
                                             </div>
 

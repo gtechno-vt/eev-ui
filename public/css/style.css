@@ -2475,3 +2475,6 @@ color: #fe0000;
 .displayContent1, .displayContent2, .displayContent3{
     display: block !important;
 }
+.lightGray{
+    color: lightgray !important;
+  }

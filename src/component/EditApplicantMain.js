@@ -516,7 +516,7 @@ const EditApplicantMain = () => {
                                                                         name='dob'
                                                                         id='dob'
                                                                         onChange={e => onTextFieldChange(e)}
-                                                                        value={leadData.dob || format(applicatDetails.dob, dateFormatString) || ''}
+                                                                        value={leadData.dob || (applicatDetails.dob && format(applicatDetails.dob, dateFormatString)) || ''}
                                                                         type="text"
                                                                         placeholder="Date of birth"
                                                                     />
@@ -546,7 +546,7 @@ const EditApplicantMain = () => {
                                                                         onChange={e => onEducation(e)}
                                                                         value={educationF}
                                                                     >
-                                                                        <option value={applicatDetails.education.id }>{applicatDetails.education.name } </option>
+                                                                        <option value={applicatDetails?.education?.id }>{applicatDetails?.education?.name } </option>
                                                                         {
                                                                             education && education.length > 0 ?
                                                                                 education.map((item, index) => (
@@ -582,7 +582,7 @@ const EditApplicantMain = () => {
                                                                         onChange={e => OnProfessionF(e)}
                                                                         value={professionF}
                                                                     >
-                                                                        <option value={applicatDetails.profession.id }>{applicatDetails.profession.name } </option>
+                                                                        <option value={applicatDetails?.profession?.id }>{applicatDetails?.profession?.name } </option>
                                                                         {
                                                                             profession && profession.length > 0 ?
                                                                                 profession.map((item, index) => (
@@ -618,7 +618,7 @@ const EditApplicantMain = () => {
                                                                         onChange={e => onTextFieldChange(e)}
                                                                         value={leadData.purposeOfVisit}
                                                                     >
-                                                                        <option value={applicatDetails.application.purposeOfVisit.id }>{applicatDetails.application.purposeOfVisit.name } </option>
+                                                                        <option value={applicatDetails?.application?.purposeOfVisit?.id }>{applicatDetails?.application?.purposeOfVisit?.name } </option>
                                                                         {
                                                                             purposeOfVisit && purposeOfVisit.length > 0 ?
                                                                                 purposeOfVisit.map((item, index) => (
