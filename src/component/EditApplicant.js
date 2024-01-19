@@ -26,10 +26,37 @@ const EditApplicant = () => {
             try {
                 const appApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/document?applicantId=${id}`)
                 if(appApi.data[0].id != undefined){
-                    setDocumentFiles(appApi.data);
+                    const data = appApi.data[0];
+                    if(data.passportDocument){
+                        if(data.passportMediaType === "jpeg" || data.passportMediaType === "png" || data.passportMediaType === "jpg"
+                        ){
+                            data.passportDocument =`data:image/${data.passportMediaType};base64,${data.passportDocument}`
+                        }else   if(data.passportMediaType === "pdf" || data.passportMediaType === "doc" || data.passportMediaType === "docx"){
+                            data.passportDocument =`data:application/${data.passportMediaType};base64,${data.passportDocument}`
+                         }
+                    }
+                    if(data.photoDocument){
+                        if(data.photoMediaType === "jpeg" || data.photoMediaType === "png" || data.photoMediaType === "jpg"
+                        ){
+                            data.photoDocument =`data:image/${data.photoMediaType};base64,${data.photoDocument}`
+                        }else   if(data.photoMediaType === "pdf" || data.photoMediaType === "doc" || data.photoMediaType === "docx"){
+                            data.photoDocument =`data:application/${data.photoMediaType};base64,${data.photoDocument}`
+                         }
+                    }
+                    if(data.otherDocument){
+                        if(data.otherDocumentMediaType === "jpeg" || data.otherDocumentMediaType === "png" || data.otherDocumentMediaType === "jpg"
+                        ){
+                            data.otherDocument =`data:image/${data.otherDocumentMediaType};base64,${data.otherDocument}`
+                        }else   if(data.otherDocumentMediaType === "pdf" || data.otherDocumentMediaType === "doc" || data.otherDocumentMediaType === "docx"){
+                            data.otherDocument =`data:application/${data.otherDocumentMediaType};base64,${data.otherDocument}`
+                         }
+                    }
+                      
+                    console.log(data,"datats");
+                    setDocumentFiles(data);
                 }
             } catch (error) {
-                console.log("Something is Wrong Visa Type");
+                console.log("Something is Wrong Visa Type",error);
             }
         }
         getApplicationDetails();
@@ -43,13 +70,13 @@ const EditApplicant = () => {
        <ApplyVisa 
        update={true}
        appId={id}
-       docInfo={documentFiles}
+       doc={documentFiles}
        />    
        : primary === false ? 
        <Apply
        update={true}
        appId={id}
-       docInfo={documentFiles}
+       doc={documentFiles}
        />:
        <div>
         Loading ...

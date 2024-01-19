@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from "react-router-dom";
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import ApiLoader from './ApiLoader';
 
 
 const Checkout = () => {
@@ -15,11 +16,20 @@ const Checkout = () => {
     const [siteInfo, setSiteInfo] = useState([]);
     const [serviceTypeValue,setServiceTypeValue] = useState("Normal")
     const [paymentDetails,setPaymentDetails] = useState({});
+    const [showApiLoader,setShowApiLoader] = useState(false);
+
     
     const navigate = useNavigate();
 
     const serviceTypeValueChange = (e) => {
         setServiceTypeValue(e.target.value);
+        if(e.target.value === "Normal"){
+            setPaymentDetails( prevState => {
+                return {...prevState,
+                    serviceFees:siteInfo?.regularServiceFee
+                };
+              })
+        }else{
         const item = serviceType.find(ele => ele.id == e.target.value);
         console.log(item);
         setPaymentDetails( prevState => {
@@ -27,6 +37,7 @@ const Checkout = () => {
                 serviceFees:item.serviceFee
             };
           })
+        }
     }
 
     useEffect(() => {
@@ -37,19 +48,16 @@ const Checkout = () => {
 
         async function getApplicationDetails() {
             try {
+                setShowApiLoader(true);
                 const appApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${id}`)
                 setApplicationDetails(appApi.data.application);
 
                 if(appApi.data.application.destinationCountry.id){
-                    try {
                         const serviceApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/service-type/${appApi.data.application.destinationCountry.id}`)
                         setServiceType(serviceApi.data);
-                    } catch (error) {
-                        console.log("Something is Wrong Visa Type");
-                    }
                 }
                 
-                try {
+               
                     const applicatntApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant?applicationId=${appApi.data.application.id}`)
                     setApplicatDetails(applicatntApi.data);
                     setPaymentDetails( prevState => {
@@ -57,11 +65,8 @@ const Checkout = () => {
                             noOfApplicant:applicatntApi.data.length
                         };
                       })
-                } catch (error) {
-                    console.log("Something is Wrong Visa Type");
-                }
 
-                try {
+                
                     const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/${appApi.data.application.visaVariant.id}/48/fee`)
                     setVisaTypeFee(visaTypeApi.data);
                     setPaymentDetails( prevState => {
@@ -69,18 +74,16 @@ const Checkout = () => {
                             visaFees:visaTypeApi.data
                         };
                       })
-                    console.log(visaTypeApi.data);
-                } catch (error) {
-                    console.log("Something is Wrong Visa Type");
-                }
+                      setShowApiLoader(false);
             } catch (error) {
+                setShowApiLoader(false);
                 console.log("Something is Wrong Visa Type");
             }
         }
 
         // getApplicatDetails();
         getApplicationDetails();
-
+         
 
     }, [id]);
 
@@ -142,6 +145,7 @@ const Checkout = () => {
   return (
     <>
         <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+        {showApiLoader && <ApiLoader/>}
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">

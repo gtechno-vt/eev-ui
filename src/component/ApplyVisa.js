@@ -5,8 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { isValidEmail } from '../utils/StaticFunctions';
 import { isValidMobile } from '../utils/StaticFunctions';
+import ApiLoader from './ApiLoader';
 
-const ApplyVisa = ({update,appId}) => {
+const ApplyVisa = ({update,appId,doc}) => {
 
     const navigate = useNavigate();
     const { visa } = useParams();
@@ -25,6 +26,7 @@ const ApplyVisa = ({update,appId}) => {
     const [selectedFile, setSelectedFile] = useState("");
     const [selectedFilePhoto, setSelectedFilePhoto] = useState("");
     const [selectedFileDoc, setSelectedFileDoc] = useState("");
+    const [showApiLoader,setShowApiLoader] = useState(false);
 
     // for update purpose 
     
@@ -38,7 +40,9 @@ const ApplyVisa = ({update,appId}) => {
         async function getCountry() {
 
             try {
+                setShowApiLoader(true);
                 const countryApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/country/basic`)
+                setShowApiLoader(false);
                 setAllCountry(countryApi.data);
                 console.log(countryApi.data);
                 if(citizen){
@@ -50,13 +54,16 @@ const ApplyVisa = ({update,appId}) => {
                     setTravellingData(travellingCountryAllData.id);
                 }
             } catch (error) {
+                setShowApiLoader(false);
                 console.log("Something is Wrong");
             }
         }
 
         async function getVisaType() {
             try {
+                setShowApiLoader(true);
                 const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/0/48?fetchImages=false`)
+                setShowApiLoader(false);
                 setVisaType(visaTypeApi.data);
                 if(visa){
                     const singlevisaVar = visaTypeApi.data.find(ele => ele.slugVisaVariantName === visa);
@@ -67,33 +74,43 @@ const ApplyVisa = ({update,appId}) => {
                 }
                 console.log(visaTypeApi.data);
             } catch (error) {
+                setShowApiLoader(false);
                 console.log("Something is Wrong Visa Type");
             }
         }
 
         async function getEducation() {
             try {
+                setShowApiLoader(true);
                 const educationApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/education`)
+                setShowApiLoader(false);
                 setEducation(educationApi.data);
             } catch (error) {
+                setShowApiLoader(false);
                 console.log("Something is Wrong Visa Type");
             }
         }
 
         async function getProfession() {
             try {
+                setShowApiLoader(true);
                 const professionApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/profession`)
+                setShowApiLoader(false);
                 setProfession(professionApi.data);
             } catch (error) {
+                setShowApiLoader(false);
                 console.log("Something is Wrong Visa Type");
             }
         }
 
         async function getPurposeVisit() {
             try {
+                setShowApiLoader(true);
                 const purposeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/purpose-of-visit`)
+                setShowApiLoader(false);
                 setPurposeOfVisit(purposeApi.data);
             } catch (error) {
+                setShowApiLoader(false);
                 console.log("Something is Wrong Visa Type");
             }
         }
@@ -102,8 +119,10 @@ const ApplyVisa = ({update,appId}) => {
         async function getApplicationData() {
 
             try {
+                setShowApiLoader(true);
                 const applicationApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${appId}`)
                 // setApplicationData(applicationApi.data);
+                setShowApiLoader(false);
                 const data = applicationApi.data;
                 setLeadData({
                     firstName:data.firstName || "",
@@ -143,6 +162,7 @@ const ApplyVisa = ({update,appId}) => {
                
                 // console.log(applicationApi.data);
             } catch (error) {
+                setShowApiLoader(false);
                 console.log("Something is Wrong",error);
             }
         }
@@ -514,8 +534,10 @@ const ApplyVisa = ({update,appId}) => {
             try {
               if(update){
                 //   to update existing
+                setShowApiLoader(true)
                 await axios.put(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${appId}`, payloadData)
                 .then((res) => {
+                    setShowApiLoader(false)
                     document.getElementById("succ_message").style.display = "block";
                     document.getElementById("alert_message").innerHTML = "Your Query has been Submitted Succesfully!!! We will get back to you.";
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -530,8 +552,10 @@ const ApplyVisa = ({update,appId}) => {
                 });
               }else{
                 //  to add new
+                setShowApiLoader(true)
                 await axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant`, payloadData)
                 .then((res) => {
+                    setShowApiLoader(false)
                     document.getElementById("succ_message").style.display = "block";
                     document.getElementById("alert_message").innerHTML = "Your Query has been Submitted Succesfully!!! We will get back to you.";
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -546,6 +570,7 @@ const ApplyVisa = ({update,appId}) => {
                 });
               }
             } catch (error) {
+                setShowApiLoader(false)
                 document.getElementById("succ_message").style.display = "block";
                 document.getElementById("alert_message").innerHTML = error;
                 console.log(error);
@@ -576,6 +601,7 @@ const ApplyVisa = ({update,appId}) => {
     return (
         <>
             <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+               {showApiLoader && <ApiLoader/>}
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
@@ -1344,6 +1370,7 @@ const ApplyVisa = ({update,appId}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Colored Passport</label>
+                                                       {doc?.passportDocument && <a download={`passport.${doc.passportMediaType}`} href={doc.passportDocument} className='doc-down-anchor'>{`Passport.${doc.passportMediaType}`}</a>}
                                                         <input
                                                             type="file"
                                                             multiple="multiple"
@@ -1363,6 +1390,7 @@ const ApplyVisa = ({update,appId}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Colored photograph</label>
+                                                        {doc?.photoDocument && <a download={`passport.${doc.photoMediaType}`} href={doc.photoDocument} className='doc-down-anchor'>{`Photo.${doc.photoMediaType}`}</a>}
                                                         <input
                                                             type="file"
                                                             onChange={e => setSelectedFilePhoto(e.target.files[0])}
@@ -1379,6 +1407,7 @@ const ApplyVisa = ({update,appId}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Others</label>
+                                                        {doc?.otherDocument && <a download={`passport.${doc.otherDocumentMediaType}`} href={doc.otherDocument} className='doc-down-anchor'>{`OtherDoc.${doc.otherDocumentMediaType}`}</a>}
                                                         <input
                                                             type="file"
                                                             onChange={e => setSelectedFileDoc(e.target.files[0])}

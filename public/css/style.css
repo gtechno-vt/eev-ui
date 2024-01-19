@@ -2478,3 +2478,25 @@ color: #fe0000;
 .lightGray{
     color: lightgray !important;
   }
+
+  .doc-down-anchor{
+        display: block;
+        margin-bottom: 10px;
+  }
+
+  .api-loader-cont{
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        background: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        top: 0px;
+  }
+
+  .api-loader-cont > img{
+    width: 100px;
+    height: 100px;
+  }

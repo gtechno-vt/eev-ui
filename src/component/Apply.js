@@ -5,8 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { isValidEmail } from '../utils/StaticFunctions';
 import { isValidMobile } from '../utils/StaticFunctions';
+import ApiLoader from './ApiLoader';
 
-const Apply = ({update}) => {
+const Apply = ({update,doc}) => {
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -18,6 +19,8 @@ const Apply = ({update}) => {
     const [selectedFile, setSelectedFile] = useState("");
     const [selectedFilePhoto, setSelectedFilePhoto] = useState("");
     const [selectedFileDoc, setSelectedFileDoc] = useState("");
+    const [showApiLoader,setShowApiLoader] = useState(false);
+
 
     //== = 
     useEffect(() => {
@@ -25,7 +28,9 @@ const Apply = ({update}) => {
         async function getApplicationData() {
 
             try {
+                setShowApiLoader(true);
                 const applicationApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${id}`)
+                setShowApiLoader(false);
                 setApplicationData(applicationApi.data);
                 const data = applicationApi.data;
                if(update){
@@ -44,6 +49,7 @@ const Apply = ({update}) => {
                }
                 console.log(applicationApi.data);
             } catch (error) {
+                setShowApiLoader(false);
                 console.log("Something is Wrong");
             }
         }
@@ -51,9 +57,12 @@ const Apply = ({update}) => {
         async function getCountry() {
 
             try {
+                setShowApiLoader(true);
                 const countryApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/country/basic`)
+                setShowApiLoader(false);
                 setAllCountry(countryApi.data);
             } catch (error) {
+                setShowApiLoader(false);
                 console.log("Something is Wrong");
             }
         }
@@ -254,8 +263,10 @@ const Apply = ({update}) => {
             try {
               if(update){
                 // for update flow
+                setShowApiLoader(true)
                 await axios.put(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${id}`, payloadData)
                 .then((res) => {
+                    setShowApiLoader(false)
                     document.getElementById("succ_message").style.display = "block";
                     document.getElementById("alert_message").innerHTML = "Applicant Submitted Succesfully!!!";
                     setLeadData({});
@@ -275,8 +286,10 @@ const Apply = ({update}) => {
                 });
               } else{
                 //  for normal add flow
+                setShowApiLoader(true)
                 await axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant`, payloadData)
                 .then((res) => {
+                    setShowApiLoader(false)
                     document.getElementById("succ_message").style.display = "block";
                     document.getElementById("alert_message").innerHTML = "Applicant Submitted Succesfully!!!";
                     setLeadData({});
@@ -297,6 +310,7 @@ const Apply = ({update}) => {
               } 
              
             } catch (error) {
+                setShowApiLoader(false)
                 console.log(error);
                 alert("Something is Wrong");
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -333,6 +347,7 @@ const Apply = ({update}) => {
     return (
         <>
             <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+            {showApiLoader && <ApiLoader/>}
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
@@ -742,6 +757,7 @@ const Apply = ({update}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Colored Passport</label>
+                                                       {doc?.passportDocument && <a download={`passport.${doc.passportMediaType}`} href={doc.passportDocument} className='doc-down-anchor'>{`Passport.${doc.passportMediaType}`}</a>}
                                                         <input 
                                                             type="file" 
                                                             multiple="multiple" 
@@ -760,6 +776,7 @@ const Apply = ({update}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Colored photograph</label>
+                                                        {doc?.photoDocument && <a download={`passport.${doc.photoMediaType}`} href={doc.photoDocument} className='doc-down-anchor'>{`Photo.${doc.photoMediaType}`}</a>}
                                                         <input 
                                                             type="file" 
                                                             multiple="multiple" 
@@ -778,6 +795,7 @@ const Apply = ({update}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Others</label>
+                                                        {doc?.otherDocument && <a download={`passport.${doc.otherDocumentMediaType}`} href={doc.otherDocument} className='doc-down-anchor'>{`OtherDoc.${doc.otherDocumentMediaType}`}</a>}
                                                         <input 
                                                             type="file" 
                                                             multiple="multiple" 
