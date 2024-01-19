@@ -231,7 +231,7 @@ const Checkout = () => {
                                                     <td>
                                                         {
                                                             item.isPrimary == true ? 
-                                                                <Link to={`/applicant-main/${item.id}`}> Edit </Link>
+                                                                <Link to={`/applicant/${item.id}`}> Edit </Link>
                                                                 :
                                                                 <Link to={`/applicant/${item.id}`}> Edit  </Link>
                                                         }
