@@ -124,7 +124,7 @@ const Footer = () => {
 <div className="copy_right">
     <div className="container">
     <div className="visit_c">
-<p>All Rights Reserved 2023 &#169;  emiratesevisaonline</p> 
+<p>All Rights Reserved {(new Date().getFullYear())} &#169;  emiratesevisaonline</p>
 <p> Visitor Counter
 <a href="https://www.cutercounter.com/" target="_blank"><img src="https://www.cutercounter.com/hits.php?id=hmxonckf&nd=6&style=5" border="0" alt="hit counter" /></a></p>
 </div>

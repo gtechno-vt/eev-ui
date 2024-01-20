@@ -132,8 +132,8 @@ const Checkout = () => {
 
 	// },[paymentDetails]);
 
-    const totalTax = ((paymentDetails.noOfApplicant*paymentDetails.visaFees+paymentDetails.serviceFees)/100)*paymentDetails.taxPercent;
-    const netPay = (paymentDetails.noOfApplicant*paymentDetails.visaFees) + paymentDetails.serviceFees + ((paymentDetails.noOfApplicant*paymentDetails.visaFees+paymentDetails.serviceFees)/100)*paymentDetails.taxPercent
+    const totalTax = (((paymentDetails.noOfApplicant*paymentDetails.visaFees)+(paymentDetails.noOfApplicant*paymentDetails.serviceFees))*paymentDetails.taxPercent/100);
+    const netPay = (paymentDetails.noOfApplicant*paymentDetails.visaFees) + (paymentDetails.noOfApplicant*paymentDetails.serviceFees) + ((paymentDetails.noOfApplicant*paymentDetails.visaFees+(paymentDetails.noOfApplicant*paymentDetails.serviceFees))/100)*paymentDetails.taxPercent
 
     const dateFormatString = 'd MMMM, yyyy';
 
@@ -184,14 +184,6 @@ const Checkout = () => {
                                             applicationDetails.id ? applicationDetails.visaVariant.name : ''
                                         }
                                         </span>
-                                    </div>
-                                </div>
-
-                                <div className="column-three">
-                                    <div className="data bg_set">
-                                        {
-                                            applicationDetails.id ? applicationDetails.visaVariant.description : ''
-                                        }
                                     </div>
                                 </div>
                             </div>
@@ -277,7 +269,7 @@ const Checkout = () => {
 
                                 <tr>
                                     <td>Total Visa Fees</td>
-                                    <td>${paymentDetails.noOfApplicant*paymentDetails.visaFees ? paymentDetails.noOfApplicant*paymentDetails.visaFees : "-"}</td>
+                                    <td>{paymentDetails.noOfApplicant*paymentDetails.visaFees ? paymentDetails.noOfApplicant*paymentDetails.visaFees : "-"} USD</td>
                                 </tr>
 
                                 <tr>
@@ -288,7 +280,7 @@ const Checkout = () => {
                                         value={serviceTypeValue}
                                         onChange={serviceTypeValueChange}
                                         >
-                                            <option value="">Select</option>
+                                            <option value="Normal">Regular Service (3-4 Days)</option>
                                             {
                                                 serviceType && serviceType.length > 0 ?
                                                 serviceType.map((item, index) => (
@@ -296,24 +288,23 @@ const Checkout = () => {
                                                     )) :
                                                     ''
                                             }
-                                            <option value="Normal">Normal</option>
                                         </select>
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td>Service Fees</td>
-                                    <td>${paymentDetails.serviceFees ? paymentDetails.serviceFees :"-"}</td>
+                                    <td>{paymentDetails.serviceFees ? paymentDetails.noOfApplicant*paymentDetails.serviceFees :"-"} USD</td>
                                 </tr>
 
                                 <tr>
                                     <td>Tax({paymentDetails.taxPercent}%)</td>
-                                    <td>${ totalTax ?totalTax.toFixed(2):"-"}</td>
+                                    <td>{ totalTax ?totalTax.toFixed(2):"-"} USD</td>
                                 </tr>
 
                                 <tr>
                                     <td className="ftr_l">Net Pay</td>
-                                    <td className="ftr_r">${netPay ?netPay.toFixed(2) :"-"}</td>
+                                    <td className="ftr_r">{netPay ?netPay.toFixed(2) :"-"} USD</td>
                                 </tr>
 
                             </table>

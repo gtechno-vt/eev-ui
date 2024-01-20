@@ -1138,7 +1138,7 @@ const EditApplicantMain = () => {
                                                             <div className="col-md-12">
                                                                 <div className="form-group">
                                                                     <div className="note">
-                                                                        <p><b>Note:</b> Upload of passport and photograph are not mandatory to complete the visa application form. You can provide us these documents later also on email: contact@emiratesevisaonline.com or on WhatsApp +91-1234567890</p>
+                                                                        <p><b>Note:</b> <ul><li> Upload of passport and photograph are not mandatory to complete the visa application form. You can provide us these documents later also on email: contact@emiratesevisaonline.com or on WhatsApp +971-569013615</li><li> Supported Document Formats - PDF, JPG, JPEG, PNG, DOC, DOCX</li></ul></p>
                                                                     </div>
                                                                 </div>
                                                             </div>
