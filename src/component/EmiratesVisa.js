@@ -278,19 +278,19 @@ const EmiratesVisa = () => {
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>Visa Validity</td>
-                                                                                        <td> {item.visaValidity}   </td>
+                                                                                        <td> {item.visaValidity} Days After Approval  </td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <td>Stay Validity</td>
+                                                                                        <td>Stay Validity in UAE</td>
                                                                                         <td>{item.stayValidity}</td>
                                                                                     </tr>
                                                                                     <tr>
-                                                                                        <td>Processing Time</td>
+                                                                                        <td>Approval Time</td>
                                                                                         <td>{item.processingTime}</td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td>Visa Fee </td>
-                                                                                        <td>{item.visaFee}</td>
+                                                                                        <td>{item.visaFee} USD</td>
                                                                                     </tr>
 
                                                                                     <tr>

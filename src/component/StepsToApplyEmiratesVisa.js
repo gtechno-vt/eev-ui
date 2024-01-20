@@ -35,15 +35,16 @@ const StepsToApplyEmiratesVisa = () => {
                     <span></span>
                 </div>
 
-                {/*<div className="content">
+                <div className="content">
                     <div className="step_cont">
                         <div className="title">
-                            <h3>Choose your nationality & the country you are living in</h3>
+                            <h3>Choose citizenship country & residence country</h3>
                         </div>
                         <div className="step_cont_pd">
-                            <p>We have included an exhaustive list of countries which is more than any other service
-                                provider. This ensures no matter which country you belong to, your dubai visa application is
-                                processed without any hassle.</p>
+                            <p>On the Home page, you can choose living and citizenship country from dropdown.
+                                We offer Emirates Visa services for individuals from all countries. We
+                                guarantee a smooth processing of your online visa application, regardless
+                                of your country of origin or the country you are living in.</p>
                         </div>
                     </div>
 
@@ -64,13 +65,15 @@ const StepsToApplyEmiratesVisa = () => {
                 <div className="content">
                     <div className="step_cont">
                         <div className="title">
-                            <h3>Choose your preferred DUBAI Visa type & click on "Apply Now"</h3>
+                            <h3>Choose suitable Emirates Visa type & click on "Apply Now"</h3>
                         </div>
                         <div className="step_cont_pd">
 
-                            <p>We believe in complete transparency, and that's why we show you a list of all the required
-                                documents and the total cost of the application at this stage, so you don't have any nasty
-                                surprises once you complete dubai visa application form..</p>
+                            <p>Choose from Emirates visa types 14 days visa, 30 days visa and 60 days visa.
+                                We uphold a commitment to absolute transparency, which is why
+                                we present you with a detailed list of the necessary documents
+                                and the total application cost at the starting stage. You are also
+                                providing with information on the typical approval time.</p>
                         </div>
                     </div>
 
@@ -91,14 +94,15 @@ const StepsToApplyEmiratesVisa = () => {
                 <div className="content">
                     <div className="step_cont">
                         <div className="title">
-                            <h3>Complete your DUBAI Visa application form</h3>
+                            <h3>Complete the application form for your Emirates visa</h3>
                         </div>
                         <div className="step_cont_pd">
 
-                            <p>We have simplified the application form so that even a first time applicant can fill this
-                                form in less than 2 minutes. You can add as many applicants (travelling in a single group)
-                                as you want from this single form. And yes, we are a stickler for privacy rights, that's why
-                                all your personal information entered are SSL Encrypted.</p>
+                            <p>We have a well organized Emirates application form, ensuring that
+                                even first-time travelers can complete it in an easy way. This single
+                                online visa application form allows you to include multiple
+                                applicants traveling together in a group, family or corporate teams.
+                                Applications can be tracked in Track Visa Status.</p>
                         </div>
                     </div>
 
@@ -119,14 +123,16 @@ const StepsToApplyEmiratesVisa = () => {
                 <div className="content">
                     <div className="step_cont">
                         <div className="title">
-                            <h3>Pay your DUBAI Visa application fees online through our secured payment gateway</h3>
+                            <h3>Pay for your Emirates visa application fees
+                                securely online using our payment gateways</h3>
                         </div>
                         <div className="step_cont_pd">
 
-                            <p>Pay your application fee securely and with complete peace of mind through our trusted payment
-                                gateway which uses an industry-leading 256-bit SSL for added security. We know you want
-                                choices, that's why we have included the option of payment both using your credit card or
-                                your debit card.</p>
+                            <p>Complete your payment securely confidence using our
+                                reliable payment gateways like Stripe, Paypal and others. We offer
+                                payment options through Mastercard, Visa and RuPay Debit or
+                                Credit cards. You can also pay via the authenticated
+                                payment link provided by our team.</p>
                         </div>
                     </div>
 
@@ -142,7 +148,7 @@ const StepsToApplyEmiratesVisa = () => {
                     </div>
 
 
-                </div>*/}
+                </div>
 
 
             </div>

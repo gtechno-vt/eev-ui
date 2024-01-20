@@ -1092,7 +1092,7 @@ color: #fe0000;
 }
 .step_format .step_cont .title h3:after {content:'';}
 .step_format .step_cont p {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     color: #505050;
     line-height: 30px;
