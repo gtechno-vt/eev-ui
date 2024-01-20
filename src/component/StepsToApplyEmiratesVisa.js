@@ -38,7 +38,7 @@ const StepsToApplyEmiratesVisa = () => {
                 <div className="content">
                     <div className="step_cont">
                         <div className="title">
-                            <h3>Choose citizenship country & residence country</h3>
+                            <h3>Choose your citizenship country & the country you live in</h3>
                         </div>
                         <div className="step_cont_pd">
                             <p>On the Home page, you can choose living and citizenship country from dropdown.
