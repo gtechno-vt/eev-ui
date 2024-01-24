@@ -2500,3 +2500,14 @@ color: #fe0000;
     width: 100px;
     height: 100px;
   }
+
+  .payment-redirect-btn{
+    background: #171819;
+    color: #fff;
+    width: 20%;
+    border: none;
+    margin: 10px 0 10px;
+    outline: none;
+    padding: 10px;
+    border-radius: 12px;
+}

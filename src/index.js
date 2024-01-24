@@ -26,6 +26,8 @@ import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
 
 import Contact from "./component/Contact";
 import NoPage from "./component/NoPage";
+import PaymentSuccess from "./component/PaymentSuccess";
+import PaymentFailure from "./component/PaymentFailure";
 
 export default function App() {
   return (
@@ -54,6 +56,8 @@ export default function App() {
           <Route path="apply-now-visa/:visa" element={<ApplyNowVisa />} />
           <Route path="emirates-visa/:citizen/:travelling" element={<EmiratesVisa />} />
           <Route path="apply-visa/:visa/:citizen/:travelling" element={<ApplyVisa />} />
+          <Route path="payment-success/:id" element={<PaymentSuccess />} />
+          <Route path="payment-failure/:id" element={<PaymentFailure />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

@@ -49,25 +49,27 @@ const Checkout = () => {
         async function getApplicationDetails() {
             try {
                 setShowApiLoader(true);
-                const appApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${id}`)
-                setApplicationDetails(appApi.data.application);
+                // const appApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${id}`)
+                // setApplicationDetails(appApi.data.application);
 
-                if(appApi.data.application.destinationCountry.id){
-                        const serviceApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/service-type/${appApi.data.application.destinationCountry.id}`)
+                const applicatntApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant?applicationId=${id}`)
+                console.log(applicatntApi);
+                const application = applicatntApi.data[0].application;
+                setApplicatDetails(applicatntApi.data);
+                setApplicationDetails(application)
+                setPaymentDetails( prevState => {
+                    return {...prevState,
+                        noOfApplicant:applicatntApi.data.length
+                    };
+                  })
+
+                if(application?.destinationCountry?.id){
+                        const serviceApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/service-type/${application.destinationCountry.id}`)
                         setServiceType(serviceApi.data);
                 }
                 
-               
-                    const applicatntApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant?applicationId=${appApi.data.application.id}`)
-                    setApplicatDetails(applicatntApi.data);
-                    setPaymentDetails( prevState => {
-                        return {...prevState,
-                            noOfApplicant:applicatntApi.data.length
-                        };
-                      })
-
-                
-                    const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/${appApi.data.application.visaVariant.id}/48/fee`)
+             
+                      const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/${application.visaVariant.id}/${application.citizenshipCountry.id}/48/fee`)
                     setVisaTypeFee(visaTypeApi.data);
                     setPaymentDetails( prevState => {
                         return {...prevState,
@@ -139,6 +141,24 @@ const Checkout = () => {
 
     const redirectAddMoreAppl = () => {
         navigate(`/apply/${applicatDetails[0].id}`)
+    }
+
+    const handleRedirectToPayment = async() => {
+        const data = {
+            applicationId: applicationDetails.displayId,
+            serviceType: serviceTypeValue,
+          }
+      try {
+        const res = await axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/payment/Stripe/order`,data,{
+            headers:{
+                "Content-Type": "application/json" 
+                    }
+         })
+         console.log(res,"reds");
+      } catch (error) {
+        console.log(error);
+      }
+    
     }
 
     console.log(paymentDetails,"paymentDetails");
@@ -309,7 +329,7 @@ const Checkout = () => {
 
                             </table>
 
-                            <button type="submit" className="btn button" id="checkout-button" name="proceedFinal"> Proceed
+                            <button type="submit" className="btn button" id="checkout-button" name="proceedFinal" onClick={handleRedirectToPayment}> Proceed
                                 Now</button>
 
                         </div>
