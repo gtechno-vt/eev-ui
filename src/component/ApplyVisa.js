@@ -416,18 +416,22 @@ const ApplyVisa = ({update,appId,doc}) => {
         document.getElementById("passportExpiryDate").style.border = "1px solid #ccc";
         document.getElementById("arrivalDate").style.border = "1px solid #ccc";
 
+        let isAllRequiredDataFilled = true;
         if (!citizenData) {
             document.getElementById("citizenshipCountry").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (!travellingData) {
+            isAllRequiredDataFilled = false;
+        } 
+         if (!travellingData) {
             document.getElementById("destinationCountry").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (!visaVariant) {
+            isAllRequiredDataFilled = false;
+        }  
+        if (!visaVariant) {
             document.getElementById("visaVariant").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (!leadData.firstName) {
+            isAllRequiredDataFilled = false;
+        } 
+         if (!leadData.firstName) {
             document.getElementById("firstName").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         }
         //  else if (leadData.lastName == undefined) {
         //     document.getElementById("lastName").style.border = "1px solid red";
@@ -437,52 +441,59 @@ const ApplyVisa = ({update,appId,doc}) => {
         //     document.getElementById("dob").style.border = "1px solid red";
         //     window.scrollTo({ top: 0, behavior: 'smooth' });
         // } 
-        else if (!leadData.emailId || !isValidEmail(leadData.emailId)) {
+         if (!leadData.emailId || !isValidEmail(leadData.emailId)) {
             document.getElementById("emailId").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         }
         // else if (educationF == '0') {
         //     document.getElementById("educationF").style.border = "1px solid red";
         //     window.scrollTo({ top: 0, behavior: 'smooth' });
         // } 
-        else if (!professionF && !leadData.customProfession) {
+         if (!professionF && !leadData.customProfession) {
             document.getElementById("professionF").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (!leadData.purposeOfVisit && !leadData.purposeOfVisitText) {
+            isAllRequiredDataFilled = false;
+        } 
+         if (!leadData.purposeOfVisit && !leadData.purposeOfVisitText) {
             document.getElementById("purposeOfVisit").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (!leadData.countryCode) {
+            isAllRequiredDataFilled = false;
+        } 
+         if (!leadData.countryCode) {
             document.getElementById("countryCode").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (!leadData.mobileNumber || !isValidMobile(leadData.mobileNumber)) {
+            isAllRequiredDataFilled = false;
+        } 
+         if (!leadData.mobileNumber || !isValidMobile(leadData.mobileNumber)) {
             document.getElementById("mobileNumber").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (!leadData.countryCodeWhatsapp) {
+            isAllRequiredDataFilled = false;
+        } 
+         if (!leadData.countryCodeWhatsapp) {
             document.getElementById("countryCodeWhatsapp").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else if (!leadData.whatsappNumber || !isValidMobile(leadData.whatsappNumber)) {
+            isAllRequiredDataFilled = false;
+        } 
+         if (!leadData.whatsappNumber || !isValidMobile(leadData.whatsappNumber)) {
             document.getElementById("whatsappNumber").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         } 
-        else if (leadData.uaeVisit == undefined) {
+         if (leadData.uaeVisit == undefined) {
             // document.getElementById("arrivalDate").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         }  
-        else if (leadData.KnowUae == undefined) {
+         if (leadData.KnowUae == undefined) {
             // document.getElementById("arrivalDate").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         } 
-        else if (!leadData.address) {
+         if (!leadData.address) {
             document.getElementById("address").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         }
-        else if (!leadData.city) {
+         if (!leadData.city) {
             document.getElementById("city").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         } 
-        else if (!leadData.state) {
+         if (!leadData.state) {
             document.getElementById("state").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         }
         // else if (leadData.residenceCountry == undefined) {
         //     document.getElementById("residenceCountry").style.border = "1px solid red";
@@ -492,9 +503,9 @@ const ApplyVisa = ({update,appId,doc}) => {
         //     document.getElementById("postalCode").style.border = "1px solid red";
         //     window.scrollTo({ top: 0, behavior: 'smooth' });
         // } 
-        else if (!leadData.passportNumber) {
+         if (!leadData.passportNumber) {
             document.getElementById("passportNumber").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         } 
         // else if (!leadData.passportExpiryDateDay) {
         //     document.getElementById("passportExpiryDateDay").style.border = "1px solid red";
@@ -507,13 +518,13 @@ const ApplyVisa = ({update,appId,doc}) => {
         //     window.scrollTo({ top: 0, behavior: 'smooth' });
         // } 
 
-        else if (!leadData.passportExpiryDate) {
+         if (!leadData.passportExpiryDate) {
             document.getElementById("passportExpiryDate").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         } 
-        else if (!leadData.arrivalDate) {
+         if (!leadData.arrivalDate) {
             document.getElementById("arrivalDate").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         } 
         
        
@@ -530,7 +541,7 @@ const ApplyVisa = ({update,appId,doc}) => {
         //     document.getElementById("arrivalDateYear").style.border = "1px solid red";
         //     window.scrollTo({ top: 0, behavior: 'smooth' });
         // } 
-        else {
+        if(isAllRequiredDataFilled) {
             try {
               if(update){
                 //   to update existing
@@ -544,9 +555,9 @@ const ApplyVisa = ({update,appId,doc}) => {
 
                     handleFileUpload(res.data.id)
                     if (scndVal == 'add') {
-                        navigate('/apply/' + res.data.id);
+                        navigate('/apply/' + res?.data?.application?.displayId);
                     } else {
-                        navigate('/checkout/' + res.data.id);
+                        navigate('/checkout/' + res?.data?.application?.displayId);
                     }
 
                 });
@@ -562,9 +573,9 @@ const ApplyVisa = ({update,appId,doc}) => {
 
                     handleFileUpload(res.data.id)
                     if (scndVal == 'add') {
-                        navigate('/apply/' + res.data.id);
+                        navigate('/apply/' + res?.data?.application?.displayId);
                     } else {
-                        navigate('/checkout/' + res.data.id);
+                        navigate('/checkout/' + res?.data?.application?.displayId);
                     }
 
                 });
@@ -576,6 +587,8 @@ const ApplyVisa = ({update,appId,doc}) => {
                 console.log(error);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+        }else{
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
 
@@ -1370,7 +1383,10 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Colored Passport</label>
-                                                       {doc?.passportDocument && <a download={`passport.${doc.passportMediaType}`} href={doc.passportDocument} className='doc-down-anchor'>{`Passport.${doc.passportMediaType}`}</a>}
+                                                       {doc?.passportDocument ? <a download={`passport.${doc.passportMediaType}`} href={doc.passportDocument} className='doc-down-anchor'>{`Passport.${doc.passportMediaType}`}</a>
+                                                       : doc?.passportDocument || doc?.photoDocument || doc?.otherDocument ? <a className='doc-down-anchor'></a> 
+                                                       : ""
+                                                       }
                                                         <input
                                                             type="file"
                                                             multiple="multiple"
@@ -1390,10 +1406,14 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Colored photograph</label>
-                                                        {doc?.photoDocument && <a download={`passport.${doc.photoMediaType}`} href={doc.photoDocument} className='doc-down-anchor'>{`Photo.${doc.photoMediaType}`}</a>}
+                                                        {doc?.photoDocument ? <a download={`passport.${doc.photoMediaType}`} href={doc.photoDocument} className='doc-down-anchor'>{`Photo.${doc.photoMediaType}`}</a>
+                                                    : doc?.passportDocument || doc?.photoDocument || doc?.otherDocument ? <a className='doc-down-anchor'></a> 
+                                                    : ""    
+                                                    }
                                                         <input
                                                             type="file"
                                                             onChange={e => setSelectedFilePhoto(e.target.files[0])}
+                                                            className="form-control"
                                                         />
                                                     </div>
                                                     {/* <div className="form-group pic">
@@ -1407,9 +1427,13 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Others</label>
-                                                        {doc?.otherDocument && <a download={`passport.${doc.otherDocumentMediaType}`} href={doc.otherDocument} className='doc-down-anchor'>{`OtherDoc.${doc.otherDocumentMediaType}`}</a>}
+                                                        {doc?.otherDocument ? <a download={`passport.${doc.otherDocumentMediaType}`} href={doc.otherDocument} className='doc-down-anchor'>{`OtherDoc.${doc.otherDocumentMediaType}`}</a>
+                                                      : doc?.passportDocument || doc?.photoDocument || doc?.otherDocument ? <a className='doc-down-anchor'></a> 
+                                                      : ""    
+                                                    }
                                                         <input
                                                             type="file"
+                                                            className="form-control"
                                                             onChange={e => setSelectedFileDoc(e.target.files[0])}
                                                         />
                                                     </div>

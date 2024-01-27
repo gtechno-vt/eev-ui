@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns';
+import { useParams } from 'react-router-dom';
 
 const TrackVisaApplication = () => {
 
     const [trackData, setTrackData] = useState([]);
+    const {id} = useParams();
     const [track, setTrack] = useState({
-        appId: ""
+        appId: id || ""
     })
 
     async function onTextFieldChange(e) {
@@ -88,7 +90,7 @@ const TrackVisaApplication = () => {
                                             type="text" 
                                             name='appId'
                                             id='appId'
-                                            value={track.appId} 
+                                            value={track.appId || ""} 
                                             onChange={e => onTextFieldChange(e)} 
                                             placeholder="Enter Reference Number" 
                                         />

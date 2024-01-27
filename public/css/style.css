@@ -1152,6 +1152,13 @@ margin-bottom:0    }
     border-radius: 6px;
     border: navajowhite;
 }
+.apply_now_form .box_shadow .btn_d_flex button.teal{
+    background: teal;
+    color: #fff;
+    padding: 7px 15px;
+    border-radius: 6px;
+    border: navajowhite;
+}
 .apply_now_form .box_shadow .btn_d_flex button.red {
     /* background: #fe0000; */
 }
@@ -2482,6 +2489,7 @@ color: #fe0000;
   .doc-down-anchor{
         display: block;
         margin-bottom: 10px;
+        min-height: 25px;
   }
 
   .api-loader-cont{
@@ -2510,4 +2518,30 @@ color: #fe0000;
     outline: none;
     padding: 10px;
     border-radius: 12px;
+}
+
+.payment-gateway-cont{
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-bottom: 10px;
+}
+
+.payment-gateway-cont > div:first-child {
+    font-size: 19px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.payment-gateway-cont > div:not(:first-child){
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.payment-gateway-cont > div:not(:first-child) > img{
+   height: 45px;
+   object-fit: cover;
 }

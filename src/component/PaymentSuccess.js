@@ -10,10 +10,10 @@ const PaymentSuccess = () => {
             <div className="container">
                 <div className="row">
                     <h5 className="col-md-12 text-center">
-                        You have successfully completed the payment.
+                    The payment for your Visa application {id} is successful.
                     </h5>
                     <div className="col-md-12 d-flex justify-content-center">
-                    <button  className="payment-redirect-btn" id="checkout-button" name="proceedFinal" onClick={() => navigate("/")}>Go To Home</button>
+                    <button  className="payment-redirect-btn" id="checkout-button" name="proceedFinal" onClick={() => navigate(`/track-visa-application/${id}`)}>Track Visa Status</button>
                     </div>
                   
                     

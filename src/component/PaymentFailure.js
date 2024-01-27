@@ -10,7 +10,7 @@ const PaymentFailure = () => {
             <div className="container">
                 <div className="row">
                     <h5 className="col-md-12 text-center">
-                        Your Payment Failed.
+                    The payment for your Visa application {id} has failed.
                     </h5>
                     <div className="col-md-12 d-flex justify-content-center">
                     <button  className="payment-redirect-btn" id="checkout-button" name="proceedFinal" onClick={() => navigate(`/checkout/${id}`)}>Retry Payment</button>

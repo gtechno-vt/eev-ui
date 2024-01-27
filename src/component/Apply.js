@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format, addMonths } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { isValidEmail } from '../utils/StaticFunctions';
 import { isValidMobile } from '../utils/StaticFunctions';
 import ApiLoader from './ApiLoader';
 
-const Apply = ({update,doc}) => {
+const Apply = ({update,doc,displayId}) => {
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -15,6 +15,7 @@ const Apply = ({update,doc}) => {
     const [allCountry, setAllCountry] = useState([]);
     const [leadData, setLeadData] = useState({});
     const [applicationData, setApplicationData] = useState([]);
+    const [allApplicantList,setAllApplicantList] = useState([])
 
     const [selectedFile, setSelectedFile] = useState("");
     const [selectedFilePhoto, setSelectedFilePhoto] = useState("");
@@ -28,12 +29,12 @@ const Apply = ({update,doc}) => {
         async function getApplicationData() {
 
             try {
+                if(update){
                 setShowApiLoader(true);
                 const applicationApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${id}`)
                 setShowApiLoader(false);
                 setApplicationData(applicationApi.data);
                 const data = applicationApi.data;
-               if(update){
                 setLeadData({
                     firstName:data.firstName || "",
                     lastName:data.lastName || "",
@@ -46,8 +47,20 @@ const Apply = ({update,doc}) => {
                     KnowUae:data.isContactInForeignCountry,
                     uaeVisit:data.isFirstForeignVisit,
                 })
+
+                setShowApiLoader(true);
+                const res = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant?applicationDisplayId=${data.application.displayId}`)
+                setShowApiLoader(false);              
+                setAllApplicantList(res.data)
+
+               }else{
+                setShowApiLoader(true);
+                const applicationApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant?applicationDisplayId=${id}`)
+                setShowApiLoader(false);
+                setApplicationData(applicationApi?.data[0] || {});
+                setAllApplicantList(applicationApi.data)
                }
-                console.log(applicationApi.data);
+               
             } catch (error) {
                 setShowApiLoader(false);
                 console.log("Something is Wrong");
@@ -69,7 +82,6 @@ const Apply = ({update,doc}) => {
 
         getApplicationData();
         getCountry();
-        
     }, [id]);
 
     //====
@@ -136,19 +148,19 @@ const Apply = ({update,doc}) => {
         var payloadData = (
             {
                 "application": {
-                    "id": applicationData.application.id
+                    "id": applicationData?.application?.id
                 },
                 "residenceCountry": {
-                    "id": applicationData.residenceCountry.id
+                    "id": applicationData?.residenceCountry?.id
                 },
                 "emailId": leadData.emailId || null,
                 "firstName": leadData.firstName,
                 "lastName": leadData.lastName || null,
                 "dob": leadData.dob || null,
-                "state": applicationData.state,
-                "city": applicationData.city,
-                "address": applicationData.address,
-                "postalCode": applicationData.postalCode,
+                "state": applicationData.state || null,
+                "city": applicationData.city || null,
+                "address": applicationData.address || null,
+                "postalCode": applicationData.postalCode || null,
                 "mobileNumber": leadData.countryCode && leadData.mobileNumber ? leadData.countryCode + "-" + leadData.mobileNumber: leadData.mobileNumber ? leadData.mobileNumber : null,
                 // "whatsappNumber": leadData.whatsappNumber,
                 "passportNumber": leadData.passportNumber,
@@ -184,18 +196,20 @@ const Apply = ({update,doc}) => {
         // document.getElementById("arrivalDateDay").style.border = "none";
         // document.getElementById("arrivalDateMonth").style.border = "none";
         // document.getElementById("arrivalDateYear").style.border = "none";
-
+        let isAllRequiredDataFilled = true;
         if (!leadData.firstName) {
             document.getElementById("firstName").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         } 
-        else if (leadData.emailId && !isValidEmail(leadData.emailId)) {
+        // else
+         if (leadData.emailId && !isValidEmail(leadData.emailId)) {
             document.getElementById("emailId").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         }
-        else if (leadData.mobileNumber && !isValidMobile(leadData.mobileNumber)) {
+        // else
+         if (leadData.mobileNumber && !isValidMobile(leadData.mobileNumber)) {
             document.getElementById("mobileNumber").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         }
         // else if (!leadData.countryCode) {
         //     document.getElementById("countryCode").style.border = "1px solid red";
@@ -219,13 +233,15 @@ const Apply = ({update,doc}) => {
         //     document.getElementById("whatsappNumber").style.border = "1px solid red";
         //     window.scrollTo({ top: 0, behavior: 'smooth' });
         // } 
-        else if (!leadData.passportNumber) {
+        // else 
+        if (!leadData.passportNumber) {
             document.getElementById("passportNumber").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         } 
-        else if (!leadData.passportExpiryDate) {
+        // else
+         if (!leadData.passportExpiryDate) {
             document.getElementById("passportExpiryDate").style.border = "1px solid red";
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         } 
         // else if (!leadData.arrivalDate) {
         //     document.getElementById("arrivalDate").style.border = "1px solid red";
@@ -258,7 +274,7 @@ const Apply = ({update,doc}) => {
         //     // document.getElementById("arrivalDate").style.border = "1px solid red";
         //     window.scrollTo({ top: 0, behavior: 'smooth' });
         // } 
-        else {
+        if(isAllRequiredDataFilled){
 
             try {
               if(update){
@@ -275,13 +291,17 @@ const Apply = ({update,doc}) => {
                     setSelectedFilePhoto("")
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     console.log(res);
-
+                    setTimeout(() => {
+                        if(document.getElementById("succ_message")){
+                            document.getElementById("succ_message").style.display = "none";
+                        }
+                    }, 5000);
                     handleFileUpload(res.data.id)
                     
                     if (scndVal == 'add') {
-                        navigate('/apply/' + res.data.id);
+                        navigate('/apply/' + res?.data?.application?.displayId);
                     } else {
-                        navigate('/checkout/' + res.data.id);
+                        navigate('/checkout/' + res?.data?.application?.displayId);
                     }
                 });
               } else{
@@ -298,13 +318,17 @@ const Apply = ({update,doc}) => {
                     setSelectedFilePhoto("")
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     console.log(res);
-
+                    setTimeout(() => {
+                       if(document.getElementById("succ_message")){
+                        document.getElementById("succ_message").style.display = "none";
+                       }
+                    }, 5000);
                     handleFileUpload(res.data.id)
                     
                     if (scndVal == 'add') {
-                        navigate('/apply/' + res.data.id);
+                        navigate('/apply/' + res?.data?.application?.displayId);
                     } else {
-                        navigate('/checkout/' + res.data.id);
+                        navigate('/checkout/' + res?.data?.application?.displayId);
                     }
                 });
               } 
@@ -315,6 +339,8 @@ const Apply = ({update,doc}) => {
                 alert("Something is Wrong");
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+        }else{
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
 
@@ -327,6 +353,13 @@ const Apply = ({update,doc}) => {
             })
     }
     // = Form Submit #END Here...
+    const handleSkipClick = () => {
+        if(update){
+            navigate(`/checkout/${displayId}`)
+            return;
+        }
+        navigate(`/checkout/${id}`)
+    }
 
     useEffect(() => {
         // 👇️ scroll to top on page load
@@ -343,7 +376,7 @@ const Apply = ({update,doc}) => {
     const currentYear = new Date().getFullYear();
     const years = Array.from({ length: 20 }, (_, index) => currentYear + index);
     console.log(leadData, "leadData");
-    
+    const dateFormatString = 'd MMMM, yyyy';
     return (
         <>
             <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
@@ -757,7 +790,10 @@ const Apply = ({update,doc}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Colored Passport</label>
-                                                       {doc?.passportDocument && <a download={`passport.${doc.passportMediaType}`} href={doc.passportDocument} className='doc-down-anchor'>{`Passport.${doc.passportMediaType}`}</a>}
+                                                       {doc?.passportDocument ? <a download={`passport.${doc.passportMediaType}`} href={doc.passportDocument} className='doc-down-anchor'>{`Passport.${doc.passportMediaType}`}</a>
+                                                    : doc?.passportDocument || doc?.photoDocument || doc?.otherDocument ? <a className='doc-down-anchor'></a> 
+                                                    : ""   
+                                                    }
                                                         <input 
                                                             type="file" 
                                                             multiple="multiple" 
@@ -776,7 +812,10 @@ const Apply = ({update,doc}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Colored photograph</label>
-                                                        {doc?.photoDocument && <a download={`passport.${doc.photoMediaType}`} href={doc.photoDocument} className='doc-down-anchor'>{`Photo.${doc.photoMediaType}`}</a>}
+                                                        {doc?.photoDocument ? 
+                                                        <a download={`passport.${doc.photoMediaType}`} href={doc.photoDocument} className='doc-down-anchor'>{`Photo.${doc.photoMediaType}`}</a>
+                                                         : doc?.passportDocument || doc?.photoDocument || doc?.otherDocument ? <a className='doc-down-anchor'></a> 
+                                                         : ""}
                                                         <input 
                                                             type="file" 
                                                             multiple="multiple" 
@@ -795,7 +834,10 @@ const Apply = ({update,doc}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Others</label>
-                                                        {doc?.otherDocument && <a download={`passport.${doc.otherDocumentMediaType}`} href={doc.otherDocument} className='doc-down-anchor'>{`OtherDoc.${doc.otherDocumentMediaType}`}</a>}
+                                                        {doc?.otherDocument ? <a download={`passport.${doc.otherDocumentMediaType}`} href={doc.otherDocument} className='doc-down-anchor'>{`OtherDoc.${doc.otherDocumentMediaType}`}</a>
+                                                       : doc?.passportDocument || doc?.photoDocument || doc?.otherDocument ? <a className='doc-down-anchor'></a> 
+                                                       : ""    
+                                                    }
                                                         <input 
                                                             type="file" 
                                                             multiple="multiple" 
@@ -840,15 +882,31 @@ const Apply = ({update,doc}) => {
                                                     >
                                                         Submit Application
                                                     </button>
+                                                    <button
+                                                        type="button"
+                                                        className="teal"
+                                                        onClick={handleSkipClick}
+                                                    >
+                                                        Skip
+                                                    </button>
                                                     </> :
+                                                    <>
                                                    <button
                                                    type="button"
                                                    className="red"
                                                    onClick={e => onFormSubmit(e, 'submit')}
                                                >
                                                    Update Application
-                                               </button>                                                   
-}
+                                               </button> 
+                                                <button
+                                                type="button"
+                                                className="teal"
+                                                onClick={handleSkipClick}
+                                            >
+                                                Skip
+                                            </button>                                                  
+                                            </>
+}                                              
                                                 </div>
                                             </div>
 
@@ -856,7 +914,66 @@ const Apply = ({update,doc}) => {
                                         </div>
                                     </div>
 
+                                    
+                                        <div className="detail_table">
+                                <div className="title">
+                                    <h3>Applicant Details</h3>
+                                </div>
 
+                                <div className="tab_set">
+                                    <div className="table-responsive">
+                                        <table id="customers">
+                                            <tr>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Visa Applied Date</th>
+                                                <th>Passport No.</th>
+                                                <th>Expiry Date</th>
+                                                <th>Action</th>
+                                            </tr>
+
+                                            {
+                                                allApplicantList && allApplicantList.length > 0 ?
+                                                allApplicantList.map((item, index) => (
+
+                                                        <tr key={index + 1}>
+                                                            <td>{item.firstName}</td>
+                                                            <td>{item.lastName}</td>
+                                                            <td>
+                                                                {
+                                                                    item.application.createdAt ?
+                                                                        format(item.application.createdAt, dateFormatString)
+                                                                        :
+                                                                        '-'
+                                                                }
+                                                            </td>
+                                                            <td>{item.passportNumber}</td>
+                                                            <td>{format(item.passportExpiryDate, dateFormatString)}</td>
+                                                            <td>
+                                                                {
+                                                                    item.isPrimary == true ?
+                                                                        <Link to={`/applicant/edit/${item.id}`}> Edit </Link>
+                                                                        :
+                                                                        <Link to={`/applicant/edit/${item.id}`}> Edit  </Link>
+                                                                }
+
+                                                            </td>
+                                                        </tr>
+
+                                                    )) :
+                                                    'Nothing Found !!!'
+                                            }
+
+                                        </table>
+                                    </div>
+                                    {/* <div className='d-flex justify-content-center'>
+                                        <button className="btn button" id="checkout-button" name="proceedFinal" onClick={redirectAddMoreAppl}> Add More Applicants</button>
+                                    </div> */}
+                                </div>
+
+                            </div>
+
+        
 
                                 </form>
                             </div>

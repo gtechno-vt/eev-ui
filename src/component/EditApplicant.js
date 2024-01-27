@@ -9,6 +9,7 @@ const EditApplicant = () => {
     const { id } = useParams();
     const [primary,setPrimary] = useState(null);
     const [documentFiles,setDocumentFiles] = useState(null);
+    const [displayId,setDisplayId] = useState(null);
  
     useEffect(() => {
 
@@ -17,6 +18,7 @@ const EditApplicant = () => {
             try {
                 const appApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${id}`)
                 setPrimary(prev => appApi.data.isPrimary || appApi.data.isPrimary === false ? appApi.data.isPrimary : null)
+                setDisplayId(appApi.data.application.displayId);
             } catch (error) {
                 console.log("Something is Wrong Visa Type");
             }
@@ -71,12 +73,14 @@ const EditApplicant = () => {
        update={true}
        appId={id}
        doc={documentFiles}
+       displayId = {displayId}
        />    
        : primary === false ? 
        <Apply
        update={true}
        appId={id}
        doc={documentFiles}
+       displayId = {displayId}
        />:
        <div>
         Loading ...
