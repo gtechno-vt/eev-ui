@@ -6,18 +6,27 @@ import axios from 'axios';
 const Footer = () => {
 
     const [siteInfo, setSiteInfo] = useState([]);
+    const [visitorCount,setVisitorCount] = useState();
 
 
     useEffect(() => {
         async function getSiteInfo() {
-
 			try {
 				const siteInfoApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/site-info/2`)
 				setSiteInfo(siteInfoApi.data);
+                setVisitorCount(siteInfoApi.data.visitorCount);
+
+                const countInfo =  await axios.put(`https://dgf0agfzdhu.emiratesevisaonline.com/site-info/visitor-count/2`) 
+               if(countInfo.data){
+                   setVisitorCount(countInfo.data);
+               }
+
+
 			} catch (error) {
 				console.log("Something is Wrong");
 			}
 		}
+      
         getSiteInfo();
 	}, []);
 
@@ -125,7 +134,7 @@ const Footer = () => {
     <div className="container">
     <div className="visit_c">
 <p>All Rights Reserved {(new Date().getFullYear())} &#169;  emiratesevisaonline</p>
-        <p> Visitor Count: {siteInfo.visitorCount}</p>
+        <p> Visitor Count: {visitorCount}</p>
 </div>
     </div>
 </div>

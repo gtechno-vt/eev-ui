@@ -13,22 +13,7 @@ import HomeFaq from "./home/HomeFaq";
 
 
 const Home = () => {
-
-  useEffect(() => {
-		updateVisitorCount();
-	}, []);
-
-  async function updateVisitorCount(){
-    try {
-      await axios.put(`https://dgf0agfzdhu.emiratesevisaonline.com/site-info/visitor-count/2`)
-        .then((res) => {
-          console.log(res);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }
-    
+  
     useEffect(() => {
 		// 👇️ scroll to top on page load
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
