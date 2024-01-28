@@ -350,7 +350,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                         "id": 2
                     },
                     "arrivalDate": leadData.arrivalDate,
-                    "status":"PAYMENT_PENDING"
+                    "status":"PAYMENT PENDING"
                 },
                 "residenceCountry": {
                     "id": travellingData
