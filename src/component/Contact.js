@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { isValidEmail, isValidMobile } from '../utils/StaticFunctions';
 
 const Contact = () => {
 
@@ -50,23 +51,31 @@ const Contact = () => {
     document.getElementById("userMobile").style.borderColor = "#044";
     document.getElementById("subject").style.borderColor = "#044";
     document.getElementById("text").style.borderColor = "#044";
+     
+    let isAllRequiredDataFilled = true;
 
-    if (lead.userName == '') {
+    if (!lead.userName) {
       document.getElementById("userName").style.borderColor = "red";
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (lead.userEmail == '') {
+      isAllRequiredDataFilled = false;
+    }
+     if(!lead.userEmail  || !isValidEmail(lead.userEmail)) {
       document.getElementById("userEmail").style.borderColor = "red";
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (lead.userMobile == '') {
+      isAllRequiredDataFilled = false;
+    } 
+     if (!lead.userMobile || !isValidMobile(lead.userMobile)) {
       document.getElementById("userMobile").style.borderColor = "red";
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (lead.subject == '') {
-      document.getElementById("subject").style.borderColor = "red";
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (lead.text == '') {
+      isAllRequiredDataFilled = false;
+    } 
+    //  if (!lead.subject) {
+    //   document.getElementById("subject").style.borderColor = "red";
+    //   isAllRequiredDataFilled = false;
+    // } 
+    if (!lead.text) {
       document.getElementById("text").style.borderColor = "red";
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
+      isAllRequiredDataFilled = false;
+    } 
+    
+    if(isAllRequiredDataFilled) {
       if (isCaptchaVerified) {
       try {
         await axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/query`, lead)
@@ -96,12 +105,14 @@ const Contact = () => {
      } else {
         document.getElementById("succ_message").style.display = "block";
         document.getElementById("alert_message").innerHTML = "Invalid Captcha Try Again";
-
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         const timeoutId = setTimeout(() => {
           document.getElementById("succ_message").style.display = "none";
         }, 5000);
         return () => clearTimeout(timeoutId);
      }
+    }else{
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
   }
@@ -162,10 +173,11 @@ const Contact = () => {
                     <div className="mb-3">
                       <input
                         name='userEmail'
+                        type="email" 
                         id='userEmail'
                         value={lead.userEmail}
                         onChange={e => onTextFieldChange(e)}
-                        className="form-control" type="email"
+                        className="form-control" 
                         placeholder="Enter Email *"
                       />
                     </div>
