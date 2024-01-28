@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const TrackVisaApplication = () => {
 
@@ -10,6 +10,7 @@ const TrackVisaApplication = () => {
     const [track, setTrack] = useState({
         appId: id || ""
     })
+    const navigate = useNavigate();
 
     async function onTextFieldChange(e) {
 
@@ -39,9 +40,8 @@ const TrackVisaApplication = () => {
     }
 
     async function onFormReset(e) {
-        e.preventDefault()
-        
-        document.getElementById('appId').value = "";
+        e.preventDefault();
+        setTrack({appId:""})
         setTrackData("");
              
     }
@@ -143,7 +143,10 @@ const TrackVisaApplication = () => {
                             )) :
                                 ''
                     }
-
+                    {trackData?.length > 0 && (trackData[0]?.application?.status === "PAYMENT_PENDING" || trackData[0]?.application?.status === "PAYMENT_PROCESSING" || trackData[0]?.application?.status === "DRAFT") && <div className="col-md-9 d-flex justify-content-center">
+                     <button className="black-btn" id="checkout-button" name="proceedFinal" onClick={() => navigate(`/checkout/${trackData[0].application.displayId}`)}>Pay Now</button>
+                                    </div>
+}
 
                     
                     

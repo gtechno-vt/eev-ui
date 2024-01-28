@@ -148,7 +148,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                     uaeVisit:data.isFirstForeignVisit,
                     purposeOfVisit:data.application?.purposeOfVisit?.id ? data.application.purposeOfVisit.id : data.application.purposeOfVisitText ? "other" : "",
                     applicationId:data.application?.id || "",
-                    status:data.application.status || "DRAFT",
+                    status:data.application.status,
                 })
 
                 setVisaVariant(data?.application?.visaVariant?.id || "")
@@ -350,7 +350,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                         "id": 2
                     },
                     "arrivalDate": leadData.arrivalDate,
-                    "status": "DRAFT"
+                    "status":"PAYMENT_PENDING"
                 },
                 "residenceCountry": {
                     "id": travellingData
@@ -384,7 +384,7 @@ const ApplyVisa = ({update,appId,doc}) => {
 
         if(update){
             payloadData.application.id = leadData.applicationId;
-            payloadData.application.status = leadData.status || "DRAFT";
+            payloadData.application.status = leadData.status;
         }
 
         document.getElementById("citizenshipCountry").style.border = "1px solid #ccc";
@@ -594,7 +594,7 @@ const ApplyVisa = ({update,appId,doc}) => {
 
     }
 
-
+    
     useEffect(() => {
         // 👇️ scroll to top on page load
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -609,7 +609,7 @@ const ApplyVisa = ({update,appId,doc}) => {
 
     const currentYear = new Date().getFullYear();
     const years = Array.from({ length: 20 }, (_, index) => currentYear + index);
-
+    const todayDate =  new Date().toJSON().slice(0,10);
     console.log(leadData, "leadData");
     return (
         <>
@@ -770,7 +770,7 @@ const ApplyVisa = ({update,appId,doc}) => {
 
                                                 <div className="col-md-3">
                                                     <div className="form-group">
-                                                        <label>Date of birth </label>
+                                                        <label>Date of birth</label>
                                                         <input
                                                             name='dob'
                                                             id='dob'
@@ -778,6 +778,8 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             value={leadData.dob}
                                                             type="date"
                                                             placeholder="Date of birth"
+                                                            // max={new Date().toJSON(0,10)}
+                                                            max={todayDate}
                                                         />
                                                     </div>
                                                 </div>
@@ -1268,6 +1270,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             value={leadData.passportExpiryDate}
                                                             type="date"
                                                             placeholder="YYYY-MM-DD"
+                                                            min={todayDate}
                                                         />
 
                                                     </div>
@@ -1363,6 +1366,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             value={leadData.arrivalDate}
                                                             type="date"
                                                             placeholder="YYYY-MM-DD"
+                                                            min={todayDate}
                                                         />
 
                                                     </div>

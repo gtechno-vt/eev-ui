@@ -17,7 +17,8 @@ const Checkout = () => {
     const [serviceTypeValue, setServiceTypeValue] = useState("Normal")
     const [paymentDetails, setPaymentDetails] = useState({});
     const [showApiLoader, setShowApiLoader] = useState(false);
-    const [paymentMethod, setPaymentMethod] = useState("Stripe")
+    const [paymentMethod, setPaymentMethod] = useState("Stripe");
+    const [loading,setLoading] = useState(true);
 
     const navigate = useNavigate();
 
@@ -43,11 +44,6 @@ const Checkout = () => {
     }
 
     useEffect(() => {
-
-        // async function getApplicatDetails() {
-
-        // }
-
         async function getApplicationDetails() {
             try {
                 setShowApiLoader(true);
@@ -56,6 +52,11 @@ const Checkout = () => {
 
                 const applicatntApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant?applicationDisplayId=${id}`)
                 console.log(applicatntApi);
+                setLoading(false);
+                if(!(applicatntApi?.data[0]?.application?.status === "PAYMENT_PENDING" || applicatntApi?.data[0]?.application?.status === "PAYMENT_PROCESSING" || applicatntApi?.data[0]?.application?.status === "DRAFT")){
+                    navigate(`/track-visa-application/${id}`)
+                    return;
+                }
                 const application = applicatntApi.data[0].application;
                 setApplicatDetails(applicatntApi.data);
                 setApplicationDetails(application)
@@ -83,6 +84,7 @@ const Checkout = () => {
                 setShowApiLoader(false);
             } catch (error) {
                 setShowApiLoader(false);
+                setLoading(false)
                 console.log("Something is Wrong Visa Type");
             }
         }
@@ -175,6 +177,7 @@ const Checkout = () => {
 
     console.log(paymentDetails, "paymentDetails");
     return (
+        loading ? <div>Loading ....</div> :
         <>
             <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
                 {showApiLoader && <ApiLoader />}

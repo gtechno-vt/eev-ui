@@ -406,7 +406,7 @@ a {text-decoration:none}
 .tab_visa .tab-content .tab-pane .row .col-md-3 {padding: 10px;}
 .tab_visa .big_box {border-radius: 10px;/* overflow: hidden; */background: #fff;}
 .tab_visa .big_box .title  {background: rgba(206, 246, 222, 1);padding: 10px 40px;margin-bottom: 0px;border-top-left-radius: 10px;border-top-right-radius: 10px;}
-.tab_visa .big_box .title h3 {font-family: Creato Display;font-size: 20px;font-weight: 700;line-height: 32px;text-align: center;margin: 0;color: #00732e;}
+.tab_visa .big_box .title h3 {font-family: Creato Display;font-size: 20px;font-weight: 700;line-height: 32px;text-align: center;margin: 0;color: #00732e; min-height: 65px;}
 .tab_visa .big_box .content {width: 100%;padding: 15px;overflow: hidden;}
 .tab_visa .big_box .over_h {margin-bottom: 0;color: rgba(123, 123, 123, 1);/* display: flex; */text-align: center;border-bottom: 1px solid #eee;padding: 9px  0;}
 
@@ -2518,6 +2518,7 @@ color: #fe0000;
     outline: none;
     padding: 10px;
     border-radius: 12px;
+    min-width: max-content;
 }
 
 .payment-gateway-cont{
@@ -2544,4 +2545,21 @@ color: #fe0000;
 .payment-gateway-cont > div:not(:first-child) > img{
    height: 45px;
    object-fit: cover;
+}
+
+.black-btn{
+        background: #171819;
+        color: #fff;
+        width: 28%;
+        border: none;
+        margin: 10px 0 10px;
+        outline: none;
+        padding: 10px;
+        border-radius: 5px;
+        min-width: max-content;
+}
+
+.visa-type-contact{
+    padding: 10px 10px;
+    font-weight: 600;
 }

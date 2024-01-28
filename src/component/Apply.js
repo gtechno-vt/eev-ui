@@ -13,7 +13,7 @@ const Apply = ({update,doc,displayId}) => {
     const navigate = useNavigate();
   
     const [allCountry, setAllCountry] = useState([]);
-    const [leadData, setLeadData] = useState({});
+    const [leadData, setLeadData] = useState({KnowUae:false,uaeVisit:false});
     const [applicationData, setApplicationData] = useState([]);
     const [allApplicantList,setAllApplicantList] = useState([])
 
@@ -242,6 +242,16 @@ const Apply = ({update,doc,displayId}) => {
          if (!leadData.passportExpiryDate) {
             document.getElementById("passportExpiryDate").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
+        }
+        if (leadData.uaeVisit == undefined) {
+            // document.getElementById("arrivalDate").style.border = "1px solid red";
+            // window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
+        }  
+         if (leadData.KnowUae == undefined) {
+            // document.getElementById("arrivalDate").style.border = "1px solid red";
+            // window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         } 
         // else if (!leadData.arrivalDate) {
         //     document.getElementById("arrivalDate").style.border = "1px solid red";
@@ -312,10 +322,11 @@ const Apply = ({update,doc,displayId}) => {
                     setShowApiLoader(false)
                     document.getElementById("succ_message").style.display = "block";
                     document.getElementById("alert_message").innerHTML = "Applicant Submitted Succesfully!!!";
-                    setLeadData({});
+                    setLeadData({KnowUae:false,uaeVisit:false});
                     setSelectedFile("")
                     setSelectedFileDoc("")
-                    setSelectedFilePhoto("")
+                    setSelectedFilePhoto("");
+
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     console.log(res);
                     setTimeout(() => {
@@ -327,6 +338,11 @@ const Apply = ({update,doc,displayId}) => {
                     
                     if (scndVal == 'add') {
                         navigate('/apply/' + res?.data?.application?.displayId);
+                        setShowApiLoader(true);
+                axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant?applicationDisplayId=${id}`).then(applicationApi => {
+                    setAllApplicantList(applicationApi.data)
+                })
+                setShowApiLoader(false);
                     } else {
                         navigate('/checkout/' + res?.data?.application?.displayId);
                     }
@@ -377,6 +393,7 @@ const Apply = ({update,doc,displayId}) => {
     const years = Array.from({ length: 20 }, (_, index) => currentYear + index);
     console.log(leadData, "leadData");
     const dateFormatString = 'd MMMM, yyyy';
+    const todayDate =  new Date().toJSON().slice(0,10);
     return (
         <>
             <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
@@ -459,6 +476,7 @@ const Apply = ({update,doc,displayId}) => {
                                                             id='dob'
                                                             onChange={e => onTextFieldChange(e)}
                                                             value={leadData.dob || ""}
+                                                            max={todayDate}
                                                         />
                                                     </div>
                                                 </div>
@@ -615,6 +633,7 @@ const Apply = ({update,doc,displayId}) => {
                                                             value={leadData.passportExpiryDate || ""}
                                                             type="date"
                                                             placeholder="YYYY-MM-DD"
+                                                            min={todayDate}
                                                         />
 
                                                     </div>
@@ -706,7 +725,7 @@ const Apply = ({update,doc,displayId}) => {
                                                 </div> */}
                                                 <div className="col-md-3">
                                                     <div className="form-group">
-                                                        <label>First UAE Visit? </label>
+                                                        <label>First UAE Visit? <sup>*</sup> </label>
 
                                                         <div className="radio_btn">
                                                             <label>
@@ -740,7 +759,7 @@ const Apply = ({update,doc,displayId}) => {
 
                                                 <div className="col-md-8">
                                                     <div className="form-group">
-                                                        <label>Is There Any family/friends/Known Person of yours in UAE?</label>
+                                                        <label>Is There Any family/friends/Known Person of yours in UAE? <sup>*</sup></label>
 
                                                         <div className="radio_btn">
                                                             <label >
@@ -873,7 +892,7 @@ const Apply = ({update,doc,displayId}) => {
                                                         className="green"
                                                     >
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z" /></svg>
-                                                        Add More Applications
+                                                        Add More Applicants
                                                     </button>
                                                     <button
                                                         type="button"

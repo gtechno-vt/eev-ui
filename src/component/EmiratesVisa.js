@@ -3,13 +3,14 @@ import axios from 'axios';
 import { format, addMonths } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
+import ApiLoader from './ApiLoader';
 
 const EmiratesVisa = () => {
 
     const { citizen } = useParams();
     const { travelling } = useParams();
     const navigate = useNavigate();
-
+    const [showApiLoader,setShowApiLoader] = useState(false);
     const [leadData, setLeadData] = useState({
         'citizen': '',
         'traveling': ''
@@ -19,15 +20,18 @@ const EmiratesVisa = () => {
 
     //== = 
     useEffect(() => {
-
-
-
-        async function getVisaType() {
+        async function getVisaType(countryData) {
             try {
-                const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/0/48?fetchImages=false`)
+                const newCitizen = leadData.citizen ? leadData.citizen : citizen;
+                const ele = countryData.find(ele => ele.countryNameSlug === newCitizen);
+                const id = ele ? ele.id : ""
+                setShowApiLoader(true)
+                const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/${id}/48?fetchImages=false`)
+                setShowApiLoader(false)
                 setHomeVisa(visaTypeApi.data);
                 console.log(visaTypeApi.data);
             } catch (error) {
+                setShowApiLoader(false)
                 console.log("Something is Wrong Visa Type");
             }
         }
@@ -35,16 +39,20 @@ const EmiratesVisa = () => {
         async function getCountry() {
 
             try {
+                setShowApiLoader(true)
                 const countryApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/country/basic`)
+                setShowApiLoader(false)
                 setAllCountry(countryApi.data);
+                getVisaType(countryApi.data);
             } catch (error) {
+                setShowApiLoader(false)
                 console.log("Something is Wrong");
             }
         }
 
 
-        getVisaType();
         getCountry();
+
     }, []);
     //====
 
@@ -94,6 +102,7 @@ const EmiratesVisa = () => {
     return (
         <>
             <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+            {showApiLoader && <ApiLoader/>}
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
@@ -231,8 +240,9 @@ const EmiratesVisa = () => {
                                                             <a href={"#tab" + (index + 1)} aria-controls={"#tab" + (index + 1)} role="tab" data-toggle="tab">{item.name}</a>
                                                         </li>
 
-                                                    )) :
-                                                    ''
+                                                    )) : showApiLoader === false ?
+                                                    <div className='visa-type-contact'>Please contact us on WhatsApp to get your Visa Application processed.</div>
+                                                    :""
                                             }
 
 

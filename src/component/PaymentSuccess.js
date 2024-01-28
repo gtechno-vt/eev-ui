@@ -1,9 +1,32 @@
-import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import axios from 'axios';
+import React, { useEffect } from 'react'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 const PaymentSuccess = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { search } = useLocation(); 
+    const orderId = search?.replace("?","")?.split("=")[1];
+
+    console.log(orderId);
+
+    const updatePaymentDetails = async() => {
+        const data = {
+            applicationDisplayId: id,
+            orderId,
+         }
+         console.log(data);
+         try {
+            const res = await axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/payment/payment-info`, data)
+            console.log(res);
+         } catch (error) {
+            console.log(error);
+         }
+    }
+
+    useEffect(() => {
+        updatePaymentDetails();
+    },[])
 
     return (
         <section className="apply_now_form">
