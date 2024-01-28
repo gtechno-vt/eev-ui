@@ -53,7 +53,7 @@ const Checkout = () => {
                 const applicatntApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant?applicationDisplayId=${id}`)
                 console.log(applicatntApi);
                 setLoading(false);
-                if(!(applicatntApi?.data[0]?.application?.status === "PAYMENT_PENDING" || applicatntApi?.data[0]?.application?.status === "PAYMENT_PROCESSING" || applicatntApi?.data[0]?.application?.status === "DRAFT")){
+                if(!(applicatntApi?.data[0]?.application?.status === "PAYMENT PENDING" || applicatntApi?.data[0]?.application?.status === "PAYMENT PROCESSING" || applicatntApi?.data[0]?.application?.status === "DRAFT")){
                     navigate(`/track-visa-application/${id}`)
                     return;
                 }

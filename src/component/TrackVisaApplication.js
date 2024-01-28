@@ -143,7 +143,7 @@ const TrackVisaApplication = () => {
                             )) :
                                 ''
                     }
-                    {trackData?.length > 0 && (trackData[0]?.application?.status === "PAYMENT_PENDING" || trackData[0]?.application?.status === "PAYMENT_PROCESSING" || trackData[0]?.application?.status === "DRAFT") && <div className="col-md-9 d-flex justify-content-center">
+                    {trackData?.length > 0 && (trackData[0]?.application?.status === "PAYMENT PENDING" || trackData[0]?.application?.status === "PAYMENT PROCESSING" || trackData[0]?.application?.status === "DRAFT") && <div className="col-md-9 d-flex justify-content-center">
                      <button className="black-btn" id="checkout-button" name="proceedFinal" onClick={() => navigate(`/checkout/${trackData[0].application.displayId}`)}>Pay Now</button>
                                     </div>
 }
