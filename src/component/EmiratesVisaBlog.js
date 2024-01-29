@@ -15,7 +15,7 @@ const EmiratesVisaBlog = () => {
     
         try {
           const response = await axios.get(
-            `https://dgf0agfzdhu.emiratesevisaonline.com/blog/basic/2?limit=${limit}&offset=${offset}`
+            `https://ymfzdgfyzhm.emiratesevisaonline.com/blog/basic/2?limit=${limit}&offset=${offset}`
           );
           setSiteBlogs(response.data); 
           if(response.data.length == 0){
@@ -47,7 +47,7 @@ const EmiratesVisaBlog = () => {
 
     async function getSiteBlogs() {
         try {
-        const siteBlogApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/blog/basic/2`)
+        const siteBlogApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/blog/basic/2`)
             setSiteBlogs(siteBlogApi.data);
         } catch (error) {
             console.log("Something is Wrong");

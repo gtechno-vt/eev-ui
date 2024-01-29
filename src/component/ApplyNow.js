@@ -25,7 +25,7 @@ const ApplyNow = () => {
         async function getCountry() {
 
             try {
-                const countryApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/country/basic`)
+                const countryApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/country/basic`)
                 setAllCountry(countryApi.data);
             } catch (error) {
                 console.log("Something is Wrong");
@@ -34,7 +34,7 @@ const ApplyNow = () => {
 
         async function getVisaType() {
             try {
-                const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/0/48?fetchImages=false`)
+                const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/0/48?fetchImages=false`)
                 setVisaType(visaTypeApi.data);
             } catch (error) {
                 console.log("Something is Wrong Visa Type");
@@ -43,7 +43,7 @@ const ApplyNow = () => {
 
         async function getEducation() {
             try {
-                const educationApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/education`)
+                const educationApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/education`)
                 setEducation(educationApi.data);
             } catch (error) {
                 console.log("Something is Wrong Visa Type");
@@ -52,7 +52,7 @@ const ApplyNow = () => {
 
         async function getProfession() {
             try {
-                const professionApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/profession`)
+                const professionApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/profession`)
                 setProfession(professionApi.data);
             } catch (error) {
                 console.log("Something is Wrong Visa Type");
@@ -61,7 +61,7 @@ const ApplyNow = () => {
 
         async function getPurposeVisit() {
             try {
-                const purposeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/purpose-of-visit`)
+                const purposeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/purpose-of-visit`)
                 setPurposeOfVisit(purposeApi.data);
             } catch (error) {
                 console.log("Something is Wrong Visa Type");
@@ -303,7 +303,7 @@ const ApplyNow = () => {
         } else {
 
             try {
-                await axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant`, payloadData)
+                await axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant`, payloadData)
                     .then((res) => {
                         document.getElementById("succ_message").style.display = "block";
                         document.getElementById("alert_message").innerHTML = "Your Query has been Submitted Succesfully!!! We will get back to you.";
@@ -315,7 +315,7 @@ const ApplyNow = () => {
                                 const formData = new FormData();
                                 formData.append("file", selectedFile);
                     
-                                axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${res.data.id}/PASSPORT/upload`, formData)
+                                axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/document/${res.data.id}/PASSPORT/upload`, formData)
                                     .then((res) => {
                                         console.log(res);
                                     });
@@ -331,7 +331,7 @@ const ApplyNow = () => {
                                 const formDataPhoto = new FormData();
                                 formDataPhoto.append("file", selectedFilePhoto);
                     
-                                axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${res.data.id}/PHOTOGRAPH/upload`, formDataPhoto)
+                                axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/document/${res.data.id}/PHOTOGRAPH/upload`, formDataPhoto)
                                     .then((res) => {
                                         console.log(res);
                                     });
@@ -347,7 +347,7 @@ const ApplyNow = () => {
                                 const formDataDoc = new FormData();
                                 formDataDoc.append("file", selectedFileDoc);
                     
-                                axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/document/${res.data.id}/OTHER/upload`, formDataDoc)
+                                axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/document/${res.data.id}/OTHER/upload`, formDataDoc)
                                     .then((res) => {
                                         console.log(res);
                                     });

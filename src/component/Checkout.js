@@ -47,10 +47,10 @@ const Checkout = () => {
         async function getApplicationDetails() {
             try {
                 setShowApiLoader(true);
-                // const appApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant/${id}`)
+                // const appApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant/${id}`)
                 // setApplicationDetails(appApi.data.application);
 
-                const applicatntApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/applicant?applicationDisplayId=${id}`)
+                const applicatntApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${id}`)
                 console.log(applicatntApi);
                 setLoading(false);
                 if(!(applicatntApi?.data[0]?.application?.status === "PAYMENT PENDING" || applicatntApi?.data[0]?.application?.status === "PAYMENT PROCESSING" || applicatntApi?.data[0]?.application?.status === "DRAFT")){
@@ -68,12 +68,12 @@ const Checkout = () => {
                 })
 
                 if (application?.destinationCountry?.id) {
-                    const serviceApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/service-type/${application.destinationCountry.id}`)
+                    const serviceApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/service-type/${application.destinationCountry.id}`)
                     setServiceType(serviceApi.data);
                 }
 
 
-                const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/${application.visaVariant.id}/${application.citizenshipCountry.id}/48/fee`)
+                const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/${application.visaVariant.id}/${application.citizenshipCountry.id}/48/fee`)
                 setVisaTypeFee(visaTypeApi.data);
                 setPaymentDetails(prevState => {
                     return {
@@ -100,7 +100,7 @@ const Checkout = () => {
         async function getSiteInfo() {
 
             try {
-                const siteInfoApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/site-info/2`)
+                const siteInfoApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-info/2`)
                 setSiteInfo(siteInfoApi.data);
                 setPaymentDetails(prevState => {
                     return {

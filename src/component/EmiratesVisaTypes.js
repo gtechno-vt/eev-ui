@@ -14,7 +14,7 @@ const EmiratesVisaTypes = () => {
 
     try {
       const response = await axios.get(
-        `https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/0/48?limit=${limit}&offset=${offset}`
+        `https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/0/48?limit=${limit}&offset=${offset}`
       );
       setVisaType(response.data); 
       if(response.data.length == 0){
@@ -43,7 +43,7 @@ const EmiratesVisaTypes = () => {
 
     async function getVisaType() {
         try {
-            const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/0/48`)
+            const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/0/48`)
             setVisaType(visaTypeApi.data);
         } catch (error) {
             console.log("Something is Wrong Visa Type");

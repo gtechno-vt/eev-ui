@@ -14,7 +14,7 @@ const EmiratesVisaFaqs = () => {
 
     try {
       const response = await axios.get(
-        `https://dgf0agfzdhu.emiratesevisaonline.com/site-faq/site/2?limit=${limit}&offset=${offset}`
+        `https://ymfzdgfyzhm.emiratesevisaonline.com/site-faq/site/2?limit=${limit}&offset=${offset}`
       );
       setSiteFaq(response.data); 
       if(response.data.length == 0){
@@ -42,7 +42,7 @@ const EmiratesVisaFaqs = () => {
     async function getSiteInfo() {
 
     try {
-        const siteFaqApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/site-faq/site/2`)
+        const siteFaqApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-faq/site/2`)
         setSiteFaq(siteFaqApi.data);
       } catch (error) {
         console.log("Something is Wrong");

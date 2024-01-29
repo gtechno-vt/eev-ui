@@ -13,7 +13,7 @@ const CustomerReview = () => {
     
         try {
           const response = await axios.get(
-            `https://dgf0agfzdhu.emiratesevisaonline.com/reviews/site/2?limit=${limit}&offset=${offset}`
+            `https://ymfzdgfyzhm.emiratesevisaonline.com/reviews/site/2?limit=${limit}&offset=${offset}`
           );
           setSiteReviews(response.data); 
           if(response.data.length == 0){
@@ -43,7 +43,7 @@ const CustomerReview = () => {
 
     async function getSiteInfo() {
         try {
-        const siteReviewsApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/reviews/site/2`)
+        const siteReviewsApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/reviews/site/2`)
             setSiteReviews(siteReviewsApi.data);
         } catch (error) {
         console.log("Something is Wrong");

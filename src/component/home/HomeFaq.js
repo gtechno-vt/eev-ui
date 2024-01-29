@@ -10,7 +10,7 @@ function HomeFaq() {
     async function getSiteInfo() {
 
       try {
-        const siteFaqApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/site-faq/site/2`)
+        const siteFaqApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-faq/site/2`)
         setSiteFaq(siteFaqApi.data);
       } catch (error) {
         console.log("Something is Wrong");

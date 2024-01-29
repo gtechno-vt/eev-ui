@@ -17,7 +17,7 @@ const PaymentFailure = () => {
          }
          console.log(data);
          try {
-            const res = await axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/payment/payment-info`, data)
+            const res = await axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/payment/payment-info`, data)
             console.log(res);
          } catch (error) {
             console.log(error);

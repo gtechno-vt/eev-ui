@@ -12,7 +12,7 @@ function HomeVisa() {
 
     async function getVisaType() {
         try {
-            const visaTypeApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/visaVariant/0/48?fetchImages=false`)
+            const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/0/48?fetchImages=false`)
             setHomeVisa(visaTypeApi.data);
             //var visaData = visaTypeApi.data;
             //const uniqueVisaTypes = [...new Set(visaData.map(visa => visa.visaType.name))];

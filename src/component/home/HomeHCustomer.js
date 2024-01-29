@@ -14,7 +14,7 @@ const HomeHCustomer = () => {
 
   async function getHappyCustomerInfo() {
     try {
-      const happyCustomerApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/reviews/site/2`);
+      const happyCustomerApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/reviews/site/2`);
       setHappyHomeCustomer(happyCustomerApi.data);
     } catch (error) {
       console.log("Something went wrong:", error);

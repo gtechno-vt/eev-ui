@@ -12,11 +12,11 @@ const Footer = () => {
     useEffect(() => {
         async function getSiteInfo() {
 			try {
-				const siteInfoApi = await axios.get(`https://dgf0agfzdhu.emiratesevisaonline.com/site-info/2`)
+				const siteInfoApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-info/2`)
 				setSiteInfo(siteInfoApi.data);
                 setVisitorCount(siteInfoApi.data.visitorCount);
 
-                const countInfo =  await axios.put(`https://dgf0agfzdhu.emiratesevisaonline.com/site-info/visitor-count/2`) 
+                const countInfo =  await axios.put(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-info/visitor-count/2`) 
                if(countInfo.data){
                    setVisitorCount(countInfo.data);
                }
