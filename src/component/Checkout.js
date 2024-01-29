@@ -156,7 +156,7 @@ const Checkout = () => {
             serviceType: serviceTypeValue,
         }
         try {
-            const res = await axios.post(`https://dgf0agfzdhu.emiratesevisaonline.com/payment/Stripe/order`, data, {
+        const res = await axios.post(`http://localhost:8081/payment/Stripe/order`,data,{
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -284,7 +284,7 @@ const Checkout = () => {
                             </div>
 
                             <div className="note_check">
-                                <p className="">The amounts shown in USD on this page will be shown in your local currency on the gateway page.</p>
+                                <p className="">Users residing in India are recommended to use the PhonePe gateway for seamless payments.</p>
                             </div>
 
                         </div>

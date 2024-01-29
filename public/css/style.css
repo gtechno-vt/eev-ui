@@ -933,7 +933,7 @@ margin-bottom:0    }
 }
 
 
-.logo_content p {line-height: 24px;position: relative;color: #303030;font-weight: 500;font-size: 15px;}
+.logo_content p {line-height: 24px;position: relative;color: #303030;font-weight: 500;font-size: 15px;text-align:justify;}
 
 .footer_des .logo_ftr:after {content:'';width: 1px;height: 100%;position: absolute;/* background: rgb(145 145 145); */right: -23px;top: 0;}
 
