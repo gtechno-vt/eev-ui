@@ -156,7 +156,7 @@ const Checkout = () => {
             serviceType: serviceTypeValue,
         }
         try {
-        const res = await axios.post(`http://localhost:8081/payment/Stripe/order`,data,{
+        const res = await axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/payment/Stripe/order`,data,{
                 headers: {
                     "Content-Type": "application/json"
                 }
