@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -7,7 +7,9 @@ import $ from 'jquery';
 
 const HomeHCustomer = () => {
   const [happyHomeCustomer, setHappyHomeCustomer] = useState([]);
-
+  const [startIndex,setStartIndex] = useState(0);
+  const myRef = useRef(null);
+  console.log(myRef?.current?.offsetWidth,"myRef");
   useEffect(() => {
     getHappyCustomerInfo();
   }, []);
@@ -32,9 +34,25 @@ const HomeHCustomer = () => {
     }
   }, [happyHomeCustomer]);
 
+ const corouselArrowClick = (click) => {
+   if(click === "next"){
+     if(myRef?.current?.offsetWidth && (Number(myRef?.current?.offsetWidth)  >= 768)){
+        console.log(happyHomeCustomer.length,startIndex,"dfdf");
+        setStartIndex(prev => happyHomeCustomer?.length-2 === prev+1 ? prev : prev+1);
+      }else{
+      console.log("call here");
+        setStartIndex(prev => happyHomeCustomer?.length === prev+1 ? prev : prev+1);
+      }
+    }else{
+      // for prev
+      setStartIndex(prev => prev === 0 ? prev : prev-1);
+
+    }
+ }
+
   return (
     <>
-      <section className="our_happy_customer">
+      <section className="our_happy_customer" ref={myRef}>
         <div className="container">
           <div className="row">
             <div className="title">
@@ -43,13 +61,12 @@ const HomeHCustomer = () => {
           </div>
 
           <div id="pinBoot">
-
-            <div className='row'>
+            <span className="corousel-forward-arrow" alt="" onClick={() => corouselArrowClick("prev")}>&#8249;</span> 
+            
+            <div className='row overflow-hidden flex-nowrap' >
               {happyHomeCustomer && happyHomeCustomer.length > 0 ? (
-                happyHomeCustomer.map((item, index) => (
-                  <div key={index} className={'col-md-4 col-xs-12 displayContent'+(index+1)} style={
-                    {display: 'none'}
-                  } >
+                happyHomeCustomer.slice(startIndex).map((item, index) => (
+                  <div key={index} className={'col-md-4 col-xs-12 displayContent'+(index+1)}  >
                     <article className="white-panel">
                       <div className="fg_review">
                         <h3>{item.userName}</h3>
@@ -70,7 +87,7 @@ const HomeHCustomer = () => {
                 <div></div>
               )}
             </div>
-              
+            <span  className="corousel-backward-arrow" alt="" onClick={() => corouselArrowClick("next")}>&#8250;</span>
             {/* 
             <OwlCarousel className="owl-theme" {...options} >
               {happyHomeCustomer && happyHomeCustomer.length > 0 ? (

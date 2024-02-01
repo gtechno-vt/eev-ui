@@ -629,6 +629,9 @@ a {text-decoration:none}
   position: relative;
   max-width: 100%;
   width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 #pinBoot .white-panel {
@@ -2475,7 +2478,7 @@ color: #fe0000;
     border: 1px solid #aaa;
     outline: none;
 }
-.error_404 img {width:100%}
+.error_404 img {height:360px}
 
 #succ_message{
     background-color: #069;
@@ -2565,8 +2568,32 @@ color: #fe0000;
         border-radius: 5px;
         min-width: max-content;
 }
+.green-btn{
+        background: #00732e;
+        color: #fff;
+        width: 28%;
+        border: none;
+        margin: 10px 0 10px;
+        outline: none;
+        padding: 10px;
+        border-radius: 5px;
+        min-width: max-content;
+}
+
+.w100{
+    width: 100% !important;
+}
 
 .visa-type-contact{
     padding: 10px 10px;
     font-weight: 600;
+}
+
+.corousel-forward-arrow, .corousel-backward-arrow{
+        cursor: pointer;
+        font-size: 60px;   
+}
+
+.ml-2{
+    margin-left: 0.5rem !important;
 }

@@ -204,7 +204,7 @@ const Contact = () => {
                         value={lead.subject}
                         onChange={e => onTextFieldChange(e)}
                         className="form-control" type="text"
-                        placeholder="Enter Subject *"
+                        placeholder="Enter Subject"
                       />
                     </div>
                   </div>

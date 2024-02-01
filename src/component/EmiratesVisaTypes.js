@@ -107,7 +107,7 @@ const EmiratesVisaTypes = () => {
 
                                                 <div className="alignFromCenter column-three mob30 paddingFromRight pos-Reltv yellow">
                                                     <div className="padding-All-sm">{item.visaFee} USD</div>
-                                                    <Link className="primary-button" to={'/apply-now-visa/'+item.id}>Apply Now</Link>
+                                                    <Link className="primary-button" to={'/apply-now-visa/'+item.slugVisaVariantName}>Apply Now</Link>
                                                 </div>
                                             </div>
 

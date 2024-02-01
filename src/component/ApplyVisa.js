@@ -13,7 +13,6 @@ const ApplyVisa = ({update,appId,doc}) => {
     const { visa } = useParams();
     const { citizen } = useParams();
     const { travelling } = useParams();
-
     const [allCountry, setAllCountry] = useState([]);
     const [visaType, setVisaType] = useState([]);
     const [education, setEducation] = useState([]);
@@ -48,6 +47,10 @@ const ApplyVisa = ({update,appId,doc}) => {
                 if(citizen){
                     const citizenCountryAllData = countryApi.data.find(ele => ele.countryNameSlug === citizen);
                     setCitizenData(citizenCountryAllData.id);
+                   if(citizenCountryAllData?.id){ getVisaType(citizenCountryAllData.id)}
+                }
+                if(visa && !citizen){
+                    getVisaType(0)  
                 }
                 if(travelling){
                     const travellingCountryAllData = countryApi.data.find(ele => ele.countryNameSlug === travelling);  
@@ -59,10 +62,10 @@ const ApplyVisa = ({update,appId,doc}) => {
             }
         }
 
-        async function getVisaType() {
+        async function getVisaType(citizenId) {
             try {
                 setShowApiLoader(true);
-                const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/0/48?fetchImages=false`)
+                const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/${citizenId}/48?fetchImages=false`)
                 setShowApiLoader(false);
                 setVisaType(visaTypeApi.data);
                 if(visa){
@@ -168,7 +171,7 @@ const ApplyVisa = ({update,appId,doc}) => {
         }
 
         getCountry();
-        getVisaType();
+        // getVisaType();
         getEducation();
         getProfession();
         getPurposeVisit();
@@ -223,7 +226,14 @@ const ApplyVisa = ({update,appId,doc}) => {
     }
 
     // const [citizenshipCountry, setCitizenshipCountry] = useState("");
-    function onCitizen(e) {
+    async function onCitizen(e) {
+        setShowApiLoader(true);
+        setVisaType([])
+        const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/${e.target.value}/48?fetchImages=false`)
+        setShowApiLoader(false);
+        setVisaType(visaTypeApi.data);
+        setVisaVariant("")
+
         setCitizenData(e.target.value)
     }
 
@@ -426,6 +436,12 @@ const ApplyVisa = ({update,appId,doc}) => {
             isAllRequiredDataFilled = false;
         }  
         if (!visaVariant) {
+            if(visaType && visaType.length === 0){
+                document.getElementById("succ_message").style.display = "block";
+                    document.getElementById("alert_message").innerHTML = "Please contact us on WhatsApp to get your Visa Application processed.";
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                return
+            }
             document.getElementById("visaVariant").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
         } 
@@ -709,6 +725,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             id='visaVariant'
                                                             onChange={e => onVisaVariant(e)}
                                                             value={visaVariant}
+                                                            disabled={visaType && visaType.length > 0 ? false : true}
                                                         >
                                                             <option value="">Visa Type</option>
                                                             {

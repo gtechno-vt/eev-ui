@@ -156,7 +156,7 @@ const Checkout = () => {
             serviceType: serviceTypeValue,
         }
         try {
-        const res = await axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/payment/Stripe/order`,data,{
+        const res = await axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/payment/${paymentMethod}/order`,data,{
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -368,7 +368,7 @@ const Checkout = () => {
                                             checked={paymentMethod === "PayPal" ? true : false}
                                         />
                                         <img className='ml-1' src="../img/paypalicon.png" alt="stripe" />
-                                    </div>
+                                    </div> */}
                                     <div>
                                         <input
                                             type="radio"
@@ -380,7 +380,7 @@ const Checkout = () => {
                                         />
                                         <img style={{height:"30px"}} src="../img/phonepeicon.png" alt="stripe" />
 
-                                    </div> */}
+                                    </div>
                                 </div>
                                 <button type="submit" className="btn button" id="checkout-button" name="proceedFinal" onClick={handleRedirectToPayment}> Proceed
                                     Now</button>

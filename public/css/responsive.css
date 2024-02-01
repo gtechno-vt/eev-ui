@@ -48,7 +48,6 @@
 #pinBoot .divid_sect .item {width: 100%;}
 #pinBoot .divid_sect {margin:0}
 
-
 }
 
 
@@ -59,7 +58,12 @@
 /*-----------------tab port------------------*/
 
 @media (min-width: 992px) {
-	
+	.banner{
+        padding: 10px;
+    }
+    .step_home .title h3 {
+        margin-bottom: 15px;
+    }
 	
 }
 

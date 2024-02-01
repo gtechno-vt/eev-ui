@@ -12,52 +12,56 @@ const EmiratesVisa = () => {
     const navigate = useNavigate();
     const [showApiLoader,setShowApiLoader] = useState(false);
     const [leadData, setLeadData] = useState({
-        'citizen': '',
-        'traveling': ''
+        'citizen': citizen || "",
+        'traveling': travelling || "",
     });
     const [homeVisa, setHomeVisa] = useState([]);
     const [allCountry, setAllCountry] = useState([]);
 
     //== = 
     useEffect(() => {
-        async function getVisaType(countryData) {
-            try {
-                const newCitizen = leadData.citizen ? leadData.citizen : citizen;
-                const ele = countryData.find(ele => ele.countryNameSlug === newCitizen);
-                const id = ele ? ele.id : ""
-                setShowApiLoader(true)
-                const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/${id}/48?fetchImages=false`)
-                setShowApiLoader(false)
-                setHomeVisa(visaTypeApi.data);
-                console.log(visaTypeApi.data);
-            } catch (error) {
-                setShowApiLoader(false)
-                console.log("Something is Wrong Visa Type");
-            }
-        }
-
         async function getCountry() {
-
             try {
                 setShowApiLoader(true)
                 const countryApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/country/basic`)
                 setShowApiLoader(false)
                 setAllCountry(countryApi.data);
-                getVisaType(countryApi.data);
+                getVisaType({data:countryApi.data});
             } catch (error) {
+                setAllCountry([]);
                 setShowApiLoader(false)
                 console.log("Something is Wrong");
             }
         }
-
-
         getCountry();
-
     }, []);
     //====
 
+    async function getVisaType({data,citizen}) {
+        console.log(data);
+        const countryData = data && data.length > 0 ? data : allCountry;
+        try {
+            const newCitizen = citizen ? citizen : leadData.citizen;
+            const ele = countryData.find(ele => ele.countryNameSlug === newCitizen);
+            const id = ele ? ele.id : ""
+            setShowApiLoader(true)
+            const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/${id}/48?fetchImages=false`)
+            setShowApiLoader(false)
+            setHomeVisa(visaTypeApi.data);
+            console.log(visaTypeApi.data);
+        } catch (error) {
+            setHomeVisa([]);
+            setShowApiLoader(false)
+            console.log("Something is Wrong Visa Type");
+        }
+    }
+
     // === Form Submit Start Here -=====
     async function onTextFieldChange(e) {
+        if(e.target.name === "citizen"){
+            setHomeVisa([]);
+            getVisaType({citizen:e.target.value});
+        }
         setLeadData({
             ...leadData,
             [e.target.name]: e.target.value
@@ -68,8 +72,8 @@ const EmiratesVisa = () => {
     async function onFormSubmit(e) {
         e.preventDefault();
 
-        var newCitizen = leadData.citizen ? leadData.citizen : citizen;
-        var newTravelling = leadData.traveling ? leadData.traveling : travelling;
+        let newCitizen = leadData.citizen;
+        let newTravelling = leadData.traveling;
 
         document.getElementById("citizen").style.border = "1px solid #444";
         document.getElementById("traveling").style.border = "1px solid #444";
@@ -87,8 +91,23 @@ const EmiratesVisa = () => {
 
     async function onFormSubmitApply(e, ids) {
         e.preventDefault();
+        let newCitizen = leadData.citizen ;
+        let newTravelling = leadData.traveling;
 
-        navigate('/apply-visa/' + ids + '/' + citizen + '/' + travelling);
+        document.getElementById("citizen").style.border = "1px solid #444";
+        document.getElementById("traveling").style.border = "1px solid #444";
+        
+        if (newCitizen == '') {
+            document.getElementById("citizen").style.border = "1px solid red";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (newTravelling == '') {
+            document.getElementById("traveling").style.border = "1px solid red";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+           
+        }
+    
+        navigate('/apply-visa/' + ids + '/' + newCitizen + '/' + travelling);
     }
 
     // = Form Submit #END Here...
@@ -136,7 +155,7 @@ const EmiratesVisa = () => {
                                             name='citizen'
                                             id='citizen'
                                             onChange={e => onTextFieldChange(e)}
-                                            value={leadData.citizen || citizen}
+                                            value={leadData.citizen || ""}
 
                                         >
                                             <option value=''>--Select--</option>
@@ -160,7 +179,7 @@ const EmiratesVisa = () => {
                                             name='traveling'
                                             id='traveling'
                                             onChange={e => onTextFieldChange(e)}
-                                            value={leadData.traveling || travelling}
+                                            value={leadData.traveling || ""}
                                             className="iner_new"
                                         >
                                             <option value=''>--Select--</option>

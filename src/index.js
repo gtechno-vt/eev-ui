@@ -54,7 +54,8 @@ export default function App() {
           <Route path="blog/:id" element={<BlogDetail />} />
           <Route path="applicant-main/:id" element={<EditApplicantMain />} />
           <Route path="applicant/edit/:id" element={<EditApplicant />} />
-          <Route path="apply-now-visa/:visa" element={<ApplyNowVisa />} />
+          {/* <Route path="apply-now-visa/:visa" element={<ApplyNowVisa />} /> */}
+          <Route path="apply-now-visa/:visa" element={<ApplyVisa />} />
           <Route path="emirates-visa/:citizen/:travelling" element={<EmiratesVisa />} />
           <Route path="apply-visa/:visa/:citizen/:travelling" element={<ApplyVisa />} />
           <Route path="payment-success/:id" element={<PaymentSuccess />} />

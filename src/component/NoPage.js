@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const NoPage = () => {
 
   const [file, setFile] = useState(null);
+  const navigate = useNavigate();
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -48,8 +50,13 @@ const NoPage = () => {
 
       <div className='error_404'>
 
-        <div className='container'>
+        <div className='container d-flex flex-column align-items-center'>
           <img src="/img/404_page-not-found.webp" />
+          <div className='d-flex w100 justify-content-center'>
+          <button  className="black-btn" onClick={() => navigate(`/`)}>Home</button>
+          <button  className="green-btn ml-2" onClick={() => navigate(`/apply-now`)}>Apply for Visa</button>
+
+          </div>
         </div>
       </div>
 
