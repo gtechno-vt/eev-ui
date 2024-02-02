@@ -227,14 +227,13 @@ const ApplyVisa = ({update,appId,doc}) => {
 
     // const [citizenshipCountry, setCitizenshipCountry] = useState("");
     async function onCitizen(e) {
+        setCitizenData(e.target.value)
         setShowApiLoader(true);
         setVisaType([])
         const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/${e.target.value}/48?fetchImages=false`)
         setShowApiLoader(false);
         setVisaType(visaTypeApi.data);
         setVisaVariant("")
-
-        setCitizenData(e.target.value)
     }
 
     // const [destinationCountry, setDestinationCountry] = useState("");
