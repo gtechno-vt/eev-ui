@@ -127,6 +127,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                 // setApplicationData(applicationApi.data);
                 setShowApiLoader(false);
                 const data = applicationApi.data;
+                  getVisaType(data?.application?.citizenshipCountry?.id || 0)
                 setLeadData({
                     firstName:data.firstName || "",
                     lastName:data.lastName || "",
@@ -233,7 +234,17 @@ const ApplyVisa = ({update,appId,doc}) => {
         const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/${e.target.value}/48?fetchImages=false`)
         setShowApiLoader(false);
         setVisaType(visaTypeApi.data);
-        setVisaVariant("")
+        if(visaTypeApi.data.length > 0){
+           const item = visaTypeApi.data.find(ele => ele.id === visaVariant);
+           if(item){
+            setVisaVariant(item.id)
+           }else{
+            setVisaVariant("")
+           }
+        }else{
+            setVisaVariant("")
+        }
+        
     }
 
     // const [destinationCountry, setDestinationCountry] = useState("");
@@ -439,7 +450,12 @@ const ApplyVisa = ({update,appId,doc}) => {
                 document.getElementById("succ_message").style.display = "block";
                     document.getElementById("alert_message").innerHTML = "Please contact us on WhatsApp to get your Visa Application processed.";
                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                return
+                  setTimeout(() => {
+                    document.getElementById("succ_message").style.display = "none";
+                    document.getElementById("alert_message").innerHTML = "";
+                  
+                  }, 5000);
+                return;
             }
             document.getElementById("visaVariant").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
