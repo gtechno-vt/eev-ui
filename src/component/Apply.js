@@ -477,6 +477,7 @@ const Apply = ({update,doc,displayId}) => {
                                                             onChange={e => onTextFieldChange(e)}
                                                             value={leadData.dob || ""}
                                                             max={todayDate}
+                                                            onKeyDown={(e) => e.preventDefault()}
                                                         />
                                                     </div>
                                                 </div>
@@ -634,6 +635,7 @@ const Apply = ({update,doc,displayId}) => {
                                                             type="date"
                                                             placeholder="YYYY-MM-DD"
                                                             min={todayDate}
+                                                            onKeyDown={(e) => e.preventDefault()}
                                                         />
 
                                                     </div>

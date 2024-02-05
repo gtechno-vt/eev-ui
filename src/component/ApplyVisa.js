@@ -446,16 +446,14 @@ const ApplyVisa = ({update,appId,doc}) => {
             isAllRequiredDataFilled = false;
         }  
         if (!visaVariant) {
-            if(visaType && visaType.length === 0){
+            if(visaType && visaType.length === 0 && citizenData){
                 document.getElementById("succ_message").style.display = "block";
                     document.getElementById("alert_message").innerHTML = "Please contact us on WhatsApp to get your Visa Application processed.";
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   setTimeout(() => {
                     document.getElementById("succ_message").style.display = "none";
                     document.getElementById("alert_message").innerHTML = "";
-                  
                   }, 5000);
-                return;
             }
             document.getElementById("visaVariant").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
@@ -476,10 +474,10 @@ const ApplyVisa = ({update,appId,doc}) => {
             document.getElementById("emailId").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
         }
-        // else if (educationF == '0') {
-        //     document.getElementById("educationF").style.border = "1px solid red";
-        //     window.scrollTo({ top: 0, behavior: 'smooth' });
-        // } 
+         if (educationF == 'other' && !leadData.customEducation ) {
+            document.getElementById("customEducation").style.border = "1px solid red";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } 
          if (!professionF && !leadData.customProfession) {
             document.getElementById("professionF").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
@@ -488,6 +486,16 @@ const ApplyVisa = ({update,appId,doc}) => {
             document.getElementById("purposeOfVisit").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
         } 
+
+        if ( professionF == 'other' && !leadData.customProfession ) {
+            document.getElementById("customProfession").style.border = "1px solid red";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } 
+        if (leadData.purposeOfVisit == 'other' && !leadData.purposeOfVisitText ) {
+            document.getElementById("purposeOfVisitText").style.border = "1px solid red";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } 
+
          if (!leadData.countryCode) {
             document.getElementById("countryCode").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
@@ -811,6 +819,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             type="date"
                                                             placeholder="Date of birth"
                                                             // max={new Date().toJSON(0,10)}
+                                                            onKeyDown={(e) => e.preventDefault()}
                                                             max={todayDate}
                                                         />
                                                     </div>
@@ -1303,6 +1312,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             type="date"
                                                             placeholder="YYYY-MM-DD"
                                                             min={todayDate}
+                                                            onKeyDown={(e) => e.preventDefault()}
                                                         />
 
                                                     </div>
@@ -1399,6 +1409,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             type="date"
                                                             placeholder="YYYY-MM-DD"
                                                             min={todayDate}
+                                                            onKeyDown={(e) => e.preventDefault()}
                                                         />
 
                                                     </div>
