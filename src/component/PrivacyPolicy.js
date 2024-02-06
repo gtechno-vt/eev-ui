@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 const PrivacyPolicy = () => {
 
@@ -25,6 +26,18 @@ const PrivacyPolicy = () => {
 
   return (
     <>
+       <Helmet>
+        <title>Emirates E Visa Online - Privacy Policy | Online Visa Policy</title>
+        <meta name="description" content="Check Emirates E Visa Online Privacy Policy.  While Apply United Arab Emirates E Visa Online Go Through www.emiratesevisaonline.com Privacy Policy."/>
+        <meta name="keywords" content="emirates e visa online privacy policy, privacy policy, uae visa official website policy, visa application policy" />
+        <meta itemprop="name" content="Emirates E Visa Online - Privacy Policy | Online Visa Policy" />
+        <meta itemprop="description" content="Check Emirates E Visa Online Privacy Policy.  While Apply United Arab Emirates E Visa Online Go Through www.emiratesevisaonline.com Privacy Policy." />
+        <meta name="og:title" content='Emirates E Visa Online - Privacy Policy | Online Visa Policy'/>
+        <meta name="og:description" content='Check Emirates E Visa Online Privacy Policy.  While Apply United Arab Emirates E Visa Online Go Through www.emiratesevisaonline.com Privacy Policy. '/>
+        <meta name="twitter:title" content='Emirates E Visa Online - Privacy Policy | Online Visa Policy'/>
+        <meta name="twitter:description" content='Check Emirates E Visa Online Privacy Policy.  While Apply United Arab Emirates E Visa Online Go Through www.emiratesevisaonline.com Privacy Policy.'/>
+        <link rel="canonical" href="https://www.emiratesevisaonline.com/privacy-policy" />
+      </Helmet>
         <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
             <div className="container">
                 <div className="row">

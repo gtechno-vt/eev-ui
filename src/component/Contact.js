@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { isValidEmail, isValidMobile } from '../utils/StaticFunctions';
+import { Helmet } from 'react-helmet';
 
 const Contact = () => {
 
@@ -124,6 +125,18 @@ const Contact = () => {
 
   return (
     <>
+     <Helmet>
+        <title>Emirates Visa Immigration Consultant | UAE Visa Online Inquiry</title>
+        <meta name="description" content="Visit Official Emirates Visa Website for E Visa Inquiry. Send Emirates Visa Inquiry Us To Our Official Email Or Talk To Our Customer Chat Support."/>
+        <meta name="keywords" content="emirates visa online inquiry, emirats visa online center, contact emirates e visa online, emirates visa office, emirates visa support, emirates visa support, chat support emirates visa, online visa query, emirates embassy, official emirates immigration office" />
+        <meta itemprop="name" content="Emirates Visa Immigration Consultant | UAE Visa Online Inquiry" />
+        <meta itemprop="description" content="Visit Official Emirates Visa Website for E Visa Inquiry. Send Emirates Visa Inquiry Us To Our Official Email Or Talk To Our Customer Chat Support." />
+        <meta name="og:title" content='Emirates Visa Immigration Consultant | UAE Visa Online Inquiry'/>
+        <meta name="og:description" content='Visit Official Emirates Visa Website for E Visa Inquiry. Send Emirates Visa Inquiry Us To Our Official Email Or Talk To Our Customer Chat Support.'/>
+        <meta name="twitter:title" content='Emirates Visa Immigration Consultant | UAE Visa Online Inquiry'/>
+        <meta name="twitter:description" content='Visit Official Emirates Visa Website for E Visa Inquiry. Send Emirates Visa Inquiry Us To Our Official Email Or Talk To Our Customer Chat Support.'/>
+        <link rel="canonical" href="https://www.emiratesevisaonline.com/contact-us" />
+      </Helmet>
       <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
         <div className="container">
           <div className="row">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 const TermsAndConditions = () => {
 
@@ -25,7 +26,18 @@ const TermsAndConditions = () => {
 
   return (
     <>
-
+ <Helmet>
+        <title>Emirates E Visa Online - Terms & Conditions | Emirates Visa Terms</title>
+        <meta name="description" content="United Arab Emirates Visa Official Website Terms & Conditions. Check Terms While Applying Emirates E Visa Online With www.emiratesevisaonline.com"/>
+        <meta name="keywords" content="emirates e visa online terms and condition, terms and condition, emirates visa policy, emirates visit visa services, emirates visa agency, emirates visa online website, online emirates visa refund, emirates visa refund policy" />
+        <meta itemprop="name" content="Emirates E Visa Online - Terms & Conditions | Emirates Visa Terms" />
+        <meta itemprop="description" content="United Arab Emirates Visa Official Website Terms & Conditions. Check Terms While Applying Emirates E Visa Online With www.emiratesevisaonline.com" />
+        <meta name="og:title" content='Emirates E Visa Online - Terms & Conditions | Emirates Visa Terms'/>
+        <meta name="og:description" content='United Arab Emirates Visa Official Website Terms & Conditions. Check Terms While Applying Emirates E Visa Online With www.emiratesevisaonline.com'/>
+        <meta name="twitter:title" content='Emirates E Visa Online - Terms & Conditions | Emirates Visa Terms'/>
+        <meta name="twitter:description" content='United Arab Emirates Visa Official Website Terms & Conditions. Check Terms While Applying Emirates E Visa Online With www.emiratesevisaonline.com'/>
+        <link rel="canonical" href="https://www.emiratesevisaonline.com/terms-and-conditions" />
+      </Helmet>
     <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
         <div className="container">
             <div className="row">

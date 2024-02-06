@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 const AboutUs = () => {
 
@@ -26,6 +27,18 @@ const AboutUs = () => {
     
   return (
     <>
+        <Helmet>
+        <title>About Emirates E Visa Online | UAE Visa Online Services</title>
+        <meta name="description" content="Emirates E Visa Online Provides Emirates Tourist Visa, Transit Visa And Business Visa. Online UAE Visa Application Process. Documents Required For E Visa."/>
+        <meta name="keywords" content="about emiratesevisaonline, emirates visa online info, uae visit visa info, online emirates visa agency, emirates e visa, emirates offical website, emirates immigration office, emirates tourist visa, emirates business visa, emirates transit visa, online emirates e visa info, emirates visa agent" />
+        <meta itemprop="name" content="About Emirates E Visa Online | UAE Visa Online Services" />
+        <meta itemprop="description" content="Emirates E Visa Online Provides Emirates Tourist Visa, Transit Visa And Business Visa. Online UAE Visa Application Process. Documents Required For E Visa." />
+        <meta name="og:title" content='About Emirates E Visa Online | UAE Visa Online Services'/>
+        <meta name="og:description" content='Emirates E Visa Online Provides Emirates Tourist Visa, Transit Visa And Business Visa. Online UAE Visa Application Process. Documents Required For E Visa.'/>
+        <meta name="twitter:title" content='About Emirates E Visa Online | UAE Visa Online Services'/>
+        <meta name="twitter:description" content='Emirates E Visa Online Provides Emirates Tourist Visa, Transit Visa And Business Visa. Online UAE Visa Application Process. Documents Required For E Visa.'/>
+        <link rel="canonical" href="https://www.emiratesevisaonline.com/about-us" />
+      </Helmet>
         <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
             <div className="container">
                 <div className="row">

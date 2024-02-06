@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 
 const EmiratesVisaTypes = () => {
 
@@ -60,6 +61,18 @@ const EmiratesVisaTypes = () => {
 
   return (
     <>
+       <Helmet>
+        <title>Types of Emirates Visa - Tourist Visa, Transit Visa, Business Visa</title>
+        <meta name="description" content="Choose Emirates Visa Type as per Requirements From 14 Days, 30 Days, 60 Days Tourist Visa. Apply UAE Visa For Business, Conferences And Transit."/>
+        <meta name="keywords" content="types of emirates visa, emirates transit visa, emirates tourist visa, emirates visit visa, 14 days visa, 30 days single entry visa, 30 days multiple entry visa, 60 days visa, emirates visa online, emirates business visa, uae visa types, 48 hours transit visa, 96 hours transit visa" />
+        <meta itemprop="name" content="Types of Emirates Visa - Tourist Visa, Transit Visa, Business Visa" />
+        <meta itemprop="description" content="Choose Emirates Visa Type as per Requirements From 14 Days, 30 Days, 60 Days Tourist Visa. Apply UAE Visa For Business, Conferences And Transit." />
+        <meta name="og:title" content='Types of Emirates Visa - Tourist Visa, Transit Visa, Business Visa'/>
+        <meta name="og:description" content='Choose Emirates Visa Type as per Requirements From 14 Days, 30 Days, 60 Days Tourist Visa. Apply UAE Visa For Business, Conferences And Transit.'/>
+        <meta name="twitter:title" content='Types of Emirates Visa - Tourist Visa, Transit Visa, Business Visa'/>
+        <meta name="twitter:description" content='Choose Emirates Visa Type as per Requirements From 14 Days, 30 Days, 60 Days Tourist Visa. Apply UAE Visa For Business, Conferences And Transit.'/>
+        <link rel="canonical" href="https://www.emiratesevisaonline.com/emirates-visa-types" />
+      </Helmet>
         <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }} >
             <div className="container">
                 <div className="row">

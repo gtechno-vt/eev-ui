@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 
 const StepsToApplyEmiratesVisa = () => {
 
@@ -9,6 +10,18 @@ const StepsToApplyEmiratesVisa = () => {
     
   return (
     <>
+          <Helmet>
+        <title>Steps To Apply Emirates E Visa Online | Get UAE Visa By Email</title>
+        <meta name="description" content="How To Fill Emirates E Visa Online Application Form In 3 Simple Steps. Fill Application Form Details Online, Pay Fees and Get Emirates E Visa Copy By Email." />
+        <meta name="keywords" content="how to apply emirates visa online, emirates e visa online, uae visa application online, steps to apply uae visa, emirates visa steps, emirates visa online process" />
+        <meta itemprop="name" content="How To Get Emirates E Visa Online In 3 Steps | UAE Visa Online" />
+        <meta itemprop="description" content="How To Fill Emirates E Visa Online Application Form In 3 Simple Steps. Fill Application Form Details Online, Pay Fees and Get Emirates E Visa Copy By Email." />
+        <meta name="og:title" content='How To Get Emirates E Visa Online In 3 Steps | UAE Visa Online'/>
+        <meta name="og:description" content='How To Fill Emirates E Visa Online Application Form In 3 Simple Steps. Fill Application Form Details Online, Pay Fees and Get Emirates E Visa Copy By Email.'/>
+        <meta name="twitter:title" content='How To Get Emirates E Visa Online In 3 Steps | UAE Visa Online'/>
+        <meta name="twitter:description" content='How To Fill Emirates E Visa Online Application Form In 3 Simple Steps. Fill Application Form Details Online, Pay Fees and Get Emirates E Visa Copy By Email. '/>
+        <link rel="canonical" href="https://www.emiratesevisaonline.com/steps-to-apply-emirates-visa" />
+      </Helmet>
         <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }} >
             <div className="container">
                 <div className="row">

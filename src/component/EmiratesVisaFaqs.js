@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 const EmiratesVisaFaqs = () => {
 
@@ -59,6 +60,18 @@ const EmiratesVisaFaqs = () => {
 
   return (
     <>
+               <Helmet>
+        <title>Emirates Visa Frequently Asked Questions | UAE Visa Faqs</title>
+        <meta name="description" content="Frequently Asked Questions Of UAE Visa Online Application. Visit Emirates Visa Official Website and Check Your Query Related to Apply Emirates Visa Online."/>
+        <meta name="keywords" content="emirates visa faqs, uae visa faqs, emirates visa online query, frequently asked question of emirates visa online, emirates visa query" />
+        <meta itemprop="name" content="Emirates Visa Frequently Asked Questions | UAE Visa Faqs" />
+        <meta itemprop="description" content="Frequently Asked Questions Of UAE Visa Online Application. Visit Emirates Visa Official Website and Check Your Query Related to Apply Emirates Visa Online." />
+        <meta name="og:title" content='Emirates Visa Frequently Asked Questions | UAE Visa Faqs'/>
+        <meta name="og:description" content='Frequently Asked Questions Of UAE Visa Online Application. Visit Emirates Visa Official Website and Check Your Query Related to Apply Emirates Visa Online.'/>
+        <meta name="twitter:title" content='Emirates Visa Frequently Asked Questions | UAE Visa Faqs'/>
+        <meta name="twitter:description" content='Frequently Asked Questions Of UAE Visa Online Application. Visit Emirates Visa Official Website and Check Your Query Related to Apply Emirates Visa Online.'/>
+        <link rel="canonical" href="https://www.emiratesevisaonline.com/emirates-visa-faqs" />
+      </Helmet>
         <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
             <div className="container">
                 <div className="row">

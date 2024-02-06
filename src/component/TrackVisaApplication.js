@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const TrackVisaApplication = () => {
 
@@ -56,6 +57,18 @@ const TrackVisaApplication = () => {
     
   return (
     <>
+     <Helmet>
+        <title>Track Emirates Visa Online Status | UAE Visa Application Status</title>
+        <meta name="description" content="Check Emirates Visa Online Status With Reference Number Or Application ID. Visit Emirates E Visa Online Official Website And Track E Visa Application.  "/>
+        <meta name="keywords" content="track emirates visa status, online e visa status, emirates visa status, uae visa status, emirates visa status online, visa status, check emirates visa status, check emirates visa offical website, check emirates visa status, online emirates visa status check." />
+        <meta itemprop="name" content="Track Emirates Visa Online Status | UAE Visa Application Status" />
+        <meta itemprop="description" content="Check Emirates Visa Online Status With Reference Number Or Application ID. Visit Emirates E Visa Online Official Website And Track E Visa Application." />
+        <meta name="og:title" content='Track Emirates Visa Online Status | UAE Visa Application Status'/>
+        <meta name="og:description" content='Check Emirates Visa Online Status With Reference Number Or Application ID. Visit Emirates E Visa Online Official Website And Track E Visa Application.'/>
+        <meta name="twitter:title" content='Track Emirates Visa Online Status | UAE Visa Application Status'/>
+        <meta name="twitter:description" content='Check Emirates Visa Online Status With Reference Number Or Application ID. Visit Emirates E Visa Online Official Website And Track E Visa Application.'/>
+        <link rel="canonical" href="https://www.emiratesevisaonline.com/track-visa-application" />
+      </Helmet>
         <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
             <div className="container">
                 <div className="row">

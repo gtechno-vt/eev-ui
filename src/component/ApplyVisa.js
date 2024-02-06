@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { isValidEmail } from '../utils/StaticFunctions';
 import { isValidMobile } from '../utils/StaticFunctions';
 import ApiLoader from './ApiLoader';
+import { Helmet } from 'react-helmet';
 
 const ApplyVisa = ({update,appId,doc}) => {
 
@@ -652,6 +653,18 @@ const ApplyVisa = ({update,appId,doc}) => {
     console.log(leadData, "leadData");
     return (
         <>
+           <Helmet>
+        <title>Emirates Urgent Visa Application Form | Apply E Visa Online</title>
+        <meta name="description" content="Emirates Visa Online Application Form - Submit Your Emirates Visa Application Easily and Get Your Visa In 3-4 Working Hours. Fast & Secure Application Form."/>
+        <meta name="keywords" content="emirates visa application form, urgent uae visa application form, online application form, emirates visa online form, apply urgent emirates visa, emirates e visa online application form, how to fill emirates visa application form" />
+        <meta itemprop="name" content="Emirates Urgent Visa Application Form | Apply E Visa Online" />
+        <meta itemprop="description" content="Emirates Visa Online Application Form - Submit Your Emirates Visa Application Easily and Get Your Visa In 3-4 Working Hours. Fast & Secure Application Form." />
+        <meta name="og:title" content='Emirates Urgent Visa Application Form | Apply E Visa Online'/>
+        <meta name="og:description" content='Emirates Visa Online Application Form - Submit Your Emirates Visa Application Easily and Get Your Visa In 3-4 Working Hours. Fast & Secure Application Form. '/>
+        <meta name="twitter:title" content='Emirates Urgent Visa Application Form | Apply E Visa Online'/>
+        <meta name="twitter:description" content='Emirates Visa Online Application Form - Submit Your Emirates Visa Application Easily and Get Your Visa In 3-4 Working Hours. Fast & Secure Application Form. '/>
+        <link rel="canonical" href="https://www.emiratesevisaonline.com/apply-now" />
+      </Helmet>
             <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
                {showApiLoader && <ApiLoader/>}
                 <div className="container">

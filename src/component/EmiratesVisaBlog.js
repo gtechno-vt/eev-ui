@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns';
+import { Helmet } from 'react-helmet';
 
 const EmiratesVisaBlog = () => {
 
@@ -64,6 +65,18 @@ const EmiratesVisaBlog = () => {
     
   return (
     <>
+       <Helmet>
+        <title>Emirates E Visa Online Official Blog | UAE Tourist Visa Online</title>
+        <meta name="description" content="emirates e visa online blog, dubai emirates visa, 14 days emirates visa, 30 days emirates visa, 60 days emirates visa online, transit visa, emirates visa on arrival, emirates visa services, emirates visa fees, emirates visa info, uae visit visa, document required for emirates visa, hot to get emirates visa, online emirates visa info"/>
+        <meta name="keywords" content="emirates e visa online blog, dubai emirates visa, 14 days emirates visa, 30 days emirates visa, 60 days emirates visa online, transit visa, emirates visa on arrival, emirates visa services, emirates visa fees, emirates visa info, uae visit visa, document required for emirates visa, hot to get emirates visa, online emirates visa info" />
+        <meta itemprop="name" content="Emirates E Visa Online Official Blog | UAE Tourist Visa Online" />
+        <meta itemprop="description" content="Official Blog Of Emirates E Visa Online. Visit Our Blog To Get Information About Emirates Tourist, Transit And Business Visa.  Stay Tuned The Latest Visa Policy." />
+        <meta name="og:title" content='Emirates E Visa Online Official Blog | UAE Tourist Visa Online'/>
+        <meta name="og:description" content='Official Blog Of Emirates E Visa Online. Visit Our Blog To Get Information About Emirates Tourist, Transit And Business Visa.  Stay Tuned The Latest Visa Policy.'/>
+        <meta name="twitter:title" content='Emirates E Visa Online Official Blog | UAE Tourist Visa Online'/>
+        <meta name="twitter:description" content='Official Blog Of Emirates E Visa Online. Visit Our Blog To Get Information About Emirates Tourist, Transit And Business Visa.  Stay Tuned The Latest Visa Policy.'/>
+        <link rel="canonical" href="https://www.emiratesevisaonline.com/emirates-visa-blog"/>
+      </Helmet>
         <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
             <div className="container">
                 <div className="row">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 const CustomerReview = () => {
 
@@ -59,6 +60,18 @@ const CustomerReview = () => {
     
   return (
     <>
+    <Helmet>
+        <title>Emirates E Visa Online Customers Review | Submit Your Review</title>
+        <meta name="description" content="Go Through Emirates E Visa Online Customers Review. Share Your Feedback About Our Emirates Visa Services. Give Us 5 Star Rating It Will Help Us."/>
+        <meta name="keywords" content="emirates visa reviews, uae visa review, customer review, officail emirates visa rating, emirates visa rating" />
+        <meta itemprop="name" content="Emirates E Visa Online Customers Review | Submit Your Review" />
+        <meta itemprop="description" content="Go Through Emirates E Visa Online Customers Review. Share Your Feedback About Our Emirates Visa Services. Give Us 5 Star Rating It Will Help Us." />
+        <meta name="og:title" content='Emirates E Visa Online Customers Review | Submit Your Review'/>
+        <meta name="og:description" content='Go Through Emirates E Visa Online Customers Review. Share Your Feedback About Our Emirates Visa Services. Give Us 5 Star Rating It Will Help Us.'/>
+        <meta name="twitter:title" content='Emirates E Visa Online Customers Review | Submit Your Review'/>
+        <meta name="twitter:description" content='Go Through Emirates E Visa Online Customers Review. Share Your Feedback About Our Emirates Visa Services. Give Us 5 Star Rating It Will Help Us.'/>
+        <link rel="canonical" href="https://www.emiratesevisaonline.com/customer-review" />
+      </Helmet>
         <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
             <div className="container">
                 <div className="row">
