@@ -361,7 +361,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                         "id": 48
                     },
                     "visaVariant": {
-                        "id": visaVariant
+                        "id": Number(visaVariant)
                     },
                     "purposeOfVisit": leadData.purposeOfVisit && leadData.purposeOfVisit !== "other" ?{
                         "id": leadData.purposeOfVisit

@@ -108,10 +108,11 @@ const Footer = () => {
                         </div>
 
                         <ul className="social-links clearfix">
-                            <li><Link to="#"><span className="fa fa-facebook-f"></span></Link></li>
-                            <li><Link to="#"><span className="fa fa-twitter"></span></Link></li>
-                            <li><Link to="#"><span className="fa fa-google"></span></Link></li>
-                            <li><Link to="#"><span className="fa fa-linkedin"></span></Link></li>
+                            <li><Link to="https://www.facebook.com/emiratesevisasonline"><span className="fa fa-facebook-f"></span></Link></li>
+                            <li><Link to="https://twitter.com/EmirateseVisa01"><span className="fa fa-twitter"></span></Link></li>
+                            <li><Link to="https://www.youtube.com/@emiratesevisaonline"><span className="fa fa-youtube-play"></span></Link></li>
+                            <li><Link to="https://www.linkedin.com/company/emiratesevisaonline"><span className="fa fa-linkedin"></span></Link></li>
+                            <li><Link to="https://www.instagram.com/emiratesevisaonline"><span className="fa fa-instagram"></span></Link></li>
                         </ul>
 
                         <div className="ftr_pay">
