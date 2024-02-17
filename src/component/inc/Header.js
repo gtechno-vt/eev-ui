@@ -29,16 +29,26 @@ const Header = () => {
 		e.preventDefault()
 		const mySidenav = document.getElementById("mySidenav");
         const main = document.getElementById("main");
-        mySidenav.style.width = '100%';
-        main.style.marginLeft = '100%';
+        if(mySidenav){
+            mySidenav.style.width = '100%';
+        }
+        if(main){
+            main.style.marginLeft = '100%';
+        }
 
 	}
 
     async function closeNav(e) {
 		e.preventDefault()
-		document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0"; 
-
+        const mySidenav = document.getElementById("mySidenav");
+        const main = document.getElementById("main");
+        if(mySidenav){
+            mySidenav.style.width = '0';
+        }
+        if(main){
+            main.style.marginLeft = '0';
+        }
+        
 	}
 
     

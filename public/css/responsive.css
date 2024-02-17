@@ -20,7 +20,7 @@
 .think_you .big_s {width: 100%;}
 .children_search .form-group {width: 90%;}
 .children_search .Bg_green_light {padding: 20px;}
-.children_search .Bg_green_light ul li {width: 50%;}
+.children_search .Bg_green_light ul li {width: 90%;}
 .test_monial_slider .owl-prev {left: 0;}
 .test_monial_slider .owl-next {right: 0;}
 .main_menu .head_menus nav { display: none;}
@@ -47,6 +47,25 @@
 .ApplY_data .nav li {width: 100%;}
 #pinBoot .divid_sect .item {width: 100%;}
 #pinBoot .divid_sect {margin:0}
+
+.children_search .explanation {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form_starts_mobile{
+    display: flex !important;
+    flex-direction: column;
+}
+.form_starts_desktop{
+    display: none !important;
+}
+.innear_search .form_start{
+    width: 100%;
+    border-radius: 12px;
+}
+
 
 }
 

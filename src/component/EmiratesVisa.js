@@ -159,7 +159,7 @@ const EmiratesVisa = () => {
                     <div className="width_set">
                         <div className="form_start">
                             <form method="post" action="">
-                                <div className="form_starts">
+                                <div className="form_starts form_starts_desktop">
 
                                     <div className="name">Choose your Nationality</div>
                                     <div className="values">
@@ -212,6 +212,59 @@ const EmiratesVisa = () => {
                                     <button type="button" className="inear_ser_btn" onClick={e => onFormSubmit(e)}>Submit </button>
 
                                 </div>
+                                <div className="form_starts form_starts_mobile">
+
+<div className="name">Choose your Nationality</div>
+<div className="values mt-2">
+    <select
+        className="iner_new"
+        name='citizen'
+        id='citizen'
+        onChange={e => onTextFieldChange(e)}
+        value={leadData.citizen || ""}
+
+    >
+        <option value=''>--Select--</option>
+        {
+            allCountry && allCountry.length > 0 ?
+                allCountry.map((item, index) => (
+                    citizen == item.countryNameSlug ?
+                        <option key={index + 1} selected value={item.countryNameSlug}>{item.name}</option>
+                        :
+                        <option key={index + 1} value={item.countryNameSlug}>{item.name}</option>
+
+                )) :
+                ''
+        }
+    </select>
+</div>
+
+<div className="name mt-2">You are Travelling From</div>
+<div className="values mt-2">
+    <select
+        name='traveling'
+        id='traveling'
+        onChange={e => onTextFieldChange(e)}
+        value={leadData.traveling || ""}
+        className="iner_new"
+    >
+        <option value=''>--Select--</option>
+        {
+            allCountry && allCountry.length > 0 ?
+                allCountry.map((item, index) => (
+                    travelling == item.countryNameSlug ?
+                        <option selected key={index + 1} value={item.countryNameSlug}>{item.name}</option>
+                        :
+                        <option key={index + 1} value={item.countryNameSlug}>{item.name}</option>
+                )) :
+                ''
+        }
+    </select>
+</div>
+
+<button type="button" className="inear_ser_btn mt-3" onClick={e => onFormSubmit(e)}>Submit </button>
+
+</div>
                             </form>
                         </div>
                     </div>
