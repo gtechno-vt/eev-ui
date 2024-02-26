@@ -110,7 +110,6 @@ const EmiratesVisa = () => {
     
         navigate('/apply-visa/' + ids + '/' + newCitizen + '/' + travelling);
     }
-
     // = Form Submit #END Here...
 
     useEffect(() => {
@@ -118,19 +117,24 @@ const EmiratesVisa = () => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, []);
 
+   const  convertCitizen = (citizen) => {
+           let str = citizen[0].toUpperCase()+ citizen.slice(1)
+           return str;
+    }
+
 
     return (
         <>
           <Helmet>
-        <title>Official Emirates Visa For {citizen} Citizen In 24 Hours</title>
-        <meta name="description" content={`Apply Emirates Visa Online For ${citizen} Citizen From Anywhere. Fill UAE Visa Application Form In 2 Minute, Make Payment and Get Visa Copy In Email.`}/>
-        <meta name="keywords" content={`emirates e visa online, emirates visa for ${citizen} passport holder, apply uae visa for ${citizen} citizen, visit visa online for ${citizen} citizen, emirates business visa for ${citizen} citizen, emirates visa from ${citizen}, emirates visa documents requirement for ${citizen} nationals, uae visa fees, apply emirates visa for ${citizen} nationals, emirates e visa processing time, emirates e visa fees`} />
-        <meta itemprop="name" content={`Official Emirates Visa For ${citizen} Citizen In 24 Hours`} />
-        <meta itemprop="description" content={`Apply Emirates Visa Online For ${citizen} Citizen From Anywhere. Fill UAE Visa Application Form In 2 Minute, Make Payment and Get Visa Copy In Email.`} />
-        <meta name="og:title" content={`Official Emirates Visa For ${citizen} Citizen In 24 Hours`}/>
-        <meta name="og:description" content={`Apply Emirates Visa Online For ${citizen} Citizen From Anywhere. Fill UAE Visa Application Form In 2 Minute, Make Payment and Get Visa Copy In Email.`}/>
-        <meta name="twitter:title" content={`Official Emirates Visa For ${citizen} Citizen In 24 Hours`}/>
-        <meta name="twitter:description" content={`Apply Emirates Visa Online For ${citizen} Citizen From Anywhere. Fill UAE Visa Application Form In 2 Minute, Make Payment and Get Visa Copy In Email.`}/>
+        <title>Official Emirates Visa For {convertCitizen(citizen)} Citizen In 24 Hours</title>
+        <meta name="description" content={`Apply Emirates Visa Online For ${convertCitizen(citizen)} Citizen From Anywhere. Fill UAE Visa Application Form In 2 Minute, Make Payment and Get Visa Copy In Email.`}/>
+        <meta name="keywords" content={`emirates e visa online, emirates visa for ${convertCitizen(citizen)} passport holder, apply uae visa for ${convertCitizen(citizen)} citizen, visit visa online for ${convertCitizen(citizen)} citizen, emirates business visa for ${convertCitizen(citizen)} citizen, emirates visa from ${convertCitizen(citizen)}, emirates visa documents requirement for ${convertCitizen(citizen)} nationals, uae visa fees, apply emirates visa for ${convertCitizen(citizen)} nationals, emirates e visa processing time, emirates e visa fees`} />
+        <meta itemprop="name" content={`Official Emirates Visa For ${convertCitizen(citizen)} Citizen In 24 Hours`} />
+        <meta itemprop="description" content={`Apply Emirates Visa Online For ${convertCitizen(citizen)} Citizen From Anywhere. Fill UAE Visa Application Form In 2 Minute, Make Payment and Get Visa Copy In Email.`} />
+        <meta name="og:title" content={`Official Emirates Visa For ${convertCitizen(citizen)} Citizen In 24 Hours`}/>
+        <meta name="og:description" content={`Apply Emirates Visa Online For ${convertCitizen(citizen)} Citizen From Anywhere. Fill UAE Visa Application Form In 2 Minute, Make Payment and Get Visa Copy In Email.`}/>
+        <meta name="twitter:title" content={`Official Emirates Visa For ${convertCitizen(citizen)} Citizen In 24 Hours`}/>
+        <meta name="twitter:description" content={`Apply Emirates Visa Online For ${convertCitizen(citizen)} Citizen From Anywhere. Fill UAE Visa Application Form In 2 Minute, Make Payment and Get Visa Copy In Email.`}/>
         <link rel="canonical" href={`https://www.emiratesevisaonline.com/emirates-visa/${citizen}/${travelling}`} />
       </Helmet>
             <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>

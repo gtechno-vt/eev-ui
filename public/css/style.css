@@ -2610,3 +2610,10 @@ color: #fe0000;
 .form_starts_desktop{
     display: flex !important;
 }
+.pagination-btn{
+    cursor: pointer;
+}
+.pagination-btn:disabled{
+    color: gray;
+    cursor: not-allowed;
+}

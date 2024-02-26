@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import ApiLoader from './ApiLoader';
 
 const TrackVisaApplication = () => {
 
@@ -10,11 +11,13 @@ const TrackVisaApplication = () => {
     const {id} = useParams();
     const [track, setTrack] = useState({
         appId: id || ""
-    })
+    });
+    const [showApiLoader, setShowApiLoader] = useState(false);
     const navigate = useNavigate();
+    const inputRef  = useRef()
 
     async function onTextFieldChange(e) {
-
+  console.log(e,"sjdjdjdjd");
         setTrack({
             ...track,
             [e.target.name]: e.target.value
@@ -23,14 +26,15 @@ const TrackVisaApplication = () => {
 
     async function onFormSubmit(e) {
         e.preventDefault()
-        
-        if(track.appId == ''){
+        if(inputRef.current.value === ''){
             document.getElementById("appId").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
             
             try {
-                const trackApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${track.appId}`);
+                setShowApiLoader(true);
+                const trackApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${inputRef.current.value}`);
+                setShowApiLoader(false);
                 setTrackData(trackApi.data);
             } catch (error) {
                 alert("Something is Wrong");
@@ -54,7 +58,29 @@ const TrackVisaApplication = () => {
 
     const dateFormatString = 'd MMMM, yyyy';
 
-    
+    const handleKeyPress = async (e) => {
+          e.preventDefault();
+          if(e.key === "Enter"){
+            console.log("Call here coming",track.appId);
+            if(inputRef.current.value === ""){
+                console.log("Call here coming",track.appId);
+                document.getElementById("appId").style.border = "1px solid red";
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                console.log("Call here coming",track.appId);
+                try {
+                    setShowApiLoader(true);
+                    const trackApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${inputRef.current.value}`);
+                    setShowApiLoader(false);
+                    setTrackData(trackApi.data);
+                } catch (error) {
+                    alert("Something is Wrong");
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+          }
+    }
+
   return (
     <>
      <Helmet>
@@ -70,6 +96,7 @@ const TrackVisaApplication = () => {
         <link rel="canonical" href="https://www.emiratesevisaonline.com/track-visa-application" />
       </Helmet>
         <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+        {showApiLoader && <ApiLoader />}
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
@@ -103,9 +130,11 @@ const TrackVisaApplication = () => {
                                             type="text" 
                                             name='appId'
                                             id='appId'
-                                            value={track.appId || ""} 
+                                            // value={track.appId || ""} 
                                             onChange={e => onTextFieldChange(e)} 
                                             placeholder="Enter Reference Number" 
+                                            onKeyUp={handleKeyPress}
+                                            ref={inputRef}
                                         />
                                     </div>
 

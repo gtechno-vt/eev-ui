@@ -2,39 +2,43 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { Helmet } from 'react-helmet';
+import ApiLoader from './ApiLoader';
 
 const EmiratesVisaTypes = () => {
 
   const [visaType, setVisaType] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [nextPage, setNextPage] = useState(1);
+  const [totalPagesCount,setTotalPagesCount] = useState(1);
+  const [limit,setLimit] = useState(15);
+  const [showApiLoader, setShowApiLoader] = useState(false);
 
   const fetchData = async (page) => {
-    const limit = 15;
     const offset = (page - 1) * limit;
-
     try {
+      setShowApiLoader(true);
       const response = await axios.get(
         `https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/0/48?limit=${limit}&offset=${offset}`
       );
+      setShowApiLoader(false)
       setVisaType(response.data); 
-      if(response.data.length == 0){
-        setNextPage(0); 
-        setCurrentPage(page-1)
-      } else {
-        setNextPage(1); 
-      }
+      // if(response.data.length == 0){
+      //   // setNextPage(0); 
+      //   setCurrentPage(page-1)
+      // } else {
+      //   // setNextPage(1); 
+      // }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
   useEffect(() => {
-    fetchData(currentPage);
-  }, [currentPage]);
+    fetchData(1);
+  }, []);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
+    fetchData(newPage);
   };
 
   /*
@@ -74,6 +78,7 @@ const EmiratesVisaTypes = () => {
         <link rel="canonical" href="https://www.emiratesevisaonline.com/emirates-visa-types" />
       </Helmet>
         <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }} >
+        {showApiLoader && <ApiLoader />}
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
@@ -138,7 +143,7 @@ const EmiratesVisaTypes = () => {
                             
 
                         )) :
-                        ''
+                        !showApiLoader && <div className='my-3'>No data Found</div>
                     }
 
 
@@ -148,37 +153,26 @@ const EmiratesVisaTypes = () => {
                 <nav aria-label="Page navigation example">
                     <ul className="pagination">
                       <li className="page-item">
-                        {
-                          currentPage === 1 ? 
-                            <a
-                              className="page-link"
-                            >
-                              Previous
-                            </a>
-                          :
-                            <a
-                              className="page-link"
+                       
+                          
+                            <button
+                              className="page-link pagination-btn"
+                              disabled={currentPage === 1 ? true : false}
                               onClick={() => handlePageChange(currentPage - 1)}
-                              disabled={currentPage === 1}
                             >
                               Previous
-                            </a>
-                        }
+                            </button>
                       
                       </li>
-                      <li className="page-item"><a className="page-link">{currentPage}</a></li>
+                      <li className="page-item"><button className="page-link">{currentPage}</button></li>
                       <li className="page-item">
-                      {
-
-                        nextPage == 1 ? 
-                          <a className="page-link" onClick={() => handlePageChange(currentPage + 1)}>
+                          <button
+                           className="page-link pagination-btn" 
+                           onClick={() => handlePageChange(currentPage + 1)}
+                           disabled={currentPage === totalPagesCount ? true : false}
+                           >
                             Next
-                          </a>
-                        :
-                          <a className="page-link">
-                            Last
-                          </a>
-                      }
+                          </button>
                       
                       </li>
                     </ul>
