@@ -21,6 +21,10 @@ const EmiratesVisaTypes = () => {
       );
       setShowApiLoader(false)
       setVisaType(response.data); 
+      if(Number(response?.headers["total-count"])){
+        setTotalPagesCount(Math.ceil(Number(response.headers["total-count"])/limit))
+        // setTotalPagesCount(Math.ceil(40/limit))
+      }
       // if(response.data.length == 0){
       //   // setNextPage(0); 
       //   setCurrentPage(page-1)
@@ -169,7 +173,7 @@ const EmiratesVisaTypes = () => {
                           <button
                            className="page-link pagination-btn" 
                            onClick={() => handlePageChange(currentPage + 1)}
-                           disabled={currentPage === totalPagesCount ? true : false}
+                           disabled={currentPage === totalPagesCount || totalPagesCount == 0  ? true : false}
                            >
                             Next
                           </button>

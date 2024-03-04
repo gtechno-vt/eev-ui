@@ -53,6 +53,9 @@ const TrackVisaApplication = () => {
 
     useEffect(() => {
 		// 👇️ scroll to top on page load
+        if(id){
+            inputRef.current.value = id
+        }
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 	}, []);
 
