@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import OwlCarousel from 'react-owl-carousel';
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css';
 import axios from 'axios';
-import $ from 'jquery';
 
 const HomeHCustomer = () => {
   const [happyHomeCustomer, setHappyHomeCustomer] = useState([]);
   const [startIndex,setStartIndex] = useState(0);
   const myRef = useRef(null);
-  console.log(myRef?.current?.offsetWidth,"myRef");
+  
   useEffect(() => {
     getHappyCustomerInfo();
   }, []);
@@ -22,17 +18,6 @@ const HomeHCustomer = () => {
       console.log("Something went wrong:", error);
     }
   }
-
-  const options = {
-    items: 3,
-    // Add other options as needed
-  };
-
-  useEffect(() => {
-    if ($.fn.owlCarousel) {
-      $('.owl-carousel').owlCarousel(options);
-    }
-  }, [happyHomeCustomer]);
 
  const corouselArrowClick = (click) => {
    if(click === "next"){
@@ -88,32 +73,6 @@ const HomeHCustomer = () => {
               )}
             </div>
             <span  className="corousel-backward-arrow" alt="" onClick={() => corouselArrowClick("next")}>&#8250;</span>
-            {/* 
-            <OwlCarousel className="owl-theme" {...options} >
-              {happyHomeCustomer && happyHomeCustomer.length > 0 ? (
-                happyHomeCustomer.map((item, index) => (
-                  <div key={index}>
-                    <article className="white-panel">
-                      <div className="fg_review">
-                        <h3>{item.userName}</h3>
-                        <ul>
-                          <li><i className="fa fa-star"></i></li>
-                          <li><i className="fa fa-star"></i></li>
-                          <li><i className="fa fa-star"></i></li>
-                          <li><i className="fa fa-star"></i></li>
-                          <li><i className="fa fa-star"></i></li>
-                        </ul>
-                      </div>
-                      <h4>{item.subject}</h4>
-                      <p>{item.text}</p>
-                    </article>
-                  </div>
-                ))
-              ) : (
-                <div>Nothing Found !!!</div>
-              )}
-            </OwlCarousel>
-            */}
           </div>
         </div>
       </section>
