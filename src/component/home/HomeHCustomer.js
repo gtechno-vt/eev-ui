@@ -15,17 +15,14 @@ const HomeHCustomer = () => {
       const happyCustomerApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/reviews/site/2`);
       setHappyHomeCustomer(happyCustomerApi.data);
     } catch (error) {
-      console.log("Something went wrong:", error);
     }
   }
 
  const corouselArrowClick = (click) => {
    if(click === "next"){
      if(myRef?.current?.offsetWidth && (Number(myRef?.current?.offsetWidth)  >= 768)){
-        console.log(happyHomeCustomer.length,startIndex,"dfdf");
         setStartIndex(prev => happyHomeCustomer?.length-2 === prev+1 ? prev : prev+1);
       }else{
-      console.log("call here");
         setStartIndex(prev => happyHomeCustomer?.length === prev+1 ? prev : prev+1);
       }
     }else{

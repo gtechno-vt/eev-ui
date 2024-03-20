@@ -32,7 +32,6 @@ const Contact = () => {
       const siteInfoApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-info/2`)
       setSiteInfo(siteInfoApi.data);
     } catch (error) {
-      console.log("Something is Wrong");
     }
   }
 
@@ -67,10 +66,6 @@ const Contact = () => {
       document.getElementById("userMobile").style.borderColor = "red";
       isAllRequiredDataFilled = false;
     } 
-    //  if (!lead.subject) {
-    //   document.getElementById("subject").style.borderColor = "red";
-    //   isAllRequiredDataFilled = false;
-    // } 
     if (!lead.text) {
       document.getElementById("text").style.borderColor = "red";
       isAllRequiredDataFilled = false;
@@ -99,7 +94,6 @@ const Contact = () => {
             return () => clearTimeout(timeoutId);
           });
       } catch (error) {
-        console.log(error);
         alert("Something is Wrong");
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }

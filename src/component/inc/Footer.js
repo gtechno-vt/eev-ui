@@ -23,7 +23,6 @@ const Footer = () => {
 
 
 			} catch (error) {
-				console.log("Something is Wrong");
 			}
 		}
       

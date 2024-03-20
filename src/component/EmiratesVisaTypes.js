@@ -23,14 +23,7 @@ const EmiratesVisaTypes = () => {
       setVisaType(response.data); 
       if(Number(response?.headers["total-count"])){
         setTotalPagesCount(Math.ceil(Number(response.headers["total-count"])/limit))
-        // setTotalPagesCount(Math.ceil(40/limit))
       }
-      // if(response.data.length == 0){
-      //   // setNextPage(0); 
-      //   setCurrentPage(page-1)
-      // } else {
-      //   // setNextPage(1); 
-      // }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -45,24 +38,7 @@ const EmiratesVisaTypes = () => {
     fetchData(newPage);
   };
 
-  /*
-  useEffect(() => {
-    getVisaType();
-  }, []);
-
-    async function getVisaType() {
-        try {
-            const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/0/48`)
-            setVisaType(visaTypeApi.data);
-        } catch (error) {
-            console.log("Something is Wrong Visa Type");
-        }
-    }
-    */
-
-
     useEffect(() => {
-		// 👇️ scroll to top on page load
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 	}, []);
 

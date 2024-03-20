@@ -25,14 +25,7 @@ const EmiratesVisaBlog = () => {
           setSiteBlogs(response.data); 
           if(Number(response?.headers["total-count"])){
             setTotalPagesCount(Math.ceil(Number(response.headers["total-count"])/limit))
-            // setTotalPagesCount(Math.ceil(40/limit))
           }
-          // if(response.data.length == 0){
-          //   setNextPage(0); 
-          //   setCurrentPage(page-1)
-          // } else {
-          //   setNextPage(1); 
-          // }
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -46,23 +39,6 @@ const EmiratesVisaBlog = () => {
         setCurrentPage(newPage);
         fetchData(newPage);
       };
-
-
-
-    /*
-    useEffect(() => {
-        getSiteBlogs();
-    }, []);
-
-    async function getSiteBlogs() {
-        try {
-        const siteBlogApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/blog/basic/2`)
-            setSiteBlogs(siteBlogApi.data);
-        } catch (error) {
-            console.log("Something is Wrong");
-        }
-    }
-    */
 
     useEffect(() => {
 		// 👇️ scroll to top on page load

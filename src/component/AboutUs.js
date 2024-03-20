@@ -15,7 +15,6 @@ const AboutUs = () => {
         const siteInfoApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-info/2`)
             setSiteInfo(siteInfoApi.data);
         } catch (error) {
-        console.log("Something is Wrong");
         }
     }
 
@@ -61,14 +60,7 @@ const AboutUs = () => {
         <section className="pad_fix_50 aboutus">
         <div className="container">
             <div className="row">
-                {/* 
-                <div className="col-md-12">
-                    <div className="prt_single_image-wrapper">
-                        <img className="img-fluid" src="../img/about_01.png" />
-                    </div>
-                </div>
-                */}
-
+                
                 <div className="col-md-12">
                     <div className="content_ab">
 

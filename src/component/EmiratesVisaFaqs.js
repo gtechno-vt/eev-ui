@@ -25,14 +25,8 @@ const EmiratesVisaFaqs = () => {
       setSiteFaq(response.data); 
       if(Number(response?.headers["total-count"])){
         setTotalPagesCount(Math.ceil(Number(response.headers["total-count"])/limit))
-        // setTotalPagesCount(Math.ceil(40/limit))
       }
-      // if(response.data.length == 0){
-      //   setNextPage(0); 
-      //   setCurrentPage(page-1)
-      // } else {
-      //   setNextPage(1); 
-      // }
+      
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -46,21 +40,6 @@ const EmiratesVisaFaqs = () => {
     setCurrentPage(newPage);
     fetchData(newPage);
   };
-
-  /*
-  useEffect(() => {
-    async function getSiteInfo() {
-
-    try {
-        const siteFaqApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-faq/site/2`)
-        setSiteFaq(siteFaqApi.data);
-      } catch (error) {
-        console.log("Something is Wrong");
-      }
-    }
-    getSiteInfo();
-  }, []);
-  */
 
   useEffect(() => {
 		// 👇️ scroll to top on page load

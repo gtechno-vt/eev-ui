@@ -44,7 +44,6 @@ const ApplyVisa = ({update,appId,doc}) => {
                 const countryApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/country/basic`)
                 setShowApiLoader(false);
                 setAllCountry(countryApi.data);
-                console.log(countryApi.data);
                 if(citizen){
                     const citizenCountryAllData = countryApi.data.find(ele => ele.countryNameSlug === citizen);
                     setCitizenData(citizenCountryAllData.id);
@@ -59,7 +58,6 @@ const ApplyVisa = ({update,appId,doc}) => {
                 }
             } catch (error) {
                 setShowApiLoader(false);
-                console.log("Something is Wrong");
             }
         }
 
@@ -71,15 +69,12 @@ const ApplyVisa = ({update,appId,doc}) => {
                 setVisaType(visaTypeApi.data);
                 if(visa){
                     const singlevisaVar = visaTypeApi.data.find(ele => ele.slugVisaVariantName === visa);
-                    console.log(singlevisaVar);
                     if (singlevisaVar) {
                         setVisaVariant(singlevisaVar.id)
                     }
                 }
-                console.log(visaTypeApi.data);
             } catch (error) {
                 setShowApiLoader(false);
-                console.log("Something is Wrong Visa Type");
             }
         }
 
@@ -91,7 +86,6 @@ const ApplyVisa = ({update,appId,doc}) => {
                 setEducation(educationApi.data);
             } catch (error) {
                 setShowApiLoader(false);
-                console.log("Something is Wrong Visa Type");
             }
         }
 
@@ -103,7 +97,6 @@ const ApplyVisa = ({update,appId,doc}) => {
                 setProfession(professionApi.data);
             } catch (error) {
                 setShowApiLoader(false);
-                console.log("Something is Wrong Visa Type");
             }
         }
 
@@ -115,7 +108,6 @@ const ApplyVisa = ({update,appId,doc}) => {
                 setPurposeOfVisit(purposeApi.data);
             } catch (error) {
                 setShowApiLoader(false);
-                console.log("Something is Wrong Visa Type");
             }
         }
 
@@ -165,10 +157,8 @@ const ApplyVisa = ({update,appId,doc}) => {
                 setEducationF(edu);
               
                
-                // console.log(applicationApi.data);
             } catch (error) {
                 setShowApiLoader(false);
-                console.log("Something is Wrong",error);
             }
         }
 
@@ -184,33 +174,8 @@ const ApplyVisa = ({update,appId,doc}) => {
 
 
 
-    // useEffect(() => {
-
-    //     // async function getCityCounrtyId(){
-    //     //     try {
-    //     //         const cityCountryApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/country/slug-name/${citizen}`)
-    //     //         setCitizenData(cityCountryApi.data.id);
-    //     //     } catch (error) {
-    //     //         console.log("Something is Wrong Visa Type");
-    //     //     }
-    //     // }
-
-    //     // async function getTravelCounrtyId(){
-    //     //     try {
-    //     //         const travellingCountryApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/country/slug-name/${travelling}`)
-    //     //         setTravellingData(travellingCountryApi.data.id);
-    //     //     } catch (error) {
-    //     //         console.log("Something is Wrong Visa Type");
-    //     //     }
-    //     // }
-
-
-    //     // getCityCounrtyId();
-    //     // getTravelCounrtyId();
-    // }, [citizen, travelling]);
-
-    // === Form Submit Start Here -=====
-    async function onTextFieldChange(e) {
+   
+       async function onTextFieldChange(e) {
         setLeadData({
             ...leadData,
             [e.target.name]: e.target.value
@@ -218,8 +183,6 @@ const ApplyVisa = ({update,appId,doc}) => {
     }
 
     const handleRadioChange = (e,val) => {
-        console.log(val,typeof val);
-            console.log(e.target.checked);
             setLeadData({
                 ...leadData,
                 [e.target.name]: val
@@ -227,7 +190,6 @@ const ApplyVisa = ({update,appId,doc}) => {
     
     }
 
-    // const [citizenshipCountry, setCitizenshipCountry] = useState("");
     async function onCitizen(e) {
         setCitizenData(e.target.value)
         setShowApiLoader(true);
@@ -263,10 +225,8 @@ const ApplyVisa = ({update,appId,doc}) => {
     function OnProfessionF(e) {
         if (e.target.value == 'other') {
             setProfessionF('other')
-            // document.getElementById('customProfessionLabel').style.display = "block";
         } else {
             setProfessionF(Number(e.target.value))
-            // document.getElementById('customProfessionLabel').style.display = "none";
         }
     }
 
@@ -275,10 +235,8 @@ const ApplyVisa = ({update,appId,doc}) => {
         
         if (e.target.value == 'other') {
             setEducationF("other")
-            // document.getElementById('customEducationLabel').style.display = "block";
         } else {
             setEducationF(Number(e.target.value))
-            // document.getElementById('customEducationLabel').style.display = "none";
         }
     }
 
@@ -289,13 +247,11 @@ const ApplyVisa = ({update,appId,doc}) => {
                     ...leadData,
                     [e.target.name]:"other",
                 })
-                // document.getElementById('purposeOfVisitTextLabel').style.display = "block";
             } else {
                 setLeadData({
                     ...leadData,
                     [e.target.name]: Number(e.target.value)
                 })
-                // document.getElementById('purposeOfVisitTextLabel').style.display = "none";
             }
         }
        
@@ -308,39 +264,28 @@ const ApplyVisa = ({update,appId,doc}) => {
 
             axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/document/${id}/PASSPORT/upload`, formData)
                 .then((res) => {
-                    console.log(res);
                 }).catch(error => {
-                    console.log("My Error Passport-" + error);
                     window.scrollTo({ top: 0, behavior: 'smooth' });        
                 })
             }
 
 
         if(selectedFilePhoto){
-
             const formDataPhoto = new FormData();
             formDataPhoto.append("file", selectedFilePhoto);
-
             axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/document/${id}/PHOTOGRAPH/upload`, formDataPhoto)
                 .then((res) => {
-                    console.log(res);
                 }).catch(error => {
-                    console.log("My Error Photo-" + error);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
-        
         }
 
         if(selectedFileDoc){
-
             const formDataDoc = new FormData();
             formDataDoc.append("file", selectedFileDoc);
-
             axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/document/${id}/OTHER/upload`, formDataDoc)
                 .then((res) => {
-                    console.log(res);
                 }).catch(error => {
-                    console.log("My Error Doc-" + error);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
        
@@ -425,15 +370,8 @@ const ApplyVisa = ({update,appId,doc}) => {
         document.getElementById("address").style.border = "1px solid #ccc";
         document.getElementById("city").style.border = "1px solid #ccc";
         document.getElementById("state").style.border = "1px solid #ccc";
-        // document.getElementById("residenceCountry").style.border = "1px solid #ccc";
         document.getElementById("postalCode").style.border = "1px solid #ccc";
         document.getElementById("passportNumber").style.border = "1px solid #ccc";
-        // document.getElementById("passportExpiryDateDay").style.border = "1px solid #ccc";
-        // document.getElementById("passportExpiryDateMonth").style.border = "1px solid #ccc";
-        // document.getElementById("passportExpiryDateYear").style.border = "1px solid #ccc";
-        // document.getElementById("arrivalDateDay").style.border = "1px solid #ccc";
-        // document.getElementById("arrivalDateMonth").style.border = "1px solid #ccc";
-        // document.getElementById("arrivalDateYear").style.border = "1px solid #ccc";
         document.getElementById("passportExpiryDate").style.border = "1px solid #ccc";
         document.getElementById("arrivalDate").style.border = "1px solid #ccc";
 
@@ -463,14 +401,6 @@ const ApplyVisa = ({update,appId,doc}) => {
             document.getElementById("firstName").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
         }
-        //  else if (leadData.lastName == undefined) {
-        //     document.getElementById("lastName").style.border = "1px solid red";
-        //     window.scrollTo({ top: 0, behavior: 'smooth' });
-        // } 
-        // else if (leadData.dob == undefined) {
-        //     document.getElementById("dob").style.border = "1px solid red";
-        //     window.scrollTo({ top: 0, behavior: 'smooth' });
-        // } 
          if (!leadData.emailId || !isValidEmail(leadData.emailId)) {
             document.getElementById("emailId").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
@@ -514,13 +444,9 @@ const ApplyVisa = ({update,appId,doc}) => {
             isAllRequiredDataFilled = false;
         } 
          if (leadData.uaeVisit == undefined) {
-            // document.getElementById("arrivalDate").style.border = "1px solid red";
-            // window.scrollTo({ top: 0, behavior: 'smooth' });
             isAllRequiredDataFilled = false;
         }  
          if (leadData.KnowUae == undefined) {
-            // document.getElementById("arrivalDate").style.border = "1px solid red";
-            // window.scrollTo({ top: 0, behavior: 'smooth' });
             isAllRequiredDataFilled = false;
         } 
          if (!leadData.address) {
@@ -534,30 +460,12 @@ const ApplyVisa = ({update,appId,doc}) => {
          if (!leadData.state) {
             document.getElementById("state").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
-        }
-        // else if (leadData.residenceCountry == undefined) {
-        //     document.getElementById("residenceCountry").style.border = "1px solid red";
-        //     window.scrollTo({ top: 0, behavior: 'smooth' });
-        // } 
-        // else if (leadData.postalCode == undefined) {
-        //     document.getElementById("postalCode").style.border = "1px solid red";
-        //     window.scrollTo({ top: 0, behavior: 'smooth' });
-        // } 
+        } 
          if (!leadData.passportNumber) {
             document.getElementById("passportNumber").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
         } 
-        // else if (!leadData.passportExpiryDateDay) {
-        //     document.getElementById("passportExpiryDateDay").style.border = "1px solid red";
-        //     window.scrollTo({ top: 0, behavior: 'smooth' });
-        // } else if (!leadData.passportExpiryDateMonth ) {
-        //     document.getElementById("passportExpiryDateMonth").style.border = "1px solid red";
-        //     window.scrollTo({ top: 0, behavior: 'smooth' });
-        // } else if (!leadData.passportExpiryDateYear) {
-        //     document.getElementById("passportExpiryDateYear").style.border = "1px solid red";
-        //     window.scrollTo({ top: 0, behavior: 'smooth' });
-        // } 
-
+         
          if (!leadData.passportExpiryDate) {
             document.getElementById("passportExpiryDate").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
@@ -566,21 +474,7 @@ const ApplyVisa = ({update,appId,doc}) => {
             document.getElementById("arrivalDate").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
         } 
-        
-       
-
-
-        // else if (!leadData.arrivalDateDay) {
-        //     document.getElementById("arrivalDateDay").style.border = "1px solid red";
-        //     window.scrollTo({ top: 0, behavior: 'smooth' });
-        // } 
-        // else if (!leadData.arrivalDateMonth) {
-        //     document.getElementById("arrivalDateMonth").style.border = "1px solid red";
-        //     window.scrollTo({ top: 0, behavior: 'smooth' });
-        // } else if (!leadData.arrivalDateYear) {
-        //     document.getElementById("arrivalDateYear").style.border = "1px solid red";
-        //     window.scrollTo({ top: 0, behavior: 'smooth' });
-        // } 
+         
         if(isAllRequiredDataFilled) {
             try {
               if(update){
@@ -624,7 +518,6 @@ const ApplyVisa = ({update,appId,doc}) => {
                 setShowApiLoader(false)
                 document.getElementById("succ_message").style.display = "block";
                 document.getElementById("alert_message").innerHTML = error;
-                console.log(error);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }else{
@@ -650,7 +543,6 @@ const ApplyVisa = ({update,appId,doc}) => {
     const currentYear = new Date().getFullYear();
     const years = Array.from({ length: 20 }, (_, index) => currentYear + index);
     const todayDate =  new Date().toJSON().slice(0,10);
-    console.log(leadData, "leadData");
     return (
         <>
            <Helmet>
@@ -1166,27 +1058,6 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                     </div>
                                                 </div>
 
-                                                {/* <div className="col-md-3">
-                                                    <div className="form-group">
-                                                        <label>Country </label>
-                                                        <select
-                                                            name="residenceCountry"
-                                                            id='residenceCountry'
-                                                            onChange={e => onTextFieldChange(e)}
-                                                            value={leadData.residenceCountry}
-                                                        >
-                                                            <option value="">-- select one --</option>
-                                                            {
-                                                                allCountry && allCountry.length > 0 ?
-                                                                    allCountry.map((item, index) => (
-                                                                        <option key={index + 1} value={item.id}>{item.name}</option>
-                                                                    )) :
-                                                                    ''
-                                                            }
-                                                        </select>
-                                                    </div>
-                                                </div> */}
-
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Zipcode / Pincode / Postal Code</label>
@@ -1231,92 +1102,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                     <div className="form-group">
                                                         <label>Passport Expiry Date <sup>*</sup></label>
 
-                                                        {/* <div className="date_gap"> */}
-                                                            {/* <select
-                                                                name="passportExpiryDateDay"
-                                                                id='passportExpiryDateDay'
-                                                                onChange={e => onTextFieldChange(e)}
-                                                                value={leadData.passportExpiryDateDay}
-                                                            >
-                                                                <option value="">Day</option>
-                                                                <option value="01">01</option>
-                                                                <option value="02">02</option>
-                                                                <option value="03">03</option>
-                                                                <option value="04">04</option>
-                                                                <option value="05">05</option>
-                                                                <option value="06">06</option>
-                                                                <option value="07">07</option>
-                                                                <option value="08">08</option>
-                                                                <option value="09">09</option>
-                                                                <option value="10">10</option>
-                                                                <option value="11">11</option>
-                                                                <option value="12">12</option>
-                                                                <option value="13">13</option>
-                                                                <option value="14">14</option>
-                                                                <option value="15">15</option>
-                                                                <option value="16">16</option>
-                                                                <option value="17">17</option>
-                                                                <option value="18">18</option>
-                                                                <option value="19">19</option>
-                                                                <option value="20">20</option>
-                                                                <option value="21">21</option>
-                                                                <option value="22">22</option>
-                                                                <option value="23">23</option>
-                                                                <option value="24">24</option>
-                                                                <option value="25">25</option>
-                                                                <option value="26">26</option>
-                                                                <option value="27">27</option>
-                                                                <option value="28">28</option>
-                                                                <option value="29">29</option>
-                                                                <option value="30">30</option>
-                                                                <option value="31">31</option> */}
-                                                                {/* 
-                                                                {numbers.map((number, index) => (
-                                                                    <option key={index} value={number}>{number}</option>
-                                                                ))}
-                                                                */}
-                                                            {/* </select> */}
-{/* 
-                                                            <select
-                                                                name="passportExpiryDateMonth"
-                                                                id='passportExpiryDateMonth'
-                                                                onChange={e => onTextFieldChange(e)}
-                                                                value={leadData.passportExpiryDateMonth}
-                                                            >
-                                                                <option value="">Month</option>
-                                                                <option value="01">January</option>
-                                                                <option value="02">February</option>
-                                                                <option value="03">March</option>
-                                                                <option value="04">April</option>
-                                                                <option value="05">May</option>
-                                                                <option value="06">June</option>
-                                                                <option value="07">July</option>
-                                                                <option value="08">August</option>
-                                                                <option value="09">September</option>
-                                                                <option value="10">October</option>
-                                                                <option value="21">November</option>
-                                                                <option value="12">December</option> */}
-                                                                {/* 
-                                                                {months.map((month, index) => (
-                                                                    <option key={index} value={month}>{month}</option>
-                                                                ))}
-                                                                */}
-
-                                                            {/* </select> */}
-
-                                                            {/* <select
-                                                                name="passportExpiryDateYear"
-                                                                id='passportExpiryDateYear'
-                                                                onChange={e => onTextFieldChange(e)}
-                                                                value={leadData.passportExpiryDateYear}
-                                                            >
-                                                                <option value="">Year</option>
-                                                                {years.map((year, index) => (
-                                                                    <option key={index} value={year}>{year}</option>
-                                                                ))}
-                                                            </select> */}
-
-                                                        {/* </div> */}
+                                                        
                                                         <input
                                                             name='passportExpiryDate'
                                                             id='passportExpiryDate'
@@ -1335,85 +1121,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                     <div className="form-group">
                                                         <label>Arrival Date <sup>*</sup></label>
 
-                                                        {/* <div className="date_gap">
-                                                            <select
-                                                                name="arrivalDateDay"
-                                                                id='arrivalDateDay'
-                                                                onChange={e => onTextFieldChange(e)}
-                                                                value={leadData.arrivalDateDay}
-                                                            >
-                                                                <option value="">Day</option>
-                                                                <option value="01">01</option>
-                                                                <option value="02">02</option>
-                                                                <option value="03">03</option>
-                                                                <option value="04">04</option>
-                                                                <option value="05">05</option>
-                                                                <option value="06">06</option>
-                                                                <option value="07">07</option>
-                                                                <option value="08">08</option>
-                                                                <option value="09">09</option>
-                                                                <option value="10">10</option>
-                                                                <option value="11">11</option>
-                                                                <option value="12">12</option>
-                                                                <option value="13">13</option>
-                                                                <option value="14">14</option>
-                                                                <option value="15">15</option>
-                                                                <option value="16">16</option>
-                                                                <option value="17">17</option>
-                                                                <option value="18">18</option>
-                                                                <option value="19">19</option>
-                                                                <option value="20">20</option>
-                                                                <option value="21">21</option>
-                                                                <option value="22">22</option>
-                                                                <option value="23">23</option>
-                                                                <option value="24">24</option>
-                                                                <option value="25">25</option>
-                                                                <option value="26">26</option>
-                                                                <option value="27">27</option>
-                                                                <option value="28">28</option>
-                                                                <option value="29">29</option>
-                                                                <option value="30">30</option>
-                                                                <option value="31">31</option>
-                                                              
-                                                            </select>
-
-                                                            <select
-                                                                name="arrivalDateMonth"
-                                                                id='arrivalDateMonth'
-                                                                onChange={e => onTextFieldChange(e)}
-                                                                value={leadData.arrivalDateMonth}
-                                                            >
-                                                                <option value="">Month</option>
-                                                                <option value="01">January</option>
-                                                                <option value="02">February</option>
-                                                                <option value="03">March</option>
-                                                                <option value="04">April</option>
-                                                                <option value="05">May</option>
-                                                                <option value="06">June</option>
-                                                                <option value="07">July</option>
-                                                                <option value="08">August</option>
-                                                                <option value="09">September</option>
-                                                                <option value="10">October</option>
-                                                                <option value="21">November</option>
-                                                                <option value="12">December</option>
-
-                                                               
-
-                                                            </select>
-
-                                                            <select
-                                                                name="arrivalDateYear"
-                                                                id='arrivalDateYear'
-                                                                onChange={e => onTextFieldChange(e)}
-                                                                value={leadData.arrivalDateYear}
-                                                            >
-                                                                <option value="">Year</option>
-                                                                {years.map((year, index) => (
-                                                                    <option key={index} value={year}>{year}</option>
-                                                                ))}
-                                                            </select>
-
-                                                        </div> */}
+                                                       
                                                          <input
                                                             name='arrivalDate'
                                                             id='arrivalDate'
@@ -1453,14 +1161,8 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             className="form-control"
                                                             onChange={e => setSelectedFile(e.target.files[0])}
                                                         />
-                                                        {/* <input type="file" onChange={handleFileChange} /> */}
                                                     </div>
-                                                    {/* <div className="form-group pic">
-                                                        <div className="set">
-                                                            <img id="blah" src="../img/passport.jpg" alt="your image" />
-                                                        </div>
-                                                        <label>Colored Passport copy</label>
-                                                    </div> */}
+                                                    
                                                 </div>
 
                                                 <div className="col-md-4">
@@ -1476,12 +1178,6 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             className="form-control"
                                                         />
                                                     </div>
-                                                    {/* <div className="form-group pic">
-                                                        <div className="set">
-                                                            <img id="blah1" src="../img/dummy-avatar.jpg" alt="your image" />
-                                                        </div>
-                                                        <label>Colored photograph</label>
-                                                    </div> */}
                                                 </div>
 
                                                 <div className="col-md-4">
@@ -1497,12 +1193,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             onChange={e => setSelectedFileDoc(e.target.files[0])}
                                                         />
                                                     </div>
-                                                    {/* <div className="form-group pic">
-                                                        <div className="set">
-                                                            <img id="blah1" src="../img/dummy-avatar.jpg" alt="your image" />
-                                                        </div>
-                                                        <label>Colored photograph</label>
-                                                    </div> */}
+                                                    
                                                 </div>
 
                                                 <div className="col-md-12">

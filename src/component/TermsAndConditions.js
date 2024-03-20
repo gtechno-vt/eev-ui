@@ -15,7 +15,6 @@ const TermsAndConditions = () => {
         const siteInfoApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-info/2`)
             setSiteInfo(siteInfoApi.data);
         } catch (error) {
-        console.log("Something is Wrong");
         }
     }
 

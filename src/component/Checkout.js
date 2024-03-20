@@ -33,7 +33,6 @@ const Checkout = () => {
             })
         } else {
             const item = serviceType.find(ele => ele.id == e.target.value);
-            console.log(item);
             setPaymentDetails(prevState => {
                 return {
                     ...prevState,
@@ -47,11 +46,7 @@ const Checkout = () => {
         async function getApplicationDetails() {
             try {
                 setShowApiLoader(true);
-                // const appApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant/${id}`)
-                // setApplicationDetails(appApi.data.application);
-
                 const applicatntApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${id}`)
-                console.log(applicatntApi);
                 setLoading(false);
                 if(!(applicatntApi?.data[0]?.application?.status === "PAYMENT PENDING" || applicatntApi?.data[0]?.application?.status === "PAYMENT PROCESSING" || applicatntApi?.data[0]?.application?.status === "DRAFT")){
                     navigate(`/track-visa-application/${id}`)
@@ -85,11 +80,9 @@ const Checkout = () => {
             } catch (error) {
                 setShowApiLoader(false);
                 setLoading(false)
-                console.log("Something is Wrong Visa Type");
             }
         }
 
-        // getApplicatDetails();
         getApplicationDetails();
 
 
@@ -110,9 +103,7 @@ const Checkout = () => {
                         taxPercent: siteInfoApi.data.vatPc
                     };
                 })
-                console.log(siteInfoApi.data);
             } catch (error) {
-                console.log("Something is Wrong");
             }
         }
         getSiteInfo();
@@ -124,23 +115,7 @@ const Checkout = () => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, []);
 
-    // useEffect(() => {
-    //  const {visaFees,serviceFees,noOfApplicant,taxPercent} = paymentDetails;
-    //  console.log("useEffect call");
-    //     if(visaFees && serviceFees && noOfApplicant && taxPercent){
-    //         const taxAmt = (((noOfApplicant*visaFees)+serviceFees)/100) * taxPercent;
-    //         const totalPayable = taxAmt+(noOfApplicant*visaFees)+serviceFees;
-
-    //         // setPaymentDetails( prevState => {
-    //         //     return {...prevState,
-    //         //         totalTax:taxAmt,
-    //         //         netPay:totalPayable
-    //         //     };
-    //         //   })
-    //     }
-
-    // },[paymentDetails]);
-
+   
     const totalTax = (((paymentDetails.noOfApplicant * paymentDetails.visaFees) + (paymentDetails.noOfApplicant * paymentDetails.serviceFees)) * paymentDetails.taxPercent / 100);
     const netPay = (paymentDetails.noOfApplicant * paymentDetails.visaFees) + (paymentDetails.noOfApplicant * paymentDetails.serviceFees) + ((paymentDetails.noOfApplicant * paymentDetails.visaFees + (paymentDetails.noOfApplicant * paymentDetails.serviceFees)) / 100) * paymentDetails.taxPercent
 
@@ -161,12 +136,10 @@ const Checkout = () => {
                     "Content-Type": "application/json"
                 }
             })
-            console.log(res, "reds");
             if (res.data) {
                 window.location.href = res.data;
             }
         } catch (error) {
-            console.log(error);
         }
 
     }
@@ -175,7 +148,6 @@ const Checkout = () => {
         setPaymentMethod(e.target.value)
     }
 
-    console.log(paymentDetails, "paymentDetails");
     return (
         loading ? <div>Loading ....</div> :
         <>

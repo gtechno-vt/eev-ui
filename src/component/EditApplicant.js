@@ -12,15 +12,12 @@ const EditApplicant = () => {
     const [displayId,setDisplayId] = useState(null);
  
     useEffect(() => {
-
-
         async function getApplicationDetails() {
             try {
                 const appApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant/${id}`)
                 setPrimary(prev => appApi.data.isPrimary || appApi.data.isPrimary === false ? appApi.data.isPrimary : null)
                 setDisplayId(appApi.data.application.displayId);
             } catch (error) {
-                console.log("Something is Wrong Visa Type");
             }
         }
 
@@ -54,11 +51,9 @@ const EditApplicant = () => {
                          }
                     }
                       
-                    console.log(data,"datats");
                     setDocumentFiles(data);
                 }
             } catch (error) {
-                console.log("Something is Wrong Visa Type",error);
             }
         }
         getApplicationDetails();

@@ -12,7 +12,6 @@ function HomeWhy() {
         const whyUsApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-why-choose-us/site/2`)
             setWhyUs(whyUsApi.data);
         } catch (error) {
-            console.log("Something is Wrong");
         }
     }
     getWhyUs();

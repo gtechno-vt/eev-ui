@@ -19,7 +19,6 @@ function HomeContinent() {
             const uniqueContinent = [...new Set(countryData.map(country => country.continentKey))];
             setContinent(uniqueContinent);
         } catch (error) {
-            console.log("Something is Wrong Contenent");
         }
     }
 
@@ -41,7 +40,6 @@ function HomeContinent() {
             const uniqueContinent = [...new Set(countryData.map(country => country.continentKey))];
             setContinent(uniqueContinent);
         } catch (error) {
-            console.log("Something is Wrong Contenent");
         }
 	}
 

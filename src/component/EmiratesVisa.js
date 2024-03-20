@@ -18,7 +18,7 @@ const EmiratesVisa = () => {
     });
     const [homeVisa, setHomeVisa] = useState([]);
     const [allCountry, setAllCountry] = useState([]);
-
+    const [selectedId,setSelectedId] = useState("")
     //== = 
     useEffect(() => {
         async function getCountry() {
@@ -31,7 +31,6 @@ const EmiratesVisa = () => {
             } catch (error) {
                 setAllCountry([]);
                 setShowApiLoader(false)
-                console.log("Something is Wrong");
             }
         }
         getCountry();
@@ -39,7 +38,6 @@ const EmiratesVisa = () => {
     //====
 
     async function getVisaType({data,citizen}) {
-        console.log(data);
         const countryData = data && data.length > 0 ? data : allCountry;
         try {
             const newCitizen = citizen ? citizen : leadData.citizen;
@@ -49,15 +47,13 @@ const EmiratesVisa = () => {
             const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/${id}/48?fetchImages=false`)
             setShowApiLoader(false)
             setHomeVisa(visaTypeApi.data);
-            console.log(visaTypeApi.data);
+            setSelectedId(visaTypeApi?.data[0]?.id || 0)
         } catch (error) {
             setHomeVisa([]);
             setShowApiLoader(false)
-            console.log("Something is Wrong Visa Type");
         }
     }
 
-    // === Form Submit Start Here -=====
     async function onTextFieldChange(e) {
         if(e.target.name === "citizen"){
             setHomeVisa([]);
@@ -325,7 +321,7 @@ const EmiratesVisa = () => {
                                                 homeVisa && homeVisa.length > 0 ?
                                                     homeVisa.map((item, index) => (
 
-                                                        <li key={index + 1} role="presentation" className={index == 0 ? 'active' : '' + "brand-nav" + index == 1 ? 'busine_s' : '' + " " + index == 2 ? 'black' : 'busine_s'}>
+                                                        <li key={index + 1} role="presentation" className={selectedId == item.id  ? 'active' : ''} onClick={() => setSelectedId(item.id)}>
                                                             <a href={"#tab" + (index + 1)} aria-controls={"#tab" + (index + 1)} role="tab" data-toggle="tab">{item.name}</a>
                                                         </li>
 
@@ -345,7 +341,7 @@ const EmiratesVisa = () => {
 
                                             {
                                                 homeVisa && homeVisa.length > 0 ?
-                                                    homeVisa.map((item, index) => (
+                                                    homeVisa.filter(ele => ele.id == selectedId).map((item, index) => (
 
                                                         <>
 

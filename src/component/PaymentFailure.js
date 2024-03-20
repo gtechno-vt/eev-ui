@@ -8,19 +8,15 @@ const PaymentFailure = () => {
     const { search } = useLocation(); 
     const orderId = search?.replace("?","")?.split("=")[1];
 
-    console.log(orderId);
 
     const updatePaymentDetails = async() => {
         const data = {
             applicationDisplayId: id,
             orderId,
          }
-         console.log(data);
          try {
             const res = await axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/payment/payment-info`, data)
-            console.log(res);
          } catch (error) {
-            console.log(error);
          }
     }
 

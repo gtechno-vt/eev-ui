@@ -13,7 +13,6 @@ function HomeFaq() {
         const siteFaqApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-faq/site/2`)
         setSiteFaq(siteFaqApi.data);
       } catch (error) {
-        console.log("Something is Wrong");
       }
     }
     getSiteInfo();

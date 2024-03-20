@@ -42,7 +42,6 @@ function HomeBanner() {
 				const countryApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/country/basic`)
 				setAllCountry(countryApi.data);
 			} catch (error) {
-				console.log("Something is Wrong");
 			}
 		}
 
@@ -52,7 +51,6 @@ function HomeBanner() {
 				const siteInfoApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-info/2`)
 				setSiteInfo(siteInfoApi.data);
 			} catch (error) {
-				console.log("Something is Wrong");
 			}
 		}
 

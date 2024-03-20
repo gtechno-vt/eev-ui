@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
-import axios from 'axios';
+import React, { useEffect, } from 'react';
+
 
 import HomeBanner from "./home/HomeBanner";
 import HomeVisaStep from "./home/HomeVisaStep";
@@ -12,6 +11,14 @@ import HomeHCustomer from "./home/HomeHCustomer";
 import HomeFaq from "./home/HomeFaq";
 import { Helmet } from 'react-helmet';
 
+// const HomeBanner = lazy(() => import("./home/HomeBanner"));
+// const HomeVisaStep = lazy(() => import("./home/HomeVisaStep"));
+// const HomeVisa = lazy(() => import("./home/HomeVisa"));
+// const HomeWhy = lazy(() => import("./home/HomeWhy"));
+// const HomeThings = lazy(() => import("./home/HomeThings"));
+// const HomeContinent = lazy(() => import("./home/HomeContinent"));
+// const HomeHCustomer = lazy(() => import("./home/HomeHCustomer"));
+// const HomeFaq = lazy(() => import("./home/HomeFaq"));
 
 const Home = () => {
 
@@ -34,7 +41,8 @@ const Home = () => {
         <meta name="twitter:description" content='Visit Emirates E Visa Online Application Form, Apply Emirates E Visa from Anywhere and Get It By Email. Apply Visit Visa, Tourist Visa,Transit Visa and Business Visa.'/>
         <link rel="canonical" href="https://www.emiratesevisaonline.com" />
       </Helmet>
-      <HomeBanner />
+     {/* <Suspense fallback={<div>loading...</div>}> */}
+     <HomeBanner />
       <HomeVisaStep />
       <HomeVisa />
       <HomeWhy />
@@ -43,6 +51,7 @@ const Home = () => {
       <HomeHCustomer />
       <HomeFaq />
 
+     {/* </Suspense> */}
     </>
   )
 };

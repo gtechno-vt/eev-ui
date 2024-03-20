@@ -14,7 +14,6 @@ const BlogDetail = () => {
                 const siteBlogApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/blog/${id}`)
                 setSiteBlogs(siteBlogApi.data);
             } catch (error) {
-                console.log("Something is Wrong");
             }
         }
 

@@ -12,7 +12,6 @@ const CustomerReview = () => {
     const [showApiLoader, setShowApiLoader] = useState(false);
 
     const fetchData = async (page) => {
-        // const limit = 15;
         const offset = (page - 1) * limit;
     
         try {
@@ -24,14 +23,7 @@ const CustomerReview = () => {
           setSiteReviews(response.data); 
           if(Number(response?.headers["total-count"])){
             setTotalPagesCount(Math.ceil(Number(response.headers["total-count"])/limit))
-            // setTotalPagesCount(Math.ceil(40/limit))
           }
-          // if(response.data.length == 0){
-          //   setNextPage(0); 
-          //   setCurrentPage(page-1)
-          // } else {
-          //   setNextPage(1); 
-          // }
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -47,20 +39,7 @@ const CustomerReview = () => {
       };
 
 
-    /*
-    useEffect(() => {
-        getSiteInfo();
-    }, []);
-
-    async function getSiteInfo() {
-        try {
-        const siteReviewsApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/reviews/site/2`)
-            setSiteReviews(siteReviewsApi.data);
-        } catch (error) {
-        console.log("Something is Wrong");
-        }
-    }
-    */
+    
 
     useEffect(() => {
 		// 👇️ scroll to top on page load

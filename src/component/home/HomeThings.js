@@ -12,7 +12,6 @@ function HomeThings() {
         const thingApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/country/48`)
             setHomeThings(thingApi.data);
         } catch (error) {
-            console.log("Something is Wrong");
         }
     }
     getThings();
