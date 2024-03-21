@@ -56,7 +56,7 @@ function HomeVisaStep() {
             </div>
 
             <div className="step_img">
-                <img src="img/OBJECTS.svg" />
+                <img src="img/OBJECTS.svg"  alt='object'/>
             </div>
 
         </div>

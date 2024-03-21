@@ -328,7 +328,7 @@ const Checkout = () => {
                                             value="Stripe"
                                             checked={paymentMethod === "Stripe" ? true : false}
                                         />
-                                        <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe" />
+                                        <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe-logo" />
                                     </div>
                                      <div>
                                         <input
@@ -339,7 +339,7 @@ const Checkout = () => {
                                             value="PayPal"
                                             checked={paymentMethod === "PayPal" ? true : false}
                                         />
-                                        <img className='ml-1' src="../img/paypalicon.png" alt="stripe" />
+                                        <img className='ml-1' src="../img/paypalicon.png" alt="paypal-logo" />
                                     </div> 
                                     <div>
                                         <input
@@ -350,7 +350,7 @@ const Checkout = () => {
                                             value="PhonePe"
                                             checked={paymentMethod === "PhonePe" ? true : false}
                                         />
-                                        <img style={{height:"30px"}} src="../img/phonepeicon.png" alt="stripe" />
+                                        <img style={{height:"30px"}} src="../img/phonepeicon.png" alt="phonepe-logo" />
 
                                     </div>
                                 </div>

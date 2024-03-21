@@ -69,7 +69,7 @@ const StepsToApplyEmiratesVisa = () => {
                     </div>
 
                     <div className="Step_img">
-                        <img src="../img/steps/step1.jpg" />
+                        <img src="../img/steps/step1.jpg" alt='step1' />
                     </div>
 
 
@@ -98,7 +98,7 @@ const StepsToApplyEmiratesVisa = () => {
                     </div>
 
                     <div className="Step_img">
-                        <img src="../img/steps/step2.jpg" />
+                        <img src="../img/steps/step2.jpg" alt='step2'/>
                     </div>
 
 
@@ -127,7 +127,7 @@ const StepsToApplyEmiratesVisa = () => {
                     </div>
 
                     <div className="Step_img">
-                        <img src="../img/steps/step3.jpg" />
+                        <img src="../img/steps/step3.jpg" alt='step3' />
                     </div>
 
 
@@ -157,7 +157,7 @@ const StepsToApplyEmiratesVisa = () => {
                     </div>
 
                     <div className="Step_img">
-                        <img src="../img/steps/step4.jpg" />
+                        <img src="../img/steps/step4.jpg" alt='step4'/>
                     </div>
 
 

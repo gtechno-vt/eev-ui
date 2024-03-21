@@ -92,7 +92,7 @@ const Header = () => {
                     <div className="logo_togle">
                         <div className="logo">
                             <Link to="/">
-                                <img src="/img/logo.png" />
+                                <img src="/img/logo.png"  alt='logo'/>
                             </Link>
                         </div>
 
@@ -111,36 +111,36 @@ const Header = () => {
                             <ul>
                                 <li className={location.pathname === '/' ? 'active' : ''}>
                                     <Link to="/">
-                                        <img src="/img/icons/10.png" />
+                                        <img src="/img/icons/10.png" alt='home'/>
                                         <span>Home </span></Link></li>
 
                                 <li className={location.pathname === '/steps-to-apply-emirates-visa' ? 'active' : ''}><Link to="/steps-to-apply-emirates-visa">
-                                        <img src="/img/icons/11.png" />
+                                        <img src="/img/icons/11.png" alt='apply'/>
                                         <span>How To Apply</span></Link></li>
 
                                 <li className={location.pathname === '/emirates-visa-types' ? 'active' : ''}><Link to="/emirates-visa-types">
-                                        <img src="/img/icons/12.png" />
+                                        <img src="/img/icons/12.png" alt='visatypes'/>
                                         <span>Emirates Visa Type</span></Link>
                                 
 
                                 </li>
 
                                 <li className={location.pathname === '/track-visa-application' ? 'active' : ''}><Link to="/track-visa-application">
-                                        <img src="/img/icons/13.png" />
+                                        <img src="/img/icons/13.png" alt='status'/>
                                         <span>Track Visa Status</span></Link></li>
 
                                 <li className={location.pathname === '/apply-now' ? 'active' : ''}><Link to="/apply-now">
-                                        <img src="/img/icons/14.png" />
+                                        <img src="/img/icons/14.png"  alt='urgentvisa'/>
                                         <span>Urgent Visa</span></Link></li>
 
                                 <li className={location.pathname === '/contact-us' ? 'active' : ''}><Link to="/contact-us">
-                                        <img src="/img/icons/15.png" />
+                                        <img src="/img/icons/15.png" alt='contact' />
                                         <span>Contact Us</span></Link></li>
                             </ul>
                             <div className="head_whatsapp">
                                 <a target='_blank' href={"https://api.whatsapp.com/send?phone="+siteInfo.whatsAppNumber+"&text=Hello"}
                                     data-toggle="tooltip" data-placement="top" title={siteInfo.whatsAppNumber}> <img
-                                        src="/img/vector.png" />
+                                        src="/img/vector.png" alt='expressvisa'/>
                                     <span>Apply Express Visa </span> </a>
                             </div>
                         </nav>
@@ -158,7 +158,7 @@ const Header = () => {
         <div className="sidenavg">
             <div className="logo">
                 <Link to="/">
-                    <img src="/img/logo.png" />
+                    <img src="/img/logo.png" alt='sedelogo'/>
                 </Link>
             </div>
             <div className="mobile_menu" id="mob_notify">

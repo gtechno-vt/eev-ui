@@ -275,22 +275,22 @@ const Contact = () => {
                       <ul>
                         <li>
                           <a target='_blank' href="https://www.facebook.com/emiratesevisasonline">
-                            <img src="../img/icons/fb.png" />
+                            <img src="../img/icons/fb.png" alt='fbicon' />
                           </a>
                         </li>
                         <li>
                           <a target='_blank' href="https://www.instagram.com/emiratesevisaonline">
-                            <img src="../img/icons/insta.png" />
+                            <img src="../img/icons/insta.png" alt='instaicon' />
                           </a>
                         </li>
                         <li>
                           <a target='_blank' href="https://www.linkedin.com/company/emiratesevisaonline">
-                            <img src="../img/icons/linke.png" />
+                            <img src="../img/icons/linke.png" alt='linkeicon'/>
                           </a>
                         </li>
                         <li>
                           <a target='_blank' href="https://twitter.com/EmirateseVisa01">
-                            <img src="../img/icons/tw.png" />
+                            <img src="../img/icons/tw.png" alt='twiticon'/>
                           </a>
                         </li>
                       </ul>

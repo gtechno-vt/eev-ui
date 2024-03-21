@@ -57,7 +57,7 @@ const BlogDetail = () => {
                         <div className="col-md-12">
                             <div className="all_content_blog">
                                 <div className="cmt-post-featured">
-                                    <img className="img-fluid" src={`data:image/png;base64,${siteBlogs.image}`} alt="" />
+                                    <img className="img-fluid" src={`data:image/png;base64,${siteBlogs.image}`} alt="bloginfo" />
                                     <div className="cmt-box-post-date">
                                         <span className="cmt-entry-date">
                                             {siteBlogs.createdAt ? format(siteBlogs.createdAt, dateFormatString) : '-'}

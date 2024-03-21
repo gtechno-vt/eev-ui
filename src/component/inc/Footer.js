@@ -40,7 +40,7 @@ const Footer = () => {
                 <div className="col-md-5">
                     <div className="logo_ftr">
 
-                        <img src="/img/logo.png" />
+                        <img src="/img/logo.png" alt='logo'/>
                         <div className="logo_content">
                             <p> {siteInfo.footerText}</p>
                         </div>
@@ -93,14 +93,14 @@ const Footer = () => {
                         </div>
 
                         <div className="ad">
-                            <div className="icon"><img src="/img/icons/location.png" /></div>
+                            <div className="icon"><img src="/img/icons/location.png" alt='location'/></div>
                             <div className="addres">
                                 <p>{siteInfo.address} </p>
                             </div>
                         </div>
 
                         <div className="ad">
-                            <div className="icon"><img src="/img/icons/email.png" /></div>
+                            <div className="icon"><img src="/img/icons/email.png" alt='email'/></div>
                             <div className="addres">
                                 <p>{siteInfo.emailAddress}</p>
                             </div>
@@ -115,7 +115,7 @@ const Footer = () => {
                         </ul>
 
                         <div className="ftr_pay">
-                            <img src="/img/payment.webp" />
+                            <img src="/img/payment.webp" alt='payment'/>
                         </div>
 
                     </div>

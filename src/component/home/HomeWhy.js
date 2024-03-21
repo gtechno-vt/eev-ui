@@ -37,7 +37,7 @@ function HomeWhy() {
                             <div className="col-md-4" key={index+1}>
                                 <div className="green_box">
                                     <div className="img">
-                                        <img src={`data:image/png;base64,${item.pointImage}`} alt={item.pointText} />
+                                        <img src={`data:image/png;base64,${item.pointImage}`} alt='pointimg' />
                                     </div>
                                     <div className="content">
                                         <p>{item.pointText}</p>

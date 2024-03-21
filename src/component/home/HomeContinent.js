@@ -102,7 +102,7 @@ function HomeContinent() {
 
                                             itemV.continentKey == item ?
                                                 <li key={indexs+1}>
-                                                    <Link to={'/emirates-visa/' + itemV.countryNameSlug +'/'+ itemV.countryNameSlug}>{itemV.name}<img src="img/svg/arrow.svg" /></Link>
+                                                    <Link to={'/emirates-visa/' + itemV.countryNameSlug +'/'+ itemV.countryNameSlug}>{itemV.name}<img src="img/svg/arrow.svg" alt='arrow' /></Link>
                                                 </li>
                                             :
                                             ''
