@@ -78,7 +78,7 @@ function HomeVisa() {
 
                                                                             <div className="pricingTable-header">
                                                                                 <span className="price-value">
-                                                                                    {itemV.visaFee} 
+                                                                                    {itemV.visaFee} USD
                                                                                 </span>
                                                                             </div>
 
