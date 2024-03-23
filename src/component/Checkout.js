@@ -330,7 +330,7 @@ const Checkout = () => {
                                         />
                                         <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe-logo" />
                                     </div>
-                                     <div>
+                                     {/*<div>
                                         <input
                                             type="radio"
                                             name='payments-method'
@@ -340,7 +340,7 @@ const Checkout = () => {
                                             checked={paymentMethod === "PayPal" ? true : false}
                                         />
                                         <img className='ml-1' src="../img/paypalicon.png" alt="paypal-logo" />
-                                    </div> 
+                                    </div> */}
                                     <div>
                                         <input
                                             type="radio"
