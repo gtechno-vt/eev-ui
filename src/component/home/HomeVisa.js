@@ -5,6 +5,7 @@ function HomeVisa() {
 
   const [homeVisa, setHomeVisa] = useState([]);
   const [homeVisaType, setHomeVisaType] = useState([]);
+  const [selectedTab,setSelectedTab] = useState("Tourist Visa");
 
   useEffect(() => {
     getVisaType();
@@ -24,7 +25,7 @@ function HomeVisa() {
   return (
 
 
-    <section className="visa_detail_home">
+<section className="visa_detail_home">
         <div className="container">
             <div className="row">
                 <div className="col-md-12">
@@ -44,11 +45,9 @@ function HomeVisa() {
                                     {
                                         homeVisaType && homeVisaType.length > 0 ?
                                         homeVisaType.map((item, index) => (
-                                           
-                                            <li key={index+1} role="presentation" className={index == 0 ? 'active' : '' +"brand-nav" + index == 1 ? 'busine_s' : '' + " " + index == 2 ? 'black' : 'busine_s'}>
+                                            <li key={index+1} role="presentation" className={selectedTab === item ? 'active' : ''} onClick={() => setSelectedTab(item)}>
                                                 <a href={"#tab"+(index+1)} aria-controls={"#tab"+(index+1)} role="tab" data-toggle="tab">{item}</a>
                                             </li>
-
                                         )) :
                                         ''
                                     }
@@ -69,7 +68,7 @@ function HomeVisa() {
                                                             homeVisa && homeVisa.length > 0 ?
                                                             homeVisa.map((itemV, indexs) => (
 
-                                                                itemV.visaType.name == item ?
+                                                                itemV.visaType.name == selectedTab ?
                                                                     <div key={indexs+1} className="col-md-3">
                                                                         <div className="big_box">
                                                                             <div className="title">
