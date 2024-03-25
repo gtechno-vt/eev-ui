@@ -112,7 +112,7 @@ a {text-decoration:none}
 
 .main_menu .head_menus nav ul li a{color: #000;display: flex;flex-wrap: wrap;justify-content: center;}
 .main_menu .logo {}
-.main_menu .logo img{width:100%}
+/* .main_menu .logo img{width:100%} */
 
 .head_whatsapp {}
 .head_whatsapp a {
@@ -389,11 +389,11 @@ a {text-decoration:none}
     overflow: hidden;
     border-top-right-radius: 10px;
 }
-.tab_visa .brand-pills li.active a{
+.tab_visa .brand-pills li.active span{
     background: #00732e;
     color: #ffffff;
 }
-.tab_visa .brand-pills li a{
+.tab_visa .brand-pills li span{
     background: #ddd8d8;
     padding: 9px;
     display: block;
@@ -401,6 +401,7 @@ a {text-decoration:none}
     text-align: center;
     font-size: 18px;
     color: #444444;
+    cursor: pointer;
 }
 .tab_visa .tab-content {
 }

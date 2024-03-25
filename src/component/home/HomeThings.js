@@ -25,7 +25,7 @@ function HomeThings() {
                 <div className="col-md-12">
                     <div className="d-flex">
                         <div className="big_s">
-                            <img src={`data:image/png;base64,${homeThings.countryImage}`} alt='countryimg'/>
+                            <img src="/img/CountryImage.png" loading="lazy" alt='countryimg'/>
                         </div>
                         <div className="content">
                             <h3>Things to be done on arrival in {homeThings.name}</h3>

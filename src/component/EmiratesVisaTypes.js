@@ -92,7 +92,7 @@ const EmiratesVisaTypes = () => {
                                 <div className="col-md-4" key={index+1}>
                                     <div className="visaBox">
                                         <div className="visaimg">
-                                            <img className="lazy" src={`data:image/png;base64,${item.visaVariantImage}`} alt='visavarientimg' />
+                                            <img className="lazy" src={`data:image/png;base64,${item.visaVariantImage}`} alt='visavarientimg' loading="lazy"/>
                                         </div>
                                         <div className="visatextBox">
 

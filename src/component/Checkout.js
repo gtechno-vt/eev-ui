@@ -328,7 +328,7 @@ const Checkout = () => {
                                             value="Stripe"
                                             checked={paymentMethod === "Stripe" ? true : false}
                                         />
-                                        <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe-logo" />
+                                        <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe-logo" loading="lazy"/>
                                     </div>
                                      {/*<div>
                                         <input
@@ -350,7 +350,7 @@ const Checkout = () => {
                                             value="PhonePe"
                                             checked={paymentMethod === "PhonePe" ? true : false}
                                         />
-                                        <img style={{height:"30px"}} src="../img/phonepeicon.png" alt="phonepe-logo" />
+                                        <img style={{height:"30px"}} src="../img/phonepeicon.png" alt="phonepe-logo" loading="lazy"/>
 
                                     </div>
                                 </div>

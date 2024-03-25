@@ -61,7 +61,7 @@ function HomeBanner() {
 
   return (
     <section className="banner">
-        <img src="img/david-rodrigo-Fr6zexbmjmc-unsplash.png" alt="banner" />
+        {/* <img src="img/david-rodrigo-Fr6zexbmjmc-unsplash.png" alt="banner" /> */}
 
         <div className="ban_content">
             <div className="container">
@@ -78,7 +78,7 @@ function HomeBanner() {
                         </div>
                         <form>
                             <div className="form-group">
-                                <label>Citizenship </label>
+                                <label htmlFor='citizen'>Citizenship </label>
                                 <select 
                                     className="form-control" 
                                     name='citizen'
@@ -99,7 +99,7 @@ function HomeBanner() {
                             </div>
 
                             <div className="form-group">
-                                <label>Traveling from </label>
+                                <label htmlFor='traveling'>Traveling from </label>
                                 <select 
                                      name='traveling'
                                      id='traveling'
