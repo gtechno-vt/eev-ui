@@ -109,7 +109,7 @@ const Footer = () => {
                         <ul className="social-links clearfix">
                         <li>
   <a href="https://www.facebook.com/emiratesevisasonline" className="facebook-link" aria-label="Facebook">
-    <span classname="fa fa-facebook-f" aria-hidden="true"></span>
+    <span className="fa fa-facebook-f" aria-hidden="true"></span>
     <span className="sr-only">Facebook</span> 
   </a>
 </li>
