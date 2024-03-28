@@ -2,12 +2,14 @@
     font-family: Creato Display;
     font-weight: 700;
     src: url("../font/CreatoDisplay-Bold.otf") format("opentype");
+    font-display: swap;
 }
 
 @font-face {
     font-family: Creato Display;
     font-weight: 400;
     src: url("../font/CreatoDisplay-Regular.otf") format("opentype");
+    font-display: swap;
 }
 
 body {font-family: Creato Display;}
