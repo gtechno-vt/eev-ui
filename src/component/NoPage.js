@@ -49,7 +49,7 @@ const NoPage = () => {
       <div className='error_404'>
 
         <div className='container d-flex flex-column align-items-center'>
-          <img src="/img/404_page-not-found.webp" alt='notfound'/>
+          <img src="/img/404_page-not-found.webp" alt='notfound' loading="lazy"/>
           <div className='d-flex w100 justify-content-center'>
           <button  className="black-btn" onClick={() => navigate(`/`)}>Home</button>
           <button  className="green-btn ml-2" onClick={() => navigate(`/apply-now`)}>Apply for Visa</button>

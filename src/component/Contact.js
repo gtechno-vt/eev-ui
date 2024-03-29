@@ -274,23 +274,43 @@ const Contact = () => {
                       <h3>Follow Us: </h3>
                       <ul>
                         <li>
-                          <a target='_blank' href="https://www.facebook.com/emiratesevisasonline">
-                            <img src="../img/icons/fb.png" alt='fbicon' />
+                          <a 
+                          target='_blank' 
+                          aria-label="Visit our Facebook page"
+                          href="https://www.facebook.com/emiratesevisasonline"
+                          rel="noopener noreferrer"
+                          >
+                            <img src="../img/icons/fb.png" alt='fbicon' loading="lazy"/>
                           </a>
                         </li>
                         <li>
-                          <a target='_blank' href="https://www.instagram.com/emiratesevisaonline">
-                            <img src="../img/icons/insta.png" alt='instaicon' />
+                          <a 
+                          target='_blank' 
+                          href="https://www.instagram.com/emiratesevisaonline"
+                          aria-label="Visit our Instagram page"
+                          rel="noopener noreferrer"
+                          >
+                            <img src="../img/icons/insta.png" alt='instaicon' loading="lazy"/>
                           </a>
                         </li>
                         <li>
-                          <a target='_blank' href="https://www.linkedin.com/company/emiratesevisaonline">
-                            <img src="../img/icons/linke.png" alt='linkeicon'/>
+                          <a 
+                          target='_blank' 
+                          href="https://www.linkedin.com/company/emiratesevisaonline"
+                          aria-label="Visit our Linkedin page"
+                          rel="noopener noreferrer"
+                          >
+                            <img src="../img/icons/linke.png" alt='linkeicon' loading="lazy"/>
                           </a>
                         </li>
                         <li>
-                          <a target='_blank' href="https://twitter.com/EmirateseVisa01">
-                            <img src="../img/icons/tw.png" alt='twiticon'/>
+                          <a 
+                          target='_blank' 
+                          href="https://twitter.com/EmirateseVisa01"
+                          aria-label="Visit our Twitter page"
+                          rel="noopener noreferrer"
+                          >
+                            <img src="../img/icons/tw.png" alt='twiticon' loading="lazy"/>
                           </a>
                         </li>
                       </ul>

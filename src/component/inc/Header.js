@@ -9,7 +9,7 @@ const Header = () => {
 
     //const ScrollListenerComponent = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
-    const toggleClass = 'main_menu page-header is-sticky'; // replace 'yourToggleClass' with the actual class you want to toggle
+    const toggleClass = 'main_menu page-header is-sticky'; // replace 'yourToggleClass' with the actuayou want to toggle
     
     useEffect(() => {
         const handleScroll = () => {
@@ -92,7 +92,7 @@ const Header = () => {
                     <div className="logo_togle">
                         <div className="logo">
                             <Link to="/">
-                                <img src="/img/logo.png"  alt='logo'/>
+                                <img src="/img/logo.png"  alt='logo' loading="lazy"  width={280}/>
                             </Link>
                         </div>
 
@@ -111,36 +111,36 @@ const Header = () => {
                             <ul>
                                 <li className={location.pathname === '/' ? 'active' : ''}>
                                     <Link to="/">
-                                        <img src="/img/icons/10.png" alt='home'/>
+                                        <img src="/img/icons/10.png" alt='homelogo' loading="lazy"/>
                                         <span>Home </span></Link></li>
 
                                 <li className={location.pathname === '/steps-to-apply-emirates-visa' ? 'active' : ''}><Link to="/steps-to-apply-emirates-visa">
-                                        <img src="/img/icons/11.png" alt='apply'/>
+                                        <img src="/img/icons/11.png" alt='apply' loading="lazy"/>
                                         <span>How To Apply</span></Link></li>
 
                                 <li className={location.pathname === '/emirates-visa-types' ? 'active' : ''}><Link to="/emirates-visa-types">
-                                        <img src="/img/icons/12.png" alt='visatypes'/>
+                                        <img src="/img/icons/12.png" alt='visatypes' loading="lazy"/>
                                         <span>Emirates Visa Type</span></Link>
                                 
 
                                 </li>
 
                                 <li className={location.pathname === '/track-visa-application' ? 'active' : ''}><Link to="/track-visa-application">
-                                        <img src="/img/icons/13.png" alt='status'/>
+                                        <img src="/img/icons/13.png" alt='status' loading="lazy"/>
                                         <span>Track Visa Status</span></Link></li>
 
                                 <li className={location.pathname === '/apply-now' ? 'active' : ''}><Link to="/apply-now">
-                                        <img src="/img/icons/14.png"  alt='urgentvisa'/>
+                                        <img src="/img/icons/14.png"  alt='urgentvisa' loading="lazy"/>
                                         <span>Urgent Visa</span></Link></li>
 
                                 <li className={location.pathname === '/contact-us' ? 'active' : ''}><Link to="/contact-us">
-                                        <img src="/img/icons/15.png" alt='contact' />
+                                        <img src="/img/icons/15.png" alt='contact' loading="lazy"/>
                                         <span>Contact Us</span></Link></li>
                             </ul>
                             <div className="head_whatsapp">
                                 <a target='_blank' href={"https://api.whatsapp.com/send?phone="+siteInfo.whatsAppNumber+"&text=Hello"}
                                     data-toggle="tooltip" data-placement="top" title={siteInfo.whatsAppNumber}> <img
-                                        src="/img/vector.png" alt='expressvisa'/>
+                                        src="/img/vector.png" alt='expressvisa' loading="lazy"/>
                                     <span>Apply Express Visa </span> </a>
                             </div>
                         </nav>
@@ -158,7 +158,7 @@ const Header = () => {
         <div className="sidenavg">
             <div className="logo">
                 <Link to="/">
-                    <img src="/img/logo.png" alt='sedelogo'/>
+                    <img src="/img/logo.png" alt='sedelogo' loading="lazy"/>
                 </Link>
             </div>
             <div className="mobile_menu" id="mob_notify">

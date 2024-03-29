@@ -92,7 +92,7 @@ const EmiratesVisaBlog = () => {
                             <div className="col-lg-4 col-md-4 col-sm-6" key={index+1}>
                                 <div className="featured-imagebox-post">
                                     <div className="featured-thumbnail">
-                                        <img className="img-fluid" src={`data:image/png;base64,${item.image}`} alt="blogimg" />
+                                        <img className="img-fluid" src={`data:image/png;base64,${item.image}`} alt="blogimg" loading="lazy"/>
                                     </div>
                                     <div className="featured-content">
                                         <div className="post-header">

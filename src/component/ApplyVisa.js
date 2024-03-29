@@ -408,6 +408,7 @@ const ApplyVisa = ({update,appId,doc}) => {
          if (educationF == 'other' && !leadData.customEducation ) {
             document.getElementById("customEducation").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         } 
          if (!professionF && !leadData.customProfession) {
             document.getElementById("professionF").style.border = "1px solid red";
@@ -421,10 +422,12 @@ const ApplyVisa = ({update,appId,doc}) => {
         if ( professionF == 'other' && !leadData.customProfession ) {
             document.getElementById("customProfession").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         } 
         if (leadData.purposeOfVisit == 'other' && !leadData.purposeOfVisitText ) {
             document.getElementById("purposeOfVisitText").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            isAllRequiredDataFilled = false;
         } 
 
          if (!leadData.countryCode) {

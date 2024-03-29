@@ -91,7 +91,7 @@ function HomeContinent() {
 
                         <>
 
-                            <div key={index+1} className="Bg_green_light pd_4">
+                            <div key={Math.floor(Math.random() * (1000000 - 100000 + 1) + 100000)} className="Bg_green_light pd_4">
                                 <h3>{item}</h3>
 
                                 <ul>
@@ -101,8 +101,8 @@ function HomeContinent() {
                                         country.map((itemV, indexs) => (
 
                                             itemV.continentKey == item ?
-                                                <li key={indexs+1}>
-                                                    <Link to={'/emirates-visa/' + itemV.countryNameSlug +'/'+ itemV.countryNameSlug}>{itemV.name}<img src="img/svg/arrow.svg" alt='arrow' /></Link>
+                                                <li key={Math.floor(Math.random() * (1000000 - 100000 + 1) + 100000)}>
+                                                    <Link to={'/emirates-visa/' + itemV.countryNameSlug +'/'+ itemV.countryNameSlug}>{itemV.name}<img src="img/svg/arrow.svg" alt='arrow' loading="lazy"/></Link>
                                                 </li>
                                             :
                                             ''

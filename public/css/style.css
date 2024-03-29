@@ -2,12 +2,14 @@
     font-family: Creato Display;
     font-weight: 700;
     src: url("../font/CreatoDisplay-Bold.otf") format("opentype");
+    font-display: swap;
 }
 
 @font-face {
     font-family: Creato Display;
     font-weight: 400;
     src: url("../font/CreatoDisplay-Regular.otf") format("opentype");
+    font-display: swap;
 }
 
 body {font-family: Creato Display;}
@@ -112,7 +114,7 @@ a {text-decoration:none}
 
 .main_menu .head_menus nav ul li a{color: #000;display: flex;flex-wrap: wrap;justify-content: center;}
 .main_menu .logo {}
-.main_menu .logo img{width:100%}
+/* .main_menu .logo img{width:100%} */
 
 .head_whatsapp {}
 .head_whatsapp a {
@@ -190,7 +192,7 @@ a {text-decoration:none}
 
 /*---------------banner----------------*/
 .banner {
-    background: url('../img/david-rodrigo-Fr6zexbmjmc-unsplash.png');
+    background: url('../img/david-rodrigo.avif');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -368,7 +370,7 @@ a {text-decoration:none}
 .step_home .step_img img{width:100%}
 
 /*--------------------visa_detail_home--------------------*/
-.visa_detail_home {background:url('../img/visa-detail.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;padding: 30px 0;}
+.visa_detail_home {background:url('../img/visa-detail.avif');background-position: center;background-repeat: no-repeat;background-size: cover;padding: 30px 0;}
 .visa_detail_home .title{
     text-align: center;
     margin-bottom: 30px;
@@ -389,11 +391,11 @@ a {text-decoration:none}
     overflow: hidden;
     border-top-right-radius: 10px;
 }
-.tab_visa .brand-pills li.active a{
+.tab_visa .brand-pills li.active span{
     background: #00732e;
     color: #ffffff;
 }
-.tab_visa .brand-pills li a{
+.tab_visa .brand-pills li span{
     background: #ddd8d8;
     padding: 9px;
     display: block;
@@ -401,6 +403,7 @@ a {text-decoration:none}
     text-align: center;
     font-size: 18px;
     color: #444444;
+    cursor: pointer;
 }
 .tab_visa .tab-content {
 }
@@ -461,7 +464,7 @@ a {text-decoration:none}
 
 
 /*-------------------why_us----------------------*/
-.why_us {background:url('../img/saj-shafique-h1Z4CNkncfo-unsplash 2.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;padding: 30px 0;position: relative;overflow: hidden;}
+.why_us {background:url('../img/saj-shafique.avif');background-position: center;background-repeat: no-repeat;background-size: cover;padding: 30px 0;position: relative;overflow: hidden;}
 .why_us:before{content:'';position: absolute;width: 100%;height: 100%;background: #ffffff9c;z-index: 0;top: 0;}
 .why_us .container {position:relative}
 .why_us .title{
@@ -620,7 +623,7 @@ a {text-decoration:none}
 /*----------------children_search------------------*/
 
 /*----------------our_happy_customer------------------*/
-.our_happy_customer {background:url('../img/our_customer.png');background-position: center;background-repeat: no-repeat;background-size: cover;padding: 30px 0;position: relative;background-attachment: fixed;overflow: hidden;}
+.our_happy_customer {background:url('../img/our_customer.avif');background-position: center;background-repeat: no-repeat;background-size: cover;padding: 30px 0;position: relative;background-attachment: fixed;overflow: hidden;}
 .our_happy_customer .title{
     text-align: center;
     position: relative;
@@ -705,7 +708,7 @@ margin-bottom:0    }
 /*----------------our_happy_customer------------------*/
 
 /*----------------Faqs------------------*/
-.faqs {background:url('../img/faq.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;padding: 30px 0 0;position: relative;}
+.faqs {background:url('../img/faq-ezgif.avif');background-position: center;background-repeat: no-repeat;background-size: cover;padding: 30px 0 0;position: relative;}
 .faqs .title{
     text-align: center;
     position: relative;

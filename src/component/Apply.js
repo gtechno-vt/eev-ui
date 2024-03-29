@@ -355,14 +355,14 @@ const Apply = ({update,doc,displayId}) => {
                                 </div>
                                 <form>
                                     
-                                    <div class="box_shadow">
-                                        <div class="title">
+                                    <div className="box_shadow">
+                                        <div className="title">
                                             <h3>Add More Applicant's Details </h3>
                                         </div>
-                                        <div class="box_shadow_pd">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
+                                        <div className="box_shadow_pd">
+                                            <div className="row">
+                                                <div className="col-md-3">
+                                                    <div className="form-group">
                                                         <label>First name <sup>*</sup></label>
                                                         <input 
                                                             type="text" 
@@ -375,8 +375,8 @@ const Apply = ({update,doc,displayId}) => {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
+                                                <div className="col-md-3">
+                                                    <div className="form-group">
                                                         <label>Last name</label>
                                                         <input 
                                                             type="text" 
@@ -389,8 +389,8 @@ const Apply = ({update,doc,displayId}) => {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
+                                                <div className="col-md-3">
+                                                    <div className="form-group">
                                                         <label>Date Of Birth </label>
                                                         <input 
                                                             type="date" 
@@ -404,8 +404,8 @@ const Apply = ({update,doc,displayId}) => {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
+                                                <div className="col-md-3">
+                                                    <div className="form-group">
                                                         <label>Email</label>
                                                         <input 
                                                             type="email" 
@@ -418,7 +418,7 @@ const Apply = ({update,doc,displayId}) => {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div className="col-md-3">
                                                 <div className="form-group">
                                                         <label>Country Code </label>
                                                         <select
@@ -439,8 +439,8 @@ const Apply = ({update,doc,displayId}) => {
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
+                                                <div className="col-md-3">
+                                                    <div className="form-group">
                                                         <label>Mobile Number</label>
                                                         <input
                                                             name='mobileNumber'

@@ -40,13 +40,13 @@ function HomeVisa() {
                     <div className="tab_visa">
 
                         <div role="tabpanel">
-                            <div className="col-md-12" key={12}>
-                                <ul className="nav nav-pills brand-pills nav-stacked" role="tablist">
+                            <div className="col-md-12" key={Math.floor(Math.random() * (1000000 - 100000 + 1) + 100000)}>
+                                <ul className="nav nav-pills brand-pills nav-stacked">
                                     {
                                         homeVisaType && homeVisaType.length > 0 ?
                                         homeVisaType.map((item, index) => (
-                                            <li key={index+1} role="presentation" className={selectedTab === item ? 'active' : ''} onClick={() => setSelectedTab(item)}>
-                                                <a href={"#tab"+(index+1)} aria-controls={"#tab"+(index+1)} role="tab" data-toggle="tab">{item}</a>
+                                            <li key={Math.floor(Math.random() * (1000000 - 100000 + 1) + 100000)} className={selectedTab === item ? 'active' : ''} onClick={() => setSelectedTab(item)}>
+                                                <span>{item}</span>
                                             </li>
                                         )) :
                                         ''
@@ -54,7 +54,7 @@ function HomeVisa() {
 
                                 </ul>
                             </div>
-                            <div className="col-md-12" key={13}>
+                            <div className="col-md-12" key={Math.floor(Math.random() * (1000000 - 100000 + 1) + 100000)}>
                                 <div className="tab-content">
                                     {
                                         homeVisaType && homeVisaType.length > 0 ?
@@ -62,14 +62,14 @@ function HomeVisa() {
 
                                             <>
                     
-                                                <div key={index+1} role="tabpanel" className={index == 0 ? 'tab-pane active' : ' tab-pane'} id={"tab"+(index+1)}>
+                                                <div key={Math.floor(Math.random() * (1000000 - 100000 + 1) + 100000)}  className={index == 0 ? 'tab-pane active' : ' tab-pane'} id={"tab"+(index+1)}>
                                                     <div className="row">
                                                         {
                                                             homeVisa && homeVisa.length > 0 ?
                                                             homeVisa.map((itemV, indexs) => (
 
                                                                 itemV.visaType.name == selectedTab ?
-                                                                    <div key={indexs+1} className="col-md-3">
+                                                                    <div key={Math.floor(Math.random() * (1000000 - 100000 + 1) + 100000)} className="col-md-3">
                                                                         <div className="big_box">
                                                                             <div className="title">
                                                                                 <h3> {itemV.name} </h3>

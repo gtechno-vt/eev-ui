@@ -40,7 +40,7 @@ const Footer = () => {
                 <div className="col-md-5">
                     <div className="logo_ftr">
 
-                        <img src="/img/logo.png" alt='logo'/>
+                        <img src="/img/logo.png" alt='logo' loading="lazy"/>
                         <div className="logo_content">
                             <p> {siteInfo.footerText}</p>
                         </div>
@@ -93,29 +93,57 @@ const Footer = () => {
                         </div>
 
                         <div className="ad">
-                            <div className="icon"><img src="/img/icons/location.png" alt='location'/></div>
+                            <div className="icon"><img src="/img/icons/location.png" alt='location' loading="lazy"/></div>
                             <div className="addres">
                                 <p>{siteInfo.address} </p>
                             </div>
                         </div>
 
                         <div className="ad">
-                            <div className="icon"><img src="/img/icons/email.png" alt='email'/></div>
+                            <div className="icon"><img src="/img/icons/email.png" alt='email' loading="lazy"/></div>
                             <div className="addres">
                                 <p>{siteInfo.emailAddress}</p>
                             </div>
                         </div>
 
                         <ul className="social-links clearfix">
-                            <li><Link to="https://www.facebook.com/emiratesevisasonline"><span className="fa fa-facebook-f"></span></Link></li>
-                            <li><Link to="https://twitter.com/EmirateseVisa01"><span className="fa fa-twitter"></span></Link></li>
-                            <li><Link to="https://www.youtube.com/@emiratesevisaonline"><span className="fa fa-youtube-play"></span></Link></li>
-                            <li><Link to="https://www.linkedin.com/company/emiratesevisaonline"><span className="fa fa-linkedin"></span></Link></li>
-                            <li><Link to="https://www.instagram.com/emiratesevisaonline"><span className="fa fa-instagram"></span></Link></li>
+                        <li>
+  <a href="https://www.facebook.com/emiratesevisasonline" className="facebook-link" aria-label="Facebook">
+    <span className="fa fa-facebook-f" aria-hidden="true"></span>
+    <span className="sr-only">Facebook</span> 
+  </a>
+</li>
+
+<li>
+  <a href="https://twitter.com/EmirateseVisa01" className="twitter-link" aria-label="Twitter">
+    <span className="fa fa-twitter" aria-hidden="true"></span>
+    <span className="sr-only">Twitter</span> 
+  </a>
+</li>
+<li>
+  <a href="https://www.youtube.com/@emiratesevisaonline" className="youtube-link" aria-label="Youtube">
+    <span className="fa fa-youtube-play" aria-hidden="true"></span>
+    <span className="sr-only">Youtube</span> 
+  </a>
+</li>
+                           
+<li>
+  <a href="https://www.linkedin.com/company/emiratesevisaonline" className="linkedin-link" aria-label="Linkedin">
+    <span className="fa fa fa-linkedin" aria-hidden="true"></span>
+    <span className="sr-only">Linkedin</span> 
+  </a>
+</li>
+<li>
+  <a href="https://www.instagram.com/emiratesevisaonline" className="instagram-link" aria-label="Instagram">
+    <span className="fa fa-instagram" aria-hidden="true"></span>
+    <span className="sr-only">Instagram</span> 
+  </a>
+</li>
+                        
                         </ul>
 
                         <div className="ftr_pay">
-                            <img src="/img/payment.webp" alt='payment'/>
+                            <img src="/img/payment.webp" alt='payment' loading="lazy"/>
                         </div>
 
                     </div>
