@@ -340,7 +340,7 @@ const Checkout = () => {
                                             checked={paymentMethod === "PayPal" ? true : false}
                                         />
                                         <img className='ml-1' src="../img/paypalicon.png" alt="paypal-logo" />
-                                    </div> */}
+                                    </div>
                                     <div>
                                         <input
                                             type="radio"
@@ -352,7 +352,7 @@ const Checkout = () => {
                                         />
                                         <img style={{height:"30px"}} src="../img/phonepeicon.png" alt="phonepe-logo" />
 
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <button type="submit" className="btn button" id="checkout-button" name="proceedFinal" onClick={handleRedirectToPayment}> Proceed
                                     Now</button>
