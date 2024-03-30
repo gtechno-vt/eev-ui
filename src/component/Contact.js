@@ -131,7 +131,7 @@ const Contact = () => {
         <meta name="twitter:description" content='Visit Official Emirates Visa Website for E Visa Inquiry. Send Emirates Visa Inquiry Us To Our Official Email Or Talk To Our Customer Chat Support.'/>
         <link rel="canonical" href="https://www.emiratesevisaonline.com/contact-us" />
       </Helmet>
-      <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+      <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.avif")` }}>
         <div className="container">
           <div className="row">
             <div className="col-md-12">

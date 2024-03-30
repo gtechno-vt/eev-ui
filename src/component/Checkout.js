@@ -151,7 +151,7 @@ const Checkout = () => {
     return (
         loading ? <div>Loading ....</div> :
         <>
-            <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+            <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.avif")` }}>
                 {showApiLoader && <ApiLoader />}
                 <div className="container">
                     <div className="row">
@@ -255,9 +255,9 @@ const Checkout = () => {
 
                             </div>
 
-                            <div className="note_check">
+                            {/*<div className="note_check">
                                 <p className="">Users residing in India are recommended to use the PhonePe gateway for seamless payments.</p>
-                            </div>
+                            </div>*/}
 
                         </div>
 

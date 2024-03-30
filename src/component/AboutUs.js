@@ -38,7 +38,7 @@ const AboutUs = () => {
         <meta name="twitter:description" content='Emirates E Visa Online Provides Emirates Tourist Visa, Transit Visa And Business Visa. Online UAE Visa Application Process. Documents Required For E Visa.'/>
         <link rel="canonical" href="https://www.emiratesevisaonline.com/about-us" />
       </Helmet>
-        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.avif")` }}>
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">

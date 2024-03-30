@@ -527,7 +527,7 @@ a {text-decoration:none}
 }
 
 /*----------------children_search------------------*/
-.children_search {background:url('../img/b130123009-banner-size.jpg');background-position: center;background-repeat: no-repeat;background-size: cover;padding: 30px 0;position: relative;}
+.children_search {background:url('../img/b130123009-banner-size.avif');background-position: center;background-repeat: no-repeat;background-size: cover;padding: 30px 0;position: relative;}
 .children_search:before {content:'';background: #000000d1;width: 100%;position: absolute;height: 100%;left: 0;top: 0;}
 .children_search .title{
     text-align: center;

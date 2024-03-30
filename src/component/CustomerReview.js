@@ -61,7 +61,7 @@ const CustomerReview = () => {
         <meta name="twitter:description" content='Go Through Emirates E Visa Online Customers Review. Share Your Feedback About Our Emirates Visa Services. Give Us 5 Star Rating It Will Help Us.'/>
         <link rel="canonical" href="https://www.emiratesevisaonline.com/customer-review" />
       </Helmet>
-        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.avif")` }}>
         {showApiLoader && <ApiLoader />}
             <div className="container">
                 <div className="row">

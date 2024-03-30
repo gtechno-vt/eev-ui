@@ -133,7 +133,7 @@ const EmiratesVisa = () => {
         <meta name="twitter:description" content={`Apply Emirates Visa Online For ${convertCitizen(citizen)} Citizen From Anywhere. Fill UAE Visa Application Form In 2 Minute, Make Payment and Get Visa Copy In Email.`}/>
         <link rel="canonical" href={`https://www.emiratesevisaonline.com/emirates-visa/${citizen}/${travelling}`} />
       </Helmet>
-            <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+            <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.avif")` }}>
             {showApiLoader && <ApiLoader/>}
                 <div className="container">
                     <div className="row">

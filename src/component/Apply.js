@@ -318,7 +318,7 @@ const Apply = ({update,doc,displayId}) => {
     const todayDate =  new Date().toJSON().slice(0,10);
     return (
         <>
-            <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+            <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.avif")` }}>
             {showApiLoader && <ApiLoader/>}
                 <div className="container">
                     <div className="row">

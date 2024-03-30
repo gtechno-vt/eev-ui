@@ -60,7 +60,7 @@ const EmiratesVisaFaqs = () => {
         <meta name="twitter:description" content='Frequently Asked Questions Of UAE Visa Online Application. Visit Emirates Visa Official Website and Check Your Query Related to Apply Emirates Visa Online.'/>
         <link rel="canonical" href="https://www.emiratesevisaonline.com/emirates-visa-faqs" />
       </Helmet>
-        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.avif")` }}>
           {showApiLoader && <ApiLoader />}
             <div className="container">
                 <div className="row">

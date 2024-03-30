@@ -560,7 +560,7 @@ const ApplyVisa = ({update,appId,doc}) => {
         <meta name="twitter:description" content='Emirates Visa Online Application Form - Submit Your Emirates Visa Application Easily and Get Your Visa In 3-4 Working Hours. Fast & Secure Application Form. '/>
         <link rel="canonical" href="https://www.emiratesevisaonline.com/apply-now" />
       </Helmet>
-            <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+            <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.avif")` }}>
                {showApiLoader && <ApiLoader/>}
                 <div className="container">
                     <div className="row">

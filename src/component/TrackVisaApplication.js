@@ -94,7 +94,7 @@ const TrackVisaApplication = () => {
         <meta name="twitter:description" content='Check Emirates Visa Online Status With Reference Number Or Application ID. Visit Emirates E Visa Online Official Website And Track E Visa Application.'/>
         <link rel="canonical" href="https://www.emiratesevisaonline.com/track-visa-application" />
       </Helmet>
-        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.avif")` }}>
         {showApiLoader && <ApiLoader />}
             <div className="container">
                 <div className="row">
