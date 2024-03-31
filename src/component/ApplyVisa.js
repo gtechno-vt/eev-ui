@@ -225,8 +225,14 @@ const ApplyVisa = ({update,appId,doc}) => {
     function OnProfessionF(e) {
         if (e.target.value == 'other') {
             setProfessionF('other')
-        } else {
+        }
+        else if(e.target.value === ""){
+            setProfessionF(e.target.value);
+            setLeadData({...leadData,customProfession:''})
+        } 
+        else {
             setProfessionF(Number(e.target.value))
+            setLeadData({...leadData,customProfession:''})
         }
     }
 
@@ -235,8 +241,14 @@ const ApplyVisa = ({update,appId,doc}) => {
         
         if (e.target.value == 'other') {
             setEducationF("other")
-        } else {
+        } 
+        else if(e.target.value === ""){
+            setEducationF(e.target.value);
+            setLeadData({...leadData,customEducation:''})
+        } 
+        else {
             setEducationF(Number(e.target.value))
+            setLeadData({...leadData,customEducation:''})
         }
     }
 
@@ -247,10 +259,19 @@ const ApplyVisa = ({update,appId,doc}) => {
                     ...leadData,
                     [e.target.name]:"other",
                 })
-            } else {
+            }
+            else if(e.target.value === ""){
                 setLeadData({
                     ...leadData,
-                    [e.target.name]: Number(e.target.value)
+                    [e.target.name]: Number(e.target.value),
+                    purposeOfVisitText:"",
+                })    
+            }  
+            else {
+                setLeadData({
+                    ...leadData,
+                    [e.target.name]: Number(e.target.value),
+                    purposeOfVisitText:"",
                 })
             }
         }
@@ -691,7 +712,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>First Name <sup>*</sup></label>
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             type="text"
                                                             name='firstName'
                                                             id='firstName'
@@ -705,7 +726,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>Last Name </label>
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             name='lastName'
                                                             id='lastName'
                                                             onChange={e => onTextFieldChange(e)}
@@ -719,7 +740,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>Date of birth</label>
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             name='dob'
                                                             id='dob'
                                                             onChange={e => onTextFieldChange(e)}
@@ -736,7 +757,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>Email <sup>*</sup></label>
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             name='emailId'
                                                             id='emailId'
                                                             onChange={e => onTextFieldChange(e)}
@@ -771,7 +792,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>Mobile Number <sup>*</sup></label>
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             name='mobileNumber'
                                                             id='mobileNumber'
                                                             onChange={e => onTextFieldChange(e)}
@@ -807,7 +828,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>Whatsapp Number <sup>*</sup></label>
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             type="number"
                                                             name='whatsappNumber'
                                                             id='whatsappNumber'
@@ -887,7 +908,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-4" id='customEducationLabel'>
                                                     <div className="form-group">
                                                         <label  className={educationF !== "other" ? "lightGray" : ""}>Education (Others) </label>
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             name='customEducation'
                                                             id='customEducation'
                                                             onChange={e => onTextFieldChange(e)}
@@ -906,7 +927,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-4" id='customProfessionLabel' >
                                                     <div className="form-group">
                                                         <label className={professionF !== "other" ? "lightGray" : ""}>Profession (Others) </label>
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             name='customProfession'
                                                             id='customProfession'
                                                             onChange={e => onTextFieldChange(e)}
@@ -922,7 +943,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-4" id='purposeOfVisitTextLabel'>
                                                     <div className="form-group">
                                                         <label className={leadData.purposeOfVisit !== "other" ? "lightGray" : ""}>Purpose of Visit (Others) </label>
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             name='purposeOfVisitText'
                                                             id='purposeOfVisitText'
                                                             onChange={e => onTextFieldChange(e)}
@@ -943,7 +964,7 @@ const ApplyVisa = ({update,appId,doc}) => {
 
                                                         <div className="radio_btn">
                                                             <label>
-                                                                <input
+                                                                < input  className="visa-form-input"
                                                                     type="radio"
                                                                     name='uaeVisit'
                                                                     id='uaeVisitF'
@@ -955,7 +976,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             </label>
 
                                                             <label >
-                                                                <input
+                                                                < input  className="visa-form-input"
                                                                     type="radio"
                                                                     name='uaeVisit'
                                                                     id='uaeVisitS'
@@ -977,7 +998,7 @@ const ApplyVisa = ({update,appId,doc}) => {
 
                                                         <div className="radio_btn">
                                                             <label >
-                                                                <input
+                                                                < input  className="visa-form-input"
                                                                     type="radio"
                                                                     name='KnowUae'
                                                                     id='KnowUae'
@@ -989,7 +1010,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             </label>
 
                                                             <label >
-                                                                <input
+                                                                < input  className="visa-form-input"
                                                                     type="radio"
                                                                     name='KnowUae'
                                                                     id='KnowUaeS'
@@ -1022,7 +1043,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-12">
                                                     <div className="form-group">
                                                         <label>Current Address (where you are currently staying) <sup>*</sup></label>
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             type="text"
                                                             name='address'
                                                             id='address'
@@ -1036,7 +1057,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>City  <sup>*</sup></label>
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             type="text"
                                                             name='city'
                                                             id='city'
@@ -1050,7 +1071,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label> State/Province <sup>*</sup></label>
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             type="text"
                                                             name='state'
                                                             id='state'
@@ -1064,7 +1085,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Zipcode / Pincode / Postal Code</label>
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             name='postalCode'
                                                             id='postalCode'
                                                             onChange={e => onTextFieldChange(e)}
@@ -1090,7 +1111,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                 <div className="col-md-4">
                                                     <div className="form-group">
                                                         <label>Passport Number <sup>*</sup></label>
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             type="text"
                                                             name='passportNumber'
                                                             id='passportNumber'
@@ -1106,7 +1127,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                         <label>Passport Expiry Date <sup>*</sup></label>
 
                                                         
-                                                        <input
+                                                        < input  className="visa-form-input"
                                                             name='passportExpiryDate'
                                                             id='passportExpiryDate'
                                                             onChange={e => onTextFieldChange(e)}
@@ -1125,7 +1146,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                         <label>Arrival Date <sup>*</sup></label>
 
                                                        
-                                                         <input
+                                                         < input  className="visa-form-input"
                                                             name='arrivalDate'
                                                             id='arrivalDate'
                                                             onChange={e => onTextFieldChange(e)}
@@ -1158,10 +1179,9 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                        : doc?.passportDocument || doc?.photoDocument || doc?.otherDocument ? <a className='doc-down-anchor'></a> 
                                                        : ""
                                                        }
-                                                        <input
+                                                        < input  className="visa-form-input form-control"
                                                             type="file"
                                                             multiple="multiple"
-                                                            className="form-control"
                                                             onChange={e => setSelectedFile(e.target.files[0])}
                                                         />
                                                     </div>
@@ -1175,10 +1195,10 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                     : doc?.passportDocument || doc?.photoDocument || doc?.otherDocument ? <a className='doc-down-anchor'></a> 
                                                     : ""    
                                                     }
-                                                        <input
+                                                        < input  className="visa-form-input form-control"
                                                             type="file"
                                                             onChange={e => setSelectedFilePhoto(e.target.files[0])}
-                                                            className="form-control"
+                            
                                                         />
                                                     </div>
                                                 </div>
@@ -1190,9 +1210,8 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                       : doc?.passportDocument || doc?.photoDocument || doc?.otherDocument ? <a className='doc-down-anchor'></a> 
                                                       : ""    
                                                     }
-                                                        <input
+                                                        < input  className="visa-form-input form-control"
                                                             type="file"
-                                                            className="form-control"
                                                             onChange={e => setSelectedFileDoc(e.target.files[0])}
                                                         />
                                                     </div>

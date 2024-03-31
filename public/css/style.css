@@ -2620,3 +2620,11 @@ color: #fe0000;
     color: gray;
     cursor: not-allowed;
 }
+
+input.visa-form-input:focus{
+  border: 1px solid #ffdfd4 !important;
+}
+
+/* input:focus {
+    background-color: yellow;
+  } */

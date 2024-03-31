@@ -47,6 +47,7 @@ const TrackVisaApplication = () => {
         e.preventDefault();
         setTrack({appId:""})
         setTrackData("");
+        document.getElementById("appId").value="";
              
     }
 

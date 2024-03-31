@@ -9,7 +9,10 @@ import ApiLoader from './ApiLoader';
 
 const Apply = ({update,doc,displayId}) => {
 
-    const { id } = useParams();
+    let { id } = useParams();
+    if(update){
+        id =  atob(id);
+    }
     const navigate = useNavigate();
   
     const [allCountry, setAllCountry] = useState([]);
@@ -364,7 +367,7 @@ const Apply = ({update,doc,displayId}) => {
                                                 <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>First name <sup>*</sup></label>
-                                                        <input 
+                                                        <input className="visa-form-input" 
                                                             type="text" 
                                                             placeholder="Enter First Name" 
                                                             name='firstName'
@@ -378,7 +381,7 @@ const Apply = ({update,doc,displayId}) => {
                                                 <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>Last name</label>
-                                                        <input 
+                                                        <input className="visa-form-input" 
                                                             type="text" 
                                                             placeholder="Enter Last Name" 
                                                             name='lastName'
@@ -392,7 +395,7 @@ const Apply = ({update,doc,displayId}) => {
                                                 <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>Date Of Birth </label>
-                                                        <input 
+                                                        <input className="visa-form-input" 
                                                             type="date" 
                                                             name='dob'
                                                             id='dob'
@@ -407,7 +410,7 @@ const Apply = ({update,doc,displayId}) => {
                                                 <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>Email</label>
-                                                        <input 
+                                                        <input className="visa-form-input" 
                                                             type="email" 
                                                             name='emailId'
                                                             id='emailId'
@@ -442,7 +445,7 @@ const Apply = ({update,doc,displayId}) => {
                                                 <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>Mobile Number</label>
-                                                        <input
+                                                        <input className="visa-form-input"
                                                             name='mobileNumber'
                                                             id='mobileNumber'
                                                             onChange={e => onTextFieldChange(e)}
@@ -457,7 +460,7 @@ const Apply = ({update,doc,displayId}) => {
                                                 <div className="col-md-3">
                                                     <div className="form-group">
                                                         <label>Passport Number <sup>*</sup></label>
-                                                        <input
+                                                        <input className="visa-form-input"
                                                             type="text"
                                                             name='passportNumber'
                                                             id='passportNumber'
@@ -473,7 +476,7 @@ const Apply = ({update,doc,displayId}) => {
                                                         <label>Passport Expiry Date <sup>*</sup></label>
 
                                                         
-                                                         <input
+                                                         <input className="visa-form-input"
                                                             name='passportExpiryDate'
                                                             id='passportExpiryDate'
                                                             onChange={e => onTextFieldChange(e)}
@@ -494,7 +497,7 @@ const Apply = ({update,doc,displayId}) => {
 
                                                         <div className="radio_btn">
                                                             <label>
-                                                                <input
+                                                                <input className="visa-form-input"
                                                                     type="radio"
                                                                     name='uaeVisit'
                                                                     id='uaeVisitF'
@@ -506,7 +509,7 @@ const Apply = ({update,doc,displayId}) => {
                                                             </label>
 
                                                             <label >
-                                                                <input
+                                                                <input className="visa-form-input"
                                                                     type="radio"
                                                                     name='uaeVisit'
                                                                     id='uaeVisitS'
@@ -528,7 +531,7 @@ const Apply = ({update,doc,displayId}) => {
 
                                                         <div className="radio_btn">
                                                             <label >
-                                                                <input
+                                                                <input className="visa-form-input"
                                                                     type="radio"
                                                                     name='KnowUae'
                                                                     id='KnowUae'
@@ -540,7 +543,7 @@ const Apply = ({update,doc,displayId}) => {
                                                             </label>
 
                                                             <label >
-                                                                <input
+                                                                <input className="visa-form-input"
                                                                     type="radio"
                                                                     name='KnowUae'
                                                                     id='KnowUaeS'
@@ -578,10 +581,9 @@ const Apply = ({update,doc,displayId}) => {
                                                     : doc?.passportDocument || doc?.photoDocument || doc?.otherDocument ? <a className='doc-down-anchor'></a> 
                                                     : ""   
                                                     }
-                                                        <input 
+                                                        <input className="visa-form-input form-control" 
                                                             type="file" 
                                                             multiple="multiple" 
-                                                            className="form-control" 
                                                             onChange={e => setSelectedFile(e.target.files[0])} 
                                                         />
                                                     </div>
@@ -594,10 +596,9 @@ const Apply = ({update,doc,displayId}) => {
                                                         <a download={`passport.${doc.photoMediaType}`} href={doc.photoDocument} className='doc-down-anchor'>{`Photo.${doc.photoMediaType}`}</a>
                                                          : doc?.passportDocument || doc?.photoDocument || doc?.otherDocument ? <a className='doc-down-anchor'></a> 
                                                          : ""}
-                                                        <input 
+                                                        <input className="visa-form-input form-control" 
                                                             type="file" 
                                                             multiple="multiple" 
-                                                            className="form-control" 
                                                             onChange={e => setSelectedFilePhoto(e.target.files[0])} 
                                                         />
                                                     </div>
@@ -610,10 +611,9 @@ const Apply = ({update,doc,displayId}) => {
                                                        : doc?.passportDocument || doc?.photoDocument || doc?.otherDocument ? <a className='doc-down-anchor'></a> 
                                                        : ""    
                                                     }
-                                                        <input 
+                                                        <input className="visa-form-input form-control" 
                                                             type="file" 
                                                             multiple="multiple" 
-                                                            className="form-control" 
                                                             onChange={e => setSelectedFileDoc(e.target.files[0])} 
                                                         />
                                                     </div>

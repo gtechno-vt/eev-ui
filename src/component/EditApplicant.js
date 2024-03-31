@@ -6,7 +6,9 @@ import Apply from './Apply';
 
 const EditApplicant = () => {
 
-    const { id } = useParams();
+    let { id } = useParams();
+    id =  atob(id);
+    
     const [primary,setPrimary] = useState(null);
     const [documentFiles,setDocumentFiles] = useState(null);
     const [displayId,setDisplayId] = useState(null);
