@@ -37,7 +37,7 @@ const TermsAndConditions = () => {
         <meta name="twitter:description" content='United Arab Emirates Visa Official Website Terms & Conditions. Check Terms While Applying Emirates E Visa Online With www.emiratesevisaonline.com'/>
         <link rel="canonical" href="https://www.emiratesevisaonline.com/terms-and-conditions" />
       </Helmet>
-    <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+    <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.avif")` }}>
         <div className="container">
             <div className="row">
                 <div className="col-md-12">

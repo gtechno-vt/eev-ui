@@ -151,7 +151,7 @@ const Checkout = () => {
     return (
         loading ? <div>Loading ....</div> :
         <>
-            <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+            <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.avif")` }}>
                 {showApiLoader && <ApiLoader />}
                 <div className="container">
                     <div className="row">
@@ -255,9 +255,9 @@ const Checkout = () => {
 
                             </div>
 
-                            <div className="note_check">
+                            {/*<div className="note_check">
                                 <p className="">Users residing in India are recommended to use the PhonePe gateway for seamless payments.</p>
-                            </div>
+                            </div>*/}
 
                         </div>
 
@@ -340,7 +340,7 @@ const Checkout = () => {
                                             checked={paymentMethod === "PayPal" ? true : false}
                                         />
                                         <img className='ml-1' src="../img/paypalicon.png" alt="paypal-logo" />
-                                    </div> */}
+                                    </div>
                                     <div>
                                         <input
                                             type="radio"
@@ -352,7 +352,7 @@ const Checkout = () => {
                                         />
                                         <img style={{height:"30px"}} src="../img/phonepeicon.png" alt="phonepe-logo" loading="lazy"/>
 
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <button type="submit" className="btn button" id="checkout-button" name="proceedFinal" onClick={handleRedirectToPayment}> Proceed
                                     Now</button>

@@ -57,7 +57,7 @@ const EmiratesVisaTypes = () => {
         <meta name="twitter:description" content='Choose Emirates Visa Type as per Requirements From 14 Days, 30 Days, 60 Days Tourist Visa. Apply UAE Visa For Business, Conferences And Transit.'/>
         <link rel="canonical" href="https://www.emiratesevisaonline.com/emirates-visa-types" />
       </Helmet>
-        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }} >
+        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.avif")` }} >
         {showApiLoader && <ApiLoader />}
             <div className="container">
                 <div className="row">

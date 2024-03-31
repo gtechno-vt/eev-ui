@@ -140,7 +140,7 @@ const Header = () => {
                             <div className="head_whatsapp">
                                 <a target='_blank' href={"https://api.whatsapp.com/send?phone="+siteInfo.whatsAppNumber+"&text=Hello"}
                                     data-toggle="tooltip" data-placement="top" title={siteInfo.whatsAppNumber}> <img
-                                        src="/img/vector.png" alt='expressvisa' loading="lazy"/>
+                                        src="/img/vector.avif" alt='expressvisa' loading="lazy"/>
                                     <span>Apply Express Visa </span> </a>
                             </div>
                         </nav>

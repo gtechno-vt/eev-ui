@@ -22,7 +22,7 @@ const StepsToApplyEmiratesVisa = () => {
         <meta name="twitter:description" content='How To Fill Emirates E Visa Online Application Form In 3 Simple Steps. Fill Application Form Details Online, Pay Fees and Get Emirates E Visa Copy By Email. '/>
         <link rel="canonical" href="https://www.emiratesevisaonline.com/steps-to-apply-emirates-visa" />
       </Helmet>
-        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }} >
+        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.avif")` }} >
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
@@ -69,7 +69,7 @@ const StepsToApplyEmiratesVisa = () => {
                     </div>
 
                     <div className="Step_img">
-                        <img src="../img/steps/step1.jpg" alt='step1' loading="lazy"/>
+                        <img src="../img/steps/step1.avif" alt='step1' loading="lazy"/>
                     </div>
 
 
@@ -98,7 +98,7 @@ const StepsToApplyEmiratesVisa = () => {
                     </div>
 
                     <div className="Step_img">
-                        <img src="../img/steps/step2.jpg" alt='step2' loading="lazy"/>
+                        <img src="../img/steps/step2.avif" alt='step2' loading="lazy"/>
                     </div>
 
 
@@ -127,7 +127,7 @@ const StepsToApplyEmiratesVisa = () => {
                     </div>
 
                     <div className="Step_img">
-                        <img src="../img/steps/step3.jpg" alt='step3' loading="lazy"/>
+                        <img src="../img/steps/step3.avif" alt='step3' loading="lazy"/>
                     </div>
 
 
@@ -157,7 +157,7 @@ const StepsToApplyEmiratesVisa = () => {
                     </div>
 
                     <div className="Step_img">
-                        <img src="../img/steps/step4.jpg" alt='step4' loading="lazy"/>
+                        <img src="../img/steps/step4.avif" alt='step4' loading="lazy"/>
                     </div>
 
 

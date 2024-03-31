@@ -37,7 +37,7 @@ const PrivacyPolicy = () => {
         <meta name="twitter:description" content='Check Emirates E Visa Online Privacy Policy.  While Apply United Arab Emirates E Visa Online Go Through www.emiratesevisaonline.com Privacy Policy.'/>
         <link rel="canonical" href="https://www.emiratesevisaonline.com/privacy-policy" />
       </Helmet>
-        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.avif")` }}>
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">

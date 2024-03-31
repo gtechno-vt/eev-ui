@@ -31,7 +31,7 @@ const BlogDetail = () => {
 
     return (
         <>
-            <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+            <section className="breadcrumb-spacing" style={{ backgroundImage: `url("../img/bg/applynow.avif")` }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">

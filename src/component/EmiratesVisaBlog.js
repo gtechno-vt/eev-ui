@@ -61,7 +61,7 @@ const EmiratesVisaBlog = () => {
         <meta name="twitter:description" content='Official Blog Of Emirates E Visa Online. Visit Our Blog To Get Information About Emirates Tourist, Transit And Business Visa.  Stay Tuned The Latest Visa Policy.'/>
         <link rel="canonical" href="https://www.emiratesevisaonline.com/emirates-visa-blog"/>
       </Helmet>
-        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.jpg")` }}>
+        <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.avif")` }}>
         {showApiLoader && <ApiLoader />}
             <div className="container">
                 <div className="row">
