@@ -9,30 +9,25 @@ const TrackVisaApplication = () => {
 
     const [trackData, setTrackData] = useState([]);
     const {id} = useParams();
-    const [track, setTrack] = useState({
-        appId: id || ""
-    });
+    const [track, setTrack] = useState(id || "");
     const [showApiLoader, setShowApiLoader] = useState(false);
     const navigate = useNavigate();
-    const inputRef  = useRef()
 
     async function onTextFieldChange(e) {
-        setTrack({
-            ...track,
-            [e.target.name]: e.target.value
-        })
+        console.log("input change")
+        setTrack(e.target.value);
     }
 
     async function onFormSubmit(e) {
+        console.log("form submit")
         e.preventDefault()
-        if(inputRef.current.value === ''){
+        if(track === ''){
             document.getElementById("appId").style.border = "1px solid red";
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
-            
             try {
                 setShowApiLoader(true);
-                const trackApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${inputRef.current.value}`);
+                const trackApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${track}`);
                 setShowApiLoader(false);
                 setTrackData(trackApi.data);
             } catch (error) {
@@ -45,17 +40,18 @@ const TrackVisaApplication = () => {
 
     async function onFormReset(e) {
         e.preventDefault();
-        setTrack({appId:""})
+        setTrack("")
         setTrackData("");
-        document.getElementById("appId").value="";
+        // document.getElementById("appId").value="";
+        // inputRef.current.value = ""
              
     }
 
     useEffect(() => {
 		// 👇️ scroll to top on page load
-        if(id){
-            inputRef.current.value = id
-        }
+        // if(id){
+        //     inputRef.current.value = id
+        // }
 		window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 	}, []);
 
@@ -63,14 +59,15 @@ const TrackVisaApplication = () => {
 
     const handleKeyPress = async (e) => {
           e.preventDefault();
+        console.log("key press",track);
           if(e.key === "Enter"){
-            if(inputRef.current.value === ""){
+            if(track === ""){
                 document.getElementById("appId").style.border = "1px solid red";
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior:'smooth'});
             } else {
                 try {
                     setShowApiLoader(true);
-                    const trackApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${inputRef.current.value}`);
+                    const trackApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${track}`);
                     setShowApiLoader(false);
                     setTrackData(trackApi.data);
                 } catch (error) {
@@ -80,7 +77,7 @@ const TrackVisaApplication = () => {
             }
           }
     }
-
+   console.log(track);
   return (
     <>
      <Helmet>
@@ -123,18 +120,17 @@ const TrackVisaApplication = () => {
                         <div className="tack_form">
                             <div className="tack_forms">
                                 <h3>Track Your Application </h3>
-                                <form>
+                                {/* <form onSubmit={(e) => e.preventDefault()}> */}
                                     <div className="form-group">
                                         <label> Reference Number </label>
                                         <input 
                                             type="text" 
                                             name='appId'
                                             id='appId'
-                                            // value={track.appId || ""} 
-                                            onChange={e => onTextFieldChange(e)} 
+                                            value={track} 
+                                            onChange={onTextFieldChange} 
                                             placeholder="Enter Reference Number" 
                                             onKeyUp={handleKeyPress}
-                                            ref={inputRef}
                                         />
                                     </div>
 
@@ -143,7 +139,7 @@ const TrackVisaApplication = () => {
                                         <button onClick={e => onFormSubmit(e)} className="btn green"> Submit</button>
                                     </div>
 
-                                </form>
+                                {/* </form> */}
                             </div>
                         </div>
                     </div>
