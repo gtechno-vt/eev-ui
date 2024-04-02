@@ -92,7 +92,7 @@ const Header = () => {
                     <div className="logo_togle">
                         <div className="logo">
                             <Link to="/">
-                                <img src="/img/logo.png"  alt='logo' loading="lazy"  width={280}/>
+                                <img src="/img/logo.png"  alt='logo' loading="lazy" height={70}/>
                             </Link>
                         </div>
 
@@ -158,7 +158,7 @@ const Header = () => {
         <div className="sidenavg">
             <div className="logo">
                 <Link to="/">
-                    <img src="/img/logo.png" alt='sedelogo' loading="lazy"/>
+                    <img src="/img/logo.png" alt='sedelogo' loading="lazy" height={70}/>
                 </Link>
             </div>
             <div className="mobile_menu" id="mob_notify">

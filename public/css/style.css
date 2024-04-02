@@ -165,7 +165,7 @@ a {text-decoration:none}
 }
 .sidenavg {padding: 60px  20px 20px 20px;}
 .sidenav .logo {margin-bottom:20px}
-.sidenav .logo img {height:75px;width: 280px;}
+/* .sidenav .logo img {height:75px;} */
 .sidenav .closebtn {position: absolute;top: 0;right: 0;background: #000;width: 45px;height: 45px;color: #fff;font-size: 27px;line-height: 26px;display: flex;justify-content: center;align-items: center;}
 
 .mobile_menu {}
