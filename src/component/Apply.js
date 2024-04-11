@@ -718,9 +718,9 @@ const Apply = ({update,doc,displayId}) => {
                                                             <td>
                                                                 {
                                                                     item.isPrimary == true ?
-                                                                        <Link to={`/applicant/edit/${item.id}`}> Edit </Link>
+                                                                        <Link to={`/applicant/edit/${btoa(item.id)}`}> Edit </Link>
                                                                         :
-                                                                        <Link to={`/applicant/edit/${item.id}`}> Edit  </Link>
+                                                                        <Link to={`/applicant/edit/${btoa(item.id)}`}> Edit  </Link>
                                                                 }
 
                                                             </td>

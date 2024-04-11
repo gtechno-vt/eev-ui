@@ -14,12 +14,10 @@ const TrackVisaApplication = () => {
     const navigate = useNavigate();
 
     async function onTextFieldChange(e) {
-        console.log("input change")
         setTrack(e.target.value);
     }
 
     async function onFormSubmit(e) {
-        console.log("form submit")
         e.preventDefault()
         if(track === ''){
             document.getElementById("appId").style.border = "1px solid red";
@@ -59,7 +57,6 @@ const TrackVisaApplication = () => {
 
     const handleKeyPress = async (e) => {
           e.preventDefault();
-        console.log("key press",track);
           if(e.key === "Enter"){
             if(track === ""){
                 document.getElementById("appId").style.border = "1px solid red";
@@ -77,7 +74,6 @@ const TrackVisaApplication = () => {
             }
           }
     }
-   console.log(track);
   return (
     <>
      <Helmet>

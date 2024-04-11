@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import ApiLoader from './ApiLoader';
+import PayPalGateway from './PayPal';
 
 
 const Checkout = () => {
@@ -115,7 +116,21 @@ const Checkout = () => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, []);
 
-   
+    
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://www.paypal.com/sdk/js?client-id=ARXaYSUP15ky4U3TgF2oO0T0bZWLJZOWlUlygSmySTnft6K0TjsyWmC0FSwyvZ_xGosV6N3UO0qWdd6H&components=buttons,marks";
+    script.async = true;
+
+    // Append the script to the body
+    document.body.appendChild(script);
+
+    // Clean up function to remove the script when component unmounts
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
     const totalTax = (((paymentDetails.noOfApplicant * paymentDetails.visaFees) + (paymentDetails.noOfApplicant * paymentDetails.serviceFees)) * paymentDetails.taxPercent / 100);
     const netPay = (paymentDetails.noOfApplicant * paymentDetails.visaFees) + (paymentDetails.noOfApplicant * paymentDetails.serviceFees) + ((paymentDetails.noOfApplicant * paymentDetails.visaFees + (paymentDetails.noOfApplicant * paymentDetails.serviceFees)) / 100) * paymentDetails.taxPercent
 
@@ -330,7 +345,7 @@ const Checkout = () => {
                                         />
                                         <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe-logo" loading="lazy"/>
                                     </div>
-                                     {/*<div>
+                                     <div>
                                         <input
                                             type="radio"
                                             name='payments-method'
@@ -341,7 +356,7 @@ const Checkout = () => {
                                         />
                                         <img className='ml-1' src="../img/paypalicon.png" alt="paypal-logo" />
                                     </div>
-                                    <div>
+                                    {/* <div>
                                         <input
                                             type="radio"
                                             name='payments-method'
@@ -354,8 +369,15 @@ const Checkout = () => {
 
                                     </div> */}
                                 </div>
-                                <button type="submit" className="btn button" id="checkout-button" name="proceedFinal" onClick={handleRedirectToPayment}> Proceed
-                                    Now</button>
+                               {paymentMethod === "PayPal" ?
+                                <PayPalGateway
+                                paymentMethod={paymentMethod}
+                                applicationId={applicationDetails.displayId}
+                                serviceType={serviceTypeValue}
+                               />  :
+                               <button  type="submit" className="btn button" id="checkout-button" name="proceedFinal" onClick={handleRedirectToPayment}> Proceed
+                                    Now</button>}
+                                   
 
                             </div>
                         </div>

@@ -2628,3 +2628,7 @@ input.visa-form-input:focus{
 /* input:focus {
     background-color: yellow;
   } */
+
+  .text-red{
+    color:red
+  }
