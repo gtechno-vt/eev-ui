@@ -2622,7 +2622,7 @@ color: #fe0000;
 }
 
 input.visa-form-input:focus{
-  border: 1px solid #ffdfd4 !important;
+  border: 1px solid #0f0f0f !important;
 }
 
 /* input:focus {
