@@ -119,7 +119,7 @@ const Checkout = () => {
     
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = "https://www.paypal.com/sdk/js?client-id=ARXaYSUP15ky4U3TgF2oO0T0bZWLJZOWlUlygSmySTnft6K0TjsyWmC0FSwyvZ_xGosV6N3UO0qWdd6H&components=buttons,marks";
+    script.src = "https://www.paypal.com/sdk/js?client-id=ASckhbRN0og6FnUdRNsx3qRelX2rp8o8jYd_KBldZm90oNq2uSalujrw4ZcSYuiKCWBlAsImvfZqMhWm&components=buttons,marks";
     script.async = true;
 
     // Append the script to the body
