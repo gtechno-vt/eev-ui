@@ -204,8 +204,12 @@ const Apply = ({update,doc,displayId}) => {
             isAllRequiredDataFilled = false;
         } 
        
-         if (!leadData.passportExpiryDate) {
+        if (!document.getElementById('passportExpiryDate').validity.valid || !leadData.passportExpiryDate || !isValidDate(leadData.passportExpiryDate)) {
             document.getElementById("passportExpiryDate").style.border = "1px solid red";
+            isAllRequiredDataFilled = false;
+        }
+        if(!document.getElementById('dob').validity.valid || (leadData.dob && !isValidDate(leadData.dob))){
+            document.getElementById("dob").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
         }
         if (leadData.uaeVisit == undefined) {
@@ -308,6 +312,22 @@ const Apply = ({update,doc,displayId}) => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, []);
 
+    const isValidDate = (dateString) => {
+        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+        if (!dateRegex.test(dateString)) {
+            return false;
+        }
+
+        const date = new Date(dateString);
+        const timestamp = date.getTime();
+
+        if (typeof timestamp !== 'number' || Number.isNaN(timestamp)) {
+            return false;
+        }
+        return dateString === date.toISOString().split('T')[0];
+    };
+
+
     const currentDate = new Date();
 
     
@@ -402,7 +422,7 @@ const Apply = ({update,doc,displayId}) => {
                                                             onChange={e => onTextFieldChange(e)}
                                                             value={leadData.dob || ""}
                                                             max={todayDate}
-                                                            onKeyDown={(e) => e.preventDefault()}
+                                                            // onKeyDown={(e) => e.preventDefault()}
                                                         />
                                                     </div>
                                                 </div>
@@ -484,7 +504,7 @@ const Apply = ({update,doc,displayId}) => {
                                                             type="date"
                                                             placeholder="YYYY-MM-DD"
                                                             min={todayDate}
-                                                            onKeyDown={(e) => e.preventDefault()}
+                                                            // onKeyDown={(e) => e.preventDefault()}
                                                         />
 
                                                     </div>

@@ -490,14 +490,19 @@ const ApplyVisa = ({update,appId,doc}) => {
             isAllRequiredDataFilled = false;
         } 
          
-         if (!leadData.passportExpiryDate) {
+        if (!document.getElementById('passportExpiryDate').validity.valid || !leadData.passportExpiryDate || !isValidDate(leadData.passportExpiryDate)) {
             document.getElementById("passportExpiryDate").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
         } 
-         if (!leadData.arrivalDate) {
+         if (!document.getElementById('arrivalDate').validity.valid || !leadData.arrivalDate || !isValidDate(leadData.arrivalDate)) {
             document.getElementById("arrivalDate").style.border = "1px solid red";
             isAllRequiredDataFilled = false;
         } 
+
+        if(!document.getElementById('dob').validity.valid || (leadData.dob && !isValidDate(leadData.dob))){
+            document.getElementById("dob").style.border = "1px solid red";
+            isAllRequiredDataFilled = false;
+        }
          
         if(isAllRequiredDataFilled) {
             try {
@@ -563,6 +568,21 @@ const ApplyVisa = ({update,appId,doc}) => {
     const months = Array.from({ length: 12 }, (_, index) =>
         format(addMonths(currentDate, index), 'MMMM')
     );
+
+    const isValidDate = (dateString) => {
+        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+        if (!dateRegex.test(dateString)) {
+            return false;
+        }
+
+        const date = new Date(dateString);
+        const timestamp = date.getTime();
+
+        if (typeof timestamp !== 'number' || Number.isNaN(timestamp)) {
+            return false;
+        }
+        return dateString === date.toISOString().split('T')[0];
+    };
 
     const currentYear = new Date().getFullYear();
     const years = Array.from({ length: 20 }, (_, index) => currentYear + index);
@@ -748,7 +768,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             type="date"
                                                             placeholder="Date of birth"
                                                             // max={new Date().toJSON(0,10)}
-                                                            onKeyDown={(e) => e.preventDefault()}
+                                                            // onKeyDown={(e) => e.preventDefault()}
                                                             max={todayDate}
                                                         />
                                                     </div>
@@ -1135,7 +1155,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             type="date"
                                                             placeholder="YYYY-MM-DD"
                                                             min={todayDate}
-                                                            onKeyDown={(e) => e.preventDefault()}
+                                                            // onKeyDown={(e) => e.preventDefault()}
                                                         />
 
                                                     </div>
@@ -1154,7 +1174,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                                                             type="date"
                                                             placeholder="YYYY-MM-DD"
                                                             min={todayDate}
-                                                            onKeyDown={(e) => e.preventDefault()}
+                                                            // onKeyDown={(e) => e.preventDefault()}
                                                         />
 
                                                     </div>
