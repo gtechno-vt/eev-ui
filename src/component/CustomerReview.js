@@ -85,7 +85,7 @@ const CustomerReview = () => {
             <div className="container">
                 <div className="row">
                     <div className="title">
-                        <h3>Customer Review</h3>
+                        <h1>Customer Review</h1>
                     </div>
                 </div>
 

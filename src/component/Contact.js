@@ -152,6 +152,10 @@ const Contact = () => {
       </section>
       <section className="contact-details pad_fix_50">
         <div className="container ">
+        <div className="All_heading">
+                    <h1 className="apply_title">Need Any Visa Help?</h1>
+                    <span></span>
+                </div>
           <div className="row">
             <div className="col-xl-7 col-lg-6">
               <div className="all_title">

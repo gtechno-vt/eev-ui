@@ -44,7 +44,7 @@ const StepsToApplyEmiratesVisa = () => {
         <section className="step_format">
             <div className="container">
                 <div className="All_heading">
-                    <h3 className="apply_title">How to Apply Dubai Visa</h3>
+                    <h1 className="apply_title">How to Apply Dubai Visa</h1>
                     <span></span>
                 </div>
 

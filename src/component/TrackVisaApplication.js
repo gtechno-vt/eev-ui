@@ -91,6 +91,7 @@ const TrackVisaApplication = () => {
         <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.avif")` }}>
         {showApiLoader && <ApiLoader />}
             <div className="container">
+           
                 <div className="row">
                     <div className="col-md-12">
                         <div className="breadcrumb_title">
@@ -110,6 +111,11 @@ const TrackVisaApplication = () => {
 
         <section className="pad_fix_50 track_status">
             <div className="container">
+            <div className="All_heading">
+                    <h1 className="apply_title">Track Emirates Visa Application Online
+</h1>
+                    <span></span>
+                </div>
                 <div className="row justify-content-center">
 
                     <div className="col-md-9">

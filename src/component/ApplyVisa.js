@@ -605,7 +605,7 @@ const ApplyVisa = ({update,appId,doc}) => {
                 <div className="container">
 
                     <div className="All_heading">
-                        <h3 className="apply_title">Dubai Visa Application Form</h3>
+                        <h1 className="apply_title">Dubai Visa Application Form</h1>
                         <span></span>
                     </div>
 

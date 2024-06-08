@@ -83,6 +83,11 @@ const EmiratesVisaBlog = () => {
 
         <section className="blog_grid_section clearfix">
             <div className="container">
+            <div className="All_heading">
+                    <h1 className="apply_title">Emirates Visa Official Blog
+</h1>
+                    <span></span>
+                </div>
                 <div className="row">
 
                     {

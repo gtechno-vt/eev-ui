@@ -25,7 +25,7 @@ function HomeFaq() {
 
         <div className="row">
           <div className="title">
-            <h3>Frequently Asked Questions</h3>
+            <h5>Frequently Asked Questions</h5>
           </div>
         </div>
 

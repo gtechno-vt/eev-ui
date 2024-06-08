@@ -9,7 +9,7 @@ function HomeVisaStep() {
             <div className="row">
                 <div className="col-md-12">
                     <div className="title">
-                        <h3>Steps to apply for visa</h3>
+                        <h2>Steps to apply for visa</h2>
                     </div>
                 </div>
             </div>

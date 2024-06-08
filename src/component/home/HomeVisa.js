@@ -30,7 +30,7 @@ function HomeVisa() {
             <div className="row">
                 <div className="col-md-12">
                     <div className="title">
-                        <h3>Visa Details</h3>
+                        <h2>Visa Details</h2>
                     </div>
                 </div>
             </div>

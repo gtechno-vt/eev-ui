@@ -38,7 +38,7 @@ const HomeHCustomer = () => {
         <div className="container">
           <div className="row">
             <div className="title">
-              <h3>Our Happy customer</h3>
+              <h5>Our Happy customer</h5>
             </div>
           </div>
 

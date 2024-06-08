@@ -32,7 +32,8 @@ a {text-decoration:none}
     position: r;
     position: relative;
     }
-.title h3 {
+
+.title h3,.title h1,.title h2,.title h4,.title h5,.title h6 {
     font-family: Creato Display;
     font-size: 45px;
     font-weight: 700;
@@ -300,7 +301,7 @@ a {text-decoration:none}
     position: relative;
 }
 .step_home .title{}
-.step_home .title h3{color:rgba(251, 108, 108, 1);}
+.step_home .title h3,.step_home .title h2{color:rgba(251, 108, 108, 1);}
 .step_home .all_step {
     display: flex;
     gap: 22px;
@@ -375,7 +376,7 @@ a {text-decoration:none}
     text-align: center;
     margin-bottom: 30px;
 }
-.visa_detail_home .title h3{
+.visa_detail_home .title h3,.visa_detail_home .title h2{
     color: #000000;
     }
 
@@ -533,7 +534,7 @@ a {text-decoration:none}
     text-align: center;
     position: relative;
     }
-.children_search .title h3{
+.children_search .title h3,.children_search .title h4{
     color: #fff;
     }
 .children_search .search_bar {
@@ -629,7 +630,7 @@ a {text-decoration:none}
     position: relative;
     }
 .our_happy_customer:before {content:'';position: absolute;width: 100%;height: 100%;background: #ffffffc7;top: 0;}
-.our_happy_customer .title h3{
+.our_happy_customer .title h3,.our_happy_customer .title h5,.our_happy_customer .title h1{
     color: rgba(251, 108, 108, 1);
     }
 
@@ -713,7 +714,7 @@ margin-bottom:0    }
     text-align: center;
     position: relative;
     }
-.faqs .title h3{
+.faqs .title h3,.faqs .title h5{
     color: rgba(251, 108, 108, 1);
     }
 
@@ -1277,7 +1278,7 @@ color: #fe0000;
     text-align: center;
     margin-bottom: 40px;
 }
-.All_heading h3{font-size: 40px;font-weight: 400;margin-bottom: 5px;}
+.All_heading h3,.All_heading h1{font-size: 40px;font-weight: 400;margin-bottom: 5px;}
 .All_heading span{width: 150px;position: relative;display: block;background: #fe0000;height: 3px;margin: 0 auto;}
 
 .pad_fix_50 {padding: 40px 0;}
@@ -2624,6 +2625,14 @@ color: #fe0000;
 input.visa-form-input:focus{
   border: 1px solid #0f0f0f !important;
 }
+
+.form-group select:focus{
+    border: 1px solid black !important;
+  }
+
+  .form-group input:focus{
+    border: 1px solid black !important;
+  }
 
 /* input:focus {
     background-color: yellow;

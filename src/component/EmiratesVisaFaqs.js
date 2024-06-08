@@ -82,13 +82,15 @@ const EmiratesVisaFaqs = () => {
 
         <section className="pad_fix_50 faq_css">
             <div className="container">
+            <div className="All_heading">
+                    <h1 className="apply_title">Frequently Asked Questions (FAQS)
+</h1>
+                    <span></span>
+                </div>
 
                 <div className="row justify-content-center">
                     <div className="col-md-12">
                         <div className="faqs_list">
-                            <div className="all_title">
-                                <h2>Frequently Asked Questions (FAQS)</h2>
-                            </div>
                             <Accordion defaultActiveKey={1}>
                               {
                                 siteFaq && siteFaq.length > 0 ?
