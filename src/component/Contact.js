@@ -317,6 +317,16 @@ const Contact = () => {
                             <img src="../img/icons/tw.png" alt='twiticon' loading="lazy"/>
                           </a>
                         </li>
+                        <li>
+                          <a 
+                          target='_blank' 
+                          href="https://www.youtube.com/@emiratesevisaonline"
+                          aria-label="Visit our Youtube page"
+                          rel="noopener noreferrer"
+                          >
+                            <img src="../img/icons/youtube.png" alt='twiticon' loading="lazy"/>
+                          </a>
+                        </li>
                       </ul>
                     </div>
                   </div>

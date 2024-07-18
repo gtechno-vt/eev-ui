@@ -95,13 +95,13 @@ function HomeVisa() {
 
                                                                                 <div className="over_h">
                                                                                     <div className="small_name"> Visa Validity</div>
-                                                                                    <div className="large_name">{itemV.visaValidity}</div>
+                                                                                    <div className="large_name">{itemV.visaValidity} Days after Approval</div>
                                                                                 </div>
 
-                                                                                <div className="over_h">
+                                                                                {/* <div className="over_h">
                                                                                     <div className="small_name"> Visa Category</div>
                                                                                     <div className="large_name">{itemV.visaCategory} </div>
-                                                                                </div>
+                                                                                </div> */}
 
                                                                                 <div className="over_h">
                                                                                     <div className="small_name"> Stay Validity In UAE</div>
