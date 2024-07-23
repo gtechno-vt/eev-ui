@@ -108,33 +108,33 @@ const Footer = () => {
 
                         <ul className="social-links clearfix">
                         <li>
-  <a href="https://www.facebook.com/emiratesevisasonline" className="facebook-link" aria-label="Facebook">
+  <a href="https://www.facebook.com/emiratesevisasonline" target='_blank' className="facebook-link" aria-label="Facebook">
     <span className="fa-brands fa-facebook-f" aria-hidden="true"></span>
     <span className="sr-only">Facebook</span> 
   </a>
 </li>
 
 <li>
-  <a href="https://twitter.com/EmirateseVisa01" className="twitter-link" aria-label="Twitter">
+  <a href="https://twitter.com/EmirateseVisa01" target='_blank' className="twitter-link" aria-label="Twitter">
     <span className="fa-brands fa-x-twitter" aria-hidden="true"></span>
     <span className="sr-only">Twitter</span> 
   </a>
 </li>
 <li>
-  <a href="https://www.youtube.com/@emiratesevisaonline" className="youtube-link" aria-label="Youtube">
+  <a href="https://www.youtube.com/@emiratesevisaonline" target='_blank' className="youtube-link" aria-label="Youtube">
     <span className="fa-brands fa-youtube" aria-hidden="true"></span>
     <span className="sr-only">Youtube</span> 
   </a>
 </li>
                            
 <li>
-  <a href="https://www.linkedin.com/company/emiratesevisaonline" className="linkedin-link" aria-label="Linkedin">
+  <a href="https://www.linkedin.com/company/emiratesevisaonline" target='_blank' className="linkedin-link" aria-label="Linkedin">
     <span className="fa-brands fa-linkedin-in" aria-hidden="true"></span>
     <span className="sr-only">Linkedin</span> 
   </a>
 </li>
 <li>
-  <a href="https://www.instagram.com/emiratesevisaonline" className="instagram-link" aria-label="Instagram">
+  <a href="https://www.instagram.com/emiratesevisaonline" className="instagram-link" target='_blank' aria-label="Instagram">
     <span className="fa-brands fa-instagram" aria-hidden="true"></span>
     <span className="sr-only">Instagram</span> 
   </a>
