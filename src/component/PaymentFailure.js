@@ -1,12 +1,12 @@
 import axios from 'axios';
 import React, { useEffect } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
 const PaymentFailure = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { search } = useLocation(); 
-    const orderId = search?.replace("?","")?.split("=")[1];
+    const [searchParams] = useSearchParams(); 
+    const orderId = searchParams.get("session_id");
 
 
     const updatePaymentDetails = async() => {

@@ -1,18 +1,23 @@
 import axios from 'axios';
 import React, { useEffect } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
 const PaymentSuccess = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { search } = useLocation(); 
-    const orderId = search?.replace("?","")?.split("=")[1];
+    const [searchParams] = useSearchParams(); 
+    const orderId = searchParams.get("session_id");
+    const paymentId = searchParams.get("payment_id");
+    const signature = searchParams.get("signature");
 
 
     const updatePaymentDetails = async() => {
         const data = {
             applicationDisplayId: id,
             orderId,
+         }
+         if(paymentId && signature){
+            data.gatewayTransactionId =  paymentId + ':' + signature;
          }
          try {
             const res = await axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/payment/payment-info`, data)

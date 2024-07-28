@@ -20,6 +20,7 @@ const Checkout = () => {
     const [showApiLoader, setShowApiLoader] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState("Stripe");
     const [loading,setLoading] = useState(true);
+    const [primaryApplicant,setPrimaryApplicant] = useState(null);
 
     const navigate = useNavigate();
 
@@ -54,8 +55,9 @@ const Checkout = () => {
                     return;
                 }
                 const application = applicatntApi.data[0].application;
+                setPrimaryApplicant(applicatntApi.data[0]);
                 setApplicatDetails(applicatntApi.data);
-                setApplicationDetails(application)
+                setApplicationDetails(application);
                 setPaymentDetails(prevState => {
                     return {
                         ...prevState,
@@ -125,6 +127,14 @@ const Checkout = () => {
     // Append the script to the body
     document.body.appendChild(script);
 
+    const razarpay = document.createElement('script');
+    razarpay.src = "https://checkout.razorpay.com/v1/checkout.js";
+    razarpay.async = true;
+
+    // Append the script to the body
+    document.body.appendChild(razarpay);
+    document.body.removeChild(razarpay);
+
     // Clean up function to remove the script when component unmounts
     return () => {
       document.body.removeChild(script);
@@ -152,11 +162,58 @@ const Checkout = () => {
                 }
             })
             if (res.data) {
-                window.location.href = res.data;
+                if(paymentMethod === "Razorpay"){
+                    OpenRazarpayModal(res.data);
+               }else{
+                   window.location.href = res.data;
+               }
             }
         } catch (error) {
         }
 
+    }
+
+    const OpenRazarpayModal = (orderData) => {
+        try {
+            let name = "";
+           if(primaryApplicant.firstName && primaryApplicant.lastName){
+              name = `${primaryApplicant.firstName} ${primaryApplicant.lastName}`;
+           }else{
+            name = primaryApplicant.firstName;
+           }
+           
+        var options = {
+            "key": "rzp_test_m4z9IzcCmDwAeH", 
+            "name": "Emirates E-Visa Online",
+            // "image": "https://example.com/your_logo",
+            "order_id": orderData,
+            "handler": function (response){
+                handleSaveRazorpayData(response,orderData);
+            },
+            "prefill": {
+                "name":name,
+                "email": primaryApplicant.emailId,
+                "contact":`+${primaryApplicant.mobileNumber}`
+            },
+            "theme": {
+                "color": localStorage.getItem("backgroundColor")
+            }
+        };
+         console.log(localStorage.getItem("backgroundColor"));
+        var rzp1 = new window.Razorpay(options);
+        rzp1.open();
+        rzp1.on('payment.failed', function (response){
+                navigate(`/payment-failure/${id}?session_id=${orderData}`)
+        });
+       
+        } catch (error) {
+            // console.log(error);
+        }
+    }
+
+   const handleSaveRazorpayData = async(response,orderId) => {
+            //  after api redirecting to success screen
+            navigate(`/payment-success/${id}?session_id=${orderId}&payment_id=${response.razorpay_payment_id}&signature=${response.razorpay_signature}`);
     }
 
     const handleRadioChange = (e) => {
@@ -355,6 +412,18 @@ const Checkout = () => {
                                             checked={paymentMethod === "PayPal" ? true : false}
                                         />
                                         <img className='ml-1' src="../img/paypalicon.png" alt="paypal-logo" />
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="radio"
+                                            name='payments-method'
+                                            // id='uaeVisitF'
+                                            onChange={handleRadioChange}
+                                            value="Razorpay"
+                                            checked={paymentMethod === "Razorpay" ? true : false}
+                                        />
+                                        {/* <img className='ml-1' src="../img/paypalicon.png" alt="paypal-logo" /> */}
+                                        Razorpay
                                     </div>
                                     {/* <div>
                                         <input
