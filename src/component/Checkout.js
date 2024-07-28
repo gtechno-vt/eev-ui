@@ -199,7 +199,6 @@ const Checkout = () => {
                 "color": localStorage.getItem("backgroundColor")
             }
         };
-         console.log(localStorage.getItem("backgroundColor"));
         var rzp1 = new window.Razorpay(options);
         rzp1.open();
         rzp1.on('payment.failed', function (response){
