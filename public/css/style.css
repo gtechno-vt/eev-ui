@@ -2562,7 +2562,8 @@ color: #fe0000;
     gap: 20px;
 }
 .payment-gateway-cont > div:not(:first-child) > img{
-   height: 45px;
+   /* height: 45px; */
+   max-width: 130px;
    object-fit: cover;
 }
 

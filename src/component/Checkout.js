@@ -55,7 +55,10 @@ const Checkout = () => {
                     return;
                 }
                 const application = applicatntApi.data[0].application;
-                setPrimaryApplicant(applicatntApi.data[0]);
+                const primaryApp = applicatntApi.data.find(ele => ele.isPrimary);
+                if(primaryApp){
+                    setPrimaryApplicant(primaryApp);
+                }
                 setApplicatDetails(applicatntApi.data);
                 setApplicationDetails(application);
                 setPaymentDetails(prevState => {
