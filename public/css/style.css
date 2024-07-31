@@ -1919,6 +1919,7 @@ color: #fe0000;
     color: red;
     margin: 0;
     margin-top: 15px;
+    font-weight: bold;
 }
 .detail_table .tab_set {
     padding: 25px;

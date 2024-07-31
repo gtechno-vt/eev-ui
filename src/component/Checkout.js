@@ -329,9 +329,9 @@ const Checkout = () => {
 
                             </div>
 
-                            {/*<div className="note_check">
-                                <p className="">Users residing in India are recommended to use the PhonePe gateway for seamless payments.</p>
-                            </div>*/}
+                            <div className="note_check">
+                                <p className="">Users residing in India are recommended to use the Razorpay gateway for seamless payments.</p>
+                            </div>
 
                         </div>
 
