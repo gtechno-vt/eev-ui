@@ -264,7 +264,7 @@ const Contact = () => {
                       <a href={"mailto:" + siteInfo.emailAddress}>{siteInfo.emailAddress}</a>
                     </div>
                   </li>
-                  <li>
+                  {/*<li>
                     <div className="icon">
                       <span className="fa fa-map-marker"></span>
                     </div>
@@ -272,7 +272,7 @@ const Contact = () => {
                       <h6>Visit Us</h6>
                       <span>{siteInfo.address}</span>
                     </div>
-                  </li>
+                  </li>*/}
                   <div className="whole-div">
                     <div className="right">
                       <h3>Follow Us: </h3>

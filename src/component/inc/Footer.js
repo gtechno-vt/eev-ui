@@ -93,12 +93,12 @@ const Footer = () => {
                             <h3>Contact Info </h3>
                         </div>
 
-                        <div className="ad">
+                        {/*<div className="ad">
                             <div className="icon"><img src="/img/icons/location.png" alt='location' loading="lazy"/></div>
                             <div className="addres">
                                 <p>{siteInfo.address} </p>
                             </div>
-                        </div>
+                        </div>*/}
 
                         <div className="ad">
                             <div className="icon"><img src="/img/icons/email.png" alt='email' loading="lazy"/></div>
