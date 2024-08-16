@@ -10,6 +10,7 @@ import HomeContinent from "./home/HomeContinent";
 import HomeHCustomer from "./home/HomeHCustomer";
 import HomeFaq from "./home/HomeFaq";
 import { Helmet } from 'react-helmet';
+import HomeAboutWebsite from './home/HomeAboutWebsite';
 
 // const HomeBanner = lazy(() => import("./home/HomeBanner"));
 // const HomeVisaStep = lazy(() => import("./home/HomeVisaStep"));
@@ -46,6 +47,7 @@ const Home = () => {
       <HomeVisaStep />
       <HomeVisa />
       <HomeWhy />
+      <HomeAboutWebsite/>
       <HomeThings />
       <HomeContinent />
       <HomeHCustomer />

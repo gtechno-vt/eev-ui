@@ -205,7 +205,8 @@ const Checkout = () => {
         var rzp1 = new window.Razorpay(options);
         rzp1.open();
         rzp1.on('payment.failed', function (response){
-                navigate(`/payment-failure/${id}?session_id=${orderData}`)
+                let redirectUrl = `https://voltechsoftware.com/?redirect=https://www.emiratesevisaonline.com/payment-failure/${id}?session_id=${orderData}`;
+                window.location.href = redirectUrl;
         });
        
         } catch (error) {
@@ -215,7 +216,9 @@ const Checkout = () => {
 
    const handleSaveRazorpayData = async(response,orderId) => {
             //  after api redirecting to success screen
-            navigate(`/payment-success/${id}?session_id=${orderId}&payment_id=${response.razorpay_payment_id}&signature=${response.razorpay_signature}`);
+            // navigate(`/payment-success/${id}?session_id=${orderId}&payment_id=${response.razorpay_payment_id}&signature=${response.razorpay_signature}`);
+            let redirectUrl = `https://voltechsoftware.com/?redirect=https://www.emiratesevisaonline.com/payment-success/${id}?session_id=${orderId}&payment_id=${response.razorpay_payment_id}&signature=${response.razorpay_signature}`;
+            window.location.href = redirectUrl;
     }
 
     const handleRadioChange = (e) => {

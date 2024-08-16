@@ -15,6 +15,8 @@ const Footer = () => {
 				const siteInfoApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-info/2`)
 				setSiteInfo(siteInfoApi.data);
                 localStorage.setItem("backgroundColor",siteInfoApi.data.backgroundColor);
+                localStorage.setItem("aboutUsText",siteInfoApi.data.aboutUsText);
+                console.log(siteInfoApi.data.aboutUsText,"skdjkjksjd");
                 setVisitorCount(siteInfoApi.data.visitorCount);
 
                 const countInfo =  await axios.put(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-info/visitor-count/2`) 
