@@ -205,7 +205,7 @@ const Checkout = () => {
         var rzp1 = new window.Razorpay(options);
         rzp1.open();
         rzp1.on('payment.failed', function (response){
-                let redirectUrl = `https://voltechsoftware.com/?redirect=https://www.emiratesevisaonline.com/payment-failure/${id}?session_id=${orderData}`;
+                let redirectUrl = `https://voltechsoftware.com/?redirect=https://www.emiratesevisaonline.com/payment-failure/${id}?session_id=${orderData}&payment_id=${response.razorpay_payment_id}&signature=${response.razorpay_signature}`;
                 window.location.href = redirectUrl;
         });
        
@@ -332,9 +332,9 @@ const Checkout = () => {
 
                             </div>
 
-                            <div className="note_check">
+                            {/*<div className="note_check">
                                 <p className="">Users residing in India are recommended to use the Razorpay gateway for seamless payments.</p>
-                            </div>
+                            </div>*/}
 
                         </div>
 
@@ -422,12 +422,33 @@ const Checkout = () => {
                                         <input
                                             type="radio"
                                             name='payments-method'
+                                            onChange={handleRadioChange}
+                                            value="MamoPay"
+                                            checked={paymentMethod === "MamoPay" ? true : false}
+                                        />
+                                        <img className='ml-1' src="../img/mamopay-icon.svg" alt="mamopay-logo" />
+                                    </div>
+                                    {/*<div>
+                                        <input
+                                            type="radio"
+                                            name='payments-method'
                                             // id='uaeVisitF'
                                             onChange={handleRadioChange}
                                             value="Razorpay"
                                             checked={paymentMethod === "Razorpay" ? true : false}
                                         />
                                         {<img className='ml-1' src="../img/razorpay-icon.png" alt="razorpay-logo" /> }
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="radio"
+                                            name='payments-method'
+                                            // id='uaeVisitF'
+                                            onChange={handleRadioChange}
+                                            value="Worldline"
+                                            checked={paymentMethod === "Worldline" ? true : false}
+                                        />
+                                        {<img className='ml-1' src="../img/worldline-icon.svg" alt="worldline-logo" /> }
                                     </div>
                                     {/* <div>
                                         <input

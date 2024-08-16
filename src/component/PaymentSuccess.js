@@ -9,15 +9,20 @@ const PaymentSuccess = () => {
     const orderId = searchParams.get("session_id");
     const paymentId = searchParams.get("payment_id");
     const signature = searchParams.get("signature");
+    const transactionId = searchParams.get("transactionId");
 
 
     const updatePaymentDetails = async() => {
         const data = {
-            applicationDisplayId: id,
-            orderId,
+            applicationDisplayId: id.split('_')[0],
+            orderId: orderId || id,
          }
-         if(paymentId && signature){
+         if(paymentId && signature) {
             data.gatewayTransactionId =  paymentId + ':' + signature;
+         } else if(paymentId) {
+            data.gatewayTransactionId =  paymentId;
+         } else if(transactionId) {
+             data.gatewayTransactionId =  transactionId;
          }
          try {
             const res = await axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/payment/payment-info`, data)
@@ -36,7 +41,7 @@ const PaymentSuccess = () => {
             <div className="container">
                 <div className="row">
                     <h5 className="col-md-12 text-center">
-                    The payment for your Visa application {id} is successful.
+                    The payment for your Visa application {id.split('_')[0]} is successful.
                     </h5>
                     <div className="col-md-12 d-flex justify-content-center">
                     <button  className="payment-redirect-btn" id="checkout-button" name="proceedFinal" onClick={() => navigate(`/track-visa-application/${id}`)}>Track Visa Status</button>

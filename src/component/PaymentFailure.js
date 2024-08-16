@@ -7,13 +7,23 @@ const PaymentFailure = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams(); 
     const orderId = searchParams.get("session_id");
+    const paymentId = searchParams.get("payment_id");
+    const signature = searchParams.get("signature");
+    const transactionId = searchParams.get("transactionId");
 
 
     const updatePaymentDetails = async() => {
         const data = {
-            applicationDisplayId: id,
-            orderId,
+            applicationDisplayId: id.split('_')[0],
+            orderId: orderId || id,
          }
+        if(paymentId && signature) {
+            data.gatewayTransactionId =  paymentId + ':' + signature;
+        } else if(paymentId) {
+            data.gatewayTransactionId =  paymentId;
+        } else if(transactionId) {
+            data.gatewayTransactionId =  transactionId;
+        }
          try {
             const res = await axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/payment/payment-info`, data)
          } catch (error) {
@@ -28,7 +38,7 @@ const PaymentFailure = () => {
             <div className="container">
                 <div className="row">
                     <h5 className="col-md-12 text-center">
-                    The payment for your Visa application {id} has failed.
+                    The payment for your Visa application {id.split('_')[0]} has failed.
                     </h5>
                     <div className="col-md-12 d-flex justify-content-center">
                     <button  className="payment-redirect-btn" id="checkout-button" name="proceedFinal" onClick={() => navigate(`/checkout/${id}`)}>Retry Payment</button>
