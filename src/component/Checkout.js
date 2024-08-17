@@ -396,18 +396,6 @@ const Checkout = () => {
 
                                 <div className='col-12 payment-gateway-cont'>
                                     <div>Choose Gateway</div>
-                                    {/*<div>
-                                        <input
-                                            type="radio"
-                                            name='payments-method'
-                                            // id='uaeVisitF'
-                                            onChange={handleRadioChange}
-                                            value="Stripe"
-                                            checked={paymentMethod === "Stripe" ? true : false}
-                                        />
-                                        <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe-logo"
-                                             loading="lazy"/>
-                                    </div>*/}
                                     <div>
                                         <input
                                             type="radio"
@@ -424,12 +412,24 @@ const Checkout = () => {
                                             name='payments-method'
                                             // id='uaeVisitF'
                                             onChange={handleRadioChange}
+                                            value="Stripe"
+                                            checked={paymentMethod === "Stripe" ? true : false}
+                                        />
+                                        <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe-logo"
+                                             loading="lazy"/>
+                                    </div>
+                                    {/*<div>
+                                        <input
+                                            type="radio"
+                                            name='payments-method'
+                                            // id='uaeVisitF'
+                                            onChange={handleRadioChange}
                                             value="PayPal"
                                             checked={paymentMethod === "PayPal" ? true : false}
                                         />
                                         <img className='ml-1' src="../img/paypalicon.png" alt="paypal-logo"/>
                                     </div>
-                                    {/*<div>
+                                    <div>
                                         <input
                                             type="radio"
                                             name='payments-method'
