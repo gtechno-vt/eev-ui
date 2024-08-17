@@ -18,7 +18,7 @@ const Checkout = () => {
     const [serviceTypeValue, setServiceTypeValue] = useState("Normal")
     const [paymentDetails, setPaymentDetails] = useState({});
     const [showApiLoader, setShowApiLoader] = useState(false);
-    const [paymentMethod, setPaymentMethod] = useState("Stripe");
+    const [paymentMethod, setPaymentMethod] = useState("MamoPay");
     const [loading,setLoading] = useState(true);
     const [primaryApplicant,setPrimaryApplicant] = useState(null);
 
