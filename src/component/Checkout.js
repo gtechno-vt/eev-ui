@@ -393,10 +393,10 @@ const Checkout = () => {
 
                                 </table>
 
-                            
+
                                 <div className='col-12 payment-gateway-cont'>
                                     <div>Choose Gateway</div>
-                                    <div>
+                                    {/*<div>
                                         <input
                                             type="radio"
                                             name='payments-method'
@@ -405,19 +405,9 @@ const Checkout = () => {
                                             value="Stripe"
                                             checked={paymentMethod === "Stripe" ? true : false}
                                         />
-                                        <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe-logo" loading="lazy"/>
-                                    </div>
-                                     <div>
-                                        <input
-                                            type="radio"
-                                            name='payments-method'
-                                            // id='uaeVisitF'
-                                            onChange={handleRadioChange}
-                                            value="PayPal"
-                                            checked={paymentMethod === "PayPal" ? true : false}
-                                        />
-                                        <img className='ml-1' src="../img/paypalicon.png" alt="paypal-logo" />
-                                    </div>
+                                        <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe-logo"
+                                             loading="lazy"/>
+                                    </div>*/}
                                     <div>
                                         <input
                                             type="radio"
@@ -426,7 +416,18 @@ const Checkout = () => {
                                             value="MamoPay"
                                             checked={paymentMethod === "MamoPay" ? true : false}
                                         />
-                                        <img className='ml-1' src="../img/mamopay-icon.svg" alt="mamopay-logo" />
+                                        <img className='ml-1' src="../img/mamopay-icon.svg" alt="mamopay-logo"/>
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="radio"
+                                            name='payments-method'
+                                            // id='uaeVisitF'
+                                            onChange={handleRadioChange}
+                                            value="PayPal"
+                                            checked={paymentMethod === "PayPal" ? true : false}
+                                        />
+                                        <img className='ml-1' src="../img/paypalicon.png" alt="paypal-logo"/>
                                     </div>
                                     {/*<div>
                                         <input
@@ -463,15 +464,16 @@ const Checkout = () => {
 
                                     </div> */}
                                 </div>
-                               {paymentMethod === "PayPal" ?
-                                <PayPalGateway
-                                paymentMethod={paymentMethod}
-                                applicationId={applicationDetails.displayId}
-                                serviceType={serviceTypeValue}
-                               />  :
-                               <button  type="submit" className="btn button" id="checkout-button" name="proceedFinal" onClick={handleRedirectToPayment}> Proceed
-                                    Now</button>}
-                                   
+                                {paymentMethod === "PayPal" ?
+                                    <PayPalGateway
+                                        paymentMethod={paymentMethod}
+                                        applicationId={applicationDetails.displayId}
+                                        serviceType={serviceTypeValue}
+                                    /> :
+                                    <button type="submit" className="btn button" id="checkout-button"
+                                            name="proceedFinal" onClick={handleRedirectToPayment}> Proceed
+                                        Now</button>}
+
 
                             </div>
                         </div>
