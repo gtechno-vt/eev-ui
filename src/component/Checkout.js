@@ -406,7 +406,7 @@ const Checkout = () => {
                                         />
                                         <img className='ml-1' src="../img/mamopay-icon.svg" alt="mamopay-logo"/>
                                     </div>
-                                    <div>
+                                    {/*<div>
                                         <input
                                             type="radio"
                                             name='payments-method'
@@ -417,8 +417,8 @@ const Checkout = () => {
                                         />
                                         <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe-logo"
                                              loading="lazy"/>
-                                    </div>
-                                    {/*<div>
+                                    </div>*/}
+                                    <div>
                                         <input
                                             type="radio"
                                             name='payments-method'
@@ -429,7 +429,7 @@ const Checkout = () => {
                                         />
                                         <img className='ml-1' src="../img/paypalicon.png" alt="paypal-logo"/>
                                     </div>
-                                    <div>
+                                    {/*<div>
                                         <input
                                             type="radio"
                                             name='payments-method'
