@@ -47,7 +47,7 @@ const Home = () => {
       <HomeVisaStep />
       <HomeVisa />
       <HomeWhy />
-      <HomeAboutWebsite/>
+      {/*<HomeAboutWebsite/>*/}
       <HomeThings />
       <HomeContinent />
       <HomeHCustomer />
