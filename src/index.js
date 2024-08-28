@@ -67,13 +67,13 @@ export default function App() {
           <Route path="terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="privacy-policy" element={<PrivacyPolicy />} />
           <Route path="emirates-visa-faqs" element={<EmiratesVisaFaqs />} />
-          <Route path="emirates-visa-blog" element={<EmiratesVisaBlog />} />
+          <Route path="emirates-visa-services" element={<EmiratesVisaBlog />} />
           <Route path="about-us" element={<AboutUs />} />
           <Route path="contact-us" element={<Contact />} />
           <Route path="apply/:id" element={<Apply />} />
           <Route path="checkout/:id" element={<Checkout />} />
           <Route path="customer-review" element={<CustomerReview />} />
-          <Route path="blog/:id" element={<BlogDetail />} />
+          <Route path="service/:id" element={<BlogDetail />} />
           <Route path="applicant/edit/:id" element={<EditApplicant />} />
           <Route path="apply-now-visa/:visa" element={<ApplyVisa />} />
           <Route path="emirates-visa/:citizen/:travelling" element={<EmiratesVisa />} />

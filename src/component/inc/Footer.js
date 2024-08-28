@@ -79,8 +79,8 @@ const Footer = () => {
                         <ul className="ftr_links">
                             <li><Link to="terms-and-conditions">Terms And Conditions</Link></li>
                             <li><Link to="privacy-policy"> Privacy Policy </Link></li>
-                            <li><Link to="emirates-visa-faqs"> Faq's </Link></li>
-                            <li><Link to="emirates-visa-blog"> Blog </Link></li>
+                            <li><Link to="emirates-visa-faqs"> FAQs </Link></li>
+                            <li><Link to="emirates-visa-services"> Services </Link></li>
                             <li><Link to="customer-review"> Customer Review </Link></li>
                             <li><Link to="about-us"> About Us</Link></li>
                         </ul>

@@ -50,16 +50,16 @@ const EmiratesVisaBlog = () => {
   return (
     <>
        <Helmet>
-        <title>Emirates E Visa Online Official Blog | UAE Tourist Visa Online</title>
-        <meta name="description" content="emirates e visa online blog, dubai emirates visa, 14 days emirates visa, 30 days emirates visa, 60 days emirates visa online, transit visa, emirates visa on arrival, emirates visa services, emirates visa fees, emirates visa info, uae visit visa, document required for emirates visa, hot to get emirates visa, online emirates visa info"/>
-        <meta name="keywords" content="emirates e visa online blog, dubai emirates visa, 14 days emirates visa, 30 days emirates visa, 60 days emirates visa online, transit visa, emirates visa on arrival, emirates visa services, emirates visa fees, emirates visa info, uae visit visa, document required for emirates visa, hot to get emirates visa, online emirates visa info" />
-        <meta itemprop="name" content="Emirates E Visa Online Official Blog | UAE Tourist Visa Online" />
-        <meta itemprop="description" content="Official Blog Of Emirates E Visa Online. Visit Our Blog To Get Information About Emirates Tourist, Transit And Business Visa.  Stay Tuned The Latest Visa Policy." />
-        <meta name="og:title" content='Emirates E Visa Online Official Blog | UAE Tourist Visa Online'/>
-        <meta name="og:description" content='Official Blog Of Emirates E Visa Online. Visit Our Blog To Get Information About Emirates Tourist, Transit And Business Visa.  Stay Tuned The Latest Visa Policy.'/>
-        <meta name="twitter:title" content='Emirates E Visa Online Official Blog | UAE Tourist Visa Online'/>
-        <meta name="twitter:description" content='Official Blog Of Emirates E Visa Online. Visit Our Blog To Get Information About Emirates Tourist, Transit And Business Visa.  Stay Tuned The Latest Visa Policy.'/>
-        <link rel="canonical" href="https://www.emiratesevisaonline.com/emirates-visa-blog"/>
+        <title>Emirates E Visa Online Official Services | UAE Tourist Visa Online</title>
+        <meta name="description" content="emirates e visa online services, dubai emirates visa, 14 days emirates visa, 30 days emirates visa, 60 days emirates visa online, transit visa, emirates visa on arrival, emirates visa services, emirates visa fees, emirates visa info, uae visit visa, document required for emirates visa, hot to get emirates visa, online emirates visa info"/>
+        <meta name="keywords" content="emirates e visa online services, dubai emirates visa, 14 days emirates visa, 30 days emirates visa, 60 days emirates visa online, transit visa, emirates visa on arrival, emirates visa services, emirates visa fees, emirates visa info, uae visit visa, document required for emirates visa, hot to get emirates visa, online emirates visa info" />
+        <meta itemprop="name" content="Emirates E Visa Online Official Services | UAE Tourist Visa Online" />
+        <meta itemprop="description" content="Official Services Of Emirates E Visa Online. Visit Our Services To Get Information About Emirates Tourist, Transit And Business Visa.  Stay Tuned The Latest Visa Policy." />
+        <meta name="og:title" content='Emirates E Visa Online Official Services | UAE Tourist Visa Online'/>
+        <meta name="og:description" content='Official Services Of Emirates E Visa Online. Visit Our Services page To Get Information About Emirates Tourist, Transit And Business Visa.  Stay Tuned For The Latest Visa Policy.'/>
+        <meta name="twitter:title" content='Emirates E Visa Online Official Services | UAE Tourist Visa Online'/>
+        <meta name="twitter:description" content='Official Services Of Emirates E Visa Online. Visit Our Services page To Get Information About Emirates Tourist, Transit And Business Visa.  Stay Tuned For The Latest Visa Policy.'/>
+        <link rel="canonical" href="https://www.emiratesevisaonline.com/services"/>
       </Helmet>
         <section className="breadcrumb-spacing" style={{  backgroundImage: `url("../img/bg/applynow.avif")` }}>
         {showApiLoader && <ApiLoader />}
@@ -67,11 +67,11 @@ const EmiratesVisaBlog = () => {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="breadcrumb_title">
-                            <h3 className="page-title">Blogs</h3>
+                            <h3 className="page-title">Services</h3>
                             <div className="breadcrumb_menu">
                                 <ul className="trail_items">
                                     <li><a href="/"> Home</a></li>
-                                    <li className="active">Blogs</li>
+                                    <li className="active">Services</li>
                                 </ul>
                             </div>
                         </div>
@@ -84,7 +84,7 @@ const EmiratesVisaBlog = () => {
         <section className="blog_grid_section clearfix">
             <div className="container">
             <div className="All_heading">
-                    <h1 className="apply_title">Emirates Visa Official Blog
+                    <h1 className="apply_title">Emirates Visa Official Services
 </h1>
                     <span></span>
                 </div>
@@ -113,7 +113,7 @@ const EmiratesVisaBlog = () => {
                                             <p></p>
                                         </div>
                                         <div className="post-bottom">
-                                            <a className="cmt-btn-size-sm" href={"blog/"+item.id}><i
+                                            <a className="cmt-btn-size-sm" href={"service/"+item.id}><i
                                                     className="fa fa-minus"></i>Read more</a>
                                         </div>
                                     </div>
