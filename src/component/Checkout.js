@@ -404,7 +404,7 @@ const Checkout = () => {
                                             value="MamoPay"
                                             checked={paymentMethod === "MamoPay" ? true : false}
                                         />
-                                        <img className='ml-1' src="../img/mamopay-icon.svg" alt="mamopay-logo"/>
+                                        <img className='ml-1' src="../img/mamopay-icon.jpeg" alt="mamopay-logo"/>
                                     </div>
                                     {/*<div>
                                         <input
