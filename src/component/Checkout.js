@@ -18,7 +18,7 @@ const Checkout = () => {
     const [serviceTypeValue, setServiceTypeValue] = useState("Normal")
     const [paymentDetails, setPaymentDetails] = useState({});
     const [showApiLoader, setShowApiLoader] = useState(false);
-    const [paymentMethod, setPaymentMethod] = useState("MamoPay");
+    const [paymentMethod, setPaymentMethod] = useState("Stripe");
     const [loading,setLoading] = useState(true);
     const [primaryApplicant,setPrimaryApplicant] = useState(null);
 
@@ -396,7 +396,7 @@ const Checkout = () => {
 
                                 <div className='col-12 payment-gateway-cont'>
                                     <div>Choose Gateway</div>
-                                    <div>
+                                    {/*<div>
                                         <input
                                             type="radio"
                                             name='payments-method'
@@ -405,8 +405,8 @@ const Checkout = () => {
                                             checked={paymentMethod === "MamoPay" ? true : false}
                                         />
                                         <img className='ml-1' src="../img/mamopay-icon.jpeg" alt="mamopay-logo"/>
-                                    </div>
-                                    {/*<div>
+                                    </div>*/}
+                                    <div>
                                         <input
                                             type="radio"
                                             name='payments-method'
@@ -417,7 +417,7 @@ const Checkout = () => {
                                         />
                                         <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe-logo"
                                              loading="lazy"/>
-                                    </div>*/}
+                                    </div>
                                     <div>
                                         <input
                                             type="radio"
