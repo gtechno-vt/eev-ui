@@ -333,7 +333,7 @@ const Checkout = () => {
                             </div>
 
                             {/*<div className="note_check">
-                                <p className="">Users residing in India are recommended to use the Razorpay gateway for seamless payments.</p>
+                                <p className="">Users residing in India are recommended to use the MamoPay gateway for seamless payments.</p>
                             </div>*/}
 
                         </div>
@@ -396,16 +396,6 @@ const Checkout = () => {
 
                                 <div className='col-12 payment-gateway-cont'>
                                     <div>Choose Gateway</div>
-                                    {/*<div>
-                                        <input
-                                            type="radio"
-                                            name='payments-method'
-                                            onChange={handleRadioChange}
-                                            value="MamoPay"
-                                            checked={paymentMethod === "MamoPay" ? true : false}
-                                        />
-                                        <img className='ml-1' src="../img/mamopay-icon.jpeg" alt="mamopay-logo"/>
-                                    </div>*/}
                                     <div>
                                         <input
                                             type="radio"
@@ -413,12 +403,22 @@ const Checkout = () => {
                                             // id='uaeVisitF'
                                             onChange={handleRadioChange}
                                             value="Stripe"
-                                            checked={paymentMethod === "Stripe" ? true : false}
+                                            checked={paymentMethod === "Stripe"}
                                         />
                                         <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe-logo"
                                              loading="lazy"/>
                                     </div>
                                     <div>
+                                        <input
+                                            type="radio"
+                                            name='payments-method'
+                                            onChange={handleRadioChange}
+                                            value="MamoPay"
+                                            checked={paymentMethod === "MamoPay"}
+                                        />
+                                        <img className='ml-1' src="../img/mamopay-icon.jpeg" alt="mamopay-logo"/>
+                                    </div>
+                                    {/*<div>
                                         <input
                                             type="radio"
                                             name='payments-method'
@@ -428,7 +428,7 @@ const Checkout = () => {
                                             checked={paymentMethod === "PayPal" ? true : false}
                                         />
                                         <img className='ml-1' src="../img/paypalicon.png" alt="paypal-logo"/>
-                                    </div>
+                                    </div>*/}
                                     {/*<div>
                                         <input
                                             type="radio"
