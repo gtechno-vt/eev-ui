@@ -400,6 +400,16 @@ const Checkout = () => {
                                         <input
                                             type="radio"
                                             name='payments-method'
+                                            onChange={handleRadioChange}
+                                            value="MamoPay"
+                                            checked={paymentMethod === "MamoPay"}
+                                        />
+                                        <img className='ml-1' src="../img/mamopay-icon.jpeg" alt="mamopay-logo"/>
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="radio"
+                                            name='payments-method'
                                             // id='uaeVisitF'
                                             onChange={handleRadioChange}
                                             value="Stripe"
@@ -407,16 +417,6 @@ const Checkout = () => {
                                         />
                                         <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe-logo"
                                              loading="lazy"/>
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="radio"
-                                            name='payments-method'
-                                            onChange={handleRadioChange}
-                                            value="MamoPay"
-                                            checked={paymentMethod === "MamoPay"}
-                                        />
-                                        <img className='ml-1' src="../img/mamopay-icon.svg" alt="mamopay-logo"/>
                                     </div>
                                     {/*<div>
                                         <input
