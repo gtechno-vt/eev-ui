@@ -18,7 +18,7 @@ const Checkout = () => {
     const [serviceTypeValue, setServiceTypeValue] = useState("Normal")
     const [paymentDetails, setPaymentDetails] = useState({});
     const [showApiLoader, setShowApiLoader] = useState(false);
-    const [paymentMethod, setPaymentMethod] = useState("MamoPay");
+    const [paymentMethod, setPaymentMethod] = useState("Stripe");
     const [loading,setLoading] = useState(true);
     const [primaryApplicant,setPrimaryApplicant] = useState(null);
 
@@ -400,16 +400,6 @@ const Checkout = () => {
                                         <input
                                             type="radio"
                                             name='payments-method'
-                                            onChange={handleRadioChange}
-                                            value="MamoPay"
-                                            checked={paymentMethod === "MamoPay"}
-                                        />
-                                        <img className='ml-1' src="../img/mamopay-icon.jpeg" alt="mamopay-logo"/>
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="radio"
-                                            name='payments-method'
                                             // id='uaeVisitF'
                                             onChange={handleRadioChange}
                                             value="Stripe"
@@ -417,6 +407,16 @@ const Checkout = () => {
                                         />
                                         <img className='ml-1' src="../img/stripeicon.jpeg" alt="stripe-logo"
                                              loading="lazy"/>
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="radio"
+                                            name='payments-method'
+                                            onChange={handleRadioChange}
+                                            value="MamoPay"
+                                            checked={paymentMethod === "MamoPay"}
+                                        />
+                                        <img className='ml-1' src="../img/mamopay-icon.svg" alt="mamopay-logo"/>
                                     </div>
                                     {/*<div>
                                         <input
