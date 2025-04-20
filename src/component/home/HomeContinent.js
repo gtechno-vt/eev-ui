@@ -13,7 +13,7 @@ function HomeContinent() {
 
     async function getCountryValues() {
         try {
-            const countryApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/country/basic`)
+            const countryApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/country/basic`)
             setCountry(countryApi.data);
             var countryData = countryApi.data;
             const uniqueContinent = [...new Set(countryData.map(country => country.continentKey))];
@@ -34,7 +34,7 @@ function HomeContinent() {
 		})
 
 		try {
-            const countryApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/country/basic?name=`+e.target.value)
+            const countryApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/country/basic?name=`+e.target.value)
             setCountry(countryApi.data);
             var countryData = countryApi.data;
             const uniqueContinent = [...new Set(countryData.map(country => country.continentKey))];

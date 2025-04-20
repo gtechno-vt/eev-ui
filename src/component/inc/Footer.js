@@ -12,14 +12,14 @@ const Footer = () => {
     useEffect(() => {
         async function getSiteInfo() {
 			try {
-				const siteInfoApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-info/2`)
+				const siteInfoApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/site-info/2`)
 				setSiteInfo(siteInfoApi.data);
                 localStorage.setItem("backgroundColor",siteInfoApi.data.backgroundColor);
                 localStorage.setItem("aboutUsText",siteInfoApi.data.aboutUsText);
                 console.log(siteInfoApi.data.aboutUsText,"skdjkjksjd");
                 setVisitorCount(siteInfoApi.data.visitorCount);
 
-                const countInfo =  await axios.put(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-info/visitor-count/2`) 
+                const countInfo =  await axios.put(`https://y2hhbibraxroyw4.emiratesevisaonline.com/site-info/visitor-count/2`) 
                if(countInfo.data){
                    setVisitorCount(countInfo.data);
                }

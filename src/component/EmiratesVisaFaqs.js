@@ -19,7 +19,7 @@ const EmiratesVisaFaqs = () => {
     try {
       setShowApiLoader(true)
       const response = await axios.get(
-        `https://ymfzdgfyzhm.emiratesevisaonline.com/site-faq/site/2?limit=${limit}&offset=${offset}`
+        `https://y2hhbibraxroyw4.emiratesevisaonline.com/site-faq/site/2?limit=${limit}&offset=${offset}`
       );
       setShowApiLoader(false)
       setSiteFaq(response.data); 

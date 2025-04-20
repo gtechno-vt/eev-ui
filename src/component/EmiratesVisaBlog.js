@@ -19,7 +19,7 @@ const EmiratesVisaBlog = () => {
         try {
           setShowApiLoader(true)
           const response = await axios.get(
-            `https://ymfzdgfyzhm.emiratesevisaonline.com/blog/basic/2?limit=${limit}&offset=${offset}`
+            `https://y2hhbibraxroyw4.emiratesevisaonline.com/blog/basic/2?limit=${limit}&offset=${offset}`
           );
           setShowApiLoader(false);
           setSiteBlogs(response.data); 

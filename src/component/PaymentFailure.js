@@ -25,7 +25,7 @@ const PaymentFailure = () => {
             data.gatewayTransactionId =  transactionId;
         }
          try {
-            const res = await axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/payment/payment-info`, data)
+            const res = await axios.post(`https://y2hhbibraxroyw4.emiratesevisaonline.com/payment/payment-info`, data)
          } catch (error) {
          }
     }

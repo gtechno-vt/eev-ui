@@ -9,7 +9,7 @@ function HomeThings() {
     async function getThings() {
 
     try {
-        const thingApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/country/48`)
+        const thingApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/country/48`)
             setHomeThings(thingApi.data);
         } catch (error) {
         }

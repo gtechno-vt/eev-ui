@@ -13,7 +13,7 @@ function HomeVisa() {
 
     async function getVisaType() {
         try {
-            const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/0/48?fetchImages=false&types=all`)
+            const visaTypeApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/visaVariant/0/48?fetchImages=false&types=all`)
             setHomeVisa(visaTypeApi.data);
             const uniqueVisaTypesS = ["Tourist Visa", "Business Visa", "Transit Visa"];
             setHomeVisaType(uniqueVisaTypesS);

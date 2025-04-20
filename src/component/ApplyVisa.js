@@ -41,7 +41,7 @@ const ApplyVisa = ({update,appId,doc}) => {
 
             try {
                 setShowApiLoader(true);
-                const countryApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/country/basic`)
+                const countryApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/country/basic`)
                 setShowApiLoader(false);
                 setAllCountry(countryApi.data);
                 if(citizen){
@@ -64,7 +64,7 @@ const ApplyVisa = ({update,appId,doc}) => {
         async function getVisaType(citizenId) {
             try {
                 setShowApiLoader(true);
-                const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/${citizenId}/48?fetchImages=false`)
+                const visaTypeApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/visaVariant/${citizenId}/48?fetchImages=false`)
                 setShowApiLoader(false);
                 setVisaType(visaTypeApi.data);
                 if(visa){
@@ -81,7 +81,7 @@ const ApplyVisa = ({update,appId,doc}) => {
         async function getEducation() {
             try {
                 setShowApiLoader(true);
-                const educationApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/education`)
+                const educationApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/education`)
                 setShowApiLoader(false);
                 setEducation(educationApi.data);
             } catch (error) {
@@ -92,7 +92,7 @@ const ApplyVisa = ({update,appId,doc}) => {
         async function getProfession() {
             try {
                 setShowApiLoader(true);
-                const professionApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/profession`)
+                const professionApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/profession`)
                 setShowApiLoader(false);
                 setProfession(professionApi.data);
             } catch (error) {
@@ -103,7 +103,7 @@ const ApplyVisa = ({update,appId,doc}) => {
         async function getPurposeVisit() {
             try {
                 setShowApiLoader(true);
-                const purposeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/purpose-of-visit`)
+                const purposeApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/purpose-of-visit`)
                 setShowApiLoader(false);
                 setPurposeOfVisit(purposeApi.data);
             } catch (error) {
@@ -116,7 +116,7 @@ const ApplyVisa = ({update,appId,doc}) => {
 
             try {
                 setShowApiLoader(true);
-                const applicationApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant/${appId}`)
+                const applicationApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/applicant/${appId}`)
                 // setApplicationData(applicationApi.data);
                 setShowApiLoader(false);
                 const data = applicationApi.data;
@@ -194,7 +194,7 @@ const ApplyVisa = ({update,appId,doc}) => {
         setCitizenData(e.target.value)
         setShowApiLoader(true);
         setVisaType([])
-        const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/${e.target.value}/48?fetchImages=false`)
+        const visaTypeApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/visaVariant/${e.target.value}/48?fetchImages=false`)
         setShowApiLoader(false);
         setVisaType(visaTypeApi.data);
         if(visaTypeApi.data.length > 0){
@@ -283,7 +283,7 @@ const ApplyVisa = ({update,appId,doc}) => {
             const formData = new FormData();
             formData.append("file", selectedFile);
 
-            axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/document/${id}/PASSPORT/upload`, formData)
+            axios.post(`https://y2hhbibraxroyw4.emiratesevisaonline.com/document/${id}/PASSPORT/upload`, formData)
                 .then((res) => {
                 }).catch(error => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });        
@@ -294,7 +294,7 @@ const ApplyVisa = ({update,appId,doc}) => {
         if(selectedFilePhoto){
             const formDataPhoto = new FormData();
             formDataPhoto.append("file", selectedFilePhoto);
-            axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/document/${id}/PHOTOGRAPH/upload`, formDataPhoto)
+            axios.post(`https://y2hhbibraxroyw4.emiratesevisaonline.com/document/${id}/PHOTOGRAPH/upload`, formDataPhoto)
                 .then((res) => {
                 }).catch(error => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -304,7 +304,7 @@ const ApplyVisa = ({update,appId,doc}) => {
         if(selectedFileDoc){
             const formDataDoc = new FormData();
             formDataDoc.append("file", selectedFileDoc);
-            axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/document/${id}/OTHER/upload`, formDataDoc)
+            axios.post(`https://y2hhbibraxroyw4.emiratesevisaonline.com/document/${id}/OTHER/upload`, formDataDoc)
                 .then((res) => {
                 }).catch(error => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -509,7 +509,7 @@ const ApplyVisa = ({update,appId,doc}) => {
               if(update){
                 //   to update existing
                 setShowApiLoader(true)
-                await axios.put(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant/${appId}`, payloadData)
+                await axios.put(`https://y2hhbibraxroyw4.emiratesevisaonline.com/applicant/${appId}`, payloadData)
                 .then((res) => {
                     setShowApiLoader(false)
                     document.getElementById("succ_message").style.display = "block";
@@ -527,7 +527,7 @@ const ApplyVisa = ({update,appId,doc}) => {
               }else{
                 //  to add new
                 setShowApiLoader(true)
-                await axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant`, payloadData)
+                await axios.post(`https://y2hhbibraxroyw4.emiratesevisaonline.com/applicant`, payloadData)
                 .then((res) => {
                     setShowApiLoader(false)
                     document.getElementById("succ_message").style.display = "block";

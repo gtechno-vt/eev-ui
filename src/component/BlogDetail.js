@@ -11,7 +11,7 @@ const BlogDetail = () => {
     useEffect(() => {
         async function getSiteBlogs() {
             try {
-                const siteBlogApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/blog/${id}`)
+                const siteBlogApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/blog/${id}`)
                 setSiteBlogs(siteBlogApi.data);
             } catch (error) {
             }

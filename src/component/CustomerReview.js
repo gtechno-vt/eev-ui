@@ -17,7 +17,7 @@ const CustomerReview = () => {
         try {
           setShowApiLoader(true)
           const response = await axios.get(
-            `https://ymfzdgfyzhm.emiratesevisaonline.com/reviews/site/2?limit=${limit}&offset=${offset}`
+            `https://y2hhbibraxroyw4.emiratesevisaonline.com/reviews/site/2?limit=${limit}&offset=${offset}`
           );
           setShowApiLoader(false)
           setSiteReviews(response.data); 

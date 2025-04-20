@@ -48,7 +48,7 @@ const Checkout = () => {
         async function getApplicationDetails() {
             try {
                 setShowApiLoader(true);
-                const applicatntApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${id}`)
+                const applicatntApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/applicant/basic?applicationDisplayId=${id}&siteId=2`)
                 setLoading(false);
                 if(!(applicatntApi?.data[0]?.application?.status === "PAYMENT PENDING" || applicatntApi?.data[0]?.application?.status === "PAYMENT PROCESSING" || applicatntApi?.data[0]?.application?.status === "DRAFT")){
                     navigate(`/track-visa-application/${id}`)
@@ -69,12 +69,12 @@ const Checkout = () => {
                 })
 
                 if (application?.destinationCountry?.id) {
-                    const serviceApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/service-type/${application.destinationCountry.id}`)
+                    const serviceApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/service-type/${application.destinationCountry.id}`)
                     setServiceType(serviceApi.data);
                 }
 
 
-                const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/${application.visaVariant.id}/${application.citizenshipCountry.id}/48/fee`)
+                const visaTypeApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/visaVariant/${application.visaVariant.id}/${application.citizenshipCountry.id}/48/fee`)
                 setVisaTypeFee(visaTypeApi.data);
                 setPaymentDetails(prevState => {
                     return {
@@ -99,7 +99,7 @@ const Checkout = () => {
         async function getSiteInfo() {
 
             try {
-                const siteInfoApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-info/2`)
+                const siteInfoApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/site-info/2`)
                 setSiteInfo(siteInfoApi.data);
                 setPaymentDetails(prevState => {
                     return {
@@ -121,7 +121,7 @@ const Checkout = () => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, []);
 
-    
+
   useEffect(() => {
     const script = document.createElement('script');
     script.src = "https://www.paypal.com/sdk/js?client-id=ASckhbRN0og6FnUdRNsx3qRelX2rp8o8jYd_KBldZm90oNq2uSalujrw4ZcSYuiKCWBlAsImvfZqMhWm&components=buttons,marks";
@@ -159,7 +159,7 @@ const Checkout = () => {
             serviceType: serviceTypeValue,
         }
         try {
-        const res = await axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/payment/${paymentMethod}/order`,data,{
+        const res = await axios.post(`https://y2hhbibraxroyw4.emiratesevisaonline.com/payment/${paymentMethod}/order`,data,{
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -184,7 +184,7 @@ const Checkout = () => {
            }else{
             name = primaryApplicant.firstName;
            }
-           
+
         var options = {
             "key": "rzp_live_mLfB6rei9hUSrZ",
             "name": "Emirates E-Visa Online",
@@ -208,7 +208,7 @@ const Checkout = () => {
                 let redirectUrl = `https://voltechsoftware.com/?redirect=https://www.emiratesevisaonline.com/payment-failure/${id}?session_id=${orderData}&payment_id=${response.razorpay_payment_id}&signature=${response.razorpay_signature}`;
                 window.location.href = redirectUrl;
         });
-       
+
         } catch (error) {
             // console.log(error);
         }

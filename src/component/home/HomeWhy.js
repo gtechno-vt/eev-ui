@@ -9,7 +9,7 @@ function HomeWhy() {
     async function getWhyUs() {
 
     try {
-        const whyUsApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-why-choose-us/site/2`)
+        const whyUsApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/site-why-choose-us/site/2`)
             setWhyUs(whyUsApi.data);
         } catch (error) {
         }

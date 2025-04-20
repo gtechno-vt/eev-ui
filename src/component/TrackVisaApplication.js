@@ -25,7 +25,7 @@ const TrackVisaApplication = () => {
         } else {
             try {
                 setShowApiLoader(true);
-                const trackApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${track}`);
+                const trackApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/applicant?applicationDisplayId=${track}`);
                 setShowApiLoader(false);
                 setTrackData(trackApi.data);
             } catch (error) {
@@ -64,7 +64,7 @@ const TrackVisaApplication = () => {
             } else {
                 try {
                     setShowApiLoader(true);
-                    const trackApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${track}`);
+                    const trackApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/applicant?applicationDisplayId=${track}`);
                     setShowApiLoader(false);
                     setTrackData(trackApi.data);
                 } catch (error) {

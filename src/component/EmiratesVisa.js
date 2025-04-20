@@ -24,7 +24,7 @@ const EmiratesVisa = () => {
         async function getCountry() {
             try {
                 setShowApiLoader(true)
-                const countryApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/country/basic`)
+                const countryApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/country/basic`)
                 setShowApiLoader(false)
                 setAllCountry(countryApi.data);
                 getVisaType({data:countryApi.data});
@@ -44,7 +44,7 @@ const EmiratesVisa = () => {
             const ele = countryData.find(ele => ele.countryNameSlug === newCitizen);
             const id = ele ? ele.id : ""
             setShowApiLoader(true)
-            const visaTypeApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/${id}/48?fetchImages=false`)
+            const visaTypeApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/visaVariant/${id}/48?fetchImages=false`)
             setShowApiLoader(false)
             setHomeVisa(visaTypeApi.data);
             setSelectedId(visaTypeApi?.data[0]?.id || 0)

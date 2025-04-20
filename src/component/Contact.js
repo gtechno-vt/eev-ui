@@ -29,7 +29,7 @@ const Contact = () => {
 
   async function getSiteInfo() {
     try {
-      const siteInfoApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/site-info/2`)
+      const siteInfoApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/site-info/2`)
       setSiteInfo(siteInfoApi.data);
     } catch (error) {
     }
@@ -74,7 +74,7 @@ const Contact = () => {
     if(isAllRequiredDataFilled) {
       if (isCaptchaVerified) {
       try {
-        await axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/query`, lead)
+        await axios.post(`https://y2hhbibraxroyw4.emiratesevisaonline.com/query`, lead)
           .then((res) => {
             document.getElementById("succ_message").style.display = "block";
             document.getElementById("alert_message").innerHTML = "Your Query has been Submitted Succesfully!!! We will get back to you.";

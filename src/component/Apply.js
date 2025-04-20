@@ -34,7 +34,7 @@ const Apply = ({update,doc,displayId}) => {
             try {
                 if(update){
                 setShowApiLoader(true);
-                const applicationApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant/${id}`)
+                const applicationApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/applicant/${id}`)
                 setShowApiLoader(false);
                 setApplicationData(applicationApi.data);
                 const data = applicationApi.data;
@@ -52,13 +52,13 @@ const Apply = ({update,doc,displayId}) => {
                 })
 
                 setShowApiLoader(true);
-                const res = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${data.application.displayId}`)
+                const res = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/applicant?applicationDisplayId=${data.application.displayId}`)
                 setShowApiLoader(false);              
                 setAllApplicantList(res.data)
 
                }else{
                 setShowApiLoader(true);
-                const applicationApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${id}`)
+                const applicationApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/applicant?applicationDisplayId=${id}`)
                 setShowApiLoader(false);
                 setApplicationData(applicationApi?.data[0] || {});
                 setAllApplicantList(applicationApi.data)
@@ -73,7 +73,7 @@ const Apply = ({update,doc,displayId}) => {
 
             try {
                 setShowApiLoader(true);
-                const countryApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/country/basic`)
+                const countryApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/country/basic`)
                 setShowApiLoader(false);
                 setAllCountry(countryApi.data);
             } catch (error) {
@@ -100,7 +100,7 @@ const Apply = ({update,doc,displayId}) => {
             const formData = new FormData();
             formData.append("file", selectedFile);
 
-            axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/document/${id}/PASSPORT/upload`, formData)
+            axios.post(`https://y2hhbibraxroyw4.emiratesevisaonline.com/document/${id}/PASSPORT/upload`, formData)
                 .then((res) => {
                 }).catch(error => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });        
@@ -113,7 +113,7 @@ const Apply = ({update,doc,displayId}) => {
             const formDataPhoto = new FormData();
             formDataPhoto.append("file", selectedFilePhoto);
 
-            axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/document/${id}/PHOTOGRAPH/upload`, formDataPhoto)
+            axios.post(`https://y2hhbibraxroyw4.emiratesevisaonline.com/document/${id}/PHOTOGRAPH/upload`, formDataPhoto)
                 .then((res) => {
                 }).catch(error => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -126,7 +126,7 @@ const Apply = ({update,doc,displayId}) => {
             const formDataDoc = new FormData();
             formDataDoc.append("file", selectedFileDoc);
 
-            axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/document/${id}/OTHER/upload`, formDataDoc)
+            axios.post(`https://y2hhbibraxroyw4.emiratesevisaonline.com/document/${id}/OTHER/upload`, formDataDoc)
                 .then((res) => {
                 }).catch(error => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -225,7 +225,7 @@ const Apply = ({update,doc,displayId}) => {
               if(update){
                 // for update flow
                 setShowApiLoader(true)
-                await axios.put(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant/${id}`, payloadData)
+                await axios.put(`https://y2hhbibraxroyw4.emiratesevisaonline.com/applicant/${id}`, payloadData)
                 .then((res) => {
                     setShowApiLoader(false)
                     document.getElementById("succ_message").style.display = "block";
@@ -251,7 +251,7 @@ const Apply = ({update,doc,displayId}) => {
               } else{
                 //  for normal add flow
                 setShowApiLoader(true)
-                await axios.post(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant`, payloadData)
+                await axios.post(`https://y2hhbibraxroyw4.emiratesevisaonline.com/applicant`, payloadData)
                 .then((res) => {
                     setShowApiLoader(false)
                     document.getElementById("succ_message").style.display = "block";
@@ -272,7 +272,7 @@ const Apply = ({update,doc,displayId}) => {
                     if (scndVal == 'add') {
                         navigate('/apply/' + res?.data?.application?.displayId);
                         setShowApiLoader(true);
-                axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant?applicationDisplayId=${id}`).then(applicationApi => {
+                axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/applicant?applicationDisplayId=${id}`).then(applicationApi => {
                     setAllApplicantList(applicationApi.data)
                 })
                 setShowApiLoader(false);

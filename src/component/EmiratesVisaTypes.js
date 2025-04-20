@@ -17,7 +17,7 @@ const EmiratesVisaTypes = () => {
     try {
       setShowApiLoader(true);
       const response = await axios.get(
-        `https://ymfzdgfyzhm.emiratesevisaonline.com/visaVariant/0/48?limit=${limit}&offset=${offset}`
+        `https://y2hhbibraxroyw4.emiratesevisaonline.com/visaVariant/0/48?limit=${limit}&offset=${offset}`
       );
       setShowApiLoader(false)
       setVisaType(response.data); 

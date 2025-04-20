@@ -16,7 +16,7 @@ const EditApplicant = () => {
     useEffect(() => {
         async function getApplicationDetails() {
             try {
-                const appApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/applicant/${id}`)
+                const appApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/applicant/${id}`)
                 setPrimary(prev => appApi.data.isPrimary || appApi.data.isPrimary === false ? appApi.data.isPrimary : null)
                 setDisplayId(appApi.data.application.displayId);
             } catch (error) {
@@ -25,7 +25,7 @@ const EditApplicant = () => {
 
         async function getDocumentFiles() {
             try {
-                const appApi = await axios.get(`https://ymfzdgfyzhm.emiratesevisaonline.com/document?applicantId=${id}`)
+                const appApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/document?applicantId=${id}`)
                 if(appApi.data[0].id != undefined){
                     const data = appApi.data[0];
                     if(data.passportDocument){

@@ -16,7 +16,7 @@ const  ReactPayPal = ({paymentMethod,applicationId,serviceType}) =>  {
              serviceType,
      }
          // Order is created on the server and the order id is returned
-         const {data} = await axios.post("https://ymfzdgfyzhm.emiratesevisaonline.com/payment/PayPal/order",
+         const {data} = await axios.post("https://y2hhbibraxroyw4.emiratesevisaonline.com/payment/PayPal/order",
              orderData
            ,{
             headers: {
@@ -102,7 +102,7 @@ export default ReactPayPal
 //         applicationId,
 //             serviceType,
 //     }
-//     const {data} = await axios.post("https://ymfzdgfyzhm.emiratesevisaonline.com/payment/PayPal/order",
+//     const {data} = await axios.post("https://y2hhbibraxroyw4.emiratesevisaonline.com/payment/PayPal/order",
 //       orderData,{
 //        headers: {
 //         "Content-Type": "application/json",
@@ -113,7 +113,7 @@ export default ReactPayPal
 //   };
 //   const onApprove = async(order) => {
 //      // Order is captured on the server and the response is returned to the browser
-//      const {data} = await axios.post("https://ymfzdgfyzhm.emiratesevisaonline.com/payment/payment-info",{orderId: order.orderID,applicationDisplayId:applicationId}, {
+//      const {data} = await axios.post("https://y2hhbibraxroyw4.emiratesevisaonline.com/payment/payment-info",{orderId: order.orderID,applicationDisplayId:applicationId}, {
 //        headers: {
 //         "Content-Type": "application/json",
 //       },

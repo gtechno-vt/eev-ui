@@ -17,7 +17,7 @@ const NoPage = () => {
     formData.append('file', file);
 
     // Make a request to your server with the formData
-    fetch('https://ymfzdgfyzhm.emiratesevisaonline.com/document/258/OTHER/upload', {
+    fetch('https://y2hhbibraxroyw4.emiratesevisaonline.com/document/258/OTHER/upload', {
       method: 'POST',
       body: formData,
     })
