@@ -66,7 +66,7 @@ const EmiratesVisaTypes = () => {
                             <h3 className="page-title">Emirates Visa Types</h3>
                             <div className="breadcrumb_menu">
                                 <ul className="trail_items">
-                                    <li><Link href="/"> Home</Link></li>
+                                    <li><a href="/"> Home</a></li>
                                     <li className="active">Emirates Visa Types</li>
                                 </ul>
                             </div>

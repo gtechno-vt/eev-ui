@@ -30,7 +30,7 @@ const StepsToApplyEmiratesVisa = () => {
                             <h3 className="page-title">How To Apply</h3>
                             <div className="breadcrumb_menu">
                                 <ul className="trail_items">
-                                    <li><a href="<?= $base_url;?>"> Home</a></li>
+                                    <li><a href="/"> Home</a></li>
                                     <li className="active">How To Apply</li>
                                 </ul>
                             </div>

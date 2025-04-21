@@ -50,17 +50,18 @@ const Checkout = () => {
                 setShowApiLoader(true);
                 const applicatntApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/applicant/basic?applicationDisplayId=${id}&siteId=2`)
                 setLoading(false);
-                if(!(applicatntApi?.data[0]?.application?.status === "PAYMENT PENDING" || applicatntApi?.data[0]?.application?.status === "PAYMENT PROCESSING" || applicatntApi?.data[0]?.application?.status === "DRAFT")){
+				if(applicatntApi.status === 200 && applicatntApi.data.length > 0){
+                if(!(applicatntApi?.data[0]?.applicationStatus === "PAYMENT PENDING" || applicatntApi?.data[0]?.applicationStatus === "PAYMENT PROCESSING" || applicatntApi?.data[0]?.applicationStatus === "DRAFT")){
                     navigate(`/track-visa-application/${id}`)
                     return;
                 }
-                const application = applicatntApi.data[0].application;
+				
                 const primaryApp = applicatntApi.data.find(ele => ele.isPrimary);
                 if(primaryApp){
                     setPrimaryApplicant(primaryApp);
                 }
+				setApplicationDetails(applicatntApi.data[0]);
                 setApplicatDetails(applicatntApi.data);
-                setApplicationDetails(application);
                 setPaymentDetails(prevState => {
                     return {
                         ...prevState,
@@ -68,13 +69,14 @@ const Checkout = () => {
                     };
                 })
 
-                if (application?.destinationCountry?.id) {
-                    const serviceApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/service-type/${application.destinationCountry.id}`)
+				const destinationCountryId = applicatntApi.data[0].destinationCountryId;
+                if (destinationCountryId) {
+                    const serviceApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/service-type/${destinationCountryId}`)
                     setServiceType(serviceApi.data);
                 }
 
 
-                const visaTypeApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/visaVariant/${application.visaVariant.id}/${application.citizenshipCountry.id}/48/fee`)
+                const visaTypeApi = await axios.get(`https://y2hhbibraxroyw4.emiratesevisaonline.com/visaVariant/${applicatntApi.data[0].visaVariantId}/${applicatntApi.data[0].citizenshipCountryId}/48/fee`)
                 setVisaTypeFee(visaTypeApi.data);
                 setPaymentDetails(prevState => {
                     return {
@@ -82,6 +84,7 @@ const Checkout = () => {
                         visaFees: visaTypeApi.data
                     };
                 })
+				}
                 setShowApiLoader(false);
             } catch (error) {
                 setShowApiLoader(false);
@@ -150,7 +153,7 @@ const Checkout = () => {
     const dateFormatString = 'd MMMM, yyyy';
 
     const redirectAddMoreAppl = () => {
-        navigate(`/apply/${applicationDetails.displayId}`)
+        navigate(`/apply/${applicationDetails.applicationDisplayId}`)
     }
 
     const handleRedirectToPayment = async () => {
@@ -258,14 +261,14 @@ const Checkout = () => {
 
                                 <div className="column-three-dflex">
                                     <div className="column-three">
-                                        <div className="data">Reference ID : <span>{applicationDetails.displayId}</span></div>
+                                        <div className="data">Reference ID : <span>{applicationDetails.applicationDisplayId}</span></div>
                                     </div>
 
                                     <div className="column-three">
                                         <div className="data">Visa Applied for :
                                             <span>
                                                 {
-                                                    applicationDetails.id ? applicationDetails.visaVariant.name : ''
+                                                    applicationDetails.id ? applicationDetails.visaVariantName : ''
                                                 }
                                             </span>
                                         </div>
@@ -300,8 +303,8 @@ const Checkout = () => {
                                                             <td>{item.lastName}</td>
                                                             <td>
                                                                 {
-                                                                    item.application.createdAt ?
-                                                                        format(item.application.createdAt, dateFormatString)
+                                                                    item.createdAt ?
+                                                                        format(item.createdAt, dateFormatString)
                                                                         :
                                                                         '-'
                                                                 }
@@ -347,7 +350,7 @@ const Checkout = () => {
                                     </tr>
 
                                     <tr>
-                                        <td>No. Of Applicant</td>
+                                        <td>Applicant Count</td>
                                         <td>{paymentDetails.noOfApplicant ? paymentDetails.noOfApplicant : "-"}</td>
                                     </tr>
 
@@ -467,7 +470,7 @@ const Checkout = () => {
                                 {paymentMethod === "PayPal" ?
                                     <PayPalGateway
                                         paymentMethod={paymentMethod}
-                                        applicationId={applicationDetails.displayId}
+                                        applicationId={applicationDetails.applicationDisplayId}
                                         serviceType={serviceTypeValue}
                                     /> :
                                     <button type="submit" className="btn button" id="checkout-button"
