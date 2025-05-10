@@ -158,7 +158,7 @@ const Checkout = () => {
 
     const handleRedirectToPayment = async () => {
         const data = {
-            applicationId: applicationDetails.displayId,
+            applicationId: applicationDetails.applicationDisplayId,
             serviceType: serviceTypeValue,
         }
         try {
